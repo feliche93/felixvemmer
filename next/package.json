@@ -3,16 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "pnpm next dev",
+    "build": "pnpm next build && pnpm generate && pnpm push",
+    "start": "pnpm next start",
+    "lint": "pnpm next lint",
+    "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
+    "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
+    "check": "drizzle-kit check:pg --config=drizzle.config.ts",
+    "drop": "drizzle-kit drop --config=drizzle.config.ts",
+    "push": "node -r dotenv/config -r ts-node/register src/migrate.ts"
   },
   "dependencies": {
     "@types/node": "20.3.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "drizzle-kit": "^0.19.2",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
