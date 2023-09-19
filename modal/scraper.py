@@ -131,7 +131,9 @@ async def scrape_freelance_de_statistics():
     await page.locator("input", has_text="Anmelden").click()
 
     # profile views
-    profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
+    profile_visits_total = await page.locator(
+        'xpath=//i[@class="far fa-fw fa-eye"]/..'
+    ).inner_text()
 
     profile_visits_total = int(profile_visits_total.replace(" Profilaufrufe gesamt", ""))
 
@@ -139,7 +141,9 @@ async def scrape_freelance_de_statistics():
 
     today = date.today()
 
-    insert_platform_statistic(full_url=full_url, profile_visits_total=profile_visits_total, date=today)
+    insert_platform_statistic(
+        full_url=full_url, profile_visits_total=profile_visits_total, date=today
+    )
 
     await page.goto("https://www.freelance.de/logout.php")
 
