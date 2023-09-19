@@ -20,4 +20,4 @@ customerio
 python-telegram-bot
 playwright-stealth
 sqlmodel
-psycopg2
+psycopg2-binary

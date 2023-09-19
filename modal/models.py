@@ -2,7 +2,7 @@
 This module defines the SQLModel classes for the FreelancePlatform and FreelancePlatformStatistics tables.
 """
 
-import datetime
+from datetime import date
 from typing import Optional
 
 from sqlalchemy.dialects.postgresql import TEXT
@@ -32,6 +32,6 @@ class FreelancePlatformStatistic(SQLModel, table=True):
 
     id: Optional[int] = Field(default=None, primary_key=True)
     freelance_platform_id: int = Field(foreign_key="freelance_platforms.id")
-    date: datetime.datetime = Field(default_factory=datetime.datetime.utcnow, nullable=False)
-    profile_visits: int = Field(nullable=False)
-    profile_visits_total: int = Field(nullable=False)
+    date: date
+    profile_visits: int = Field(default=None, nullable=False)
+    profile_visits_total: int = Field(default=None, nullable=False)

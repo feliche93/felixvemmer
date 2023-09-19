@@ -165,7 +165,7 @@ playwright-stealth==1.0.6
     # via -r requirements.in
 protobuf==4.24.3
     # via modal
-psycopg2==2.9.7
+psycopg2-binary==2.9.7
     # via -r requirements.in
 pydantic==1.10.12
     # via

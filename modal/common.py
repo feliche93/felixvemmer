@@ -8,11 +8,11 @@ ENV = "prod"
 
 load_dotenv()
 
-stub = Stub(f"backlinkgpt-{ENV}")
+stub = Stub(f"felixvemmer-{ENV}")
 
-secret = Secret.from_name(f"backlinkgpt-secret-{ENV}")
+secret = Secret.from_name(f"felixvemmer-secret-{ENV}")
 
-llm = ChatOpenAI(temperature=0)
+# llm = ChatOpenAI(temperature=0)
 
 image = (
     Image.debian_slim(python_version="3.11.1")
