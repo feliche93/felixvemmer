@@ -6,7 +6,7 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy.dialects.postgresql import ENUM, TEXT
+from sqlalchemy.dialects.postgresql import ENUM, TEXT, DATE
 from sqlmodel import Column, Field, SQLModel
 
 
@@ -51,18 +51,16 @@ class WorkType(str, Enum):
 class JobStatus(str, Enum):
     """
     This class represents the status of a job post.
-    It can be any of the following: CONTACTED, NOT_INTERESTED,
-    INTERVIEWED, REJECTED, APPLIED, OFFERED, ACCEPTED, COMPLETED.
+    It can be any of the following: SCRAPED, CONTACTED, NOT_INTERESTED,
+    INTERVIEWED, REJECTED, APPLIED.
     """
 
+    SCRAPED = "scraped"
     CONTACTED = "contacted"
     NOT_INTERESTED = "not_interested"
     INTERVIEWED = "interviewed"
     REJECTED = "rejected"
     APPLIED = "applied"
-    OFFERED = "offered"
-    ACCEPTED = "accepted"
-    COMPLETED = "completed"
 
 
 class FreelanceJobPost(SQLModel, table=True):
@@ -79,8 +77,8 @@ class FreelanceJobPost(SQLModel, table=True):
     title: str = Field(default=None, sa_column=Column(TEXT, nullable=False))
     description: str = Field(default=None, sa_column=Column(TEXT, nullable=False))
     timestamp_posted: datetime = Field(default=None, nullable=False)
-    start_date: Optional[str] = Field(default=None, sa_column=Column(TEXT))
-    end_date: Optional[str] = Field(default=None, sa_column=Column(TEXT))
+    start_date: Optional[date] = Field(default=None, sa_column=Column(DATE))
+    end_date: Optional[date] = Field(default=None, sa_column=Column(DATE))
     workload: Optional[str] = Field(default=None, sa_column=Column(TEXT))
     location: Optional[str] = Field(default=None, sa_column=Column(TEXT))
     hourly_rate: Optional[str] = Field(default=None, sa_column=Column(TEXT))
@@ -92,3 +90,4 @@ class FreelanceJobPost(SQLModel, table=True):
     work_type: WorkType = Field(sa_column=Column(ENUM(WorkType)))
     status: Optional[JobStatus] = Field(sa_column=Column(ENUM(JobStatus)))
     platform_id: int = Field(foreign_key="freelance_platforms.id")
+    url: str = Field(default=None, sa_column=Column(TEXT, nullable=False, unique=True))

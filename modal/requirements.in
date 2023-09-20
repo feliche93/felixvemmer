@@ -21,3 +21,4 @@ python-telegram-bot
 playwright-stealth
 sqlmodel
 psycopg2-binary
+dateparser

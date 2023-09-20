@@ -2,16 +2,15 @@
 import os
 
 import telegram
+from common import image, secret, stub
+from db import update_job_post_status
 from dotenv import load_dotenv
-from models import (
-    PostHogBacklinkProspectsCreatedEvent,
-    PostHogCampaignCreatedEvent,
-    PostHogCancellationSurveySubmittedEvent,
-    PosthogMessageCreatedEvent,
-    PostHogOnboardingSurveyCompletedEvent,
-    PostHogSubscriptionUpdatedEvent,
-    PostHogUserCreatedEvent,
-)
+from fastapi import Request
+from models import FreelanceJobPost, JobStatus
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import CallbackContext
+
+from modal import web_endpoint
 
 load_dotenv()
 
@@ -21,62 +20,116 @@ chat_id = 1424617201
 bot = telegram.Bot(token=token)
 
 
-async def send_message(text: str):
+async def send_message(text: str, job_id: str, has_reply_markup: bool = False):
     """
     Asynchronously sends a message to a predefined chat using a Telegram bot.
 
     Args:
         text (str): The text of the message to be sent.
+        job_id (str): The ID of the job, used as callback data.
+        has_reply_markup (bool): Whether to include a reply markup in the message.
     """
 
+    # Define the inline keyboard
+    keyboard = [
+        [
+            InlineKeyboardButton("Interested ✅", callback_data=f"interested-{job_id}"),
+            InlineKeyboardButton("Not Interested ❌", callback_data=f"notinterested-{job_id}"),
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard) if has_reply_markup else None
+
     async with bot:
-        await bot.send_message(text=text, chat_id=chat_id)
+        await bot.send_message(text=text, chat_id=chat_id, reply_markup=reply_markup)
 
 
-async def send_telegram_notification(posthog_event):
+async def send_jobpost_message(job_post: FreelanceJobPost):
     """
     Sends a notification to a predefined Telegram chat when a new user is created.
 
     Args:
         posthog_event (PostHogUserCreatedEvent): The event data from PostHog.
     """
-    if isinstance(posthog_event, PostHogUserCreatedEvent):
-        message = (
-            f"👤 New user created: {posthog_event.properties.email}\n"
-            f"Time of creation: {posthog_event.properties.created_at}"
-        )
 
-    if isinstance(posthog_event, PostHogSubscriptionUpdatedEvent):
-        message = (
-            f"💸 Subscription updated for user: {posthog_event.properties.email}\n"
-            f"Product variant: {posthog_event.properties.product_variant}\n"
-            f"New subscription status: {posthog_event.properties.subscription_status}\n"
-            f"Subscription renews at {posthog_event.properties.subscription_renews_at}\n"
-            f"Subscription ends at {posthog_event.properties.subscription_ends_at}\n"
-        )
+    platform = "freelance.de" if job_post.platform_id == "freelance_de" else "freelancermap.de"
 
-    if isinstance(posthog_event, PostHogOnboardingSurveyCompletedEvent):
-        message = (
-            f"📝 Onboarding survey completed by user: {posthog_event.properties.email}\n"
-            f"Onboarding Organization: {posthog_event.properties.onboarding_organization}\n"
-            f"Onboarding Role: {posthog_event.properties.onboarding_role}\n"
-            f"Onboarding Problem: {posthog_event.properties.onboarding_problem}\n"
-        )
+    message = (
+        f"🚀 New freelance job post on {platform}\n\n"
+        f"Title: {job_post.title}\n"
+        f"Description: {job_post.description}\n"
+    )
 
-    if isinstance(posthog_event, PostHogCancellationSurveySubmittedEvent):
-        message = (
-            f"📝 Cancellation survey submitted by user: {posthog_event.properties.email}\n"
-            f"Cancellation reason: {posthog_event.properties.reason_cancellation}\n"
-            f"Cancellation reason other: {posthog_event.properties.reason_other}\n"
-        )
+    await send_message(text=message, job_id=job_post.id, has_reply_markup=True)
 
-    if isinstance(posthog_event, PostHogCampaignCreatedEvent):
-        message = f"📝 Campaign created for url: {posthog_event.properties.url}\n"
 
-    if isinstance(posthog_event, PostHogBacklinkProspectsCreatedEvent):
-        message = f"📝 Backlink prospects created for campaign id: {posthog_event.properties.campaign_id}\n"
+async def handle_update(update: Update, context: CallbackContext):
+    """
+    Handles a callback query from a user.
 
-    if isinstance(posthog_event, PosthogMessageCreatedEvent):
-        message = f"📝 Message created: {posthog_event.properties.message}\n"
+    Args:
+        update (Update): Incoming update from Telegram.
+        context (CallbackContext): Context for the current update.
+    """
 
-    await send_message(message)
+    # Check if the update has a callback query
+    if update.callback_query:
+        # Extract the callback data (job_id) and chat ID
+        callback_data = update.callback_query.data
+        chat_id = update.callback_query.message.chat_id
+        message_id = update.callback_query.message.message_id
+
+        # Split the callback data into the action and job_id
+        action, job_id = callback_data.split("-")
+
+        job_id = int(job_id)
+
+        # Here you can add your custom logic
+        # For example, you might retrieve a job post using the job_id
+        # job_post = retrieve_job_post(job_id)
+
+        if action == "interested":
+            # If the user is interested, mark the job post as "interested" in your database
+            update_job_post_status(job_id, JobStatus.CONTACTED)
+
+            # TODO: Auto Apply
+        elif action == "notinterested":
+            # If the user is not interested, mark the job post as "not interested" in your database
+            # mark_job_post_as_not_interested(job_post)
+
+            update_job_post_status(job_id, JobStatus.NOT_INTERESTED)
+        # Delete the original message
+        await bot.delete_message(chat_id=chat_id, message_id=message_id)
+
+    else:
+        # If the update does not have a callback query, you might want to send a default reply
+        # Extract the chat ID from the message
+        chat_id = update.message.chat_id
+        return
+
+
+async def register_webhook():
+    """
+    Registers a webhook for the Telegram bot.
+    """
+
+    webhook_url = "https://feliche93--freelance-job-post-telegram-bot-dev.modal.run"
+
+    # Set the webhook
+    await bot.set_webhook(webhook_url)
+
+
+@stub.function(image=image, secret=secret)
+@web_endpoint(label="freelance-job-post-telegram-bot", method="POST")
+async def handle_telegram_messages(request: Request):
+    # Parse the update
+    data = await request.json()
+
+    print(f"Received update: {data}")
+
+    update = Update.de_json(data, bot)
+
+    # Create a CallbackContext
+    context = CallbackContext(bot)
+
+    # Handle the update
+    await handle_update(update, context)
