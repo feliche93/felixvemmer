@@ -17,9 +17,10 @@ from dotenv import load_dotenv
 from models import FreelanceJobPost, JobStatus
 from playwright.async_api import Page
 from scraper import get_full_url, initialize_playwright, random_wait
-from telegram_bot import send_job_post_notification
-
+from modal import web_endpoint
 import modal
+from fastapi import Request
+import json
 
 load_dotenv()
 
@@ -47,8 +48,6 @@ async def login_to_freelance_de(email: str, password: str, headless: bool = True
     _, page = await initialize_playwright(headless=headless)
 
     await page.goto("https://www.freelance.de/login.php")
-
-    await page.wait_for_timeout(3000)
 
     # close cookie banner
     await page.locator("a", has_text="Auswahl bestätigen").click()
@@ -79,9 +78,7 @@ async def scrape_freelance_de_statistics():
     page = await login_to_freelance_de(freelance_de_email, freelance_de_password)
 
     # profile views
-    profile_visits_total = await page.locator(
-        'xpath=//i[@class="far fa-fw fa-eye"]/..'
-    ).inner_text()
+    profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
 
     profile_visits_total = int(profile_visits_total.replace(" Profilaufrufe gesamt", ""))
 
@@ -89,9 +86,7 @@ async def scrape_freelance_de_statistics():
 
     today = date.today()
 
-    insert_platform_statistic(
-        full_url=full_url, profile_visits_total=profile_visits_total, date=today
-    )
+    insert_platform_statistic(full_url=full_url, profile_visits_total=profile_visits_total, date=today)
 
     await page.goto("https://www.freelance.de/logout.php")
 
@@ -129,6 +124,9 @@ async def scrape_job_offers(num_pages: int = 6):
     """
     Scrapes the freelance.de website for job offers.
     """
+
+    from telegram_bot import send_job_post_notification
+
     page = await login_to_freelance_de(
         freelance_de_email,
         freelance_de_password,
@@ -163,7 +161,7 @@ async def scrape_job_offers(num_pages: int = 6):
 
     print(f"Sending notification for {len(new_jobs)} new jobs.")
 
-    for job_post in new_jobs[1:2]:
+    for job_post in new_jobs:
         await send_job_post_notification(job_post)
         update_job_post_status(job_post, JobStatus.CONTACTED)
 
@@ -272,7 +270,8 @@ async def scrape_job_detail_offer(url: str):
 
 
 @stub.function(secret=secret, image=image)
-async def apply_for_job_post(job_post: FreelanceJobPost):
+@web_endpoint(label="apply-freelance-de-job", method="POST", wait_for_response=False)
+async def apply_for_job_post(request: Request):
     """
     Applies for a job post on the freelance.de website.
 
@@ -285,17 +284,36 @@ async def apply_for_job_post(job_post: FreelanceJobPost):
     Returns:
         str: The URL of the application.
     """
+
+    data = await request.json()
+
+    data = json.loads(data)
+
+    print(f"Received data: {data}")
+
+    job_post = FreelanceJobPost(**data)
+
     print("Logging into freelance.de...")
-    page = await login_to_freelance_de(freelance_de_email, freelance_de_password, headless=False)
+    page = await login_to_freelance_de(
+        freelance_de_email,
+        freelance_de_password,
+        # headless=False
+    )
 
     print(f"Navigating to job post at {job_post.url}...")
     await page.goto(job_post.url)
 
+    try:
+        print("Clicking 'Jetzt bewerben' button...")
+        await page.locator('xpath=//input[@name="profile_up_to_date"]').nth(0).click()
+    except Exception as e:
+        print(f"Could not click 'Jetzt bewerben' button: {e}")
+
     print("Clicking 'Bewerbung senden' button...")
     await page.locator("button", has_text="Bewerbung senden").click()
 
-    print("Waiting for 5 seconds...")
-    await page.wait_for_timeout(5000)
+    print("Waiting for 10 seconds...")
+    await page.wait_for_timeout(10000)
 
     print("Retrieving URL of application...")
     application_url = await page.locator(

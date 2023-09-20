@@ -1,15 +1,14 @@
 """This module contains the Telegram bot used to send messages to a predefined chat."""
 import os
 
+import requests
 import telegram
 from common import image, secret, stub
 from db import get_job_post_by_id, update_job_post_status
 from dotenv import load_dotenv
 from fastapi import Request
-from freelance_de import apply_for_job_post
 from models import FreelanceJobPost, JobStatus
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import CallbackContext
 
 from modal import web_endpoint
 
@@ -60,12 +59,13 @@ async def send_job_post_notification(job_post: FreelanceJobPost):
         f"Description: {job_post.description}\n"
     )
 
-    print(f"Sending message: {message}")
+    print(f"Sending message for job post id {job_post.id}")
 
     await send_message(text=message, job_post_id=job_post.id, has_reply_markup=True)
 
 
-async def handle_update(update: Update, context: CallbackContext):
+@stub.function(image=image, secret=secret)
+async def handle_update(data: dict):
     """
     Handles a callback query from a user.
 
@@ -74,12 +74,14 @@ async def handle_update(update: Update, context: CallbackContext):
         context (CallbackContext): Context for the current update.
     """
 
+    update = Update.de_json(data, bot)
+
     # Check if the update has a callback query
-    if update.callback_query:
+    if hasattr(update, "callback_query") and update.callback_query:  # pylint: disable=no-member
         # Extract the callback data (job_id) and chat ID
-        callback_data = update.callback_query.data
-        incoming_chat_id = update.callback_query.message.chat_id
-        message_id = update.callback_query.message.message_id
+        callback_data = update.callback_query.data  # pylint: disable=no-member
+        incoming_chat_id = update.callback_query.message.chat_id  # pylint: disable=no-member
+        message_id = update.callback_query.message.message_id  # pylint: disable=no-member
 
         # Split the callback data into the action and job_id
         action, job_post_id = callback_data.split("-")
@@ -92,22 +94,37 @@ async def handle_update(update: Update, context: CallbackContext):
 
         if action == "interested":
             # If the user is interested, mark the job post as "interested" in your database
-            apply_for_job_post.remote(job_post)
+            if job_post.status != JobStatus.APPLIED:
+                # The response variable is not used, so we can remove it
+                requests.post(
+                    url="https://feliche93--apply-freelance-de-job.modal.run", json=job_post.json()
+                )
 
-            update_job_post_status(job_post, JobStatus.APPLIED)
+                application_url = f"https://www.freelance.de/application/dialog.php?application_id={job_post.job_id}"
+
+                text = (
+                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n"
+                    f"🔗 Application Url: {application_url}"
+                )
+
+                await send_message(text=text, job_post_id=job_post_id)
 
         elif action == "notinterested":
             # If the user is not interested, mark the job post as "not interested" in your database
-            # mark_job_post_as_not_interested(job_post)
+            if job_post.status != JobStatus.NOT_INTERESTED:
+                update_job_post_status(job_post, JobStatus.NOT_INTERESTED)
 
-            update_job_post_status(job_post, JobStatus.NOT_INTERESTED)
         # Delete the original message
-        await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)
+        try:
+            await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)
+        except telegram.error.BadRequest:
+            print(f"Message {message_id} has already been deleted.")
 
     else:
         # If the update does not have a callback query, you might want to send a default reply
         # Extract the chat ID from the message
-        incoming_chat_id = update.message.chat_id
+        if hasattr(update, "message") and update.message:  # pylint: disable=no-member
+            incoming_chat_id = update.message.chat_id  # pylint: disable=no-member
         return
 
 
@@ -118,22 +135,36 @@ async def register_webhook():
 
     webhook_url = "https://feliche93--freelance-job-post-telegram-bot-dev.modal.run"
 
+    webhook_url = "https://feliche93--freelance-job-post-telegram-bot.modal.run"
+
     # Set the webhook
     await bot.set_webhook(webhook_url)
 
 
 @stub.function(image=image, secret=secret)
-@web_endpoint(label="freelance-job-post-telegram-bot", method="POST")
+@web_endpoint(label="freelance-job-post-telegram-bot", method="POST", wait_for_response=False)
 async def handle_telegram_messages(request: Request):
+    """
+    Asynchronously handles incoming Telegram messages.
+
+    This function is triggered by a webhook when a new message arrives. It parses the update,
+    prints it for debugging purposes, and then delegates the handling of the update to the
+    `handle_update` function.
+
+    Args:
+        request (Request): The incoming request from the webhook, containing the update.
+
+    Returns:
+        dict: A dictionary with a single key-value pair, indicating that the handling of the update was successful.
+    """
     # Parse the update
     data = await request.json()
 
     print(f"Received update: {data}")
 
-    update = Update.de_json(data, bot)
-
-    # Create a CallbackContext
-    context = CallbackContext(bot)
-
     # Handle the update
-    await handle_update(update, context)
+    handle_update.remote(data)
+
+    print("Finished handling update")
+
+    return {"status": "ok"}
