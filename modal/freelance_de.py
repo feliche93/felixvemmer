@@ -1,18 +1,25 @@
 import os
+import re
 from datetime import date, datetime
 from typing import List
 
 from bs4 import BeautifulSoup
 from common import image, secret, stub
-from db import insert_platform_statistic, upsert_job_post, filter_new_job_post_urls, find_new_jobs
+from dateparser import parse
+from db import (
+    filter_new_job_post_urls,
+    find_new_jobs,
+    insert_platform_statistic,
+    update_job_post_status,
+    upsert_job_post,
+)
 from dotenv import load_dotenv
 from models import FreelanceJobPost, JobStatus
 from playwright.async_api import Page
 from scraper import get_full_url, initialize_playwright, random_wait
-from dateparser import parse
-from telegram_bot import send_jobpost_message
+from telegram_bot import send_job_post_notification
+
 import modal
-import re
 
 load_dotenv()
 
@@ -72,7 +79,9 @@ async def scrape_freelance_de_statistics():
     page = await login_to_freelance_de(freelance_de_email, freelance_de_password)
 
     # profile views
-    profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
+    profile_visits_total = await page.locator(
+        'xpath=//i[@class="far fa-fw fa-eye"]/..'
+    ).inner_text()
 
     profile_visits_total = int(profile_visits_total.replace(" Profilaufrufe gesamt", ""))
 
@@ -80,7 +89,9 @@ async def scrape_freelance_de_statistics():
 
     today = date.today()
 
-    insert_platform_statistic(full_url=full_url, profile_visits_total=profile_visits_total, date=today)
+    insert_platform_statistic(
+        full_url=full_url, profile_visits_total=profile_visits_total, date=today
+    )
 
     await page.goto("https://www.freelance.de/logout.php")
 
@@ -143,8 +154,6 @@ async def scrape_job_offers(num_pages: int = 6):
 
     print(f"Found {len(links)} job offers.")
 
-    # TODO: Filter which jobs already in DB
-
     filtered_links = filter_new_job_post_urls(links)
 
     async for result in scrape_job_detail_offer.map(filtered_links, return_exceptions=True):
@@ -155,7 +164,8 @@ async def scrape_job_offers(num_pages: int = 6):
     print(f"Sending notification for {len(new_jobs)} new jobs.")
 
     for job_post in new_jobs[1:2]:
-        await send_jobpost_message(job_post)
+        await send_job_post_notification(job_post)
+        update_job_post_status(job_post, JobStatus.CONTACTED)
 
     print("Finished flow.")
 
@@ -259,3 +269,41 @@ async def scrape_job_detail_offer(url: str):
     print(f"Inserted job post with id {upserted_job_id}.")
 
     return upserted_job_id
+
+
+@stub.function(secret=secret, image=image)
+async def apply_for_job_post(job_post: FreelanceJobPost):
+    """
+    Applies for a job post on the freelance.de website.
+
+    This function logs into the freelance.de website, navigates to the URL of a specific job post,
+    clicks the "Bewerbung senden" button to apply for the job, and then retrieves the URL of the application.
+
+    Args:
+        job_post (FreelanceJobPost): The job post to apply for.
+
+    Returns:
+        str: The URL of the application.
+    """
+    print("Logging into freelance.de...")
+    page = await login_to_freelance_de(freelance_de_email, freelance_de_password, headless=False)
+
+    print(f"Navigating to job post at {job_post.url}...")
+    await page.goto(job_post.url)
+
+    print("Clicking 'Bewerbung senden' button...")
+    await page.locator("button", has_text="Bewerbung senden").click()
+
+    print("Waiting for 5 seconds...")
+    await page.wait_for_timeout(5000)
+
+    print("Retrieving URL of application...")
+    application_url = await page.locator(
+        "a", has_text="Sie haben sich bereits auf das Projekt beworben."
+    ).get_attribute("href")
+
+    application_url = f"{base_url}{application_url}"
+
+    print(f"Application URL: {application_url}")
+
+    return application_url

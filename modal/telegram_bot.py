@@ -3,9 +3,10 @@ import os
 
 import telegram
 from common import image, secret, stub
-from db import update_job_post_status
+from db import get_job_post_by_id, update_job_post_status
 from dotenv import load_dotenv
 from fastapi import Request
+from freelance_de import apply_for_job_post
 from models import FreelanceJobPost, JobStatus
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext
@@ -20,7 +21,7 @@ chat_id = 1424617201
 bot = telegram.Bot(token=token)
 
 
-async def send_message(text: str, job_id: str, has_reply_markup: bool = False):
+async def send_message(text: str, job_post_id: str, has_reply_markup: bool = False):
     """
     Asynchronously sends a message to a predefined chat using a Telegram bot.
 
@@ -33,8 +34,8 @@ async def send_message(text: str, job_id: str, has_reply_markup: bool = False):
     # Define the inline keyboard
     keyboard = [
         [
-            InlineKeyboardButton("Interested ✅", callback_data=f"interested-{job_id}"),
-            InlineKeyboardButton("Not Interested ❌", callback_data=f"notinterested-{job_id}"),
+            InlineKeyboardButton("Interested ✅", callback_data=f"interested-{job_post_id}"),
+            InlineKeyboardButton("Not Interested ❌", callback_data=f"notinterested-{job_post_id}"),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard) if has_reply_markup else None
@@ -43,7 +44,7 @@ async def send_message(text: str, job_id: str, has_reply_markup: bool = False):
         await bot.send_message(text=text, chat_id=chat_id, reply_markup=reply_markup)
 
 
-async def send_jobpost_message(job_post: FreelanceJobPost):
+async def send_job_post_notification(job_post: FreelanceJobPost):
     """
     Sends a notification to a predefined Telegram chat when a new user is created.
 
@@ -59,7 +60,9 @@ async def send_jobpost_message(job_post: FreelanceJobPost):
         f"Description: {job_post.description}\n"
     )
 
-    await send_message(text=message, job_id=job_post.id, has_reply_markup=True)
+    print(f"Sending message: {message}")
+
+    await send_message(text=message, job_post_id=job_post.id, has_reply_markup=True)
 
 
 async def handle_update(update: Update, context: CallbackContext):
@@ -75,35 +78,36 @@ async def handle_update(update: Update, context: CallbackContext):
     if update.callback_query:
         # Extract the callback data (job_id) and chat ID
         callback_data = update.callback_query.data
-        chat_id = update.callback_query.message.chat_id
+        incoming_chat_id = update.callback_query.message.chat_id
         message_id = update.callback_query.message.message_id
 
         # Split the callback data into the action and job_id
-        action, job_id = callback_data.split("-")
+        action, job_post_id = callback_data.split("-")
 
-        job_id = int(job_id)
+        job_post_id = int(job_post_id)
 
-        # Here you can add your custom logic
-        # For example, you might retrieve a job post using the job_id
-        # job_post = retrieve_job_post(job_id)
+        job_post = get_job_post_by_id(job_post_id=job_post_id)
+
+        print(f"Received callback data: {callback_data}")
 
         if action == "interested":
             # If the user is interested, mark the job post as "interested" in your database
-            update_job_post_status(job_id, JobStatus.CONTACTED)
+            apply_for_job_post.remote(job_post)
 
-            # TODO: Auto Apply
+            update_job_post_status(job_post, JobStatus.APPLIED)
+
         elif action == "notinterested":
             # If the user is not interested, mark the job post as "not interested" in your database
             # mark_job_post_as_not_interested(job_post)
 
-            update_job_post_status(job_id, JobStatus.NOT_INTERESTED)
+            update_job_post_status(job_post, JobStatus.NOT_INTERESTED)
         # Delete the original message
-        await bot.delete_message(chat_id=chat_id, message_id=message_id)
+        await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)
 
     else:
         # If the update does not have a callback query, you might want to send a default reply
         # Extract the chat ID from the message
-        chat_id = update.message.chat_id
+        incoming_chat_id = update.message.chat_id
         return
 
 

@@ -53,7 +53,9 @@ def insert_platform_statistic(
         None
     """
     with session:
-        platform = session.exec(select(FreelancePlatform).where(FreelancePlatform.url == full_url)).first()
+        platform = session.exec(
+            select(FreelancePlatform).where(FreelancePlatform.url == full_url)
+        ).first()
 
         previous_stat = session.exec(
             select(FreelancePlatformStatistic)
@@ -62,7 +64,9 @@ def insert_platform_statistic(
         ).first()
 
         # Check if the previous_stat date is equal to the input date
-        print(f"Checking if previous_stat.date ({previous_stat.date}) is equal to input date ({date})")
+        print(
+            f"Checking if previous_stat.date ({previous_stat.date}) is equal to input date ({date})"
+        )
         if previous_stat.date == date:
             print("Statistic for this date is already present.")
             return
@@ -71,13 +75,19 @@ def insert_platform_statistic(
 
         # If profile_visits_total is provided, calculate profile_visits based on the previous date
         if profile_visits_total is not None:
-            profile_visits = profile_visits_total - (previous_stat.profile_visits_total if previous_stat else 0)
+            profile_visits = profile_visits_total - (
+                previous_stat.profile_visits_total if previous_stat else 0
+            )
         elif profile_visits is not None:
             # If profile_visits is provided, calculate profile_visits_total based on
             # the previous date
-            profile_visits_total = (previous_stat.profile_visits_total if previous_stat else 0) + profile_visits
+            profile_visits_total = (
+                previous_stat.profile_visits_total if previous_stat else 0
+            ) + profile_visits
         else:
-            raise ValueError("Either profile visits or profile visits total with a date must be provided")
+            raise ValueError(
+                "Either profile visits or profile visits total with a date must be provided"
+            )
 
         print(f"Date before creating FreelancePlatformStatistic: {date}")
 
@@ -109,7 +119,9 @@ def filter_new_job_post_urls(urls: List[str]) -> List[str]:
     """
     with session:
         # Get the URLs that are already in the database
-        existing_urls = session.exec(select(FreelanceJobPost.url).where(FreelanceJobPost.url.in_(urls))).all()
+        existing_urls = session.exec(
+            select(FreelanceJobPost.url).where(FreelanceJobPost.url.in_(urls))
+        ).all()
 
         # Print the number of URLs before filtering
         print(f"Number of URLs before filtering: {len(urls)}")
@@ -136,17 +148,23 @@ def upsert_job_post(job_post: FreelanceJobPost) -> int:
     print(f"Upserting job post: {job_post.dict()}")
 
     with session:
-        existing_job_post = session.exec(select(FreelanceJobPost).where(FreelanceJobPost.url == job_post.url)).first()
+        existing_job_post = session.exec(
+            select(FreelanceJobPost).where(FreelanceJobPost.url == job_post.url)
+        ).first()
 
         if existing_job_post is None:
-            print(f"Job post with url {job_post.url} not found in the database. Inserting new job post.")
+            print(
+                f"Job post with url {job_post.url} not found in the database. Inserting new job post."
+            )
             session.add(job_post)
             session.commit()
             session.refresh(job_post)
             print(f"Inserted new job post with id {job_post.id}.")
             return job_post.id
         else:
-            print(f"Job post with url {job_post.url} already exists in the database. Doing nothing.")
+            print(
+                f"Job post with url {job_post.url} already exists in the database. Doing nothing."
+            )
             return existing_job_post.id
 
 
@@ -174,7 +192,34 @@ def find_new_jobs() -> List[FreelanceJobPost]:
         return new_jobs
 
 
-def update_job_post_status(job_post_id: int, status: JobStatus) -> None:
+def get_job_post_by_id(job_post_id: int) -> FreelanceJobPost:
+    """
+    Retrieves a job post from the database by its ID.
+
+    Args:
+        job_post_id (int): The ID of the job post to retrieve.
+
+    Returns:
+        FreelanceJobPost: The job post with the given ID.
+
+    Raises:
+        ValueError: If no job post is found with the given ID.
+    """
+    with session:
+        # Retrieve the job post
+        job_post = session.exec(
+            select(FreelanceJobPost).where(FreelanceJobPost.id == job_post_id)
+        ).first()
+
+        # If the job post does not exist, raise an exception
+        if job_post is None:
+            raise ValueError(f"No job post found with ID {job_post_id}")
+
+        print(f"Found job post with ID {job_post_id}")
+        return job_post
+
+
+def update_job_post_status(job_post: FreelanceJobPost, status: JobStatus) -> None:
     """
     Updates the status of a job post in the database.
 
@@ -182,19 +227,10 @@ def update_job_post_status(job_post_id: int, status: JobStatus) -> None:
         job_post_id (int): The ID of the job post to update.
         status (JobStatus): The new status for the job post.
     """
-    with session:
-        # Retrieve the job post
-        job_post = session.exec(select(FreelanceJobPost).where(FreelanceJobPost.id == job_post_id)).first()
 
-        # If the job post does not exist, raise an exception
-        if job_post is None:
-            raise ValueError(f"No job post found with ID {job_post_id}")
+    # Update the status of the job post
+    job_post.status = status
+    session.merge(job_post)
+    session.commit()
 
-        print(f"Updating status of job post with ID {job_post_id} to {status}.")
-
-        # Update the status of the job post
-        job_post.status = status
-        session.merge(job_post)
-        session.commit()
-
-        print(f"Updated status of job post with ID {job_post_id} to {status}.")
+    print(f"Updated status of job post with ID {job_post.id} to {status}.")

@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 from common import image, secret, stub
-from db import insert_platform_statistic, find_new_jobs
+from db import insert_platform_statistic
 from dotenv import load_dotenv
 from scraper import get_full_url, initialize_playwright
 import modal
