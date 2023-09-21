@@ -56,6 +56,7 @@ async def send_job_post_notification(job_post: FreelanceJobPost):
     message = (
         f"🚀 New freelance job post on {platform}\n\n"
         f"Title: {job_post.title}\n"
+        f"Url: {job_post.url}\n\n"
         f"Description: {job_post.description}\n"
     )
 
@@ -97,14 +98,15 @@ async def handle_update(data: dict):
             if job_post.status != JobStatus.APPLIED:
                 # The response variable is not used, so we can remove it
                 requests.post(
-                    url="https://feliche93--apply-freelance-de-job.modal.run", json=job_post.json()
+                    url="https://feliche93--apply-freelance-de-job.modal.run",
+                    json=job_post.json(),
+                    timeout=20,
                 )
 
                 application_url = f"https://www.freelance.de/application/dialog.php?application_id={job_post.job_id}"
 
                 text = (
-                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n"
-                    f"🔗 Application Url: {application_url}"
+                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n" f"🔗 Application Url: {application_url}"
                 )
 
                 await send_message(text=text, job_post_id=job_post_id)
@@ -116,7 +118,8 @@ async def handle_update(data: dict):
 
         # Delete the original message
         try:
-            await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)
+            async with bot:
+                await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)
         except telegram.error.BadRequest:
             print(f"Message {message_id} has already been deleted.")
 

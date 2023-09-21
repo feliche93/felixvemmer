@@ -1,3 +1,4 @@
+import json
 import os
 import re
 from datetime import date, datetime
@@ -14,13 +15,14 @@ from db import (
     upsert_job_post,
 )
 from dotenv import load_dotenv
+from fastapi import Request
 from models import FreelanceJobPost, JobStatus
 from playwright.async_api import Page
 from scraper import get_full_url, initialize_playwright, random_wait
-from modal import web_endpoint
+from telegram_bot import send_job_post_notification
+
 import modal
-from fastapi import Request
-import json
+from modal import web_endpoint
 
 load_dotenv()
 
@@ -78,7 +80,9 @@ async def scrape_freelance_de_statistics():
     page = await login_to_freelance_de(freelance_de_email, freelance_de_password)
 
     # profile views
-    profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
+    profile_visits_total = await page.locator(
+        'xpath=//i[@class="far fa-fw fa-eye"]/..'
+    ).inner_text()
 
     profile_visits_total = int(profile_visits_total.replace(" Profilaufrufe gesamt", ""))
 
@@ -86,7 +90,9 @@ async def scrape_freelance_de_statistics():
 
     today = date.today()
 
-    insert_platform_statistic(full_url=full_url, profile_visits_total=profile_visits_total, date=today)
+    insert_platform_statistic(
+        full_url=full_url, profile_visits_total=profile_visits_total, date=today
+    )
 
     await page.goto("https://www.freelance.de/logout.php")
 
@@ -124,8 +130,6 @@ async def scrape_job_offers(num_pages: int = 6):
     """
     Scrapes the freelance.de website for job offers.
     """
-
-    from telegram_bot import send_job_post_notification
 
     page = await login_to_freelance_de(
         freelance_de_email,
