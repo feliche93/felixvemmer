@@ -35,9 +35,7 @@ freelance_de_email = os.environ.get("FREELANCE_DE_EMAIL")
 freelance_de_password = os.environ.get("FREELANCE_DE_PASSWORD")
 
 if not freelance_de_email or not freelance_de_password:
-    raise ValueError(
-        "Please set FREELANCE_DE_EMAIL and FREELANCE_DE_PASSWORD environment variables."
-    )
+    raise ValueError("Please set FREELANCE_DE_EMAIL and FREELANCE_DE_PASSWORD environment variables.")
 
 BASE_URL = "https://www.freelance.de"
 
@@ -90,9 +88,7 @@ async def scrape_freelance_de_statistics() -> None:
     page = await login_to_freelance_de(freelance_de_email, freelance_de_password)
 
     # profile views
-    profile_visits_total = await page.locator(
-        'xpath=//i[@class="far fa-fw fa-eye"]/..'
-    ).inner_text()
+    profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
 
     profile_visits_total = int(profile_visits_total.replace(" Profilaufrufe gesamt", ""))
 
@@ -100,9 +96,7 @@ async def scrape_freelance_de_statistics() -> None:
 
     today = datetime.today()
 
-    insert_platform_statistic(
-        full_url=full_url, profile_visits_total=profile_visits_total, date=today
-    )
+    insert_platform_statistic(full_url=full_url, profile_visits_total=profile_visits_total, date=today)
 
     await page.goto("https://www.freelance.de/logout.php")
 

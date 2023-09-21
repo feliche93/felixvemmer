@@ -108,8 +108,7 @@ async def handle_update(data: dict):
                 application_url = response.text
 
                 text = (
-                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n"
-                    f"🔗 Application Url: {application_url}"
+                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n" f"🔗 Application Url: {application_url}"
                 )
 
                 await send_message(text=text, job_post_id=job_post_id)

@@ -19,12 +19,6 @@ repos:
         args:
           [--remove-unused-variables, --remove-all-unused-imports, --in-place]
 
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: "v2.0.2" # Use the sha / tag you want to point at
-    hooks:
-      - id: autopep8
-        args: [--in-place, --aggressive, --aggressive, --max-line-length=100]
-
   - repo: local
     hooks:
       - id: isort
@@ -46,4 +40,4 @@ repos:
         pass_filenames: false
         entry: black .
         args:
-          [--safe, --quiet, "--line-length=100", "--skip-string-normalization"]
+          [--safe, --quiet, "--line-length=120", "--skip-string-normalization"]
