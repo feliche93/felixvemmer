@@ -1,10 +1,14 @@
+"""
+This module contains functions for scraping the freelance.de website.
+"""
+
 import json
 import os
 import re
-from datetime import date, datetime
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from common import image, secret, stub
 from dateparser import parse
 from db import (
@@ -16,20 +20,26 @@ from db import (
 )
 from dotenv import load_dotenv
 from fastapi import Request
-from models import FreelanceJobPost, JobStatus
+from models import FreelanceJobPost, JobStatus, WorkType
 from playwright.async_api import Page
+from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 from scraper import get_full_url, initialize_playwright, random_wait
 from telegram_bot import send_job_post_notification
 
 import modal
-from modal import web_endpoint
+from modal import web_endpoint  # type: ignore
 
 load_dotenv()
 
 freelance_de_email = os.environ.get("FREELANCE_DE_EMAIL")
 freelance_de_password = os.environ.get("FREELANCE_DE_PASSWORD")
 
-base_url = "https://www.freelance.de"
+if not freelance_de_email or not freelance_de_password:
+    raise ValueError(
+        "Please set FREELANCE_DE_EMAIL and FREELANCE_DE_PASSWORD environment variables."
+    )
+
+BASE_URL = "https://www.freelance.de"
 
 
 async def login_to_freelance_de(email: str, password: str, headless: bool = True) -> Page:
@@ -66,8 +76,8 @@ async def login_to_freelance_de(email: str, password: str, headless: bool = True
     return page
 
 
-@stub.function(secret=secret, image=image, schedule=modal.Cron("55 21 * * *"))
-async def scrape_freelance_de_statistics():
+@stub.function(secret=secret, image=image, schedule=modal.Cron("55 21 * * *"))  # type: ignore
+async def scrape_freelance_de_statistics() -> None:
     """
     Scrapes the freelance.de website for statistics.
 
@@ -88,7 +98,7 @@ async def scrape_freelance_de_statistics():
 
     full_url = get_full_url(page.url)
 
-    today = date.today()
+    today = datetime.today()
 
     insert_platform_statistic(
         full_url=full_url, profile_visits_total=profile_visits_total, date=today
@@ -116,16 +126,16 @@ async def extract_job_links(page: Page) -> List[str]:
 
     print(f"Found {h3_elements_count} job offers.")
 
-    links = []
+    links: List[str] = []
 
     for index in range(h3_elements_count):
         link = await h3_elements.nth(index).get_attribute("href")
-        links.append(f"{base_url}{link}")
+        links.append(f"{BASE_URL}{link}")
 
     return links
 
 
-@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"))
+@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"))  # type: ignore
 async def scrape_job_offers(num_pages: int = 6):
     """
     Scrapes the freelance.de website for job offers.
@@ -139,9 +149,9 @@ async def scrape_job_offers(num_pages: int = 6):
 
     await random_wait(page)
 
-    base_job_page = "https://www.freelance.de/search/project.php?__search_sort_by=1&__search_project_age=0&__search_profile_availability=0&__search_profile_update=0&__search_profile_apply_watchlist=0&__search_project_start_date=&__search_profile_ac=&__search_additional_filter=&__search=search&search_extended=0&__search_freetext=%28Python+OR+Next.js+OR+SQL+OR+JavaScript+OR+TypeScript%29+AND+NOT+%28%22Java%22+AND+NOT+JavaScript%29&__search_city=&seal=2feb68b0bf51ece41a556e0c14aef0d82d36f923&__search_city_location_id=&__search_city_country=&__search_city_country_extended=&__search_city_perimeter=0&search_id=a3c3b9ae5ba06b22f6aa3054c7213cd1&__search_country=&__search_hour_rate_modifier=&__search_experience_modifier=&__search_additional_filter=&__search_project_age_remote=0&__search_project_start_date_remote=&__search_sort_by_remote=1"  # noqa: E501
+    base_job_page = "https://www.freelance.de/search/project.php?__search_sort_by=1&__search_project_age=0&__search_profile_availability=0&__search_profile_update=0&__search_profile_apply_watchlist=0&__search_project_start_date=&__search_profile_ac=&__search_additional_filter=&__search=search&search_extended=0&__search_freetext=%28Python+OR+Next.js+OR+SQL+OR+JavaScript+OR+TypeScript%29+AND+NOT+%28%22Java%22+AND+NOT+JavaScript%29&__search_city=&seal=2feb68b0bf51ece41a556e0c14aef0d82d36f923&__search_city_location_id=&__search_city_country=&__search_city_country_extended=&__search_city_perimeter=0&search_id=a3c3b9ae5ba06b22f6aa3054c7213cd1&__search_country=&__search_hour_rate_modifier=&__search_experience_modifier=&__search_additional_filter=&__search_project_age_remote=0&__search_project_start_date_remote=&__search_sort_by_remote=1"  # noqa: E501, pylint: disable=line-too-long
 
-    links = []
+    links: List[str] = []
 
     for i in range(num_pages):
         offset = i * 20
@@ -158,8 +168,8 @@ async def scrape_job_offers(num_pages: int = 6):
 
     filtered_links = filter_new_job_post_urls(links)
 
-    async for result in scrape_job_detail_offer.map(filtered_links, return_exceptions=True):
-        print(result)
+    async for result in scrape_job_detail_offer.map(filtered_links, return_exceptions=True):  # type: ignore
+        print(result)  # type: ignore
 
     new_jobs = find_new_jobs()
 
@@ -172,7 +182,7 @@ async def scrape_job_offers(num_pages: int = 6):
     print("Finished flow.")
 
 
-@stub.function(secret=secret, image=image, concurrency_limit=3, allow_concurrent_inputs=3)
+@stub.function(secret=secret, image=image, concurrency_limit=3, allow_concurrent_inputs=3)  # type: ignore
 async def scrape_job_detail_offer(url: str):
     """
     Scrapes the details of a specific job offer from the freelance.de website.
@@ -200,28 +210,40 @@ async def scrape_job_detail_offer(url: str):
 
     soup = BeautifulSoup(await page.content(), "html.parser")
 
-    title = soup.find("h1").text.strip()
+    h1_tag = soup.find("h1")
+
+    if not h1_tag:
+        raise ValueError("Could not find h1 tag.")
+
+    title = h1_tag.text.strip()
 
     # Extracting the company name
-    company_name = soup.find("p", {"class": "company-name"}).text.strip()
+    company_name_element = soup.find("p", {"class": "company-name"})
+    company_name = company_name_element.text.strip() if company_name_element else None
 
     # Extracting the job details
-    details = soup.find("div", {"class": "overview"}).find_all("li")
+    details: List[Optional[Tag]] = soup.find("div", {"class": "overview"}).find_all("li")  # type: ignore
 
     # Initialize variables
     start_date = None
     end_date = None
     location = None
     hourly_rate = None
-    timestamp_posted = None
     job_id = None
+    timestamp_posted = None
 
     # Loop through details
+    if not details:
+        raise ValueError("No details found.")
 
     for detail in details:
-        i_tag = detail.find("i")
+        i_tag = detail.find("i")  # type: ignore
         if i_tag is not None:
-            detail_type = i_tag.get("data-original-title")
+            detail_type = i_tag.get("data-original-title")  # type: ignore
+
+            if not detail:
+                raise ValueError("Could not extract detail type.")
+
             detail_text = detail.text.strip()
 
             if detail_type == "Geplanter Start":
@@ -241,6 +263,9 @@ async def scrape_job_detail_offer(url: str):
             elif detail_type == "Letztes Update":
                 timestamp_posted = datetime.strptime(detail_text, "%d.%m.%Y")
 
+    if not timestamp_posted:
+        raise ValueError("Could not extract timestamp posted.")
+
     job_id_match = re.search(r"Projekt-(\d+)-", url)
     job_id = job_id_match.group(1) if job_id_match else None
 
@@ -248,7 +273,12 @@ async def scrape_job_detail_offer(url: str):
         raise ValueError("Could not extract job ID from URL.")
 
     # Extracting the description
-    description = soup.find("div", {"class": "panel-body highlight-text"}).text.strip()
+    description_tag = soup.find("div", {"class": "panel-body highlight-text"})
+    if not description_tag:
+        raise ValueError("Could not find description tag.")
+
+    description = description_tag.text.strip()
+
     print(f"Start date: {start_date}")
 
     job_post = FreelanceJobPost(
@@ -262,8 +292,9 @@ async def scrape_job_detail_offer(url: str):
         job_id=job_id,
         company_name=company_name,
         platform_id=1,
-        status=JobStatus.SCRAPED.value,
+        status=JobStatus.SCRAPED,
         url=url,
+        work_type=WorkType.REMOTE,
     )
 
     upserted_job_id = upsert_job_post(job_post)
@@ -273,8 +304,8 @@ async def scrape_job_detail_offer(url: str):
     return upserted_job_id
 
 
-@stub.function(secret=secret, image=image)
-@web_endpoint(label="apply-freelance-de-job", method="POST", wait_for_response=False)
+@stub.function(secret=secret, image=image)  # type: ignore
+@web_endpoint(label="apply-freelance-de-job", method="POST", wait_for_response=True)
 async def apply_for_job_post(request: Request):
     """
     Applies for a job post on the freelance.de website.
@@ -307,11 +338,29 @@ async def apply_for_job_post(request: Request):
     print(f"Navigating to job post at {job_post.url}...")
     await page.goto(job_post.url)
 
-    try:
-        print("Clicking 'Jetzt bewerben' button...")
-        await page.locator('xpath=//input[@name="profile_up_to_date"]').nth(0).click()
-    except Exception as e:
-        print(f"Could not click 'Jetzt bewerben' button: {e}")
+    # Check if 'Data Privacy Policy' checkbox exists and try to check it
+    data_policy_checkbox = page.locator('xpath=//input[@id="data_policy_accepted"]').nth(0)
+    if await data_policy_checkbox.is_visible():
+        print("Accepting Data Privacy Policy...")
+        try:
+            await data_policy_checkbox.click()
+            print("Data Privacy Policy accepted.")
+        except PlaywrightTimeoutError:
+            print("Could not accept Data Privacy Policy.")
+    else:
+        print("Data Privacy Policy checkbox not found.")
+
+    # Check if 'Profile up to date' checkbox exists and try to click it
+    profile_up_to_date_checkbox = page.locator('xpath=//input[@name="profile_up_to_date"]').nth(0)
+    if await profile_up_to_date_checkbox.is_visible():
+        print("Clicking 'Profile up to date' checkbox...")
+        try:
+            await profile_up_to_date_checkbox.click()
+            print("'Profile up to date' checkbox clicked.")
+        except PlaywrightTimeoutError:
+            print("Could not click 'Profile up to date' checkbox.")
+    else:
+        print("'Profile up to date' checkbox not found.")
 
     print("Clicking 'Bewerbung senden' button...")
     await page.locator("button", has_text="Bewerbung senden").click()
@@ -324,7 +373,7 @@ async def apply_for_job_post(request: Request):
         "a", has_text="Sie haben sich bereits auf das Projekt beworben."
     ).get_attribute("href")
 
-    application_url = f"{base_url}{application_url}"
+    application_url = f"{BASE_URL}{application_url}"
 
     print(f"Application URL: {application_url}")
 

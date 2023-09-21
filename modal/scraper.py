@@ -15,7 +15,7 @@ from playwright_stealth import stealth_async
 import random
 
 
-async def random_wait(page):
+async def random_wait(page: Page):
     """
     Waits for a random timeout between 2 and 5 seconds.
 

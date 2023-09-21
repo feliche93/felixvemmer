@@ -6,8 +6,8 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy.dialects.postgresql import ENUM, TEXT, DATE
-from sqlmodel import Column, Field, SQLModel
+from sqlalchemy.dialects.postgresql import DATE, ENUM, TEXT
+from sqlmodel import Column, Field, SQLModel  # type: ignore
 
 
 class FreelancePlatform(SQLModel, table=True):
@@ -16,7 +16,7 @@ class FreelancePlatform(SQLModel, table=True):
     It has the following columns: id, name, url.
     """
 
-    __tablename__ = "freelance_platforms"
+    __tablename__: str = "freelance_platforms"  # type: ignore
 
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(default=None, sa_column=Column(TEXT, unique=True, nullable=False))
@@ -29,7 +29,7 @@ class FreelancePlatformStatistic(SQLModel, table=True):
     It has the following columns: id, freelance_platform_id, date, profile_visits, profile_visits_total.
     """
 
-    __tablename__ = "freelance_platform_statistics"
+    __tablename__: str = "freelance_platform_statistics"  # type: ignore
 
     id: Optional[int] = Field(default=None, primary_key=True)
     freelance_platform_id: int = Field(foreign_key="freelance_platforms.id")
@@ -71,7 +71,7 @@ class FreelanceJobPost(SQLModel, table=True):
     contact_person, industry, contract_type, work_type, status, platform_id.
     """
 
-    __tablename__ = "freelance_job_posts"
+    __tablename__: str = "freelance_job_posts"  # type: ignore
 
     id: Optional[int] = Field(default=None, primary_key=True)
     title: str = Field(default=None, sa_column=Column(TEXT, nullable=False))

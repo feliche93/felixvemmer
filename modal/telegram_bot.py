@@ -97,16 +97,19 @@ async def handle_update(data: dict):
             # If the user is interested, mark the job post as "interested" in your database
             if job_post.status != JobStatus.APPLIED:
                 # The response variable is not used, so we can remove it
-                requests.post(
+
+                response = requests.post(
                     url="https://feliche93--apply-freelance-de-job.modal.run",
                     json=job_post.json(),
-                    timeout=20,
+                    timeout=50,
                 )
 
-                application_url = f"https://www.freelance.de/application/dialog.php?application_id={job_post.job_id}"
+                # Extract the application URL from the response
+                application_url = response.text
 
                 text = (
-                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n" f"🔗 Application Url: {application_url}"
+                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n"
+                    f"🔗 Application Url: {application_url}"
                 )
 
                 await send_message(text=text, job_post_id=job_post_id)

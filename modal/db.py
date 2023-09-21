@@ -3,7 +3,7 @@ This module is used to set up the database connection and create the necessary t
 """
 import os
 from datetime import datetime, timedelta
-from typing import List
+from typing import List, Optional
 
 from dotenv import load_dotenv
 from models import (  # noqa pylint: disable=unused-import
@@ -16,7 +16,10 @@ from sqlmodel import Session, SQLModel, create_engine, select
 
 load_dotenv()
 
-psql_url: str = os.getenv("DATABASE_URL")
+psql_url: Optional[str] = os.getenv("DATABASE_URL")
+if psql_url is None:
+    raise ValueError("Environment variable DATABASE_URL is not set")
+
 engine = create_engine(psql_url, echo=False)
 
 
@@ -35,9 +38,9 @@ if __name__ == "__main__":
 
 def insert_platform_statistic(
     full_url: str,
-    profile_visits_total: int = None,
-    profile_visits: int = None,
-    date: datetime.date = None,
+    profile_visits_total: Optional[int] = None,
+    profile_visits: Optional[int] = None,
+    date: Optional[datetime] = None,
 ) -> None:
     """
     Inserts a new platform statistic into the database.
@@ -57,11 +60,17 @@ def insert_platform_statistic(
             select(FreelancePlatform).where(FreelancePlatform.url == full_url)
         ).first()
 
+        if platform is None:
+            raise ValueError(f"No platform found with URL {full_url}")
+
         previous_stat = session.exec(
             select(FreelancePlatformStatistic)
             .where(FreelancePlatformStatistic.freelance_platform_id == platform.id)
-            .order_by(FreelancePlatformStatistic.date.desc())
+            .order_by(FreelancePlatformStatistic.date.desc())  # type: ignore
         ).first()
+
+        if previous_stat is None:
+            raise ValueError(f"No previous statistic found for platform {platform.name}")
 
         # Check if the previous_stat date is equal to the input date
         print(
@@ -90,6 +99,9 @@ def insert_platform_statistic(
             )
 
         print(f"Date before creating FreelancePlatformStatistic: {date}")
+
+        if date is None or platform.id is None:
+            raise ValueError("Date and platform must be provided")
 
         latest_stat = FreelancePlatformStatistic(
             profile_visits=profile_visits,
@@ -120,7 +132,7 @@ def filter_new_job_post_urls(urls: List[str]) -> List[str]:
     with session:
         # Get the URLs that are already in the database
         existing_urls = session.exec(
-            select(FreelanceJobPost.url).where(FreelanceJobPost.url.in_(urls))
+            select(FreelanceJobPost.url).where(FreelanceJobPost.url.in_(urls))  # type: ignore
         ).all()
 
         # Print the number of URLs before filtering
@@ -152,20 +164,22 @@ def upsert_job_post(job_post: FreelanceJobPost) -> int:
             select(FreelanceJobPost).where(FreelanceJobPost.url == job_post.url)
         ).first()
 
-        if existing_job_post is None:
-            print(
-                f"Job post with url {job_post.url} not found in the database. Inserting new job post."
-            )
-            session.add(job_post)
-            session.commit()
-            session.refresh(job_post)
-            print(f"Inserted new job post with id {job_post.id}.")
-            return job_post.id
-        else:
-            print(
-                f"Job post with url {job_post.url} already exists in the database. Doing nothing."
-            )
+        if existing_job_post and existing_job_post.id is not None:
+            print(f"Found existing job post with id {existing_job_post.id}.")
             return existing_job_post.id
+
+        print(
+            f"Job post with url {job_post.url} not found in the database. Inserting new job post."
+        )
+        session.add(job_post)
+        session.commit()
+        session.refresh(job_post)
+        print(f"Inserted new job post with id {job_post.id}.")
+
+        if job_post.id is None:
+            raise ValueError("Job post id is None")
+
+        return job_post.id
 
 
 def find_new_jobs() -> List[FreelanceJobPost]:
@@ -184,7 +198,7 @@ def find_new_jobs() -> List[FreelanceJobPost]:
             select(FreelanceJobPost)
             .where(FreelanceJobPost.timestamp_posted >= datetime.now() - timedelta(days=1))
             .where(FreelanceJobPost.status == JobStatus.SCRAPED)
-            .order_by(FreelanceJobPost.timestamp_posted.desc())
+            .order_by(FreelanceJobPost.timestamp_posted.desc())  # type: ignore
         ).all()
 
         print(f"Found {len(new_jobs)} matching jobs.")

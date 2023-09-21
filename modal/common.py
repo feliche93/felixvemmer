@@ -1,18 +1,15 @@
 "Common modules shared"
 
 from dotenv import load_dotenv
-from langchain.chat_models import ChatOpenAI
 from modal import Image, Secret, Stub
 
 ENV = "prod"
 
 load_dotenv()
 
-stub = Stub(f"felixvemmer-{ENV}")
+stub: Stub = Stub(f"felixvemmer-{ENV}")
 
 secret = Secret.from_name(f"felixvemmer-secret-{ENV}")
-
-# llm = ChatOpenAI(temperature=0)
 
 image = (
     Image.debian_slim(python_version="3.11.1")
