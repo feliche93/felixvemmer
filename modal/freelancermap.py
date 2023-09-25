@@ -5,19 +5,20 @@ retrieves profile view statistics, and stores these in a database.
 """
 
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Tuple
 
-from common import image, secret, stub
-from db import insert_platform_statistic
-from dotenv import load_dotenv
-from playwright.async_api import Request, Route, Page
-from scraper import get_full_url, initialize_playwright
 from bs4 import BeautifulSoup
-from models import FreelanceJobPost, JobStatus, WorkType
+from common import image, secret, stub
 from dateparser import parse
+from db import insert_platform_statistic, upsert_job_post
+from dotenv import load_dotenv
+from models import FreelanceJobPost, JobStatus, WorkType
+from playwright.async_api import Page, Request, Route
+from scraper import get_full_url, initialize_playwright
+from telegram_bot import send_job_post_notification
+
 import modal
-from datetime import datetime, timedelta
 
 load_dotenv()
 
@@ -35,7 +36,8 @@ async def login_to_freelancermap(page: Page, email: str, password: str):
     """
     Logs into the freelancermap.de website.
 
-    This function navigates to the login page, accepts cookies, fills in the login form with the provided email and password,
+    This function navigates to the login page, accepts cookies,
+    fills in the login form with the provided email and password,
     and submits the form.
 
     Args:
@@ -191,6 +193,12 @@ async def scrape_freelancermap_job_posta():
 
         job_post = extract_job_details(soup, url)
 
+        job_post_id = upsert_job_post(job_post)
+
+        await send_job_post_notification(job_post)
+
+        print(f"Inserted job post with id {job_post_id} into the database")
+
 
 def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     """
@@ -241,9 +249,15 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     timestamp_posted = timestamp_posted_elem.get_text(strip=True) if timestamp_posted_elem else None
     timestamp_posted = parse(timestamp_posted) if timestamp_posted else None
 
+    if not timestamp_posted:
+        raise ValueError("Timestamp posted is not set")
+
     job_id_elem = soup.find("dt", text="Projekt-ID:")
     job_id_elem = job_id_elem.find_next_sibling("dd") if job_id_elem else None
     job_id = job_id_elem.get_text(strip=True) if job_id_elem else None
+
+    if not job_id:
+        raise ValueError("Job id is not set")
 
     job_work_type_elem = soup.find("i", {"class": "fas fa-globe"})
     job_work_type_elem = job_work_type_elem.parent if job_work_type_elem else None
@@ -260,10 +274,16 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     title = soup.find("h1")
     title = title.get_text(strip=True) if title else None
 
+    if not title:
+        raise ValueError("Title is not set")
+
     description = soup.find_all("div", {"class": "content"})
     description = description[1] if description else None
     description = description.get_text(strip=True) if description else None
     description = description.replace("Beschreibung", "", 1).strip() if description else None
+
+    if not description:
+        raise ValueError("Description is not set")
 
     contact_person_elem = soup.find("dt", text="Ansprechpartner:")
     contact_person_elem = contact_person_elem.find_next_sibling("dd") if contact_person_elem else None
@@ -281,25 +301,23 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     location = location.get_text(strip=True) if location else None
 
     # Create a FreelanceJobPost object with the extracted fields
-    job_post = FreelanceJobPost.parse_obj(
-        {
-            "job_id": job_id,
-            "title": title,
-            "description": description,
-            "company_name": company_name,
-            "work_type": work_type,
-            "start_date": start_date,
-            "end_date": end_date,
-            "timestamp_posted": timestamp_posted,
-            "url": url,
-            "contact_person": contact_person,
-            "contract_type": contract_type,
-            "workload": workload,
-            "status": JobStatus.CONTACTED,
-            "platform": "freelancermap.de",
-            "industry": industry,
-            "location": location,
-        }
+    job_post = FreelanceJobPost(
+        url=url,
+        title=title,
+        description=description,
+        company_name=company_name,
+        contact_person=contact_person,
+        industry=industry,
+        location=location,
+        work_type=work_type,
+        start_date=start_date,
+        end_date=end_date,
+        timestamp_posted=timestamp_posted,
+        job_id=job_id,
+        contract_type=contract_type,
+        workload=workload,
+        platform_id=3,
+        status=JobStatus.SCRAPED,
     )
 
     return job_post
