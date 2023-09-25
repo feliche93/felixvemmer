@@ -14,11 +14,15 @@ from dateparser import parse
 from db import insert_platform_statistic, upsert_job_post
 from dotenv import load_dotenv
 from models import FreelanceJobPost, JobStatus, WorkType
-from playwright.async_api import Page, Request, Route
+from playwright.async_api import Page, Route
 from scraper import get_full_url, initialize_playwright
 from telegram_bot import send_job_post_notification
+import json
+from fastapi import Request
+from ai import create_application_message
 
 import modal
+from modal import web_endpoint  # type: ignore
 
 load_dotenv()
 
@@ -32,7 +36,7 @@ if freelancermap_email is None or freelancermap_password is None:
     raise ValueError("Environment variables FREELANCERMAP_EMAIL and FREELANCERMAP_PASSWORD are not set")
 
 
-async def login_to_freelancermap(page: Page, email: str, password: str):
+async def login_to_freelancermap(page: Page):
     """
     Logs into the freelancermap.de website.
 
@@ -58,10 +62,10 @@ async def login_to_freelancermap(page: Page, email: str, password: str):
     await page.wait_for_timeout(3000)
 
     # input id username
-    await page.locator('xpath=//input[@id="login"]').fill(email)
+    await page.locator('xpath=//input[@id="login"]').fill(freelancermap_email)
 
     # input id password
-    await page.locator('xpath=//input[@id="password"]').fill(password)
+    await page.locator('xpath=//input[@id="password"]').fill(freelancermap_password)
 
     # sign in
     await page.locator("button", has_text="Anmelden").click()
@@ -164,7 +168,7 @@ async def scrape_freelancermap_job_posta():
     # headless = False
     _, page = await initialize_playwright(headless=headless)
 
-    await login_to_freelancermap(page, freelancermap_email, freelancermap_password)
+    await login_to_freelancermap(page=page)
 
     await page.goto(url)
 
@@ -214,7 +218,11 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     start_date_elem = soup.find("dt", text="Start")
     start_date_elem = start_date_elem.find_next_sibling("dd") if start_date_elem else None
     start_date = start_date_elem.get_text(strip=True) if start_date_elem else None
-    start_date = parse(start_date) if start_date else None
+
+    if start_date == "ab sofort":
+        start_date = datetime.now()
+    else:
+        start_date = parse(start_date) if start_date else None
 
     if not start_date:
         raise ValueError("Start date is not set")
@@ -238,7 +246,7 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     end_date = start_date + timedelta(days=duration_in_days.days) if start_date and duration_in_days else None
 
     if end_date is None:
-        raise ValueError("End date is not set")
+        end_date = start_date
 
     company_name_elem = soup.find("dt", text="Von")
     company_name_elem = company_name_elem.find_next_sibling("dd") if company_name_elem else None
@@ -321,3 +329,78 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     )
 
     return job_post
+
+
+@stub.function(secret=secret, image=image)  # type: ignore
+@web_endpoint(label="apply-freelancermap-job", method="POST", wait_for_response=True)
+async def apply_freelancermap_job(request: Request) -> str:
+    """
+    Applies to a job on freelancermap.de.
+
+    This function receives a job post as a JSON object in the request body, logs into the freelancermap.de website,
+    navigates to the job post's URL, fills in the application form with a generated message, and submits the form.
+
+    Args:
+        request: The FastAPI request object containing the job post data in the body.
+
+    Raises:
+        ValueError: If the apply button or the success message is not visible on the page.
+
+    Note: The function operates in headless mode, meaning no browser window will be visible during its operation.
+    """
+    data = await request.json()
+
+    data = json.loads(data)
+
+    print(f"Received data: {data}")
+
+    job_post = FreelanceJobPost(**data)
+
+    headless = True
+    # headless = False
+    _, page = await initialize_playwright(headless=headless)
+
+    await login_to_freelancermap(page=page)
+
+    await page.goto(job_post.url)
+
+    apply_button_element = page.locator('xpath=//a[@class="fm-btn fm-btn-action w-100"]')
+    apply_button_element_visible = await apply_button_element.is_visible()
+
+    if not apply_button_element_visible:
+        raise ValueError("Apply button is not visible")
+
+    await apply_button_element.click()
+
+    message = create_application_message(job_post)
+
+    application_text_area_element = page.locator('xpath=//textarea[@id="apply_project_form_content"]')
+
+    await application_text_area_element.fill(message)
+
+    checkbox_1_element = page.locator('xpath=//input[@id="attachment-index-1"]')
+    checkbox_1_element_visible = await checkbox_1_element.is_visible()
+
+    if checkbox_1_element_visible:
+        await checkbox_1_element.click()
+
+    checkbox_2_element = page.locator('xpath=//input[@name="vcard[]"]')
+    checkbox_2_element_visible = await checkbox_2_element.is_visible()
+
+    if checkbox_2_element_visible:
+        await checkbox_2_element.click()
+
+    submit_button_element = page.locator("input", has_text="Bewerbung abschicken")
+
+    await submit_button_element.click()
+
+    success_message_element = page.locator("h4", has_text="Ihre Nachricht wurde erfolgreich gesendet.")
+
+    success_message_element_visible = await success_message_element.is_visible()
+
+    if not success_message_element_visible:
+        raise ValueError("Success message is not visible")
+
+    print("Successfully applied to job post")
+
+    return message
