@@ -129,7 +129,7 @@ async def extract_job_links(page: Page) -> List[str]:
     return links
 
 
-@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"))  # type: ignore
+@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"), timeout=600)  # type: ignore
 async def scrape_job_offers(num_pages: int = 6):
     """
     Scrapes the freelance.de website for job offers.

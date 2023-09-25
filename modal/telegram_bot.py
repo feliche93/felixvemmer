@@ -1,5 +1,6 @@
 """This module contains the Telegram bot used to send messages to a predefined chat."""
 import os
+from typing import Optional
 
 import requests
 import telegram
@@ -8,19 +9,23 @@ from db import get_job_post_by_id, update_job_post_status
 from dotenv import load_dotenv
 from fastapi import Request
 from models import FreelanceJobPost, JobStatus
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Update
 
-from modal import web_endpoint
+from modal import web_endpoint  # type: ignore
 
 load_dotenv()
 
 token = os.getenv("TELEGRAM_TOKEN")
-chat_id = 1424617201
+
+if not token:
+    raise ValueError("TELEGRAM_TOKEN environment variable is not set.")
+
+CHAT_ID = 1424617201
 
 bot = telegram.Bot(token=token)
 
 
-async def send_message(text: str, job_post_id: str, has_reply_markup: bool = False):
+async def send_message(text: str, job_post_id: int, has_reply_markup: bool = False):
     """
     Asynchronously sends a message to a predefined chat using a Telegram bot.
 
@@ -39,8 +44,7 @@ async def send_message(text: str, job_post_id: str, has_reply_markup: bool = Fal
     ]
     reply_markup = InlineKeyboardMarkup(keyboard) if has_reply_markup else None
 
-    async with bot:
-        await bot.send_message(text=text, chat_id=chat_id, reply_markup=reply_markup)
+    await bot.send_message(text=text, chat_id=CHAT_ID, reply_markup=reply_markup)  # type: ignore
 
 
 async def send_job_post_notification(job_post: FreelanceJobPost):
@@ -51,7 +55,7 @@ async def send_job_post_notification(job_post: FreelanceJobPost):
         posthog_event (PostHogUserCreatedEvent): The event data from PostHog.
     """
 
-    platform = "freelance.de" if job_post.platform_id == "freelance_de" else "freelancermap.de"
+    platform = "freelance.de" if job_post.platform_id == 1 else "freelancermap.de"
 
     message = (
         f"🚀 New freelance job post on {platform}\n\n"
@@ -62,11 +66,14 @@ async def send_job_post_notification(job_post: FreelanceJobPost):
 
     print(f"Sending message for job post id {job_post.id}")
 
+    if not job_post.id:
+        raise ValueError("Job post ID is not set.")
+
     await send_message(text=message, job_post_id=job_post.id, has_reply_markup=True)
 
 
-@stub.function(image=image, secret=secret)
-async def handle_update(data: dict):
+@stub.function(image=image, secret=secret)  # type: ignore
+async def handle_update(data: dict[str, str]):
     """
     Handles a callback query from a user.
 
@@ -75,14 +82,30 @@ async def handle_update(data: dict):
         context (CallbackContext): Context for the current update.
     """
 
-    update = Update.de_json(data, bot)
+    update: Optional[Update] = Update.de_json(data, bot)
 
-    # Check if the update has a callback query
+    if not update:
+        print("Update is None")
+        return
+
+        # Check if the update has a callback query
     if hasattr(update, "callback_query") and update.callback_query:  # pylint: disable=no-member
         # Extract the callback data (job_id) and chat ID
-        callback_data = update.callback_query.data  # pylint: disable=no-member
-        incoming_chat_id = update.callback_query.message.chat_id  # pylint: disable=no-member
-        message_id = update.callback_query.message.message_id  # pylint: disable=no-member
+        callback_query: CallbackQuery = update.callback_query  # pylint: disable=no-member
+        callback_data = callback_query.data  # pylint: disable=no-member
+
+        if not callback_data:
+            print("Callback data is None")
+            return
+
+        callback_message = callback_query.message  # pylint: disable=no-member
+
+        if not callback_message:
+            print("Callback message is None")
+            return
+
+        incoming_chat_id = callback_message.chat_id  # pylint: disable=no-member
+        message_id = callback_message.message_id  # pylint: disable=no-member
 
         # Split the callback data into the action and job_id
         action, job_post_id = callback_data.split("-")
@@ -120,8 +143,7 @@ async def handle_update(data: dict):
 
         # Delete the original message
         try:
-            async with bot:
-                await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)
+            await bot.delete_message(chat_id=incoming_chat_id, message_id=message_id)  # type: ignore
         except telegram.error.BadRequest:
             print(f"Message {message_id} has already been deleted.")
 
@@ -143,10 +165,10 @@ async def register_webhook():
     webhook_url = "https://feliche93--freelance-job-post-telegram-bot.modal.run"
 
     # Set the webhook
-    await bot.set_webhook(webhook_url)
+    await bot.set_webhook(webhook_url)  # type: ignore
 
 
-@stub.function(image=image, secret=secret)
+@stub.function(image=image, secret=secret)  # type: ignore
 @web_endpoint(label="freelance-job-post-telegram-bot", method="POST", wait_for_response=False)
 async def handle_telegram_messages(request: Request):
     """

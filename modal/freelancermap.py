@@ -11,19 +11,60 @@ from typing import Any, Dict, List, Tuple
 from common import image, secret, stub
 from db import insert_platform_statistic
 from dotenv import load_dotenv
-from playwright.async_api import Request, Route
+from playwright.async_api import Request, Route, Page
 from scraper import get_full_url, initialize_playwright
-
+from bs4 import BeautifulSoup
+from models import FreelanceJobPost, JobStatus, WorkType
+from dateparser import parse
 import modal
+from datetime import datetime, timedelta
 
 load_dotenv()
 
+
+BASE_URL = "https://www.freelancermap.de"
 
 freelancermap_email = os.environ.get("FREELANCERMAP_EMAIL")
 freelancermap_password = os.environ.get("FREELANCERMAP_PASSWORD")
 
 if freelancermap_email is None or freelancermap_password is None:
     raise ValueError("Environment variables FREELANCERMAP_EMAIL and FREELANCERMAP_PASSWORD are not set")
+
+
+async def login_to_freelancermap(page: Page, email: str, password: str):
+    """
+    Logs into the freelancermap.de website.
+
+    This function navigates to the login page, accepts cookies, fills in the login form with the provided email and password,
+    and submits the form.
+
+    Args:
+        page: The Playwright page object to interact with.
+        email: The email to use for logging in.
+        password: The password to use for logging in.
+
+    Returns:
+        None
+    """
+    await page.goto("https://www.freelancermap.de/login")
+
+    await page.wait_for_timeout(3000)
+
+    # accept cookies
+    await page.locator("button", has_text="Alle Cookies akzeptieren").click()
+
+    await page.wait_for_timeout(3000)
+
+    # input id username
+    await page.locator('xpath=//input[@id="login"]').fill(email)
+
+    # input id password
+    await page.locator('xpath=//input[@id="password"]').fill(password)
+
+    # sign in
+    await page.locator("button", has_text="Anmelden").click()
+
+    await page.wait_for_timeout(3000)
 
 
 @stub.function(secret=secret, image=image, schedule=modal.Cron("0 1 * * *"))  # type: ignore
@@ -107,3 +148,158 @@ async def scrape_freelancermap_statistics():
     insert_platform_statistic(full_url, profile_visits=profile_visits, date=latest_date)
 
     await page.goto("https://www.freelancermap.de/logout")
+
+
+@stub.function(secret=secret, image=image, schedule=modal.Cron("0 1 * * *"))  # type: ignore
+async def scrape_freelancermap_job_posta():
+    """
+    Scrapes the freelancermap.de website for job posts.
+    """
+
+    url = "https://www.freelancermap.de/projektboerse.html?endcustomer=&created=1&excludeDachProjects=&partner=&poster=&posterName=&lastRun=&projectContractTypes%5B0%5D=contracting&currentPlatform=1&locale=de&query=next.js&queryParts=&countries%5B%5D=1&radius=&city=&sort=1"  # pylint: disable=line-too-long
+
+    headless = True
+    # headless = False
+    _, page = await initialize_playwright(headless=headless)
+
+    await login_to_freelancermap(page, freelancermap_email, freelancermap_password)
+
+    await page.goto(url)
+
+    job_link_elements = page.locator('xpath=//a[@class="project-title"]')
+
+    job_link_elements_count = await job_link_elements.count()
+
+    print(f"Found {job_link_elements_count} jobs on freelancermap.de")
+
+    job_links: List[str] = []
+
+    for index in range(job_link_elements_count):
+        job_link = await job_link_elements.nth(index).get_attribute("href")
+
+        if job_link is not None:
+            job_links.append(f"{BASE_URL}{job_link}")
+
+    # going through each job link
+    for link in job_links:
+        await page.goto(link)
+
+        html = await page.content()
+        soup = BeautifulSoup(html, "html.parser")
+
+        url = page.url
+
+        job_post = extract_job_details(soup, url)
+
+
+def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
+    """
+    Extracts job details from the provided BeautifulSoup object.
+
+    Args:
+        soup: The BeautifulSoup object containing the job details.
+
+    Returns:
+        A FreelanceJobPost object containing the extracted job details.
+    """
+    # Extract the required fields
+    start_date_elem = soup.find("dt", text="Start")
+    start_date_elem = start_date_elem.find_next_sibling("dd") if start_date_elem else None
+    start_date = start_date_elem.get_text(strip=True) if start_date_elem else None
+    start_date = parse(start_date) if start_date else None
+
+    if not start_date:
+        raise ValueError("Start date is not set")
+
+    workload_elem = soup.find("dt", text="Auslastung")
+    workload_elem = workload_elem.find_next_sibling("dd") if workload_elem else None
+    workload = workload_elem.get_text(strip=True) if workload_elem else None
+
+    duration_elem = soup.find("dt", text="Dauer")
+    duration_elem = duration_elem.find_next_sibling("dd") if duration_elem else None
+    duration = duration_elem.get_text(strip=True) if duration_elem else None
+
+    duration = duration.replace("\n", "").replace("(Verlängerung möglich)", "").strip() if duration else None
+
+    parsed_duration = parse(duration) if duration else None
+
+    now = datetime.now()
+
+    duration_in_days = now - parsed_duration if parsed_duration else None
+
+    end_date = start_date + timedelta(days=duration_in_days.days) if start_date and duration_in_days else None
+
+    if end_date is None:
+        raise ValueError("End date is not set")
+
+    company_name_elem = soup.find("dt", text="Von")
+    company_name_elem = company_name_elem.find_next_sibling("dd") if company_name_elem else None
+    company_name = company_name_elem.get_text(strip=True) if company_name_elem else None
+
+    timestamp_posted_elem = soup.find("dt", text="Eingestellt")
+    timestamp_posted_elem = timestamp_posted_elem.find_next_sibling("dd") if timestamp_posted_elem else None
+    timestamp_posted = timestamp_posted_elem.get_text(strip=True) if timestamp_posted_elem else None
+    timestamp_posted = parse(timestamp_posted) if timestamp_posted else None
+
+    job_id_elem = soup.find("dt", text="Projekt-ID:")
+    job_id_elem = job_id_elem.find_next_sibling("dd") if job_id_elem else None
+    job_id = job_id_elem.get_text(strip=True) if job_id_elem else None
+
+    job_work_type_elem = soup.find("i", {"class": "fas fa-globe"})
+    job_work_type_elem = job_work_type_elem.parent if job_work_type_elem else None
+    job_work_type = job_work_type_elem.get_text(strip=True) if job_work_type_elem else None
+
+    # Convert the work type to the corresponding enum value
+    if job_work_type == "Remote":
+        work_type = WorkType.REMOTE
+    elif job_work_type == "Onsite":
+        work_type = WorkType.LOCAL
+    else:
+        work_type = WorkType.LOCAL
+
+    title = soup.find("h1")
+    title = title.get_text(strip=True) if title else None
+
+    description = soup.find_all("div", {"class": "content"})
+    description = description[1] if description else None
+    description = description.get_text(strip=True) if description else None
+    description = description.replace("Beschreibung", "", 1).strip() if description else None
+
+    contact_person_elem = soup.find("dt", text="Ansprechpartner:")
+    contact_person_elem = contact_person_elem.find_next_sibling("dd") if contact_person_elem else None
+    contact_person = contact_person_elem.get_text(strip=True) if contact_person_elem else None
+
+    contract_type_elem = soup.find("dt", text="Vertragsart")
+    contract_type_elem = contract_type_elem.find_next_sibling("dd") if contract_type_elem else None
+    contract_type = contract_type_elem.get_text(strip=True) if contract_type_elem else None
+
+    industry = soup.find("dt", text="Branche")
+    industry = industry.find_next_sibling("dd") if industry else None
+    industry = industry.get_text(strip=True) if industry else None
+
+    location = soup.find("span", {"class": "address"})
+    location = location.get_text(strip=True) if location else None
+
+    # Create a FreelanceJobPost object with the extracted fields
+    job_post = FreelanceJobPost.parse_obj(
+        {
+            "job_id": job_id,
+            "title": title,
+            "description": description,
+            "company_name": company_name,
+            "work_type": work_type,
+            "start_date": start_date,
+            "end_date": end_date,
+            "timestamp_posted": timestamp_posted,
+            "url": url,
+            "contact_person": contact_person,
+            "contract_type": contract_type,
+            "workload": workload,
+            "status": JobStatus.CONTACTED,
+            "platform": "freelancermap.de",
+            "industry": industry,
+            "location": location,
+        }
+    )
+
+    return job_post
