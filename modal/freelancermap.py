@@ -4,22 +4,27 @@ It includes the function scrape_freelancermap_statistics which logs into the web
 retrieves profile view statistics, and stores these in a database.
 """
 
+import json
 import os
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Tuple
 
+from ai import create_application_message
 from bs4 import BeautifulSoup
 from common import image, secret, stub
 from dateparser import parse
-from db import insert_platform_statistic, upsert_job_post
+from db import (
+    filter_new_job_post_urls,
+    insert_platform_statistic,
+    update_job_post_status,
+    upsert_job_post,
+)
 from dotenv import load_dotenv
+from fastapi import Request
 from models import FreelanceJobPost, JobStatus, WorkType
 from playwright.async_api import Page, Route
 from scraper import get_full_url, initialize_playwright
 from telegram_bot import send_job_post_notification
-import json
-from fastapi import Request
-from ai import create_application_message
 
 import modal
 from modal import web_endpoint  # type: ignore
@@ -157,12 +162,12 @@ async def scrape_freelancermap_statistics():
 
 
 @stub.function(secret=secret, image=image, schedule=modal.Cron("0 1 * * *"))  # type: ignore
-async def scrape_freelancermap_job_posta():
+async def scrape_freelancermap_job_posts():
     """
     Scrapes the freelancermap.de website for job posts.
     """
 
-    url = "https://www.freelancermap.de/projektboerse.html?endcustomer=&created=1&excludeDachProjects=&partner=&poster=&posterName=&lastRun=&projectContractTypes%5B0%5D=contracting&currentPlatform=1&locale=de&query=next.js&queryParts=&countries%5B%5D=1&radius=&city=&sort=1"  # pylint: disable=line-too-long
+    url = "https://www.freelancermap.de/projektboerse.html?endcustomer=&created=1&excludeDachProjects=&partner=&poster=&posterName=&lastRun=&projectContractTypes%5B0%5D=contracting&currentPlatform=1&locale=de&query=next.js+or+seo+or+python&queryParts=&countries%5B%5D=1&radius=&city=&sort=1"  # pylint: disable=line-too-long
 
     headless = True
     # headless = False
@@ -186,8 +191,10 @@ async def scrape_freelancermap_job_posta():
         if job_link is not None:
             job_links.append(f"{BASE_URL}{job_link}")
 
+    filtered_links = filter_new_job_post_urls(job_links)
+
     # going through each job link
-    for link in job_links:
+    for link in filtered_links:
         await page.goto(link)
 
         html = await page.content()
@@ -197,11 +204,12 @@ async def scrape_freelancermap_job_posta():
 
         job_post = extract_job_details(soup, url)
 
-        job_post_id = upsert_job_post(job_post)
+        upserted_job = upsert_job_post(job_post)
 
-        await send_job_post_notification(job_post)
+        await send_job_post_notification(upserted_job)
+        update_job_post_status(job_post, JobStatus.CONTACTED)
 
-        print(f"Inserted job post with id {job_post_id} into the database")
+        print(f"Inserted job post with id {upserted_job.id} into the database")
 
 
 def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
@@ -238,9 +246,9 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     duration = duration.replace("\n", "").replace("(Verlängerung möglich)", "").strip() if duration else None
 
     parsed_duration = parse(duration) if duration else None
+    parsed_duration = parsed_duration.replace(tzinfo=None) if parsed_duration else None
 
     now = datetime.now()
-
     duration_in_days = now - parsed_duration if parsed_duration else None
 
     end_date = start_date + timedelta(days=duration_in_days.days) if start_date and duration_in_days else None
@@ -404,3 +412,18 @@ async def apply_freelancermap_job(request: Request) -> str:
     print("Successfully applied to job post")
 
     return message
+
+
+# async def main():
+#     """
+#     Main function for scraping freelancermap.de.
+#     """
+#     await scrape_freelancermap_statistics()
+
+#     await scrape_freelancermap_job_posts.local()  # type: ignore
+
+
+# if __name__ == "__main__":
+#     import asyncio
+
+#     asyncio.run(main())

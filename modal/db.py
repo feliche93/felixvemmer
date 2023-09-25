@@ -137,7 +137,7 @@ def filter_new_job_post_urls(urls: List[str]) -> List[str]:
     return new_urls
 
 
-def upsert_job_post(job_post: FreelanceJobPost) -> int:
+def upsert_job_post(job_post: FreelanceJobPost) -> FreelanceJobPost:
     """
     Inserts a new job post into the database or does nothing if it already exists.
 
@@ -154,7 +154,7 @@ def upsert_job_post(job_post: FreelanceJobPost) -> int:
 
         if existing_job_post and existing_job_post.id is not None:
             print(f"Found existing job post with id {existing_job_post.id}.")
-            return existing_job_post.id
+            return existing_job_post
 
         print(f"Job post with url {job_post.url} not found in the database. Inserting new job post.")
         session.add(job_post)
@@ -165,7 +165,7 @@ def upsert_job_post(job_post: FreelanceJobPost) -> int:
         if job_post.id is None:
             raise ValueError("Job post id is None")
 
-        return job_post.id
+        return job_post
 
 
 def find_new_jobs() -> List[FreelanceJobPost]:

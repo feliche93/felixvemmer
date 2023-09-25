@@ -121,20 +121,35 @@ async def handle_update(data: dict[str, str]):
             if job_post.status != JobStatus.APPLIED:
                 # The response variable is not used, so we can remove it
 
-                response = requests.post(
-                    url="https://feliche93--apply-freelance-de-job.modal.run",
-                    json=job_post.json(),
-                    timeout=50,
-                )
+                if job_post.platform_id == 1:
+                    response = requests.post(
+                        url="https://feliche93--apply-freelance-de-job.modal.run",
+                        json=job_post.json(),
+                        timeout=50,
+                    )
 
-                # Extract the application URL from the response
-                application_url = response.text
+                    # Extract the application URL from the response
+                    application_url = response.text
 
-                text = (
-                    f"🚀 Applied for job post {job_post_id} on freelance.de\n\n" f"🔗 Application Url: {application_url}"
-                )
+                    text = (
+                        f"🚀 Applied for job post {job_post_id} on freelance.de\n\n"
+                        f"🔗 Application Url: {application_url}"
+                    )
 
-                await send_message(text=text, job_post_id=job_post_id)
+                    await send_message(text=text, job_post_id=job_post_id)
+
+                elif job_post.platform_id == 3:
+                    response = requests.post(
+                        url="https://feliche93--apply-freelancermap-job.modal.run",
+                        json=job_post.json(),
+                        timeout=50,
+                    )
+
+                    message = response.text
+
+                    text = f"🚀 Applied for job post {job_post_id} on freelancermap.de\n\n" f"🔗 Application: {message}"
+
+                    await send_message(text=text, job_post_id=job_post_id)
 
         elif action == "notinterested":
             # If the user is not interested, mark the job post as "not interested" in your database

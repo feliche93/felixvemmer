@@ -291,11 +291,11 @@ async def scrape_job_detail_offer(url: str):
         work_type=WorkType.REMOTE,
     )
 
-    upserted_job_id = upsert_job_post(job_post)
+    upserted_job = upsert_job_post(job_post)
 
-    print(f"Inserted job post with id {upserted_job_id}.")
+    print(f"Inserted job post with id {upserted_job.id}.")
 
-    return upserted_job_id
+    return upserted_job.id
 
 
 @stub.function(secret=secret, image=image)  # type: ignore
