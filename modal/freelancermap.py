@@ -78,7 +78,7 @@ async def login_to_freelancermap(page: Page):
     await page.wait_for_timeout(3000)
 
 
-@stub.function(secret=secret, image=image, schedule=modal.Cron("0 1 * * *"))  # type: ignore
+@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"), timeout=600)  # type: ignore
 async def scrape_freelancermap_statistics():
     """
     Scrapes the freelancermap.de website for statistics.
