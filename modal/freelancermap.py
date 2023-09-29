@@ -161,7 +161,7 @@ async def scrape_freelancermap_statistics():
     await page.goto("https://www.freelancermap.de/logout")
 
 
-@stub.function(secret=secret, image=image, schedule=modal.Cron("0 1 * * *"))  # type: ignore
+@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"))  # type: ignore
 async def scrape_freelancermap_job_posts():
     """
     Scrapes the freelancermap.de website for job posts.
@@ -228,6 +228,8 @@ def extract_job_details(soup: BeautifulSoup, url: str) -> FreelanceJobPost:
     start_date = start_date_elem.get_text(strip=True) if start_date_elem else None
 
     if start_date == "ab sofort":
+        start_date = datetime.now()
+    elif start_date == "keine Angabe":
         start_date = datetime.now()
     else:
         start_date = parse(start_date) if start_date else None
@@ -414,16 +416,16 @@ async def apply_freelancermap_job(request: Request) -> str:
     return message
 
 
-# async def main():
-#     """
-#     Main function for scraping freelancermap.de.
-#     """
-#     await scrape_freelancermap_statistics()
+async def main():
+    """
+    Main function for scraping freelancermap.de.
+    """
+    # await scrape_freelancermap_statistics()
 
-#     await scrape_freelancermap_job_posts.local()  # type: ignore
+    await scrape_freelancermap_job_posts.local()  # type: ignore
 
 
-# if __name__ == "__main__":
-#     import asyncio
+if __name__ == "__main__":
+    import asyncio
 
-#     asyncio.run(main())
+    asyncio.run(main())
