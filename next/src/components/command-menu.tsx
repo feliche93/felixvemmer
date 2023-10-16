@@ -16,7 +16,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { docsConfig } from '@/config/docs'
+import { navigationConfig } from '@/config/navigation'
 import { cn } from '@/lib/utils'
 import { NavItem } from '../types/nav'
 
@@ -63,7 +63,7 @@ export function CommandMenu({ ...props }: DialogProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Links">
-            {docsConfig.mainNav
+            {navigationConfig.mainNav
               .filter((navitem) => !navitem.external)
               .map((navItem) => (
                 <CommandItem
@@ -78,7 +78,7 @@ export function CommandMenu({ ...props }: DialogProps) {
                 </CommandItem>
               ))}
           </CommandGroup>
-          {docsConfig.sidebarNav.map((group) => (
+          {navigationConfig.sidebarNav.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
               {group.items.map((navItem: NavItem) => (
                 <CommandItem

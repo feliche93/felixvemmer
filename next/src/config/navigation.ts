@@ -1,40 +1,46 @@
-import { MainNavItem, SidebarNavItem } from 'types/nav'
+import { MainNavItem, SidebarNavItem } from '@/types/nav'
+import { siteConfig } from './site'
 
-interface DocsConfig {
+interface NavigationConfig {
   mainNav: MainNavItem[]
   sidebarNav: SidebarNavItem[]
 }
 
-export const docsConfig: DocsConfig = {
+export const navigationConfig: NavigationConfig = {
   mainNav: [
     {
-      title: 'Documentation',
-      href: '/docs',
+      title: 'Blog',
+      href: '/blog',
     },
     {
-      title: 'Components',
-      href: '/docs/components/accordion',
+      title: 'Tech Stack',
+      href: '/tech-stack',
     },
     {
-      title: 'Themes',
-      href: '/themes',
+      title: 'Hardware',
+      href: '/hardware',
     },
     {
-      title: 'Examples',
-      href: '/examples',
+      title: 'Stats',
+      href: '/stats',
     },
     {
-      title: 'Figma',
-      href: '/docs/figma',
+      title: 'Consulting Services',
+      href: '/consulting-services',
     },
     {
       title: 'GitHub',
-      href: 'https://github.com/shadcn/ui',
+      href: siteConfig.links.github,
       external: true,
     },
     {
       title: 'Twitter',
-      href: 'https://twitter.com/shadcn',
+      href: siteConfig.links.twitter,
+      external: true,
+    },
+    {
+      title: 'LinkedIn',
+      href: siteConfig.links.linkedin,
       external: true,
     },
   ],

@@ -1,11 +1,14 @@
 export const siteConfig = {
-  name: 'shadcn/ui',
-  url: 'https://ui.shadcn.com',
-  ogImage: 'https://ui.shadcn.com/og.jpg',
-  description: 'Beautifully designed components built with Radix UI and Tailwind CSS.',
+  name: 'Felix Vemmer',
+  url: 'https://www.felixvemmer.com',
+  ogImage:
+    'https://www.felixvemmer.com/content/images/2023/08/Hey--I-am-Felix----Welcome-to-my-blog-where--you-ll-find-straight-to-the-point-insights-and-practical-advice-on-Python--TypeScript--and-all-things-full-stack.-1.png',
+  description:
+    "Felix Vemmer's blog: your gateway to Python, TypeScript, full-stack mastery. Subscribe for exclusive content and become part of our learning community!",
   links: {
-    twitter: 'https://twitter.com/shadcn',
-    github: 'https://github.com/shadcn-ui/ui',
+    twitter: 'https://twitter.com/felixvemmer',
+    github: 'https://github.com/feliche93',
+    linkedin: 'https://www.linkedin.com/in/felix-vemmer/',
   },
 }
 
