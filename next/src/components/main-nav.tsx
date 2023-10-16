@@ -29,6 +29,7 @@ export function MainNav() {
 
           return (
             <Link
+              key={item.title}
               href={item.href}
               className={cn(
                 'transition-colors hover:text-foreground/80',
