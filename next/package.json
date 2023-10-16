@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm concurrently \"contentlayer dev\" \"next dev\"",
-    "build": "pnpm generate && pnpm push && pnpm contentlayer build && pnpm next build",
+    "build": "pnpm contentlayer build && pnpm next build",
     "preview": "pnpm next build && pnpm next start",
     "start": "pnpm next start",
     "lint": "prettier . --check && pnpm eslint",
@@ -15,7 +15,6 @@
     "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
     "check": "drizzle-kit check:pg --config=drizzle.config.ts",
     "drop": "drizzle-kit drop --config=drizzle.config.ts",
-    "push": "node -r dotenv/config -r ts-node/register src/migrate.ts",
     "generate-content": "pnpm contentlayer build"
   },
   "dependencies": {
