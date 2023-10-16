@@ -22,7 +22,7 @@ More interested on why I switched? Check out the post below:
 
 Navigate to the `User & Authentication` settings and select `Email, Phone, Username`. This is the stage where you'll want to ensure that the settings mirror those of your existing Supabase account.
 
-<Callout className="my-4" variant={"destructive"} icon={"⚠️"}>
+<Callout className="my-4" variant={"destructive"} icon={<Icons.alertTriangle />}>
   If you use a **username** make sure that you first toggle the setting off in clerk, as the import
   without setting a username will throw an error.
 
@@ -94,8 +94,8 @@ load_dotenv(
 )
 ```
 
-<Callout variant={'destructive'} icon={'⚠️'}>
-  Make sure to adjust the ".env.local" and path to your env file.
+<Callout variant={'destructive'} icon={<Icons.alertTriangle />}>
+  Make sure to adjust the `.env.local` and path to your env file.
 </Callout>
 
 ### Connecting to Supabase and fetching all Users
@@ -170,7 +170,7 @@ The SQL query logic works in the following way:
 - Get all the `user_profiles` info from a separate table, e.g. `first_name` and `last_name` in a second CTE.
 - Piece all the info together and add any missing parts
 
-<Callout variant={'destructive'} icon={'⚠️'}>
+<Callout variant={'destructive'} icon={<Icons.alertTriangle />}>
   Make sure to adjust the sql query as needed. E.g. if you have **no username** or other auth types.
 </Callout>
 
@@ -228,7 +228,7 @@ So all we need to do is just specify the following in SQL:
 
 Finally using the set up environment variable in Step 1, we connect to Backend API and iterate over the rows to create each user in Clerk.dev.
 
-<Callout className="my-4" variant={'destructive'} icon={'⏱️'}>
+<Callout className="my-4" variant={'destructive'} icon={<Icons.clock />}>
   As specified in the Rate limits section we can only make 20 requests per 10 seconds. That is why I
   included the wait time.
 </Callout>
@@ -265,7 +265,7 @@ for result in tqdm(results):
         print(f"User with email {result.get('email_address')[0]} created successfully")
 ```
 
-<Callout className="my-4" variant={'positive'} icon={'👏'}>
+<Callout className="my-4" variant={'positive'} icon={<Icons.partyPopper />}>
   Congrats, you successfully migrated Auth from Supabase to Clerk.dev.
 </Callout>
 

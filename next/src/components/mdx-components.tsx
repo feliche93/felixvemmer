@@ -1,6 +1,7 @@
 'use client'
 
 import { Callout } from '@/components/callout'
+import { Icons } from '@/components/icons'
 import {
   Accordion,
   AccordionContent,
@@ -17,6 +18,7 @@ import Link from 'next/link'
 import * as React from 'react'
 
 const components = {
+  Icons,
   Accordion,
   AccordionContent,
   AccordionItem,

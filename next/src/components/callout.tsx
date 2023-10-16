@@ -9,7 +9,7 @@ interface CalloutProps {
 export function Callout({ title, children, icon, ...props }: CalloutProps) {
   return (
     <Alert {...props}>
-      {icon && <span className="mr-4 text-2xl">{icon}</span>}
+      {icon && <p className="pb-2">{icon}</p>}
       {title && <AlertTitle>{title}</AlertTitle>}
       <AlertDescription>{children}</AlertDescription>
     </Alert>

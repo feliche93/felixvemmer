@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from 'lucide-react'
+import { AlertTriangleIcon, ChevronLeftIcon, ClockIcon, PartyPopperIcon } from 'lucide-react'
 
 type IconProps = React.HTMLAttributes<SVGElement>
 
@@ -147,4 +147,7 @@ export const Icons = {
     </svg>
   ),
   chevronLeft: (props: IconProps) => <ChevronLeftIcon {...props} />,
+  partyPopper: (props: IconProps) => <PartyPopperIcon {...props} />,
+  clock: (props: IconProps) => <ClockIcon {...props} />,
+  alertTriangle: (props: IconProps) => <AlertTriangleIcon {...props} />,
 }

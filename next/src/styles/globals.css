@@ -57,9 +57,9 @@
     --accent: 215 27.9% 16.9%;
     --accent-foreground: 210 20% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
-
+    --destructive: 0 80% 50%; /* Brighter red */
+    --destructive-foreground: 0 80% 70%; /* Brighter red */
+  
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 216 12.2% 83.9%;
