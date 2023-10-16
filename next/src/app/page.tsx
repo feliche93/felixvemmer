@@ -21,8 +21,8 @@ export default function IndexPage() {
         </Link> */}
         <PageHeaderHeading>Hey, I am Felix 👋 Welcome to my personal website.</PageHeaderHeading>
         <PageHeaderDescription>
-          You'll find straight-to-the-point insights and practical advice on Python, TypeScript, and
-          all things full-stack.
+          You will find straight-to-the-point insights and practical advice on Python, TypeScript,
+          and all things full-stack.
         </PageHeaderDescription>
         <div className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10">
           <Link href="/docs" className={cn(buttonVariants())}>
