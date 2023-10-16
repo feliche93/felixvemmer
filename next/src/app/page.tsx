@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { db } from './lib/db';
+import { db } from '../lib/db';
 
 export default async function Home() {
   return (
