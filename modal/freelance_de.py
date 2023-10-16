@@ -87,6 +87,9 @@ async def scrape_freelance_de_statistics() -> None:
     """
     page = await login_to_freelance_de(freelance_de_email, freelance_de_password)
 
+    # adds a delay to make sure the page is loaded
+    await page.wait_for_timeout(5000)
+
     # profile views
     profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
 

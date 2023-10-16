@@ -44,6 +44,11 @@ async def send_message(text: str, job_post_id: int, has_reply_markup: bool = Fal
     ]
     reply_markup = InlineKeyboardMarkup(keyboard) if has_reply_markup else None
 
+    # Check if the message is too long
+    if len(text) > 4096:
+        # If the message is too long, truncate it
+        text = text[:4093] + "..."
+
     await bot.send_message(text=text, chat_id=CHAT_ID, reply_markup=reply_markup)  # type: ignore
 
 

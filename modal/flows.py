@@ -8,9 +8,15 @@ from telegram_bot import handle_telegram_messages, handle_update
 
 async def main():
     """Main function"""
-    await scrape_freelancermap_statistics.local()
-    await scrape_freelance_de_statistics.local()
-    await scrape_job_offers.local()
-    await apply_for_job_post.local()
-    await handle_telegram_messages.local()
-    await handle_update.local()
+    # await scrape_freelancermap_statistics.local()
+    # await scrape_freelance_de_statistics.local()
+    # await scrape_job_offers.local()
+    # await apply_for_job_post.local()
+    # await handle_telegram_messages.local()
+    # await handle_update.local()
+
+
+# if __name__ == "__main__":
+#     import asyncio
+
+#     asyncio.run(main())

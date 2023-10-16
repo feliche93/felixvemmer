@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "directus": "^10.3.0",
-    "pg": "^8.11.0"
-  }
-}
