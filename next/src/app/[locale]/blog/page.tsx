@@ -81,7 +81,7 @@ export default async function BlogPage() {
                           </Link>
                         </h3>
                         <p className="mt-5 line-clamp-3 text-sm leading-6 text-base-content/80">
-                          {post.title}
+                          {post.description}
                         </p>
                       </div>
                       <div className="relative mt-8 flex items-center gap-x-4">
