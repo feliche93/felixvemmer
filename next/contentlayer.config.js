@@ -122,6 +122,12 @@ export const Post = defineDocumentType(() => ({
       required: true,
     },
   },
+  postAccess: {
+    type: 'enum',
+    of: ['public', 'membersOnly', 'paidMembersOnly', 'specificTiers'],
+    default: 'public',
+    required: true,
+  },
   computedFields,
 }))
 

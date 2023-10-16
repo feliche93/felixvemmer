@@ -3,9 +3,12 @@ import Link from 'next/link'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 export default function IndexPage() {
+  const t = useTranslations('index.hero')
+
   return (
     <div className="container relative">
       <PageHeader className="pb-8 flex flex-col items-center">
@@ -26,12 +29,8 @@ export default function IndexPage() {
           height={200}
           alt="Felix Vemmer"
         />
-        <PageHeaderHeading>👋 Welcome to my personal website</PageHeaderHeading>
-        <PageHeaderDescription className="text-center">
-          Hey, I am Felix, a full-stack developer based in Berlin. You will find
-          straight-to-the-point insights and practical advice on Python, TypeScript, and all things
-          full-stack.
-        </PageHeaderDescription>
+        <PageHeaderHeading className="text-center">{t('title')}</PageHeaderHeading>
+        <PageHeaderDescription className="text-center">{t('description')}</PageHeaderDescription>
         <div className="flex w-full justify-center items-center space-x-4 pb-8 pt-4 md:pb-10">
           <Link
             href="/consulting"
@@ -42,7 +41,7 @@ export default function IndexPage() {
               }),
             )}
           >
-            Consulting Services
+            {t('primaryCTA')}
           </Link>
           <Link
             target="_blank"
@@ -50,7 +49,7 @@ export default function IndexPage() {
             href={'/blog'}
             className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
           >
-            Blog
+            {t('secondaryCTA')}
           </Link>
         </div>
       </PageHeader>

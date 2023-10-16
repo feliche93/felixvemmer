@@ -1,0 +1,14 @@
+{
+  "site": {
+    "description": "Felix Vemmers Blog: Ihr Zugang zu Python, TypeScript, Full-Stack-Meisterschaft. Abonnieren Sie für exklusiven Inhalt und werden Sie Teil unserer Lerngemeinschaft!"
+  },
+  "index": {
+    "notFound": "Seite nicht gefunden",
+    "hero": {
+      "title": "👋 Willkommen auf meiner persönlichen Webseite",
+      "description": "Hey, ich bin Felix, ein Full-Stack-Entwickler aus Berlin. Hier findest du klare Einblicke und praktische Ratschläge zu Python, TypeScript und allem, was mit Full-Stack zu tun hat.",
+      "primaryCTA": "Beratungsdienste",
+      "secondaryCTA": "Lese meinen Blog"
+    }
+  }
+}

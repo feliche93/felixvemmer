@@ -1,0 +1,14 @@
+{
+  "site": {
+    "description": "Felix Vemmer's blog: your gateway to Python, TypeScript, full-stack mastery. Subscribe for exclusive content and become part of our learning community!"
+  },
+  "index": {
+    "notFound": "Page not found",
+    "hero": {
+      "title": "👋 Welcome to my personal website",
+      "description": "Hey, I am Felix, a full-stack developer based in Berlin. You will find straight-to-the-point insights and practical advice on Python, TypeScript, and all things full-stack.",
+      "primaryCTA": "Consulting Services",
+      "secondaryCTA": "Read my blog"
+    }
+  }
+}
