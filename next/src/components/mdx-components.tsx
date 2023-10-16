@@ -2,6 +2,7 @@
 
 import { Callout } from '@/components/callout'
 import { Icons } from '@/components/icons'
+import { Iframe } from '@/components/iframe'
 import {
   Accordion,
   AccordionContent,
@@ -16,8 +17,11 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import NextImage, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
+import { Tweet } from 'react-tweet'
 
 const components = {
+  Tweet,
+  Iframe,
   Icons,
   Accordion,
   AccordionContent,
