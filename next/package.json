@@ -6,7 +6,9 @@
     "dev": "pnpm next dev",
     "build": "pnpm next build && pnpm generate && pnpm push",
     "start": "pnpm next start",
-    "lint": "pnpm next lint",
+    "lint": "prettier . --check && pnpm eslint",
+    "lint:fix": "prettier . --write && eslint --fix",
+    "lint:format": "prettier . --write",
     "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
     "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
     "check": "drizzle-kit check:pg --config=drizzle.config.ts",
@@ -72,6 +74,13 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.19.13"
+    "@tailwindcss/typography": "^0.5.10",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "concurrently": "^8.2.1",
+    "drizzle-kit": "^0.19.13",
+    "eslint-plugin-mdx": "^2.2.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "prettier-plugin-tailwindcss": "^0.5.6"
   }
 }
