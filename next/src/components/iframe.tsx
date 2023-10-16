@@ -18,7 +18,7 @@ export const Iframe: FC<IframeProps> = ({ src, className }) => {
         maxWidth: '100%',
       }}
     >
-      <Script strategy="lazyOnload">
+      <Script id="iframeContainer" strategy="lazyOnload">
         {`
           var iframe = document.createElement('iframe');
           iframe.src = "${src}";
