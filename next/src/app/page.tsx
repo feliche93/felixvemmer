@@ -17,7 +17,7 @@ export default function IndexPage() {
           className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium"
         >
           🎉 <Separator className="mx-2 h-4" orientation="vertical" />{' '}
-          <span className="sm:hidden">Style, a new CLI and more.</span>
+          <span className="sm:hidden">Test test.</span>
           <span className="hidden sm:inline">Introducing Style, a new CLI and more.</span>
           <ArrowRightIcon className="ml-1 h-4 w-4" />
         </Link>
