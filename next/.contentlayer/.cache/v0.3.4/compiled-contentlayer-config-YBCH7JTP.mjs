@@ -1,105 +1,105 @@
 // contentlayer.config.js
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypePrettyCode from 'rehype-pretty-code'
-import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 var computedFields = {
   slug: {
-    type: 'string',
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    type: "string",
+    resolve: (doc) => `/${doc._raw.flattenedPath}`
   },
   slugAsParams: {
-    type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
-  },
-}
+    type: "string",
+    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/")
+  }
+};
 var Post = defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   filePathPattern: `blog/**/*.mdx`,
   // This line was changed
-  contentType: 'mdx',
+  contentType: "mdx",
   fields: {
     title: {
-      description: 'The title of the post',
-      type: 'string',
-      required: true,
+      description: "The title of the post",
+      type: "string",
+      required: true
     },
     description: {
-      description: 'The description of the post',
-      type: 'string',
+      description: "The description of the post",
+      type: "string"
     },
     metaTitle: {
-      description: 'The meta title',
-      type: 'string',
+      description: "The meta title",
+      type: "string"
     },
     metaDescription: {
-      description: 'The meta description',
-      type: 'string',
+      description: "The meta description",
+      type: "string"
     },
     keywords: {
-      description: 'Keywords for blogpost',
-      type: 'list',
-      of: { type: 'string' },
+      description: "Keywords for blogpost",
+      type: "list",
+      of: { type: "string" }
     },
     date: {
-      type: 'date',
-      required: true,
+      type: "date",
+      required: true
     },
     published: {
-      type: 'boolean',
-      default: true,
+      type: "boolean",
+      default: true
     },
     featured: {
-      type: 'boolean',
-      default: false,
+      type: "boolean",
+      default: false
     },
     image: {
-      type: 'string',
-      required: true,
+      type: "string",
+      required: true
     },
     authors: {
       // Reference types are not embedded.
       // Until this is fixed, we can use a simple list.
       // type: "reference",
       // of: Author,
-      type: 'list',
-      of: { type: 'string' },
-      required: true,
+      type: "list",
+      of: { type: "string" },
+      required: true
     },
     categories: {
-      type: 'list',
-      of: { type: 'string' },
-      required: true,
-    },
+      type: "list",
+      of: { type: "string" },
+      required: true
+    }
   },
-  computedFields,
-}))
+  computedFields
+}));
 var Author = defineDocumentType(() => ({
-  name: 'Author',
+  name: "Author",
   filePathPattern: `authors/**/*.mdx`,
-  contentType: 'mdx',
+  contentType: "mdx",
   fields: {
     title: {
-      type: 'string',
-      required: true,
+      type: "string",
+      required: true
     },
     description: {
-      type: 'string',
+      type: "string"
     },
     avatar: {
-      type: 'string',
-      required: true,
+      type: "string",
+      required: true
     },
     twitter: {
-      type: 'string',
-      required: true,
-    },
+      type: "string",
+      required: true
+    }
   },
-  computedFields,
-}))
+  computedFields
+}));
 var contentlayer_config_default = makeSource({
-  contentDirPath: './content',
+  contentDirPath: "./content",
   documentTypes: [Post, Author],
   mdx: {
     remarkPlugins: [remarkGfm],
@@ -108,31 +108,35 @@ var contentlayer_config_default = makeSource({
       [
         rehypePrettyCode,
         {
-          theme: 'github-dark',
+          theme: "github-dark",
           onVisitLine(node) {
             if (node.children.length === 0) {
-              node.children = [{ type: 'text', value: ' ' }]
+              node.children = [{ type: "text", value: " " }];
             }
           },
           onVisitHighlightedLine(node) {
-            node.properties.className.push('line--highlighted')
+            node.properties.className.push("line--highlighted");
           },
           onVisitHighlightedWord(node) {
-            node.properties.className = ['word--highlighted']
-          },
-        },
+            node.properties.className = ["word--highlighted"];
+          }
+        }
       ],
       [
         rehypeAutolinkHeadings,
         {
           properties: {
-            className: ['subheading-anchor'],
-            ariaLabel: 'Link to section',
-          },
-        },
-      ],
-    ],
-  },
-})
-export { Author, Post, contentlayer_config_default as default }
+            className: ["subheading-anchor"],
+            ariaLabel: "Link to section"
+          }
+        }
+      ]
+    ]
+  }
+});
+export {
+  Author,
+  Post,
+  contentlayer_config_default as default
+};
 //# sourceMappingURL=compiled-contentlayer-config-YBCH7JTP.mjs.map
