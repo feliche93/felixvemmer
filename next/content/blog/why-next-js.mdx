@@ -47,11 +47,18 @@ Major players like [**The Washington Post,**](https://www.washingtonpost.com/?r
 
 When Next.js first emerged, it offered a revolutionary choice to developers: **render pages on the server or directly in the browser**, paving the way for a new era in web development.
 
-💡
+<Callout className="my-4" title="Client Rendering vs Server Rendering" icon={<Icons.lightBulb />}>
+  **Client Rendering** is when the **browser** generates and updates the web page using JavaScript,
+  often leading to dynamic interactions. In contrast, **Server Rendering** has the **server** create
+  the initial page, delivering a fully-formed page to the browser, which can provide quicker initial
+  load times.
+</Callout>
 
-\***\*Client Rendering\*\*** is when the \***\*browser\*\*** generates and updates the web page using JavaScript, often leading to dynamic interactions. In contrast, \***\*Server Rendering\*\*** has the \***\*server\*\*** create the initial page, delivering a fully-formed page to the browser, which can provide quicker initial load times.
-
-With the [introduction of Next.js 13](https://nextjs.org/blog/next-13?ref=felixvemmer.com), the game has changed even more. Developers can now **decide, on a component-by-component basis**, whether each should be rendered on the server or the client. This fine-tuning ensures both optimal performance and maximum flexibility.For a clearer picture of when to utilize each strategy, the [Next.js documentation](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns?ref=felixvemmer.com) provides an insightful table.
+With the [introduction of Next.js 13](https://nextjs.org/blog/next-13?ref=felixvemmer.com), the game
+has changed even more. Developers can now **decide, on a component-by-component basis**, whether each
+should be rendered on the server or the client. This fine-tuning ensures both optimal performance and
+maximum flexibility.For a clearer picture of when to utilize each strategy, the [Next.js documentation](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns?ref=felixvemmer.com) provides
+an insightful table.
 
 <Image
   className="my-4 rounded-lg"
@@ -76,7 +83,7 @@ In the rapidly evolving world of Next.js, developers are presented yet with more
 - **Edge Runtime**: Tailored for blazing-fast global content delivery, the Edge runtime leverages distributed servers. Its edge (pun intended) lies in **immediate, low-latency user experiences**, which can greatly boost site performance and user engagement. While its speed is an SEO asset, its limited functional scope compared to Node.js might require developers to strike a balance based on content needs.
 - **Node.js Runtime**: Standing as Next.js's bedrock, the Node.js runtime opens doors to an **expansive ecosystem and APIs**. While its boot time may lag behind Edge, it offers a depth of features that can significantly enhance site dynamics, which in turn can be crucial for SEO-rich content and complex web applications.
 
-By **aligning runtime choice with your goals**, you can optimize your Next.js project for both performance and search visibility.
+By **aligning runtime choice with your goals**, you can [optimize](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes?ref=felixvemmer.com) your Next.js project for both performance and search visibility.
 
 <Image
   className="my-4 rounded-lg"
@@ -213,6 +220,8 @@ export async function generateMetadata(
 
 Amplify your social media presence by harnessing the power of the Open Graph Protocol and the `@vercel/og` library. This tool allows for dynamic and custom image creation for social media sharing.
 
+<Tweet id="1694429596471718039" />
+
 Key advantages include:
 
 - **Performance**: Rapid image generation through minimal code, enhanced by Edge Functions.
@@ -271,27 +280,27 @@ Here's what I love most about Vercel:
 - **Push to Deploy**: With a simple `git push`, every deployment automatically triggers the creation of a live preview site, keeping it in sync with your changes. No extra commands required.
 - **Automatic Previews**: Every new branch automatically gets its own live, production-like URL. It's the best way for everyone on the team or clients to see, in real-time, the changes and updates being made.
 
-<Image
-  className="my-4 rounded-lg"
-  src="/posts/why-next-js/CleanShot-2023-10-10-at-16.13.05@2x.png"
-  alt="Preview Deployments"
-  width={800}
-  height={600}
-/>
+  <Image
+    className="my-4 rounded-lg"
+    src="/posts/why-next-js/CleanShot-2023-10-10-at-16.13.05@2x.png"
+    alt="Preview Deployments"
+    width={800}
+    height={600}
+  />
 
 - **Collaborative UI Reviews**: Vercel promotes collaborative workflows. Team members can comment directly on UI components, layouts, copy, and more, fostering real-time feedback. This collaboration integrates seamlessly with platforms like GitHub and Slack.
 
-CEO of Vercel Reviewing deployed start up apps on Vercel.
+  <Tweet id="1710710023285018920" />
 
 - **Instant Rollback for Swift Recovery**: Vercel's Instant Rollback allows teams to swiftly revert to a prior production deployment, ensuring rapid recovery from any unforeseen production hiccups, like major bugs or breaking changes. This feature is invaluable for maintaining uptime and seamless user experience, particularly during critical incidents.
 
-<Image
-  className="my-4 rounded-lg"
-  src="/posts/why-next-js/CleanShot-2023-10-10-at-16.19.31@2x.png"
-  alt="Instant Rollback Next.js"
-  width={800}
-  height={600}
-/>
+  <Image
+    className="my-4 rounded-lg"
+    src="/posts/why-next-js/CleanShot-2023-10-10-at-16.19.31@2x.png"
+    alt="Instant Rollback Next.js"
+    width={800}
+    height={600}
+  />
 
 ### World Class Next.js Documentation
 
@@ -326,11 +335,18 @@ My personal favorite templates are the following:
 
 Vercel has carved out a distinctive space in the web development ecosystem, and much of its success can be **attributed to its remarkable team**. Their Developer Relations group, in particular, stands out as one of **the best in the industry**.
 
+📺 [17 Questions with the Vercel team](https://www.youtube.com/watch?v=L1PifCvxKT8)
+
 ### Active and Relevant on Developer Twitter
 
 A defining characteristic of Vercel's team is their vibrant participation on Developer Twitter. More than just marketing, they **consistently share practical insights, tips, and tricks that resonate with developers everywhere**. Beyond that, what sets them apart is their genuine receptiveness to feedback—even if it's harsh criticism.
 
+📺 [Responding to Reddit on the Next.js App Router
+](https://www.youtube.com/watch?v=-YO_z14dUyI)
+
 They're not above admitting to mistakes or acknowledging areas for improvement.
+
+<Tweet id="1653636931291602953" />
 
 This humility, paired with a proactive approach, not only highlights their deep commitment to the developer community but also cements their status as industry trailblazers.
 
@@ -338,15 +354,29 @@ This humility, paired with a proactive approach, not only highlights their deep 
 
 Vercel is not only great at connecting with developers, but they're also **smart in choosing their team members**. They've picked top talents like [Rich Harris](https://twitter.com/Rich_Harris?ref=felixvemmer.com), who made Svelte, and [shadcn](https://twitter.com/shadcn?ref=felixvemmer.com), who designed a [popular UI library](https://ui.shadcn.com/?ref=felixvemmer.com) using Tailwind CSS. By bringing these skilled people on board, Vercel shows they're serious about leading in web development. These choices are just a few examples of how Vercel keeps aiming for the best in the web world.
 
+<Tweet id="1458822051263823875" />
+
+<Tweet id="1688945578439499776" />
+
+<Tweet id="1640800001625411606" />
+
 ### Insights from Vercel's Influential Voices
 
 One of the best ways to truly grasp the power and potential of Next.js is to **follow the thought leaders and developers who not only advocate for it but actively showcase its advantages**. Whether it's by launching innovative projects, sharing insightful snippets, or creating comprehensive educational content, these individuals deeply enrich the developer community.
 
 - [**Guillermo Rauch**](https://twitter.com/rauchg?ref=felixvemmer.com)**:** As Vercel's CEO, Guillermo offers invaluable insights into the modern web, shedding light on impeccable UI/UX and the intricacies of performance.
 
+  <Tweet id="1702353417375826303" />
+
 - [**Lee Robinson**](https://twitter.com/leeerob?ref=felixvemmer.com)**:** With a rich repository of content on his personal blog and an array of YouTube videos, Lee, Vercel's VP of Developer Experience, brilliantly simplifies complex concepts for budding developers and veterans alike.
 
+  <Tweet id="1708280997488333078" />
+
 - [**Steven Tey**](https://twitter.com/steventey?ref=felixvemmer.com) **& [**Hassan El Mghari**](https://twitter.com/nutlope?ref=felixvemmer.com):** These developers are testament to the ease and efficiency of Vercel. Continuously churning out open-source projects, they exemplify how effortlessly one can start building and deploying apps with Vercel. Steven's ventures like dub.co and novel.sh, and Hassan's focus on AI and web development, further underscore their dedication and innovative spirit.
+
+  <Tweet id="1696534532709872072" />
+
+  <Tweet id="1669762868416512000" />
 
 ## React's Thriving Ecosystem: A Safe Bet for the Future
 
