@@ -101,12 +101,12 @@ export default async function PostPage({ params }: PostPageProps) {
     <main className="px-4 md:px-8 mx-auto max-w-6xl relative py-6 lg:grid lg:grid-cols-[1fr_300px] md:gap-5 lg:gap-10 lg:py-10 xl:gap-20">
       <div className="prose prose-p:text-base sm:prose-p:text-lg mx-auto sm:max-w-2xl md:max-w-2xl">
         <article className="">
-          <div className="flex flex-row items-center gap-4 pb-4">
+          <div className="flex flex-wrap-reverse items-center gap-4 pb-4">
             {/* Categories */}
-            <div className="flex flex-wrap">
+            <div className="flex gap-1 flex-wrap">
               {post.categories &&
                 post.categories.map((category, index) => (
-                  <Badge className="mr-2" key={index}>
+                  <Badge className="" key={index}>
                     {category}
                   </Badge>
                 ))}
