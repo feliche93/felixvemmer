@@ -16,6 +16,7 @@ export interface ProductCard {
     href: string
     imageSrc: string
     imageAlt: string
+    buttonLabel?: string
   }
 }
 export const ProductCard: FC<ProductCard> = ({ product }) => {
@@ -27,7 +28,7 @@ export const ProductCard: FC<ProductCard> = ({ product }) => {
           alt={product.imageAlt}
           width={300}
           height={200}
-          className="object-cover object-center w-full"
+          className="object-cover object-center w-full p-4"
         />
       </div>
       <div className="sm:col-span-8 lg:col-span-7 p-4">
@@ -90,7 +91,7 @@ export const ProductCard: FC<ProductCard> = ({ product }) => {
               className: 'w-full',
             })}
           >
-            Buy on Amazon
+            {product.buttonLabel || 'View on Amazon'}
           </Link>
         </section>
       </div>
