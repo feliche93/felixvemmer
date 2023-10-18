@@ -31,11 +31,7 @@ A headless browser, as the name suggests, operates without a graphical interface
 
 My hope was that running a headless browser on Vercel was straight forward. Turns out it was not. I soon ran into a few issues regarding [**bundle size and memory limits**](https://github.com/orgs/vercel/discussions/103?ref=felixvemmer.com).
 
-To run them, you must connect to a browser instance via websockets. [Browserless.io](https://www.browserless.io/?ref=felixvemmer.com) is one option and has a good tutorial on it:
-
-[Vercel + Puppeteer](https://dev.to/joelgriffith/vercel-puppeteer-4l7c?ref=felixvemmer.com)
-
-Browserless.io Next.js Tutorial
+To run them, you must connect to a browser instance via websockets. [Browserless.io](https://www.browserless.io/?ref=felixvemmer.com) is one option and has a [good tutorial](https://dev.to/joelgriffith/vercel-puppeteer-4l7c?ref=felixvemmer.com) on it.
 
 So I just went ahead and created a route, which would allow me to use the Browserless API and scrape the content:
 
@@ -155,7 +151,7 @@ export async function POST(request: Request) {
 
 Overall, it worked out pretty fine and the scraping was also fairly quick as I shared in this tweet:
 
-First Implementation Showcase
+<Tweet id="1676958985151455234" />
 
 While the pricing for Browserless.io was reasonable and I quickly surpassed the free tier's limit of 1,000 scrapes, I remained unsatisfied due to additional challenges.
 
@@ -176,10 +172,11 @@ I encountered two primary challenges with Browserless.io.
 
 While addressing these issues with Browserless.io seemed feasible, my Python background made it enticing to use Python Playwright. This approach granted me greater ease in debugging and crafting custom logic, ensuring adaptability for future enhancements.
 
-## **Solution: FastAPI App with Playwright on Modal, Complemented by a Fetch TypeScript Client**
+## Solution: FastAPI App with Playwright on Modal, Complemented by a Fetch TypeScript Client
 
 I've long admired Modal for its unparalleled developer experience in deploying Python apps. While I intend to share a detailed review on its merits soon, feel free to check out my tech stack in the meantime:
 
+{/* TODO: Add related page */}
 [Tech Stack 2023](https://www.felixvemmer.com/tech-stack/)
 
 ### FastAPI App with simple Post Route
@@ -341,7 +338,10 @@ async def get_website_content(url: str) -> WebsiteContentOutputSchema:
 
 For those keen on delving deeper into web scraping or deploying a FastAPI app on Modal, here is a curated a list of invaluable resources:
 
-[Building a Python Playwright Webscraper on Modal.com](https://modal.com/docs/guide/web-scraper?ref=felixvemmer.com)
+{/* TODO: Rich Card Preview */}
+
+- [Building a Python Playwright Webscraper on Modal.com](https://modal.com/docs/guide/web-scraper?ref=felixvemmer.com)
+- [A simple web scraper](https://modal.com/docs/guide/web-scraper?ref=felixvemmer.com)
 
 ### Generating a Typescript Client
 
@@ -369,11 +369,11 @@ Turns out I tried too many tools and code generators and was quite amazed on how
 3. [openapi-zod-client](https://github.com/astahmer/openapi-zod-client?ref=felixvemmer.com): Sadly uses axios and I did not want an additonal dependencies. Also all the functions are in snake case and customizing them was a bit confusing to me since I never used handlebars.
 4. [Fern](https://www.buildwithfern.com/?ref=felixvemmer.com): Looks like a cool startup but a bit of an overkill. Also creating more yaml and custom things was too much work, since I wanted to keep it simple.
 
-## Solution: openapi-fetch
+## Solution: [openapi-fetch](https://github.com/drwpow/openapi-typescript/tree/main?ref=felixvemmer.com)
 
-Finally after almost giving up I came across this project, which finally worked with PydanticV2 and OpenApi **3.1**.
+Finally after almost giving up I came across this project, which finally worked with PydanticV2 and OpenApi **3.1**:
 
-[GitHub - drwpow/openapi-typescript: Generate TypeScript types from OpenAPI 3 specs](https://github.com/drwpow/openapi-typescript/tree/main?ref=felixvemmer.com)
+[drwpow/openapi-typescript: Generate TypeScript types from OpenAPI 3 specs](https://github.com/drwpow/openapi-typescript/tree/main?ref=felixvemmer.com)
 
 The command to generate the types was quite straight forward:
 
