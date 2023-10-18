@@ -137,7 +137,7 @@ export const Page = defineDocumentType(() => ({
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: `blog/**/*.mdx`, // This line was changed
+  filePathPattern: `**/blog/**/*.mdx`, // This line was changed
   contentType: 'mdx',
   fields: {
     title: {
