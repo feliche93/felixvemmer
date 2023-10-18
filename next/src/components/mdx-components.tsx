@@ -3,6 +3,8 @@
 import { Callout } from '@/components/callout'
 import { Icons } from '@/components/icons'
 import { Iframe } from '@/components/iframe'
+import { MdxCard } from '@/components/mdx-card'
+import { RelatedPostCard } from '@/components/related-post-card'
 import {
   Accordion,
   AccordionContent,
@@ -21,6 +23,8 @@ import * as React from 'react'
 import { Tweet } from 'react-tweet'
 
 const components = {
+  Card: MdxCard,
+  RelatedPostCard,
   Tweet,
   YouTubeEmbed,
   Iframe,
