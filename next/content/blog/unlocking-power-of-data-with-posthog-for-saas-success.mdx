@@ -29,7 +29,7 @@ However, upon further exploration, it seems that Danny's initial excitement abou
 PostHog, with its robust features, might not seem like the right fit if you're aiming for simplicity. However, before opting for a simpler solution, it's worth considering why a powerful tool like PostHog is so essential for building your SaaS product. Simplicity can be attractive, but it might not be sufficient as your needs evolve.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-06-at-20.40.49@2x.png"
   alt="Screenshot taken from PostHog showing companies using PostHog"
   width={800}
@@ -41,7 +41,7 @@ PostHog, with its robust features, might not seem like the right fit if you're a
 PostHog's tagline gives us a clear idea of the problems it's designed to solve: it positions itself as the all-in-one platform for building better products - boasting features like **product analytics, feature flags, session recordings, A/B testing, heatmaps, and more**.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-29-at-23.52.06@2x.png"
   alt="PostHog Landing Page Screenshot"
   width={800}
@@ -59,7 +59,7 @@ One of the key appeals of Plausible.io and similar platforms is their commitment
 UTM parameters and referrer headers can pinpoint the domain a user came from without resorting to any cookies. This is particularly useful for blogs or websites without extensive sign-up or sign-in processes, like this blog.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-23-at-12.27.45@2x.png"
   alt="Users by Referring Domain PostHog Bar Chart for felixvemmer.com"
   width={800}
@@ -71,7 +71,7 @@ In a SaaS context, it's crucial to identify the best-performing marketing channe
 Cookies are instrumental in this process. PostHog assigns a random ID to each anonymous visitor. When they sign up and become identifiable, we can link the anonymous ID to the specific user. This means, with the help of cookies, you can track user engagement across sessions and identify their journey from the first visit to signing up.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-23-at-12.34.43@2x.png"
   alt="Example of Data Points that can be collected during sign up"
   width={800}
@@ -87,7 +87,7 @@ A user landing on a page is only the starting point of their engagement with you
 For my SaaS [BacklinkGPT](https://www.backlinkgpt.com/?ref=felixvemmer.com) I get the following user journey stats:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-24-at-17.20.06@2x.png"
   alt="Example User Journey for https://www.backlinkgpt.com/"
   width={800}
@@ -103,7 +103,7 @@ prospects - a task only 19 users (4.3%) successfully accomplished.
 This struggle is echoed in the onboarding survey results from the past 30 days, where 51% of respondents (76 individuals) identified finding quality link prospects as their primary challenge.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-24-at-17.38.01@2x.png"
   alt="Onboarding Survey Results."
   width={800}
@@ -117,7 +117,7 @@ Realising this, I am currently focusing on automating this process end-to-end to
 What's even better, PostHog lets me identify users who dropped off at step 7, the 'Backlink Prospect Created' stage. This is incredibly valuable, as it provides me with their contact information. This means I can directly reach out to them for user interviews, gaining first-hand insight into their challenges.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-24-at-17.46.21@2x.png"
   alt="Detailed User Journey Drop-off Analysis"
   width={800}
@@ -139,7 +139,7 @@ PostHog handles the complexity for you, managing everything from the definition 
 But PostHog's features don't end there. Its easy integration with various other apps broadens its utility even further. As a testament to its adaptability, I successfully built my own Telegram Notification Service for core events, illustrating just how versatile PostHog can be:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-29-at-23.33.00@2x.png"
   alt="Custom Telegram Realtime Notification Bot"
   width={800}
@@ -151,7 +151,7 @@ Building this was incredibly straightforward and required just three simple step
 1. **Define Core Actions on Events:** Utilize PostHog's Data Management to specify the necessary actions.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-29-at-23.23.12@2x.png"
   alt="PostHog Data Management"
   width={800}
@@ -161,7 +161,7 @@ Building this was incredibly straightforward and required just three simple step
 2. **Set Up the Webhook:** Pick an event and draft the message format using PostHog's Webhook Setup.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-29-at-23.25.08@2x-1.png"
   alt="PostHog Webhook Setup"
   width={800}
@@ -173,7 +173,7 @@ PostHog Webhook Setup
 3. **Configure Notification Logic:** With the help of [Pipedream.com](https://pipedream.com/workflows?ref=felixvemmer.com), create a workflow to connect PostHog to Telegram via Pipedream.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/unlocking-power-of-data-with-posthog-for-saas-success/CleanShot-2023-07-29-at-23.29.36@2x.png"
   alt="Example Workflow of connecting Pipedream to PostHog"
   width={800}

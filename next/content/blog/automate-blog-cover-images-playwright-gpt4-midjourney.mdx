@@ -19,7 +19,7 @@ My girlfriend and I took on this cool side project, [GiftIdeasAI.xyz](https://w
 Wanna see how it works? Here's a demo of our Gift Recommendation Engine:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot 2023-10-18 at 12.02.52.gif"
   alt="Google finding but not indexing pages."
   width={800}
@@ -33,7 +33,7 @@ We were all starry-eyed at launch, thinking users would just start flowing in. B
 Spent a good chunk of time crafting a neat data schema, and even had GPT-3 churn out some snazzy titles, subtitles, and descriptions for the gift ideas. Thought we'd nailed it, but Google had other plans: just wouldn't index those pages. Let's dig into this a bit more:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-09.04.33@2x.png"
   alt="Google finding but not indexing pages."
   width={800}
@@ -43,7 +43,7 @@ Spent a good chunk of time crafting a neat data schema, and even had GPT-3 churn
 To tell you the truth, I was pretty happy with the content, the headings, and the intros we put together. But, even then, our blog posts looked a bit thin - like a party without the balloons. What were we missing? A good, attention-grabbing blog post cover image.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-09.33.11@2x.png"
   alt="Example of barebone blog post."
   width={800}
@@ -55,7 +55,7 @@ To tell you the truth, I was pretty happy with the content, the headings, and th
 So, my first shot at this was to use the [Unsplash API](https://unsplash.com/developers?ref=felixvemmer.com), thinking I could easily snag some good-looking cover images for our blog posts. Turns out, finding the perfect picture for each specific keyword was like finding a needle in a haystack. For instance, try finding the perfect image for `Gift ideas 9yr old girl`. Not as straightforward as I thought.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-09.34.28@2x-1.png"
   alt="Unsplash Search Results Gift ideas 9yr old girl"
   width={800}
@@ -69,7 +69,7 @@ Well, it turns out that even with Midjourney, my initial prompts were a bit off-
 > Housewarming gift ideas, new homeowners, vibrant, inviting, decorated living room, warm and cozy, coffee table, potted plant, scented candles, personalized welcome mat, elegant coasters, stylish decorative vase, soft natural lighting, modern kitchen, comfortable seating area, thoughtful gestures, meaningful gifts
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/felixv3785_Housewarming_gift_ideas_new_homeowners_vibrant_invit_ed57ebfa-3977-4995-9e76-b20506457d35-1.png"
   alt="Bad prompt for housewarming gifts Midjourney"
   width={800}
@@ -92,7 +92,7 @@ After doing some research though, I finally was able to use GPT 3.5 to start gen
 Here's the final result of the picture. Not too shabby, right?
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/girl-present.png"
   alt="A photograph of a beaming 9-year-old girl unwrapping a gift, surrounded by her friends at a colorful and lively birthday party, captured during midday with natural lighting streaming in through a large window. The picture is shot with a Canon EOS Rebel T7i camera, using a 35mm f/1.8 lens, highlighting the excitement and joy of the moment."
   width={800}
@@ -102,7 +102,7 @@ By the way, if you're interested, we'll soon be offering the stock images prompt
 tool on BacklinkGPT.com. It could be just what you need for your blog posts.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-09.45.19@2x.png"
   alt="Free SEO Tools by BacklinkGPT.com"
   width={800}
@@ -116,7 +116,7 @@ Free SEO Tools by [BacklinkGPT.com](https://www.backlinkgpt.com/free-seo-tools?
 Here's a curveball: Midjourney doesn't yet have an API for easy image generation. Let's look into this:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-09.50.58@2x.png"
   alt="Midjourney API Access"
   width={800}
@@ -131,7 +131,7 @@ to a Discord bot. It's not exactly the most automation-friendly setup:
 3. Finally, you need to save the image from an url
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-09.56.13@2x.png"
   alt="Sample Discord Commands"
   width={800}
@@ -219,7 +219,7 @@ I started of generating 70% of the code by running the following simple command:
 This process launches a window where you can start interacting with the Discord server - clicking, typing, you name it. The great thing is, as you're doing this, the code is being automatically generated and recorded for you. All you have to do is copy it and paste it into your script. Here's how it looks:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="https://user-images.githubusercontent.com/13063165/212751993-b7da2c40-a7cc-4b13-9a91-40ee837042a1.png"
   alt="Playwright Codegen Test Generator"
   width={800}
@@ -229,7 +229,7 @@ This process launches a window where you can start interacting with the Discord 
 So, with the code generated by Playwright and a little help from GPT to refactor it, creating the final login_to_discord function becomes a breeze. Let's take a look:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-10.34.30@2x.png"
   alt="Code Generation with Chat GPT"
   width={800}
@@ -291,7 +291,7 @@ async def login_to_discord(
 Next, I followed the same process for the remaining parts. There was a bit of manual work involved - mainly finding the last Discord messages and figuring out the waiting logic to decide when to proceed.
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-10.39.19@2x.png"
   alt="GPT Engineering Wait Functions for Upscale Button"
   width={800}
@@ -301,7 +301,7 @@ Next, I followed the same process for the remaining parts. There was a bit of ma
 And we repeat the same process again for retrieving the image link 🫠, giving minimal feedback:
 
 <Image
-  className="mt-4 rounded-lg"
+  className="my-4 rounded-lg"
   src="/posts/automate-blog-cover-images-playwright-gpt4-midjourney/CleanShot-2023-07-03-at-10.41.38@2x.png"
   alt="GPT Engineering Wait Functions for Image Link Retrieval"
   width={800}
