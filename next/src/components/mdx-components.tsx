@@ -1,6 +1,7 @@
 'use client'
 
 import { ProductCard } from '@/components/amazon-product-card'
+import { CalCom } from '@/components/cal-com'
 import { Callout } from '@/components/callout'
 import { Icons } from '@/components/icons'
 import { Iframe } from '@/components/iframe'
@@ -25,6 +26,7 @@ import * as React from 'react'
 import { Tweet } from 'react-tweet'
 
 const components = {
+  CalCom,
   Card: MdxCard,
   RelatedPostCard,
   ProductCard,

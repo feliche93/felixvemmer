@@ -18,6 +18,7 @@
     "generate-content": "pnpm contentlayer build"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.3.0",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",
     "@mdx-js/esbuild": "^2.3.0",
