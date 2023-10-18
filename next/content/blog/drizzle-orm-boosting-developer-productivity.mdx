@@ -16,7 +16,7 @@ featured: true
 
 Inspired by a few of my favorite tech YouTubers, namely [Theo](https://www.youtube.com/@t3dotgg?ref=felixvemmer.com) and [Josh](https://www.youtube.com/@joshtriedcoding?ref=felixvemmer.com), I was intrigued to try out Drizzle ORM after hearing their rave reviews. Having since incorporated [Drizzle](https://orm.drizzle.team/?ref=felixvemmer.com) into several projects, I've discovered numerous features that have not only enhanced my productivity but have also made the development process more enjoyable. Want to know why Drizzle has made such a difference? Stay with me as I dive into its game-changing features.
 
-## 1) Great Structured Documentation with a lot of examples
+## 1. Great Structured Documentation with a lot of examples
 
 Beyond the very funny marketing landing page (see blogpost cover), Drizzle also finally launched a highly anticipated [documentation](https://orm.drizzle.team/docs/quick-start?ref=felixvemmer.com). What I particularly like is that the documentation is well structured and broken down logically.
 
@@ -38,7 +38,7 @@ For each of these they have the most important topics displayed nicely in a side
   height={600}
 />
 
-## 2) Easy to remember SQL Query Syntax
+## 2. Easy to remember SQL Query Syntax
 
 When adopting a relatively new library, it can be a struggle to remember the specific API syntax. If you know SQL though, you already know Drizzle.
 
@@ -76,7 +76,7 @@ SQL Syntax:
 
 `select distinct "id", "name" from "users" order by "users"."id", "users"."name";`
 
-## 3) Support for Complex SQL Queries
+## 3. Support for Complex SQL Queries
 
 "While most ORMs manage to handle the simpler examples adequately, Drizzle takes it a step further. It truly excels in dealing with complex TypeScript [joins](https://orm.drizzle.team/docs/joins?ref=felixvemmer.com), navigating terrain where many others struggle. Moreover, Drizzle shines by offering advanced database features, such as [transactions](https://orm.drizzle.team/docs/transactions?ref=felixvemmer.com), thereby enhancing its functionality and flexibility
 
@@ -248,7 +248,7 @@ Even with partial select, when you expect any joined table to be potentially hav
   height={600}
 />
 
-## 4) Transaction & Prepared Statement Support
+## 4. Transaction & Prepared Statement Support
 
 When I work with a relational database, I normalize my tables and keep everything neatly organised. However, this approach can introduce complexities when it comes to populating these tables. Let's explore this issue using a practical example from my SaaS, [BacklinkGPT.com](https://www.backlinkgpt.com/?ref=felixvemmer.com).
 
@@ -394,9 +394,11 @@ Sadly, I figured that not all Databases (e.g. [Neon](https://neon.tech/?ref=fel
   alt="Prepared Statements outperforming edge"
 />
 
-## 5) No more manual creation of zod models or types
+## 5. No more manual creation of zod models or types
 
 By far this is my favourite feature, as it makes you so much more productive as a developer. The power behind Drizzle reminds me a bit about Theo's video:
+
+<YouTubeEmbed id="RmGHnYUqQ4k" />
 
 Every Developer will eventually have some sort of similar workflow for inserting data into a table:
 
@@ -491,7 +493,7 @@ Reuse of drizzle-zod schema.
 
 Building forms and moving types and schemas between client and server components has never been so easy and fun!
 
-## 6) Drizzle Kit Introspect: Create types for an existing db
+## 6. Drizzle Kit Introspect: Create types for an existing db
 
 When I initially considered Drizzle, I was a bit skeptical. I anticipated a lot of effort in creating a complete schema to get typings for my existing Supabase project. However, I was pleasantly surprised - all it took was a single command and voila, my types were ready:
 
@@ -501,15 +503,21 @@ When I initially considered Drizzle, I was a bit skeptical. I anticipated a lot 
 
 With this feature you can really test the waters before committing fully.
 
-## 7) Drizzle Studio
+## 7. Drizzle Studio
 
 Just after one month of launching [Relational Queries](https://medium.com/@aleksandrblokh/best-typescript-orm-just-got-better-5a33688b8d2e?ref=felixvemmer.com) the Drizzle team launched a database-browser kit for the Drizzle ecosystem.
+
+<YouTubeEmbed id="FkAsG9q0vHA" />
 
 Though it's still in beta and undergoing continuous development, I am thoroughly excited about utilizing a GUI for inspecting and editing data. I have been using the [PostgreSQL Explorer](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres&ref=felixvemmer.com) VS Code extension, which is excellent in its own right, but lacks the ability to edit data directly.
 
 ## Wrapping Up: Drizzle Could Be Your Next Favorite Tool!
 
-As you can gather from my journey, I've become a major fan of Drizzle and it's now my go-to ORM for all new projects. But, in the interest of giving you the full picture, I'll also share a few areas where Drizzle might not be perfect yet and where I stumbled upon some challenges.
+As you can gather from my journey, I've become a major fan of Drizzle and it's now my go-to ORM for all new projects.
+
+<RelatedPostCard slug="/blog/drizzle-orm-directus-typescript-sdk" />
+
+But, in the interest of giving you the full picture, I'll also share a few areas where Drizzle might not be perfect yet and where I stumbled upon some challenges.
 
 ### Figuring out how to do push migrations for PSQL via script
 
