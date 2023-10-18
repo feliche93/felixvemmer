@@ -2,6 +2,10 @@
   "site": {
     "description": "Felix Vemmer's blog: your gateway to Python, TypeScript, full-stack mastery. Subscribe for exclusive content and become part of our learning community!"
   },
+  "blog": {
+    "title": "The latest from my blog",
+    "subtitle": "Straight-to-the-point insights and practical advice on Python, TypeScript, and all things full-stack."
+  },
   "index": {
     "notFound": "Page not found",
     "hero": {

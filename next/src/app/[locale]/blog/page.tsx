@@ -1,6 +1,7 @@
 import { formatDate } from '@/lib/utils'
 import { allAuthors, allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
+import { getTranslator } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -8,7 +9,9 @@ export const metadata = {
   title: 'Blog',
 }
 
-export default async function BlogPage() {
+export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
+  const t = await getTranslator(locale, 'blog')
+
   const posts = allPosts
     .filter((post) => post.published)
     .sort((a, b) => {
@@ -22,11 +25,9 @@ export default async function BlogPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-              BacklinkGPT Knowledge Hub
+              {t('title')}
             </h2>
-            <p className="mt-2 text-lg leading-8 text-base-content">
-              From SEO basics to AI-powered tactics, discover the future of link building.
-            </p>
+            <p className="mt-2 text-lg leading-8 text-base-content">{t('subtitle')}</p>
           </div>
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {posts.map((post) => {

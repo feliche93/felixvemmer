@@ -2,6 +2,10 @@
   "site": {
     "description": "Felix Vemmers Blog: Ihr Zugang zu Python, TypeScript, Full-Stack-Meisterschaft. Abonnieren Sie für exklusiven Inhalt und werden Sie Teil unserer Lerngemeinschaft!"
   },
+  "blog": {
+    "title": "Das Neueste von meinem Blog",
+    "subtitle": "Klare Einblicke und praktische Ratschläge zu Python, TypeScript und allem, was mit Full-Stack zu tun hat."
+  },
   "index": {
     "notFound": "Seite nicht gefunden",
     "hero": {
