@@ -167,6 +167,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.47.0
     version: 7.47.0(react@18.2.0)
+  react-lite-youtube-embed:
+    specifier: ^2.3.52
+    version: 2.3.52(react-dom@18.2.0)(react@18.2.0)
   react-tweet:
     specifier: ^3.1.1
     version: 3.1.1(react-dom@18.2.0)(react@18.2.0)
@@ -7458,6 +7461,16 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-lite-youtube-embed@2.3.52(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-G010PvCavA4EqL8mZ/Sv9XXiHnjMfONW+lmNeCRnSEPluPdptv2lZ0cNlngrj7K9j7luc8pbpyrmNpKbD9VMmw==}
+    peerDependencies:
+      react: '>=16.0.8'
+      react-dom: '>=16.0.8'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.28)(react@18.2.0):

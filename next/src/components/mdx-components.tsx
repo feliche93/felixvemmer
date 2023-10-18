@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/accordion'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { YouTubeEmbed } from '@/components/youtube-embed'
 import { useConfig } from '@/hooks/use-config'
 import { cn } from '@/lib/utils'
 import { useMDXComponent } from 'next-contentlayer/hooks'
@@ -21,6 +22,7 @@ import { Tweet } from 'react-tweet'
 
 const components = {
   Tweet,
+  YouTubeEmbed,
   Iframe,
   Icons,
   Accordion,
