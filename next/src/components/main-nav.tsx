@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 
 import { navigationConfig } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
@@ -10,6 +10,9 @@ import Image from 'next/image'
 
 export function MainNav() {
   const pathname = usePathname()
+  const params = useParams()
+
+  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
 
   return (
     <div className="mr-4 hidden md:flex">
@@ -24,7 +27,7 @@ export function MainNav() {
         <span className="hidden font-bold sm:inline-block">{siteConfig.name}</span>
       </Link>
       <nav className="flex items-center space-x-6 text-sm font-medium">
-        {navigationConfig.mainNav.map((item) => {
+        {navigationConfig.mainNav[locale].map((item) => {
           if (item.external || !item.href) return null
 
           return (

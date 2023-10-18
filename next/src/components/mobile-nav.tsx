@@ -1,7 +1,7 @@
 'use client'
 
 import Link, { LinkProps } from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -15,6 +15,10 @@ import Image from 'next/image'
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false)
+  const params = useParams()
+
+  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
+  // return <pre>{JSON.stringify(params, null, 2)}</pre>
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -40,7 +44,7 @@ export function MobileNav() {
         </MobileLink>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-3">
-            {navigationConfig.mainNav?.map(
+            {navigationConfig.mainNav[locale]?.map(
               (item) =>
                 item.href && (
                   <MobileLink key={item.href} href={item.href} onOpenChange={setOpen}>

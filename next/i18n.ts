@@ -26,7 +26,4 @@ export default getRequestConfig(async ({ locale }) => ({
   },
 }))
 
-export const locales = [
-  'en',
-  // 'de'
-]
+export const locales = ['en', 'de']

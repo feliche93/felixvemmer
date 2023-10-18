@@ -2,48 +2,97 @@ import { MainNavItem, SidebarNavItem } from '@/types/nav'
 import { siteConfig } from './site'
 
 interface NavigationConfig {
-  mainNav: MainNavItem[]
+  mainNav: {
+    [lang: string]: MainNavItem[]
+  }
   sidebarNav: SidebarNavItem[]
 }
 
 export const navigationConfig: NavigationConfig = {
-  mainNav: [
-    {
-      title: 'Blog',
-      href: '/blog',
-    },
-    {
-      title: 'Tech Stack',
-      href: '/tech-stack',
-    },
-    {
-      title: 'Hardware',
-      href: '/hardware',
-    },
-    {
-      title: 'Stats',
-      href: '/stats',
-    },
-    {
-      title: 'Consulting Services',
-      href: '/consulting-services',
-    },
-    {
-      title: 'GitHub',
-      href: siteConfig.links.github,
-      external: true,
-    },
-    {
-      title: 'Twitter',
-      href: siteConfig.links.twitter,
-      external: true,
-    },
-    {
-      title: 'LinkedIn',
-      href: siteConfig.links.linkedin,
-      external: true,
-    },
-  ],
+  mainNav: {
+    en: [
+      {
+        title: 'Blog',
+        href: '/blog',
+      },
+      {
+        title: 'About',
+        href: '/about',
+      },
+      {
+        title: 'Tech Stack',
+        href: '/tech-stack',
+      },
+      {
+        title: 'Hardware',
+        href: '/hardware',
+      },
+      {
+        title: 'Stats',
+        href: '/stats',
+      },
+      {
+        title: 'Consulting Services',
+        href: '/consulting-services',
+      },
+      {
+        title: 'GitHub',
+        href: siteConfig.links.github,
+        external: true,
+      },
+      {
+        title: 'Twitter',
+        href: siteConfig.links.twitter,
+        external: true,
+      },
+      {
+        title: 'LinkedIn',
+        href: siteConfig.links.linkedin,
+        external: true,
+      },
+    ],
+    de: [
+      {
+        title: 'Blog',
+        href: '/blog',
+      },
+      {
+        title: 'About',
+        href: '/about',
+      },
+      {
+        title: 'Tech Stack',
+        href: '/tech-stack',
+      },
+      {
+        title: 'Hardware',
+        href: '/hardware',
+      },
+      {
+        title: 'Stats',
+        href: '/stats',
+      },
+      {
+        title: 'Consulting Services',
+        href: '/consulting-services',
+      },
+      {
+        title: 'GitHub',
+        href: siteConfig.links.github,
+        external: true,
+      },
+      {
+        title: 'Twitter',
+        href: siteConfig.links.twitter,
+        external: true,
+      },
+      {
+        title: 'LinkedIn',
+        href: siteConfig.links.linkedin,
+        external: true,
+      },
+    ],
+  },
   sidebarNav: [
     {
       title: 'Getting Started',

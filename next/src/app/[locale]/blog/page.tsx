@@ -35,7 +35,7 @@ export default async function BlogPage() {
               )
 
               return (
-                <>
+                <div key={post._id}>
                   {/* <pre>
                     {JSON.stringify(
                       {
@@ -46,7 +46,7 @@ export default async function BlogPage() {
                       2,
                     )}
                   </pre> */}
-                  <article key={post._id} className="flex flex-col items-start justify-between">
+                  <article className="flex flex-col items-start justify-between">
                     <div className="relative w-full">
                       <Image
                         className="aspect-[16/9] w-full rounded-2xl bg-base-200 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
@@ -107,7 +107,7 @@ export default async function BlogPage() {
                       </div>
                     </div>
                   </article>
-                </>
+                </div>
               )
             })}
           </div>
