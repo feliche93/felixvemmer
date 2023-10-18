@@ -4,6 +4,7 @@ import { ProductCard } from '@/components/amazon-product-card'
 import { Callout } from '@/components/callout'
 import { Icons } from '@/components/icons'
 import { Iframe } from '@/components/iframe'
+import { LinkButton } from '@/components/link-button'
 import { MdxCard } from '@/components/mdx-card'
 import { RelatedPostCard } from '@/components/related-post-card'
 import {
@@ -27,6 +28,7 @@ const components = {
   Card: MdxCard,
   RelatedPostCard,
   ProductCard,
+  LinkButton,
   Tweet,
   YouTubeEmbed,
   Iframe,
