@@ -57,7 +57,7 @@ export const navigationConfig: NavigationConfig = {
         href: '/blog',
       },
       {
-        title: 'About',
+        title: 'Über mich',
         href: '/about',
       },
       {
