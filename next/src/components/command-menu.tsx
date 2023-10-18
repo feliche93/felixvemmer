@@ -3,7 +3,7 @@
 import { DialogProps } from '@radix-ui/react-alert-dialog'
 import { CircleIcon, FileIcon, LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -22,8 +22,11 @@ import { NavItem } from '../types/nav'
 
 export function CommandMenu({ ...props }: DialogProps) {
   const router = useRouter()
+  const params = useParams()
   const [open, setOpen] = React.useState(false)
   const { setTheme } = useTheme()
+
+  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -63,7 +66,7 @@ export function CommandMenu({ ...props }: DialogProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Links">
-            {navigationConfig.mainNav
+            {navigationConfig.mainNav[locale]
               .filter((navitem) => !navitem.external)
               .map((navItem) => (
                 <CommandItem
