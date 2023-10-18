@@ -4,7 +4,8 @@
   },
   "blog": {
     "title": "Das Neueste von meinem Blog",
-    "subtitle": "Klare Einblicke und praktische Ratschläge zu Python, TypeScript und allem, was mit Full-Stack zu tun hat."
+    "subtitle": "Klare Einblicke und praktische Ratschläge zu Python, TypeScript und allem, was mit Full-Stack zu tun hat.",
+    "tocHeading": "Auf dieser Seite"
   },
   "index": {
     "notFound": "Seite nicht gefunden",

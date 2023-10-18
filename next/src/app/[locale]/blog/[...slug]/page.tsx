@@ -15,11 +15,13 @@ import { getTableOfContents } from '@/lib/toc'
 import { absoluteUrl, cn, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { Metadata } from 'next'
+import { getTranslator } from 'next-intl/server'
 import Link from 'next/link'
 
 interface PostPageProps {
   params: {
     slug: string[]
+    locale: string
   }
 }
 
@@ -82,11 +84,14 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 export async function generateStaticParams(): Promise<PostPageProps['params'][]> {
   return allPosts.map((post) => ({
     slug: post.slugAsParams.split('/'),
+    locale: post.locale,
   }))
 }
 
 export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostFromParams(params)
+
+  const t = await getTranslator(params.locale, 'blog')
 
   // return (
   //   <>
@@ -174,7 +179,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </div>
       <div className="hidden text-sm lg:block">
         <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
-          <DashboardTableOfContents toc={toc} />
+          <DashboardTableOfContents title={t('tocHeading')} toc={toc} />
         </div>
       </div>
     </main>

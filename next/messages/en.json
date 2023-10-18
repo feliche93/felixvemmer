@@ -4,7 +4,8 @@
   },
   "blog": {
     "title": "The latest from my blog",
-    "subtitle": "Straight-to-the-point insights and practical advice on Python, TypeScript, and all things full-stack."
+    "subtitle": "Straight-to-the-point insights and practical advice on Python, TypeScript, and all things full-stack.",
+    "tocHeading": "On this Page"
   },
   "index": {
     "notFound": "Page not found",
