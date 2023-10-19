@@ -14,6 +14,18 @@
       "description": "Hey, I am Felix, a full-stack developer based in Berlin. You will find straight-to-the-point insights and practical advice on Python, TypeScript, and all things full-stack.",
       "primaryCTA": "Consulting Services",
       "secondaryCTA": "Read my blog"
+    },
+    "testimonials": {
+      "title": "What Clients and Readers Say",
+      "section": "Testimonials"
+    },
+    "bookAMeeeting": {
+      "title": "Interested in Working together?",
+      "section": "Book a Meeting"
+    },
+    "blog": {
+      "title": "The latest from my blog",
+      "section": "Blog"
     }
   }
 }

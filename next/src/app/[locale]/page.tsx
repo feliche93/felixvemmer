@@ -1,17 +1,28 @@
 import Link from 'next/link'
 
+import { BlogPostGrid } from '@/components/blog-post-grid'
+import { CalCom } from '@/components/cal-com'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 import Testimonials from '@/components/testimonials'
 import { buttonVariants } from '@/components/ui/button'
+import { Header } from '@/components/ui/header'
 import { cn } from '@/lib/utils'
+import { allPosts } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
-export default function IndexPage() {
-  const t = useTranslations('index.hero')
+export default function IndexPage({ params: { locale } }: { params: { locale: string } }) {
+  const t = useTranslations('index')
+
+  const posts = allPosts
+    .filter((post) => post.published)
+    .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+    .slice(0, 6)
 
   return (
     <>
+      {/* Hero */}
       <div className="container relative">
         <PageHeader className="pb-8 flex flex-col items-center">
           {/* <Link
@@ -31,8 +42,10 @@ export default function IndexPage() {
             height={200}
             alt="Felix Vemmer"
           />
-          <PageHeaderHeading className="text-center">{t('title')}</PageHeaderHeading>
-          <PageHeaderDescription className="text-center">{t('description')}</PageHeaderDescription>
+          <PageHeaderHeading className="text-center">{t('hero.title')}</PageHeaderHeading>
+          <PageHeaderDescription className="text-center">
+            {t('hero.description')}
+          </PageHeaderDescription>
           <div className="flex w-full justify-center items-center space-x-4 pb-8 pt-4 md:pb-10">
             <Link
               href="/consulting"
@@ -43,7 +56,7 @@ export default function IndexPage() {
                 }),
               )}
             >
-              {t('primaryCTA')}
+              {t('hero.primaryCTA')}
             </Link>
             <Link
               target="_blank"
@@ -51,12 +64,33 @@ export default function IndexPage() {
               href={'/blog'}
               className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
             >
-              {t('secondaryCTA')}
+              {t('hero.secondaryCTA')}
             </Link>
           </div>
         </PageHeader>
       </div>
-      <Testimonials />
+      {/* Latest from blog */}
+      <div className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
+        <Header className="mx-auto max-w-xl text-center mb-16">
+          <Header.Section>{t('blog.section')}</Header.Section>
+          <Header.Title>{t('blog.title')}</Header.Title>
+        </Header>
+        <BlogPostGrid posts={posts} />
+      </div>
+      {/* <FeatureGrid /> */}
+      <Testimonials>
+        <Header className="mx-auto max-w-xl text-center">
+          <Header.Section>{t('testimonials.section')}</Header.Section>
+          <Header.Title>{t('testimonials.title')}</Header.Title>
+        </Header>
+      </Testimonials>
+      <div>
+        <Header className="mx-auto max-w-xl text-center mb-16">
+          <Header.Section className="pt-12 sm:pt-16">{t('bookAMeeeting.section')}</Header.Section>
+          <Header.Title>{t('bookAMeeeting.title')}</Header.Title>
+        </Header>
+        <CalCom />
+      </div>
     </>
   )
 }

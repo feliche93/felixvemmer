@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { PropsWithChildren } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Card } from './ui/card'
-import { Header } from './ui/header'
 
 const featuredTestimonial = {
   body: "Felix expertly guided our transition from Wordpress to Next.js, translating complex frontend concepts into clear terms. His detailed insights on SEO, from performance to meta tag nuances, were invaluable. He also advised on blog setup and CMS suitability for our needs, and efficiently assisted with integrations like Mailchimp. Felix's broad tech knowledge and business acumen make him an invaluable asset. I highly recommend him for his ability to merge technology and business insights to deliver real value.",
@@ -24,12 +24,44 @@ const testimonialsData = [
         body: "I collaborated with Felix on a project for DezentralizedFinance.com to create a scalable logo map SaaS tool. Felix was professional, timely, and efficient. He excelled in communication, adapting to my vision of integrating a prototype with Google Sheets. With his expertise, especially in image rendering with Vercel OG Image, he closely matched my expectations, needing only slight style adjustments. What stood out was Felix's understanding of my workflow and needs. The prototype's value for money is impressive, and I look forward to future projects with him. I highly recommend Felix for his exceptional work and client-focused approach, solidifying his freelancing reputation.",
         author: {
           name: 'Julian Richter',
-          linkedinUrl: 'https://www.linkedin.com/in/richter-julian/',
+          socialUrl: 'https://www.linkedin.com/in/richter-julian/',
           position: 'Founder at DezentralizedFinance.com',
           imageUrl:
             'https://media.licdn.com/dms/image/C4D03AQHROst7-gdgCA/profile-displayphoto-shrink_400_400/0/1580838009297?e=1703116800&v=beta&t=nYhYpmB_ENrt6zPP2P1CfHk4GtYLYWB-x3X8JZhuRHE',
         },
       },
+    ],
+    [
+      {
+        body: 'This is a good summary! I’m glad you enjoyed the book, and thanks for sharing your thoughts.',
+        author: {
+          name: 'Rob Walling',
+          imageUrl:
+            'https://m.media-amazon.com/images/S/amzn-author-media-prod/a2ivs540g924bgkqv9p5sjdm1v.jpg',
+          socialUrl:
+            'https://www.reddit.com/r/indiehackers/comments/15makjn/comment/jvg31jp/?utm_source=share&utm_medium=web2x&context=3',
+          position: 'Author of the SaaS Playbook',
+        },
+      },
+      {
+        body: 'This is an awesome blog post. Thanks!',
+        author: {
+          name: 'Michael Frieze',
+          socialUrl:
+            'https://www.reddit.com/r/nextjs/comments/174v2ua/comment/k4byz37/?utm_source=share&utm_medium=web2x&context=3/',
+          position: '@u/michaelfrieze',
+        },
+      },
+      {
+        body: 'As a recent bootcamp grad who is often overwhelmed by how much is out there and how the bar seems so much higher for a chance at employment, stuff like this is super helpful. Really appreciate it! It was nice to see some of my current frameworks included',
+        author: {
+          name: 'Due_Advisor925',
+          socialUrl:
+            'https://www.reddit.com/r/nextjs/comments/15fplwb/comment/jug0f4z/?utm_source=share&utm_medium=web2x&context=3',
+          position: '@u/Due_Advisor925',
+        },
+      },
+
       // More testimonials...
     ],
     //     [
@@ -73,14 +105,13 @@ const testimonialsData = [
   ],
 ]
 
-export default function Testimonials() {
+interface Testimonial extends PropsWithChildren {}
+
+export default async function Testimonials({ children }: Testimonial) {
   return (
-    <div className="relative isolate pb-32 pt-24 sm:pt-32">
+    <div className="relative isolate pb-16 pt-12 sm:pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <Header className="mx-auto max-w-xl text-center">
-          <Header.Section>Testimonials</Header.Section>
-          <Header.Title>What Clients Say</Header.Title>
-        </Header>
+        {children}
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
           <Card className="rounded-2xl shadow-lg sm:col-span-2 xl:col-start-2 xl:row-end-1">
             <blockquote className="p-6 text-lg font-semibold leading-7 tracking-tight sm:p-12 sm:text-xl sm:leading-8">
@@ -128,10 +159,7 @@ export default function Testimonials() {
                   )}
                 >
                   {column.map((testimonial) => (
-                    <Card
-                      key={testimonial.author.linkedinUrl}
-                      className="rounded-2xl p-6 shadow-lg"
-                    >
+                    <Card key={testimonial.author.socialUrl} className="rounded-2xl p-6 shadow-lg">
                       <blockquote className="">
                         <p>{`“${testimonial.body}”`}</p>
                       </blockquote>
@@ -143,7 +171,7 @@ export default function Testimonials() {
                           />
                           <AvatarFallback>{testimonial.author.name.substring(0, 2)}</AvatarFallback>
                         </Avatar>
-                        <Link href={testimonial.author.linkedinUrl}>
+                        <Link href={testimonial.author.socialUrl}>
                           <div className="font-semibold">{testimonial.author.name}</div>
                           <div className="text-muted-foreground">{`${testimonial.author.position}`}</div>
                         </Link>
