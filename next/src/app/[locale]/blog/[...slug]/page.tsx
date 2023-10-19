@@ -150,8 +150,13 @@ export default async function PostPage({ params }: PostPageProps) {
           <p className="text-xl pt-4 leading-8">{post.description}</p>
           {/* Author */}
           <div className="flex h-24 flex-row items-center gap-x-4">
-            <Image width={56} height={56} alt={authors[0].title} src={authors[0].avatar} />
-
+            <Image
+              priority={true}
+              width={56}
+              height={56}
+              alt={authors[0].title}
+              src={authors[0].avatar}
+            />
             <div className="flex flex-col gap-1 text-sm">
               <span className="text-lg font-bold">{authors[0].title}</span>
               <span>{formatDate(post.date)}</span>
@@ -159,13 +164,13 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
           {/* Cover Image */}
           <Image
+            priority={true}
             alt={post.title}
             width={804}
             height={452}
             className="rounded-md border my-4"
             src={post.image}
           />
-
           {/* Content */}
           <Mdx code={post.body.code} />
         </article>
