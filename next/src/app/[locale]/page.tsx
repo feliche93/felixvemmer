@@ -48,7 +48,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
           </PageHeaderDescription>
           <div className="flex w-full justify-center items-center space-x-4 pb-8 pt-4 md:pb-10">
             <Link
-              href="/consulting"
+              href="/consulting-services"
               className={cn(
                 buttonVariants({
                   variant: 'default',
@@ -58,12 +58,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
             >
               {t('hero.primaryCTA')}
             </Link>
-            <Link
-              target="_blank"
-              rel="noreferrer"
-              href={'/blog'}
-              className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
-            >
+            <Link href={'/blog'} className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
               {t('hero.secondaryCTA')}
             </Link>
           </div>
