@@ -15,6 +15,10 @@
       "primaryCTA": "Beratungsdienste",
       "secondaryCTA": "Lese meinen Blog"
     },
+    "skills": {
+      "title": "Womit kann ich dir helfen?",
+      "section": "Fähigkeiten"
+    },
     "testimonials": {
       "title": "Was Kunden und Leser sagen",
       "section": "Referenzen"
@@ -26,6 +30,22 @@
     "blog": {
       "title": "Das Neueste von meinem Blog",
       "section": "Blog"
+    }
+  },
+  "components": {
+    "skills": {
+      "tools": "Tools / Frameworks",
+      "languages": "Expertise",
+      "description": "Ich bin ein self-taught Developer mit einem CEMS Master in internationalem Management. Dank meiner Kombination aus Geschäftssinn und technischem Verständnis kann ich nicht nur komplexe technische Ideen verständlich vermitteln, sondern diese auch erfolgreich umsetzen.",
+      "fullstack": {
+        "description": "Ich verwandle deine individuellen Ideen in moderne Web-Anwendungen."
+      },
+      "dataAndAI": {
+        "description": "Ich biete dir Einblicke und helfe dir dabei, skalierbare Datenprodukte und AI Services zu erstellen.        "
+      },
+      "businessAndMarketing": {
+        "description": "Lerne wie du dein aktuelles Geschäft optimieren kannst oder erhalte Feedback zu einer völlig neuen Geschäftsidee."
+      }
     }
   }
 }

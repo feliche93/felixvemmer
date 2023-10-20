@@ -43,6 +43,8 @@ const testimonialsData = [
           position: 'Author of the SaaS Playbook',
         },
       },
+    ],
+    [
       {
         body: 'This is an awesome blog post. Thanks!',
         author: {
@@ -50,8 +52,11 @@ const testimonialsData = [
           socialUrl:
             'https://www.reddit.com/r/nextjs/comments/174v2ua/comment/k4byz37/?utm_source=share&utm_medium=web2x&context=3/',
           position: '@u/michaelfrieze',
+          imageUrl: undefined,
         },
       },
+    ],
+    [
       {
         body: 'As a recent bootcamp grad who is often overwhelmed by how much is out there and how the bar seems so much higher for a chance at employment, stuff like this is super helpful. Really appreciate it! It was nice to see some of my current frameworks included',
         author: {
@@ -59,6 +64,7 @@ const testimonialsData = [
           socialUrl:
             'https://www.reddit.com/r/nextjs/comments/15fplwb/comment/jug0f4z/?utm_source=share&utm_medium=web2x&context=3',
           position: '@u/Due_Advisor925',
+          imageUrl: undefined,
         },
       },
 
@@ -66,7 +72,7 @@ const testimonialsData = [
     ],
     //     [
     //       {
-    //         body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
+    //         body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem undefineda blanditiis.',
     //         author: {
     //           name: 'Lindsay Walton',
     //           handle: 'lindsaywalton',
@@ -166,7 +172,7 @@ export default async function Testimonials({ children }: Testimonial) {
                       <figcaption className="mt-6 flex items-center gap-x-4">
                         <Avatar>
                           <AvatarImage
-                            src={testimonial.author.imageUrl}
+                            src={testimonial.author?.imageUrl}
                             alt={testimonial.author.name}
                           />
                           <AvatarFallback>{testimonial.author.name.substring(0, 2)}</AvatarFallback>

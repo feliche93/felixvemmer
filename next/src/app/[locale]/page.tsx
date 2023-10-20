@@ -6,6 +6,7 @@ import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/componen
 import Testimonials from '@/components/testimonials'
 import { buttonVariants } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
+import { Skills } from '@/components/ui/skills'
 import { cn } from '@/lib/utils'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
@@ -63,6 +64,12 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
             </Link>
           </div>
         </PageHeader>
+      </div>
+      {/* Skills */}
+      <div className="flex flex-col items-center py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
+        <Header.Section>{t('skills.section')}</Header.Section>
+        <Header.Title>{t('skills.title')}</Header.Title>
+        <Skills locale={locale} />
       </div>
       {/* Latest from blog */}
       <div className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">

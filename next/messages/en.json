@@ -15,6 +15,10 @@
       "primaryCTA": "Consulting Services",
       "secondaryCTA": "Read my blog"
     },
+    "skills": {
+      "title": "What Can I help you with?",
+      "section": "Skills"
+    },
     "testimonials": {
       "title": "What Clients and Readers Say",
       "section": "Testimonials"
@@ -26,6 +30,22 @@
     "blog": {
       "title": "The latest from my blog",
       "section": "Blog"
+    }
+  },
+  "components": {
+    "skills": {
+      "tools": "Tools / Frameworks",
+      "languages": "Expertise",
+      "description": "I am a self-taught programmer with a CEMS Master in International Management. Having both a business and deep technical understanding allows me to easily communicate complex technical ideas with business stakeholders.",
+      "fullstack": {
+        "description": "Build and ship the next modern frontend application to power your individual idea."
+      },
+      "dataAndAI": {
+        "description": "Derive better insights and build new data products with a scalable data warehouse and custom data pipelines."
+      },
+      "businessAndMarketing": {
+        "description": "Learn how to how to optimize your current business or get feedback on a complete new business idea."
+      }
     }
   }
 }
