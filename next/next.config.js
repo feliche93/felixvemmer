@@ -14,6 +14,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/ingest/:path*',
+        destination: 'https://eu.posthog.com/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = withNextIntl(withContentlayer(nextConfig))
