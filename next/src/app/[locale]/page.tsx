@@ -68,7 +68,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
       {/* Skills */}
       <div className="flex flex-col items-center py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
         <Header.Section>{t('skills.section')}</Header.Section>
-        <Header.Title>{t('skills.title')}</Header.Title>
+        <Header.Title className="text-center">{t('skills.title')}</Header.Title>
         <Skills locale={locale} />
       </div>
       {/* Latest from blog */}
