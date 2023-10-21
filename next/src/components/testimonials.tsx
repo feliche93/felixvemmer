@@ -67,7 +67,17 @@ const testimonialsData = [
           imageUrl: undefined,
         },
       },
-
+      {
+        body: 'Thank you very much for creating this article. I am a beginner with Next.js, and I found your piece extremely helpful. It also led me to explore the rest of your impressive blog 🤩',
+        author: {
+          name: 'Pierre Rognion',
+          socialUrl:
+            'https://www.linkedin.com/feed/update/urn:li:activity:7117758220042915840?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7117758220042915840%2C7121397129381568512%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287121397129381568512%2Curn%3Ali%3Aactivity%3A7117758220042915840%29',
+          position: 'AI Manager @Twelve Consulting',
+          image:
+            'https://media.licdn.com/dms/image/C5603AQE3GLoobp0s5Q/profile-displayphoto-shrink_400_400/0/1567712611436?e=1703116800&v=beta&t=gNjuccotJBLHiIq8JrQRTKHmemavWa6zS2QMBvRuwkw',
+        },
+      },
       // More testimonials...
     ],
     //     [
