@@ -139,7 +139,7 @@ export default async function PostPage({ params }: PostPageProps) {
         '@type': 'ImageObject',
         url: author?.avatar,
       },
-      url: absoluteUrl(`/authors/${author?.slug}`),
+      url: absoluteUrl(author?.slug ?? '/'),
       sameAs: [author?.twitter].filter(Boolean) as string[],
     })),
     headline: post.title,
@@ -150,7 +150,7 @@ export default async function PostPage({ params }: PostPageProps) {
       '@type': 'ImageObject',
       url: post.image,
     },
-    keywords: post.categories.join(', '),
+    keywords: post?.keywords && post?.keywords?.length > 0 ? post.keywords.join(', ') : undefined,
     description: post.description,
     mainEntityOfPage: absoluteUrl(post.slug),
   }
