@@ -45,8 +45,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   if (!post) return notFound()
 
-  const url = process.env.NEXT_PUBLIC_URL
-
   const ogUrl = new URL(`${siteConfig.url}/api/og`)
   ogUrl.searchParams.set('heading', post.title)
   ogUrl.searchParams.set('type', 'Blog Post')
