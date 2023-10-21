@@ -129,7 +129,7 @@ export default async function PostPage({ params }: PostPageProps) {
       url: absoluteUrl('/'),
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.404media.co/content/images/2023/08/Logo-Color-on-White@24x.png',
+        url: absoluteUrl('/logos/felix-vemmer.png'),
       },
     },
     author: authors.map((author) => ({
