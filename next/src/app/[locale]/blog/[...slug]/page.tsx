@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       url: absoluteUrl(post.slug),
       images: [
         {
-          url: ogUrl.toString(),
+          url: absoluteUrl(post.image),
           width: 1200,
           height: 630,
           alt: post.title,
@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [ogUrl.toString()],
+      images: [absoluteUrl(post.image)],
     },
   }
 }
