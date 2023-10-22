@@ -6,8 +6,9 @@ retrieves profile view statistics, and stores these in a database.
 
 import json
 import os
+import re
 from datetime import datetime, timedelta
-from typing import Any, Dict, List, Tuple
+from typing import List
 
 from ai import create_application_message
 from bs4 import BeautifulSoup
@@ -22,7 +23,7 @@ from db import (
 from dotenv import load_dotenv
 from fastapi import Request
 from models import FreelanceJobPost, JobStatus, WorkType
-from playwright.async_api import Page, Route
+from playwright.async_api import Page
 from scraper import get_full_url, initialize_playwright
 from telegram_bot import send_job_post_notification
 
@@ -89,31 +90,10 @@ async def scrape_freelancermap_statistics():
 
     Note: The function operates in non-headless mode, meaning a browser window will be visible during its operation.
     """
-    profile_data: Dict[str, Any] = {}
-
-    async def intercept_route(route: Route, request: Request):
-        """
-        Intercept the route and capture the response data.
-
-        Args:
-            route: The route to be intercepted.
-            request: The request to be intercepted.
-        """
-        if "profiles" in request.url:
-            try:
-                response = await route.fetch()
-                if response.ok:
-                    profile_data["data"] = await response.json()
-            except Exception as e:  # pylint: disable=broad-except,invalid-name
-                print(f"Failed to get response: {e}")  # pylint: disable=invalid-name
-        else:
-            await route.continue_()
 
     headless = True
     # headless = False
     _, page = await initialize_playwright(headless=headless)
-
-    await page.route("**/*", intercept_route)
 
     await page.goto("https://www.freelancermap.de/login")
 
@@ -135,23 +115,38 @@ async def scrape_freelancermap_statistics():
 
     await page.wait_for_timeout(3000)
 
-    await page.goto("https://www.freelancermap.de/profilaufrufe.html")
+    await page.goto("https://www.freelancermap.de/mein_account.html")
 
     await page.wait_for_timeout(2000)
 
-    # This will print the data from the first profile-related fetch call
-    # print(profile_data["data"])
+    html_content = await page.content()
 
-    last_week_data: List[Tuple[str, int]] = profile_data["data"].get("lastWeek")
+    soup = BeautifulSoup(html_content, "html.parser")
 
-    # Sort the data by date in descending order
-    last_week_data.sort(key=lambda x: x[0], reverse=True)
+    script_tag = soup.find("script", text=re.compile("drawProfileStatistics"))
 
-    # Get the latest date and the corresponding profile visits
-    latest_date, profile_visits = last_week_data[0]
+    if script_tag is None:
+        raise ValueError("Script tag is not set")
 
-    # Convert the date string to a datetime.date object
-    latest_date = datetime.strptime(latest_date, "%Y-%m-%d")
+    data_array_match = re.search(r"data\.addRows\((.*?)\);", script_tag.string, re.DOTALL)  # type: ignore
+
+    if data_array_match is None:
+        raise ValueError("Data array match is not set")
+
+    data_array_str = data_array_match.group(1)  # type: ignore
+    data_array_str = data_array_str.strip("[]")  # type: ignore
+
+    # Split the string into lines
+    data_array_lines = data_array_str.split("\n")  # type: ignore
+
+    last_line = data_array_lines[-2]  # type: ignore
+
+    latest_date, profile_visits = last_line.strip(",").strip().strip("[").strip("]").split(",")  # type: ignore
+
+    latest_date = latest_date.strip("'")  # type: ignore
+    latest_date = datetime.strptime(latest_date, "%d.%m.%Y")  # type: ignore
+
+    profile_visits = int(profile_visits)  # type: ignore
 
     full_url = get_full_url(page.url)
 
@@ -422,10 +417,10 @@ async def main():
     """
     # await scrape_freelancermap_statistics()
 
-    await scrape_freelancermap_job_posts.local()  # type: ignore
+    # await scrape_freelancermap_job_posts.local()  # type: ignore
 
 
-if __name__ == "__main__":
-    import asyncio
+# if __name__ == "__main__":
+#     import asyncio
 
-    asyncio.run(main())
+#     asyncio.run(main())
