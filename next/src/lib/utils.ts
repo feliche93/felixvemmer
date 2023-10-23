@@ -15,6 +15,8 @@ export function formatDate(input: string | number): string {
 }
 
 export function absoluteUrl(path: string) {
+  if (!process.env.NEXT_PUBLIC_URL) throw new Error('NEXT_PUBLIC_URL is not defined')
+
   return `${process.env.NEXT_PUBLIC_URL}${path}`
 }
 

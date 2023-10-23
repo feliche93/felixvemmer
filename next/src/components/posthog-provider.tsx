@@ -3,11 +3,12 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 import { FC, PropsWithChildren, useEffect } from 'react'
 
+import { absoluteUrl } from '@/lib/utils'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 
 const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
-const posthogHost = `${process.env.NEXT_PUBLIC_URL}/ingest`
+const posthogHost = absoluteUrl('/ingest')
 
 if (!posthogKey) throw new Error('NEXT_PUBLIC_POSTHOG_KEY is not set')
 if (!posthogHost) throw new Error('NEXT_PUBLIC_POSTHOG_HOST is not set')
