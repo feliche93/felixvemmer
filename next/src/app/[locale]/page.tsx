@@ -18,6 +18,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
 
   const posts = allPosts
     .filter((post) => post.published)
+    .filter((post) => post.locale === locale)
     .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
     .slice(0, 6)
 

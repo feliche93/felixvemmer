@@ -5,6 +5,7 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
+import { LanguageToggle } from './language-toggle'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
 
@@ -60,6 +61,7 @@ export function SiteHeader() {
               </div>
             </Link>
             <ModeToggle />
+            <LanguageToggle />
           </nav>
         </div>
       </div>

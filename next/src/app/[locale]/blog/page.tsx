@@ -12,6 +12,7 @@ export default async function BlogPage({ params: { locale } }: { params: { local
 
   const posts = allPosts
     .filter((post) => post.published)
+    .filter((post) => post.locale === locale)
     .sort((a, b) => {
       return compareDesc(new Date(a.date), new Date(b.date))
     })
