@@ -4,7 +4,7 @@ title: "The Rise of Next.js: Why It's the Full-Stack Framework of Choice for Mod
 description: 'When selecting a frontend framework, reliability is paramount for my clients. Despite exploring options like SvelteKit, "Why Next.js?" remains a frequent query. In this article, I unpack why Next.js stands out as a dependable choice and its promising future.'
 metaTitle: 'Why Next.js is the Full-Stack Framework for Modern Websites'
 metaDescription: "Explore why Next.js is more than just a trend. Dive into its unparalleled reliability and discover why it's the go-to for modern web development."
-date: '2023-10-10'
+date: '2023-11-01'
 categories:
   - 'Reviews'
   - 'Typescript'
@@ -26,6 +26,15 @@ keywords:
 ---
 
 My freelance clients often ask which frontend framework is best. They **don’t want the newest trend; they want something reliable**. I've looked into new options like [SvelteKit](https://kit.svelte.dev/?ref=felixvemmer.com), but [Next.js](https://nextjs.org/?ref=felixvemmer.com) keeps coming out on top. It’s not about the latest and greatest; it’s about **choosing what's proven and dependable**. In this article, we’ll delve into the key reasons I'm putting my chips on [Next.js](https://nextjs.org/?ref=felixvemmer.com) and why I'm optimistic about its future.
+
+<Callout className="my-4" title="2 Other Expert Opinions" icon={<Icons.lightBulb />}>
+  As fate would have it, I'm not the only one who talks about Next.js. Recently [Kent C.
+  Dodds](https://twitter.com/kentcdodds) published a post [Why I Won't Use
+  Next.js](https://www.epicweb.dev/why-i-wont-use-nextjs) to which [Lee
+  Robinson](https://twitter.com/leeerob) VP of Developer Experience at Vercel responded with [Why
+  I'm Using Next.js](https://leerob.io/blog/why-i-use-nextjs). Both are great reads and I highly
+  recommend you check them out as well.
+</Callout>
 
 ## Unified Adoption: The Trust in Next.js Among Clients and Developers
 
@@ -94,6 +103,12 @@ Next.js provides **three primary rendering strategies**, each offering unique i
 2. **Dynamic Rendering:** Pages get generated per user request, facilitating personalized content. While this offers **custom user experiences**, it might be a tad slower, potentially affecting SEO. However, with the right tweaks, optimal performance can be retained.
 3. **Streaming:** The server progressively renders the UI in segments. This method can enhance perceived performance, allowing users to **engage with sections of a page even before the full content finishes rendering** — an absolute advantage for content that relies on slower data fetches.
 
+At the latest Next.js 14 Conf Guillermo Rauch, CEO of Vercel, explained the different rendering strategies in more detail and announced the Preview of [Partial Rendering](https://nextjs.org/blog/next-14#partial-prerendering-preview).
+
+> We'd like to share a preview of Partial Prerendering — a compiler optimization for dynamic content with a fast initial static response — that we're working on for Next.js.
+
+<YouTubeEmbed id="8q2q_820Sx4" params="start=2500" />
+
 ### Making the Right Choice: Edge and Node.js Runtimes
 
 In the rapidly evolving world of Next.js, developers are presented yet with more choices that impact not just rendering but also the very foundation of performance and SEO. **Two core runtimes spearhead this offering**, each with distinct advantages in these areas.
@@ -132,7 +147,7 @@ Recognizing this, Next.js introduced the `loading.js` convention, coupled with
 <Image
   className="my-4 rounded-lg"
   src="/posts/why-next-js/CleanShot-2023-10-10-at-14.41.48.gif"
-  alt="Loading demo in Next.js 13 App Playground"
+  alt="Loading demo in Next.js 14 App Playground"
   width={800}
   height={600}
 />
@@ -147,12 +162,12 @@ With these tools at their disposal, developers can design both loading UIs and s
 <Image
   className="my-4 rounded-lg"
   src="/posts/why-next-js/CleanShot-2023-10-10-at-14.45.44.gif"
-  alt="Suspense streaming demo in Next.js 13 App Playground"
+  alt="Suspense streaming demo in Next.js 14 App Playground"
   width={800}
   height={600}
 />
 
-If you want to experience these features in an interactive way, check out this great [Next.js 13 App
+If you want to experience these features in an interactive way, check out this great [Next.js 14 App
 Playground](https://vercel.com/templates/next.js/app-directory?ref=felixvemmer.com) demo.
 
 ## Built-in Optimizations
@@ -176,6 +191,12 @@ Third-party scripts, like Google Tag Manager, often adversely affect website per
 
 - **Strategized Loading**: Tailor how and when scripts load, optimizing website speed.
 - **Web Worker Offloading** (Experimental): Improve performance by offloading scripts from the main thread.
+
+#### New Experimental Libary `@next/third-parties`
+
+The experimental library @next/third-parties enhances performance and developer experience in Next.js applications by providing optimized integrations for popular third-party libraries. Key features include components for Google Tag Manager, Google Maps Embed, and YouTube Embed. To use, install the library with npm install @next/third-parties. For more details, refer to the Next.js documentation.
+
+<YouTubeEmbed id="8q2q_820Sx4" params="start=5703" />
 
 ### Next.js's `next/link` Component: Transforming Web Navigation
 
@@ -278,16 +299,18 @@ Next.js sets itself apart with its intuitive integration of middleware and backe
 <Image
   className="my-4 rounded-lg"
   src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Froute-special-file.png&w=3840&q=75&dpl=dpl_CyeuvjR1SQJkh2gxPddbFJxdH5aL"
-  alt="Illustration Routes in Next 13 App router"
+  alt="Illustration Routes in Next 14 App router"
   width={800}
   height={600}
 />
 
-Routes in Next 13 App router. Illustration by [Next.js](https://nextjs.org/docs/app/building-your-application/routing/route-handlers?ref=felixvemmer.com)
+Routes in Next 14 App router. Illustration by [Next.js](https://nextjs.org/docs/app/building-your-application/routing/route-handlers?ref=felixvemmer.com)
 
 ### Hassle-Free Deployments with Vercel
 
 The deployment phase is often seen as cumbersome. Enter Vercel. Tailored specifically for Next.js, Vercel simplifies deployments, making them straightforward and hassle-free. In just a few steps, your application is live, ready to scale, and optimized for performance.
+
+<Tweet id="1719474215798345978" />
 
 Here's what I love most about Vercel:
 
@@ -395,9 +418,7 @@ One of the best ways to truly grasp the power and potential of Next.js is to **
 
   <Tweet id="1708280997488333078" />
 
-- [**Steven Tey**](https://twitter.com/steventey?ref=felixvemmer.com) **& [**Hassan El Mghari**](https://twitter.com/nutlope?ref=felixvemmer.com):** These developers are testament to the ease and efficiency of Vercel. Continuously churning out open-source projects, they exemplify how effortlessly one can start building and deploying apps with Vercel. Steven's ventures like dub.co and novel.sh, and Hassan's focus on AI and web development, further underscore their dedication and innovative spirit.
-
-  <Tweet id="1696534532709872072" />
+- [**Steven Tey**](https://twitter.com/steventey?ref=felixvemmer.com): This developer is a testament to the ease and efficiency of Vercel. Continuously churning out open-source projects, he exemplifies how effortlessly one can start building and deploying apps with Vercel. Steven's ventures like dub.co and novel.sh further underscore his dedication and innovative spirit.
 
   <Tweet id="1669762868416512000" />
 
