@@ -6,7 +6,9 @@ import imageWhiteboard from '@/../public/images/whiteboard.jpg'
 import { Blockquote } from '@/components/ui/blockquote'
 import { Container } from '@/components/ui/container'
 import { FadeIn } from '@/components/ui/fade-in'
+import { GridPattern } from '@/components/ui/grid-pattern'
 import { List, ListItem } from '@/components/ui/list'
+import { PageIntro } from '@/components/ui/page-intro'
 import { StylizedImage } from '@/components/ui/stylized-image'
 import { TagList, TagListItem } from '@/components/ui/tag-list'
 
@@ -164,10 +166,10 @@ function Values() {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
       <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
-        {/* <GridPattern
+        <GridPattern
           className="absolute inset-0 h-full w-full fill-neutral-100 stroke-foreground/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
           yOffset={-270}
-        /> */}
+        />
       </div>
       {/* 
       <SectionIntro eyebrow="Our values" title="Balancing reliability and innovation">
@@ -219,13 +221,13 @@ export const metadata: Metadata = {
 export default function Process() {
   return (
     <>
-      {/* <PageIntro eyebrow="Our process" title="How we work">
+      <PageIntro centered eyebrow="Our process" title="How we work">
         <p>
           We believe in efficiency and maximizing our resources to provide the best value to our
           clients. The primary way we do that is by re-using the same five projects we’ve been
           developing for the past decade.
         </p>
-      </PageIntro> */}
+      </PageIntro>
 
       <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
         <Discover />
