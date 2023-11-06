@@ -5,6 +5,7 @@ import { CalCom } from '@/components/cal-com'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 import Testimonials from '@/components/testimonials'
 import { buttonVariants } from '@/components/ui/button'
+import { FadeIn } from '@/components/ui/fade-in'
 import { Header } from '@/components/ui/header'
 import { Skills } from '@/components/ui/skills'
 import { cn } from '@/lib/utils'
@@ -25,7 +26,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
   return (
     <>
       {/* Hero */}
-      <div className="container relative">
+      <FadeIn className="container relative">
         <PageHeader className="pb-8 flex flex-col items-center">
           {/* <Link
           href="/docs/changelog"
@@ -36,6 +37,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
           <span className="hidden sm:inline">Introducing Style, a new CLI and more.</span>
           <ArrowRightIcon className="ml-1 h-4 w-4" />
         </Link> */}
+
           <Image
             className="border border-primary-foreground rounded-full"
             src={'/logos/felix-vemmer.png'}
@@ -44,6 +46,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
             height={200}
             alt="Felix Vemmer"
           />
+
           <PageHeaderHeading className="text-center">{t('hero.title')}</PageHeaderHeading>
           <PageHeaderDescription className="text-center">
             {t('hero.description')}
@@ -65,21 +68,21 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
             </Link>
           </div>
         </PageHeader>
-      </div>
+      </FadeIn>
       {/* Skills */}
-      <div className="flex flex-col items-center py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
+      <FadeIn className="flex flex-col items-center py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
         <Header.Section>{t('skills.section')}</Header.Section>
         <Header.Title className="text-center">{t('skills.title')}</Header.Title>
         <Skills locale={locale} />
-      </div>
+      </FadeIn>
       {/* Latest from blog */}
-      <div className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
+      <FadeIn className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
         <Header className="mx-auto max-w-xl text-center mb-16">
           <Header.Section>{t('blog.section')}</Header.Section>
           <Header.Title>{t('blog.title')}</Header.Title>
         </Header>
         <BlogPostGrid posts={posts} />
-      </div>
+      </FadeIn>
       {/* <FeatureGrid /> */}
       <Testimonials>
         <Header className="mx-auto max-w-xl text-center">
@@ -87,13 +90,13 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
           <Header.Title>{t('testimonials.title')}</Header.Title>
         </Header>
       </Testimonials>
-      <div>
+      <FadeIn>
         <Header className="mx-auto max-w-xl text-center mb-16">
           <Header.Section className="pt-12 sm:pt-16">{t('bookAMeeeting.section')}</Header.Section>
           <Header.Title>{t('bookAMeeeting.title')}</Header.Title>
         </Header>
         <CalCom />
-      </div>
+      </FadeIn>
     </>
   )
 }

@@ -10,7 +10,6 @@ import { GridPattern } from '@/components/ui/grid-pattern'
 import { List, ListItem } from '@/components/ui/list'
 import { PageIntro } from '@/components/ui/page-intro'
 import { StylizedImage } from '@/components/ui/stylized-image'
-import { TagList, TagListItem } from '@/components/ui/tag-list'
 
 function Section({
   title,
@@ -52,68 +51,107 @@ function Section({
 
 function Discover() {
   return (
-    <Section title="Discover" image={{ src: imageWhiteboard }}>
-      <div className="space-y-6 text-base text-muted-foreground">
+    <Section title="Discovery Call" image={{ src: imageWhiteboard }}>
+      <div className="space-y-4 text-base text-muted-foreground">
         <p>
-          We work closely with our clients to understand their{' '}
-          <strong className="font-semibold text-foreground">needs</strong> and goals, embedding
-          ourselves in their every day operations to understand what makes their business tick.
+          Transforming your business ideas into digital success is what I do best. My
+          <strong className="font-semibold text-foreground">
+            {' '}
+            CEMS Master's in International Management{' '}
+          </strong>
+          and deep technical knowledge enable me to turn complex challenges into
+          <strong className="font-semibold text-foreground"> effective tech solutions</strong>. I'm
+          committed to
+          <strong className="font-semibold text-foreground"> clear communication</strong>, ensuring
+          your goals are achieved with custom solutions tailored for your business.
         </p>
+
         <p>
-          Our team of private investigators shadow the company director’s for several weeks while
-          our account managers focus on going through their trash. Our senior security experts then
-          perform social engineering hacks to gain access to their{' '}
-          <strong className="font-semibold text-foreground">business</strong> accounts — handing
-          that information over to our forensic accounting team.
+          Our discovery call will be a session of
+          <strong className="font-semibold text-foreground"> honest feedback </strong> and
+          <strong className="font-semibold text-foreground"> actionable insights</strong>. With a
+          lean MVP approach, I prioritize a fast and focused launch, attuned to your customers'
+          needs and your project's unique requirements.
         </p>
+
         <p>
-          Once the full audit is complete, we report back with a comprehensive{' '}
-          <strong className="font-semibold text-foreground">plan</strong> and, more importantly, a
-          budget.
+          Transparency is a given with me. If a project stretches beyond my expertise, I'll be
+          upfront about it. But with my robust knowledge of the
+          <strong className="font-semibold text-foreground"> React and Python </strong> ecosystems,
+          I'm ready to craft a
+          <strong className="font-semibold text-foreground">
+            {' '}
+            comprehensive full-stack strategy{' '}
+          </strong>{' '}
+          for your project's success.
         </p>
       </div>
 
-      <h3 className="mt-12 font-display text-base font-semibold text-foreground">
+      <Blockquote
+        author={{ name: 'Julian Richter', role: 'Founder at DecentralizedFinance.com' }}
+        className="mt-12"
+      >
+        I collaborated with Felix on a project for DezentralizedFinance.com to create a scalable
+        logo map SaaS tool. Felix was professional, timely, and efficient. He excelled in
+        communication, adapting to my vision of integrating a prototype with Google Sheets. What
+        stood out was Felix's understanding of my workflow and needs.
+      </Blockquote>
+
+      {/* <h3 className="mt-12 font-display text-base font-semibold text-foreground">
         Included in this phase
       </h3>
       <TagList className="mt-4">
         <TagListItem>In-depth questionnaires</TagListItem>
         <TagListItem>Feasibility studies</TagListItem>
-        <TagListItem>Blood samples</TagListItem>
-        <TagListItem>Employee surveys</TagListItem>
         <TagListItem>Proofs-of-concept</TagListItem>
-        <TagListItem>Forensic audit</TagListItem>
-      </TagList>
+      </TagList> */}
     </Section>
   )
 }
 
-function Build() {
+function Offer() {
   return (
-    <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
+    <Section title="Offer" image={{ src: imageLaptop, shape: 1 }}>
       <div className="space-y-6 text-base text-muted-foreground">
         <p>
-          Based off of the discovery phase, we develop a comprehensive roadmap for each product and
-          start working towards delivery. The roadmap is an intricately tangled mess of technical
-          nonsense designed to drag the project out as long as possible.
+          Post-discovery, you'll receive a{' '}
+          <strong className="font-semibold text-foreground">tailored proposal</strong>, complete
+          with{' '}
+          <strong className="font-semibold text-foreground">
+            minimum and maximum pricing brackets
+          </strong>
+          . This gives you a{' '}
+          <strong className="font-semibold text-foreground">
+            transparent view of potential costs
+          </strong>
+          , ensuring no surprises down the line.
         </p>
         <p>
-          Each client is assigned a key account manager to keep lines of communication open and
-          obscure the actual progress of the project. They act as a buffer between the client’s
-          incessant nagging and the development team who are hard at work scouring open source
-          projects for code to re-purpose.
+          Understanding that every project is unique, I offer the{' '}
+          <strong className="font-semibold text-foreground">flexibility to adjust the scope</strong>{' '}
+          to meet your financial and project requirements. We can work together to align the
+          project's needs with your budget, crafting a solution that's{' '}
+          <strong className="font-semibold text-foreground">right for you</strong>.
         </p>
         <p>
-          Our account managers are trained to only reply to client emails after 9pm, several days
-          after the initial email. This reinforces the general aura that we are very busy and
-          dissuades clients from asking for changes.
+          My aim is to deliver{' '}
+          <strong className="font-semibold text-foreground">exceptional value</strong>, balancing
+          quality and cost. By{' '}
+          <strong className="font-semibold text-foreground">refining the project scope</strong>, we
+          can find a sweet spot that{' '}
+          <strong className="font-semibold text-foreground">maximizes your investment</strong> and
+          brings your vision to life without compromise.
         </p>
       </div>
 
-      <Blockquote author={{ name: 'Debra Fiscal', role: 'CEO of Unseal' }} className="mt-12">
-        Studio were so regular with their progress updates we almost began to think they were
-        automated!
-      </Blockquote>
+      {/* <h3 className="mt-12 font-display text-base font-semibold text-foreground">
+        Included in this phase
+      </h3>
+      <TagList className="mt-4">
+        <TagListItem>In-depth questionnaires</TagListItem>
+        <TagListItem>Feasibility studies</TagListItem>
+        <TagListItem>Proofs-of-concept</TagListItem>
+      </TagList> */}
     </Section>
   )
 }
@@ -123,22 +161,28 @@ function Deliver() {
     <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
       <div className="space-y-6 text-base text-muted-foreground">
         <p>
-          About halfway through the Build phase, we push each project out by 6 weeks due to a change
-          in <strong className="font-semibold text-foreground">requirements</strong>. This allows us
-          to increase the budget a final time before launch.
+          I ensure the solution sticks to the agreed proposal, focusing on essential features to
+          prevent <strong className="font-semibold text-foreground">feature bloat</strong>. However,
+          I stay adaptable to refine the project scope as your needs evolve, keeping things{' '}
+          <strong className="font-semibold text-foreground">simple and efficient</strong>.
+        </p>
+
+        <p>
+          Delivery speed is championed through modern cloud providers like Vercel and Modal.com,
+          which support{' '}
+          <strong className="font-semibold text-foreground">
+            rapid scaling and robust deployment
+          </strong>{' '}
+          of web applications.
         </p>
         <p>
-          Despite largely using pre-built components, most of the{' '}
-          <strong className="font-semibold text-foreground">progress</strong> on each project takes
-          place in the final 24 hours. The development time allocated to each client is actually
-          spent making augmented reality demos that go viral on Twitter.
-        </p>
-        <p>
-          We ensure that the main pages of the site are{' '}
-          <strong className="font-semibold text-foreground">fully functional</strong> at launch —
-          the auxiliary pages will, of course, be lorem ipusm shells which get updated as part of
-          our exorbitant <strong className="font-semibold text-foreground">maintenance</strong>{' '}
-          retainer.
+          By leveraging full-stack frameworks like Next.js, combined with clean, well-documented
+          code and robust testing, I deliver products that are not just quickly brought to market,
+          but also{' '}
+          <strong className="font-semibold text-foreground">maintainable and scalable</strong>. My
+          commitment to code quality involves using TypeScript/Python type hints, which enhances
+          readability and future-proofs your application, making it ready for whatever changes lie
+          ahead.
         </p>
       </div>
 
@@ -146,16 +190,14 @@ function Deliver() {
         Included in this phase
       </h3>
       <List className="mt-8">
-        <ListItem title="Testing">
-          Our projects always have 100% test coverage, which would be impressive if our tests
-          weren’t as porous as a sieve.
-        </ListItem>
-        <ListItem title="Infrastructure">
-          To ensure reliability we only use the best Digital Ocean droplets that $4 a month can buy.
+        <ListItem title="Documentation">
+          Comprehensive documentation is provided to ensure easy understanding and future
+          maintenance of the application.
         </ListItem>
         <ListItem title="Support">
-          Because we hold the API keys for every critical service your business uses, you can expect
-          a lifetime of support, and invoices, from us.
+          We provide ongoing support to ensure the smooth operation of your application. As we have
+          access to the API keys for all critical services your business uses, you can rely on us
+          for continuous assistance.
         </ListItem>
       </List>
     </Section>
@@ -221,17 +263,21 @@ export const metadata: Metadata = {
 export default function Process() {
   return (
     <>
-      <PageIntro centered eyebrow="Our process" title="How we work">
+      <PageIntro
+        centered
+        eyebrow="Process Overview"
+        title="Transforming Ideas into Digital Success"
+      >
         <p>
-          We believe in efficiency and maximizing our resources to provide the best value to our
-          clients. The primary way we do that is by re-using the same five projects we’ve been
-          developing for the past decade.
+          I follow a three-step process: Discover, Offer, and Deliver. This approach ensures a deep
+          understanding of your needs, a transparent proposal, and the delivery of scalable
+          solutions using React and Python.
         </p>
       </PageIntro>
 
       <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
         <Discover />
-        <Build />
+        <Offer />
         <Deliver />
       </div>
 

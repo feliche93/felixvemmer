@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import { Badge } from './ui/badge'
+import { FadeIn } from './ui/fade-in'
 
 export interface BlogPostGridProps {
   posts: Post[] // replace with your actual Post type
@@ -11,7 +12,7 @@ export interface BlogPostGridProps {
 
 export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
   return (
-    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <FadeIn className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
       {posts.map((post) => {
         const authors = post.authors.map((author) =>
           allAuthors.find(({ slug }) => slug === `/authors/${author}`),
@@ -80,6 +81,6 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
           </div>
         )
       })}
-    </div>
+    </FadeIn>
   )
 }

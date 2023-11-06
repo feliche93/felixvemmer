@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { PropsWithChildren } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Card } from './ui/card'
+import { FadeIn } from './ui/fade-in'
 
 const featuredTestimonial = {
   body: "Felix expertly guided our transition from Wordpress to Next.js, translating complex frontend concepts into clear terms. His detailed insights on SEO, from performance to meta tag nuances, were invaluable. He also advised on blog setup and CMS suitability for our needs, and efficiently assisted with integrations like Mailchimp. Felix's broad tech knowledge and business acumen make him an invaluable asset. I highly recommend him for his ability to merge technology and business insights to deliver real value.",
@@ -77,6 +78,16 @@ const testimonialsData = [
           imageUrl: '/testimonials/pierre-rognion.jpeg',
         },
       },
+      {
+        body: "Many thanks for your detailed and informed advice on choosing a tech stack for our health startup. The level of detail in your assessment was unexpected and highly appreciated. Your checklist, with its clear and useful tips, has been invaluable—it pointed out things we hadn't thought of by ourselves.",
+        author: {
+          name: 'Daniel Biene',
+          socialUrl: 'https://www.linkedin.com/in/danielbiene/',
+          position: 'Digital Entrepreneur',
+          imageUrl:
+            'https://media.licdn.com/dms/image/D4E03AQH_gooIdJZMqw/profile-displayphoto-shrink_400_400/0/1687530238993?e=1704931200&v=beta&t=za2Y_ITdy6Ut1S1AQY-0woukbrAVnv12DZMc69p6exY',
+        },
+      },
       // More testimonials...
     ],
     //     [
@@ -124,7 +135,7 @@ interface Testimonial extends PropsWithChildren {}
 
 export default async function Testimonials({ children }: Testimonial) {
   return (
-    <div className="relative isolate pb-16 pt-12 sm:pt-16">
+    <FadeIn className="relative isolate pb-16 pt-12 sm:pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {children}
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
@@ -199,6 +210,6 @@ export default async function Testimonials({ children }: Testimonial) {
           ))}
         </div>
       </div>
-    </div>
+    </FadeIn>
   )
 }
