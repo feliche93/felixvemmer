@@ -1,5 +1,3 @@
-import { type Metadata } from 'next'
-
 import imageLaptop from '@/../public/images/laptop.jpg'
 import imageMeeting from '@/../public/images/meeting.jpg'
 import imageWhiteboard from '@/../public/images/whiteboard.jpg'
@@ -9,7 +7,9 @@ import { FadeIn } from '@/components/ui/fade-in'
 import { GridPattern } from '@/components/ui/grid-pattern'
 import { List, ListItem } from '@/components/ui/list'
 import { PageIntro } from '@/components/ui/page-intro'
+import { Skills } from '@/components/ui/skills'
 import { StylizedImage } from '@/components/ui/stylized-image'
+import { useTranslations } from 'next-intl'
 
 function Section({
   title,
@@ -254,19 +254,27 @@ function Values() {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Our Process',
-  description:
-    'We believe in efficiency and maximizing our resources to provide the best value to our clients.',
-}
+export default function Process({ params: { locale } }: { params: { locale: string } }) {
+  const t = useTranslations('index')
 
-export default function Process() {
   return (
     <>
+      <PageIntro
+        className="mt-24 sm:mt-32 lg:mt-40"
+        centered
+        title={t('skills.title')}
+        eyebrow={t('skills.section')}
+      >
+        {t('skills.description')}
+      </PageIntro>
+
+      <Skills locale={locale} />
+
       <PageIntro
         centered
         eyebrow="Process Overview"
         title="Transforming Ideas into Digital Success"
+        className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
           I follow a three-step process: Discover, Offer, and Deliver. This approach ensures a deep

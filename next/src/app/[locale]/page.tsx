@@ -6,7 +6,7 @@ import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/componen
 import Testimonials from '@/components/testimonials'
 import { buttonVariants } from '@/components/ui/button'
 import { FadeIn } from '@/components/ui/fade-in'
-import { Header } from '@/components/ui/header'
+import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
 import { cn } from '@/lib/utils'
 import { allPosts } from 'contentlayer/generated'
@@ -70,31 +70,21 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
         </PageHeader>
       </FadeIn>
       {/* Skills */}
-      <FadeIn className="flex flex-col items-center py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
-        <Header.Section>{t('skills.section')}</Header.Section>
-        <Header.Title className="text-center">{t('skills.title')}</Header.Title>
-        <Skills locale={locale} />
-      </FadeIn>
+      <PageIntro centered title={t('skills.title')} eyebrow={t('skills.section')}>
+        {t('skills.description')}
+      </PageIntro>
+      <Skills locale={locale} />
       {/* Latest from blog */}
       <FadeIn className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
-        <Header className="mx-auto max-w-xl text-center mb-16">
-          <Header.Section>{t('blog.section')}</Header.Section>
-          <Header.Title>{t('blog.title')}</Header.Title>
-        </Header>
+        <PageIntro centered title={t('blog.title')} eyebrow={t('blog.section')} />
         <BlogPostGrid posts={posts} />
       </FadeIn>
       {/* <FeatureGrid /> */}
       <Testimonials>
-        <Header className="mx-auto max-w-xl text-center">
-          <Header.Section>{t('testimonials.section')}</Header.Section>
-          <Header.Title>{t('testimonials.title')}</Header.Title>
-        </Header>
+        <PageIntro centered title={t('testimonials.title')} eyebrow={t('testimonials.section')} />
       </Testimonials>
       <FadeIn>
-        <Header className="mx-auto max-w-xl text-center mb-16">
-          <Header.Section className="pt-12 sm:pt-16">{t('bookAMeeeting.section')}</Header.Section>
-          <Header.Title>{t('bookAMeeeting.title')}</Header.Title>
-        </Header>
+        <PageIntro centered title={t('bookAMeeeting.title')} eyebrow={t('bookAMeeeting.section')} />
         <CalCom />
       </FadeIn>
     </>

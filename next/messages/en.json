@@ -16,8 +16,9 @@
       "secondaryCTA": "Read my blog"
     },
     "skills": {
+      "section": "Skills",
       "title": "What Can I help you with?",
-      "section": "Skills"
+      "description": "I am a self-taught programmer with a CEMS Master in International Management. Having both a business and deep technical understanding allows me to easily communicate complex technical ideas with business stakeholders."
     },
     "testimonials": {
       "title": "What Clients and Readers Say",
@@ -36,7 +37,6 @@
     "skills": {
       "tools": "Tools / Frameworks",
       "languages": "Expertise",
-      "description": "I am a self-taught programmer with a CEMS Master in International Management. Having both a business and deep technical understanding allows me to easily communicate complex technical ideas with business stakeholders.",
       "fullstack": {
         "description": "Build and ship the next modern frontend application to power your individual idea."
       },
