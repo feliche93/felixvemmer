@@ -47,5 +47,22 @@
         "description": "Learn how to how to optimize your current business or get feedback on a complete new business idea."
       }
     }
+  },
+  "consultingServices": {
+    "title": "Consulting Services",
+    "description": "I offer consulting services for startups and small businesses. My services include:",
+    "discover": {
+      "title": "Discovery Call",
+      "description": "<p>Transforming your business ideas into digital success is what I do best. My <strong>CEMS Master's in International Management</strong> and deep technical knowledge enable me to turn complex challenges into <strong>effective tech solutions</strong>. I'm committed to <strong>clear communication</strong>, ensuring your goals are achieved with custom solutions tailored for your business.</p><p>Our discovery call will be a session of <strong>honest feedback</strong> and <strong>actionable insights</strong>. With a lean MVP approach, I prioritize a fast and focused launch, attuned to your customers' needs and your project's unique requirements.</p><p>Transparency is a given with me. If a project stretches beyond my expertise, I'll be upfront about it. But with my robust knowledge of the <strong>React and Python</strong> ecosystems, I'm ready to craft a <strong>comprehensive full-stack strategy</strong> for your project's success.</p>",
+      "quote": "I collaborated with Felix on a project for DezentralizedFinance.com to create a scalable logo map SaaS tool. Felix was professional, timely, and efficient. He excelled in communication, adapting to my vision of integrating a prototype with Google Sheets. What stood out was Felix's understanding of my workflow and needs."
+    },
+    "offer": {
+      "title": "Offer",
+      "description": "<p>Post-discovery, you'll receive a <strong>tailored proposal</strong>, complete with <strong>minimum and maximum pricing brackets</strong>. This gives you a <strong>transparent view of potential costs</strong>, ensuring no surprises down the line.</p><p>Understanding that every project is unique, I offer the <strong>flexibility to adjust the scope</strong> to meet your financial and project requirements. We can work together to align the project's needs with your budget, crafting a solution that's <strong>right for you</strong>.</p><p>My aim is to deliver <strong>exceptional value</strong>, balancing quality and cost. By <strong>refining the project scope</strong>, we can find a sweet spot that <strong>maximizes your investment</strong> and brings your vision to life without compromise.</p>"
+    },
+    "deliver": {
+      "title": "Deliver",
+      "description": "<p>I ensure the solution sticks to the agreed proposal, focusing on essential features to prevent <strong>feature bloat</strong>. However, I stay adaptable to refine the project scope as your needs evolve, keeping things <strong>simple and efficient</strong>.</p><p>Delivery speed is championed through modern cloud providers like Vercel and Modal.com, which support <strong>rapid scaling and robust deployment</strong> of web applications.</p><p>By leveraging full-stack frameworks like Next.js, combined with clean, well-documented code and robust testing, I deliver products that are not just quickly brought to market, but also <strong>maintainable and scalable</strong>. My commitment to code quality involves using TypeScript/Python type hints, which enhances readability and future-proofs your application, making it ready for whatever changes lie ahead.</p>"
+    }
   }
 }
