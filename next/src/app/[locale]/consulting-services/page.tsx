@@ -1,5 +1,6 @@
-import imageMeeting from '@/../public/images/meeting.jpg'
-import imageWhiteboard from '@/../public/images/whiteboard.jpg'
+import deliverImage from '@/../public/pages/consulting-services/deliver.avif'
+import discoverImage from '@/../public/pages/consulting-services/discover.jpeg'
+import offerImage from '@/../public/pages/consulting-services/offer.avif'
 import { Blockquote } from '@/components/ui/blockquote'
 import { Container } from '@/components/ui/container'
 import { FadeIn } from '@/components/ui/fade-in'
@@ -51,7 +52,7 @@ function Section({
 function Discover() {
   const t = useTranslations('consultingServices.discover')
   return (
-    <Section title={t('title')} image={{ src: imageWhiteboard }}>
+    <Section title={t('title')} image={{ src: discoverImage }}>
       <div className="space-y-6 text-base text-muted-foreground">
         {t.rich('description', {
           strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
@@ -71,7 +72,7 @@ function Discover() {
 function Offer() {
   const t = useTranslations('consultingServices.offer')
   return (
-    <Section title={t('title')} image={{ src: imageWhiteboard }}>
+    <Section title={t('title')} image={{ src: offerImage }}>
       <div className="space-y-6 text-base text-muted-foreground">
         {t.rich('description', {
           strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
@@ -86,7 +87,7 @@ function Deliver() {
   const t = useTranslations('consultingServices.deliver')
 
   return (
-    <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
+    <Section title="Deliver" image={{ src: deliverImage, shape: 2 }}>
       <div className="space-y-6 text-base text-muted-foreground">
         {t.rich('description', {
           strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
@@ -99,13 +100,12 @@ function Deliver() {
       </h3>
       <List className="mt-8">
         <ListItem title="Documentation">
-          Comprehensive documentation is provided to ensure easy understanding and future
-          maintenance of the application.
+          Comprehensive documentation is provided to ensure easy understanding, future maintenance
+          of the application, and easy onboarding of other developers or team members.
         </ListItem>
         <ListItem title="Support">
-          We provide ongoing support to ensure the smooth operation of your application. As we have
-          access to the API keys for all critical services your business uses, you can rely on us
-          for continuous assistance.
+          I am committed to providing ongoing support to ensure the smooth operation of your
+          application.
         </ListItem>
       </List>
     </Section>
@@ -187,7 +187,7 @@ export default function Process({ params: { locale } }: { params: { locale: stri
         <p>
           I follow a three-step process: Discover, Offer, and Deliver. This approach ensures a deep
           understanding of your needs, a transparent proposal, and the delivery of scalable
-          solutions using React and Python.
+          solutions.
         </p>
       </PageIntro>
 
