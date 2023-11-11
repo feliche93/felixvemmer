@@ -62,7 +62,18 @@
     },
     "deliver": {
       "title": "Deliver",
-      "description": "<p>I ensure the solution sticks to the agreed proposal, focusing on essential features to prevent <strong>feature bloat</strong>. However, I stay adaptable to refine the project scope as your needs evolve, keeping things <strong>simple and efficient</strong>.</p><p>Delivery speed is championed through modern cloud providers like Vercel and Modal.com, which support <strong>rapid scaling and robust deployment</strong> of web applications.</p><p>By leveraging full-stack frameworks like Next.js, combined with clean, well-documented code and robust testing, I deliver products that are not just quickly brought to market, but also <strong>maintainable and scalable</strong>. My commitment to code quality involves using TypeScript/Python type hints, which enhances readability and future-proofs your application, making it ready for whatever changes lie ahead.</p>"
+      "description": "<p>I ensure the solution sticks to the agreed proposal, focusing on essential features to prevent <strong>feature bloat</strong>. However, I stay adaptable to refine the project scope as your needs evolve, keeping things <strong>simple and efficient</strong>.</p><p>Delivery speed is championed through modern cloud providers like Vercel and Modal.com, which support <strong>rapid scaling and robust deployment</strong> of web applications.</p><p>By leveraging full-stack frameworks like Next.js, combined with clean, well-documented code and robust testing, I deliver products that are not just quickly brought to market, but also <strong>maintainable and scalable</strong>. My commitment to code quality involves using TypeScript/Python type hints, which enhances readability and future-proofs your application, making it ready for whatever changes lie ahead.</p>",
+      "list": {
+        "title": "Included in this phase",
+        "documentation": {
+          "title": "Documentation",
+          "description": "Comprehensive documentation is provided to ensure easy understanding, future maintenance of the application, and easy onboarding of other developers or team members."
+        },
+        "support": {
+          "title": "Support",
+          "description": "I am committed to providing ongoing support to ensure the smooth operation of your application."
+        }
+      }
     }
   }
 }
