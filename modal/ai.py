@@ -112,7 +112,9 @@ def create_application_message(job_post: FreelanceJobPost) -> str:
     APPLICANT: "Felix Vemmer"
     """
 
-    system_message = SystemMessagePromptTemplate.from_template(system_message_prompt).format(
+    system_message = SystemMessagePromptTemplate.from_template(
+        system_message_prompt
+    ).format(
         target_language=detect_language(job_post),
         title=job_post.title,
         contact_person=job_post.contact_person,

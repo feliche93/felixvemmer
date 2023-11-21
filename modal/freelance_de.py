@@ -35,12 +35,16 @@ freelance_de_email = os.environ.get("FREELANCE_DE_EMAIL")
 freelance_de_password = os.environ.get("FREELANCE_DE_PASSWORD")
 
 if not freelance_de_email or not freelance_de_password:
-    raise ValueError("Please set FREELANCE_DE_EMAIL and FREELANCE_DE_PASSWORD environment variables.")
+    raise ValueError(
+        "Please set FREELANCE_DE_EMAIL and FREELANCE_DE_PASSWORD environment variables."
+    )
 
 BASE_URL = "https://www.freelance.de"
 
 
-async def login_to_freelance_de(email: str, password: str, headless: bool = True) -> Page:
+async def login_to_freelance_de(
+    email: str, password: str, headless: bool = True
+) -> Page:
     """
     Logs into the freelance.de website.
 
@@ -91,15 +95,21 @@ async def scrape_freelance_de_statistics() -> None:
     await page.wait_for_timeout(5000)
 
     # profile views
-    profile_visits_total = await page.locator('xpath=//i[@class="far fa-fw fa-eye"]/..').inner_text()
+    profile_visits_total = await page.locator(
+        'xpath=//i[@class="far fa-fw fa-eye"]/..'
+    ).inner_text()
 
-    profile_visits_total = int(profile_visits_total.replace(" Profilaufrufe gesamt", ""))
+    profile_visits_total = int(
+        profile_visits_total.replace(" Profilaufrufe gesamt", "")
+    )
 
     full_url = get_full_url(page.url)
 
     today = datetime.today()
 
-    insert_platform_statistic(full_url=full_url, profile_visits_total=profile_visits_total, date=today)
+    insert_platform_statistic(
+        full_url=full_url, profile_visits_total=profile_visits_total, date=today
+    )
 
     await page.goto("https://www.freelance.de/logout.php")
 
@@ -132,7 +142,9 @@ async def extract_job_links(page: Page) -> List[str]:
     return links
 
 
-@stub.function(secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"), timeout=600)  # type: ignore
+@stub.function(
+    secret=secret, image=image, schedule=modal.Cron("0 8-18 * * *"), timeout=600
+)  # type: ignore
 async def scrape_job_offers(num_pages: int = 6):
     """
     Scrapes the freelance.de website for job offers.
@@ -165,7 +177,9 @@ async def scrape_job_offers(num_pages: int = 6):
 
     filtered_links = filter_new_job_post_urls(links)
 
-    async for result in scrape_job_detail_offer.map(filtered_links, return_exceptions=True):  # type: ignore
+    async for result in scrape_job_detail_offer.map(
+        filtered_links, return_exceptions=True
+    ):  # type: ignore
         print(result)  # type: ignore
 
     new_jobs = find_new_jobs()
@@ -179,7 +193,9 @@ async def scrape_job_offers(num_pages: int = 6):
     print("Finished flow.")
 
 
-@stub.function(secret=secret, image=image, concurrency_limit=3, allow_concurrent_inputs=3)  # type: ignore
+@stub.function(
+    secret=secret, image=image, concurrency_limit=3, allow_concurrent_inputs=3
+)  # type: ignore
 async def scrape_job_detail_offer(url: str):
     """
     Scrapes the details of a specific job offer from the freelance.de website.
@@ -219,7 +235,9 @@ async def scrape_job_detail_offer(url: str):
     company_name = company_name_element.text.strip() if company_name_element else None
 
     # Extracting the job details
-    details: List[Optional[Tag]] = soup.find("div", {"class": "overview"}).find_all("li")  # type: ignore
+    details: List[Optional[Tag]] = soup.find("div", {"class": "overview"}).find_all(
+        "li"
+    )  # type: ignore
 
     # Initialize variables
     start_date = None
@@ -245,12 +263,18 @@ async def scrape_job_detail_offer(url: str):
 
             if detail_type == "Geplanter Start":
                 start_date_str = detail_text
-                start_date = parse(start_date_str) if start_date_str != "nicht angegeben" else None
+                start_date = (
+                    parse(start_date_str)
+                    if start_date_str != "nicht angegeben"
+                    else None
+                )
                 if start_date:
                     start_date = start_date.replace(day=1)
             elif detail_type == "Voraussichtliches Ende":
                 end_date_str = detail_text
-                end_date = parse(end_date_str) if end_date_str != "nicht angegeben" else None
+                end_date = (
+                    parse(end_date_str) if end_date_str != "nicht angegeben" else None
+                )
                 if end_date:
                     end_date = end_date.replace(day=1)
             elif detail_type == "Projektort":
@@ -336,7 +360,9 @@ async def apply_for_job_post(request: Request):
     await page.goto(job_post.url)
 
     # Check if 'Data Privacy Policy' checkbox exists and try to check it
-    data_policy_checkbox = page.locator('xpath=//input[@id="data_policy_accepted"]').nth(0)
+    data_policy_checkbox = page.locator(
+        'xpath=//input[@id="data_policy_accepted"]'
+    ).nth(0)
     if await data_policy_checkbox.is_visible():
         print("Accepting Data Privacy Policy...")
         try:
@@ -348,7 +374,9 @@ async def apply_for_job_post(request: Request):
         print("Data Privacy Policy checkbox not found.")
 
     # Check if 'Profile up to date' checkbox exists and try to click it
-    profile_up_to_date_checkbox = page.locator('xpath=//input[@name="profile_up_to_date"]').nth(0)
+    profile_up_to_date_checkbox = page.locator(
+        'xpath=//input[@name="profile_up_to_date"]'
+    ).nth(0)
     if await profile_up_to_date_checkbox.is_visible():
         print("Clicking 'Profile up to date' checkbox...")
         try:
