@@ -13,7 +13,7 @@ export function CalCom() {
     ;(async function () {
       const cal = await getCalApi()
       cal('ui', {
-        styles: { branding: { brandColor: '#000000' } },
+        styles: { branding: { brandColor: '#111827' } },
         hideEventTypeDetails: false,
         layout: 'month_view',
         theme: resolvedTheme === 'dark' ? 'dark' : 'light',

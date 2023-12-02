@@ -21,16 +21,19 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
         return (
           <div key={post._id}>
             <article className="flex flex-col items-start justify-between">
-              <div className="relative w-full">
-                <Image
-                  className="aspect-[16/9] w-full rounded-2xl bg-base-200 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
-                  src={post.image}
-                  alt={post.title}
-                  width={804}
-                  height={452}
-                />
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-              </div>
+              <Link href={post.slug}>
+                <div className="relative w-full">
+                  <Image
+                    className="aspect-[16/9] w-full rounded-2xl bg-base-200 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                    src={post.image}
+                    alt={post.title}
+                    width={804}
+                    height={452}
+                  />
+
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                </div>
+              </Link>
               {/* TODO: Add featured */}
               <div className="max-w-xl">
                 <div className="mt-8 flex flex-wrap items-center gap-2">
