@@ -15,7 +15,7 @@ import { getTableOfContents } from '@/lib/toc'
 import { absoluteUrl, cn, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { Metadata } from 'next'
-import { getTranslator } from 'next-intl/server'
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 import { Article } from 'schema-dts'
 
@@ -90,7 +90,9 @@ export async function generateStaticParams(): Promise<PostPageProps['params'][]>
 export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostFromParams(params)
 
-  const t = await getTranslator(params.locale, 'blog')
+  unstable_setRequestLocale(params.locale || 'en')
+
+  const t = await getTranslations('blog')
 
   // return (
   //   <>
