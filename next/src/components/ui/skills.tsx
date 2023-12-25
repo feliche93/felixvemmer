@@ -1,5 +1,5 @@
 import { AtomIcon, BrainCircuit, Megaphone } from 'lucide-react'
-import { getTranslator } from 'next-intl/server'
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import { FC } from 'react'
 import { Card } from './card'
 
@@ -7,7 +7,9 @@ export interface SkillsProps {
   locale: string
 }
 export const Skills: FC<SkillsProps> = async ({ locale }) => {
-  const t = await getTranslator(locale, 'components.skills')
+  unstable_setRequestLocale(locale || 'en')
+
+  const t = await getTranslations('components.skills')
 
   const features = [
     {

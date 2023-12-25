@@ -1,14 +1,16 @@
 import { BlogPostGrid } from '@/components/blog-post-grid'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
-import { getTranslator } from 'next-intl/server'
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 
 export const metadata = {
   title: 'Blog',
 }
 
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslator(locale, 'blog')
+  unstable_setRequestLocale(locale || 'en')
+
+  const t = await getTranslations('blog')
 
   const posts = allPosts
     .filter((post) => post.published)
