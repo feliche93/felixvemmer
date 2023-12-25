@@ -5,7 +5,7 @@ description = ""
 authors = ["feliche93 <felix.vemmer@gmail.com>"]
 readme = "README.md"
 packages = [
-    { include = "app" },
+    { include = "modal_flows" },
 ]
 
 [tool.poetry.dependencies]

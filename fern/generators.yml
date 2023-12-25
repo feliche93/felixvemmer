@@ -1,0 +1,11 @@
+default-group: local
+groups:
+  local:
+    generators:
+      - name: fernapi/fern-python-sdk
+        version: 0.7.5
+        config:
+          client_class_name: "PapierkramClient"
+        output:
+          location: local-file-system
+          path: ../modal/papierkram
