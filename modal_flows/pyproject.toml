@@ -1,11 +1,12 @@
 [tool.poetry]
-name = "modal-flows"
+name = "modal_flows"
 version = "0.1.0"
 description = ""
 authors = ["feliche93 <felix.vemmer@gmail.com>"]
 readme = "README.md"
 packages = [
-    { include = "modal_flows" },
+    { include = "app" },
+    { include = "papierkram" },
 ]
 
 [tool.poetry.dependencies]

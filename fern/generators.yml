@@ -3,9 +3,9 @@ groups:
   local:
     generators:
       - name: fernapi/fern-python-sdk
-        version: 0.7.5
+        version: 1.0.0-rc0
         config:
           client_class_name: "PapierkramClient"
         output:
           location: local-file-system
-          path: ../modal/papierkram
+          path: ../modal_flows/modal_flows/papierkram
