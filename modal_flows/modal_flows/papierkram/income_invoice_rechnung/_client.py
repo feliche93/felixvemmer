@@ -10,18 +10,34 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..not_found_error import NotFoundError
 from ..unprocessable_entity_error import UnprocessableEntityError
-from .get_income_invoices_request_order_direction_item import GetIncomeInvoicesRequestOrderDirectionItem
-from .post_income_invoices_id_deliver_request_email import PostIncomeInvoicesIdDeliverRequestEmail
+from .get_income_invoices_request_order_direction_item import (
+    GetIncomeInvoicesRequestOrderDirectionItem,
+)
+from .post_income_invoices_id_deliver_request_email import (
+    PostIncomeInvoicesIdDeliverRequestEmail,
+)
 from .post_income_invoices_request_billing import PostIncomeInvoicesRequestBilling
-from .post_income_invoices_request_custom_template import PostIncomeInvoicesRequestCustomTemplate
+from .post_income_invoices_request_custom_template import (
+    PostIncomeInvoicesRequestCustomTemplate,
+)
 from .post_income_invoices_request_customer import PostIncomeInvoicesRequestCustomer
-from .post_income_invoices_request_line_items_item import PostIncomeInvoicesRequestLineItemsItem
-from .post_income_invoices_request_payment_term import PostIncomeInvoicesRequestPaymentTerm
+from .post_income_invoices_request_line_items_item import (
+    PostIncomeInvoicesRequestLineItemsItem,
+)
+from .post_income_invoices_request_payment_term import (
+    PostIncomeInvoicesRequestPaymentTerm,
+)
 from .put_income_invoices_id_request_billing import PutIncomeInvoicesIdRequestBilling
-from .put_income_invoices_id_request_custom_template import PutIncomeInvoicesIdRequestCustomTemplate
+from .put_income_invoices_id_request_custom_template import (
+    PutIncomeInvoicesIdRequestCustomTemplate,
+)
 from .put_income_invoices_id_request_customer import PutIncomeInvoicesIdRequestCustomer
-from .put_income_invoices_id_request_line_items_item import PutIncomeInvoicesIdRequestLineItemsItem
-from .put_income_invoices_id_request_payment_term import PutIncomeInvoicesIdRequestPaymentTerm
+from .put_income_invoices_id_request_line_items_item import (
+    PutIncomeInvoicesIdRequestLineItemsItem,
+)
+from .put_income_invoices_id_request_payment_term import (
+    PutIncomeInvoicesIdRequestPaymentTerm,
+)
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
@@ -44,7 +60,8 @@ class IncomeInvoiceRechnungClient:
         order_by: typing.Optional[str] = None,
         order_direction: typing.Optional[
             typing.Union[
-                GetIncomeInvoicesRequestOrderDirectionItem, typing.List[GetIncomeInvoicesRequestOrderDirectionItem]
+                GetIncomeInvoicesRequestOrderDirectionItem,
+                typing.List[GetIncomeInvoicesRequestOrderDirectionItem],
             ]
         ] = None,
         company_id: typing.Optional[int] = None,
@@ -80,7 +97,9 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "income/invoices"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", "income/invoices"
+            ),
             params=remove_none_from_dict(
                 {
                     "page": page,
@@ -113,10 +132,14 @@ class IncomeInvoiceRechnungClient:
         document_date: typing.Optional[str] = OMIT,
         supply_date: typing.Optional[str] = OMIT,
         customer: typing.Optional[PostIncomeInvoicesRequestCustomer] = OMIT,
-        custom_template: typing.Optional[PostIncomeInvoicesRequestCustomTemplate] = OMIT,
+        custom_template: typing.Optional[
+            PostIncomeInvoicesRequestCustomTemplate
+        ] = OMIT,
         billing: typing.Optional[PostIncomeInvoicesRequestBilling] = OMIT,
         payment_term: PostIncomeInvoicesRequestPaymentTerm,
-        line_items: typing.Optional[typing.List[PostIncomeInvoicesRequestLineItemsItem]] = OMIT,
+        line_items: typing.Optional[
+            typing.List[PostIncomeInvoicesRequestLineItemsItem]
+        ] = OMIT,
     ) -> None:
         """
         Cost in API Credits: 50
@@ -142,7 +165,10 @@ class IncomeInvoiceRechnungClient:
 
             - line_items: typing.Optional[typing.List[PostIncomeInvoicesRequestLineItemsItem]].
         """
-        _request: typing.Dict[str, typing.Any] = {"name": name, "payment_term": payment_term}
+        _request: typing.Dict[str, typing.Any] = {
+            "name": name,
+            "payment_term": payment_term,
+        }
         if description is not OMIT:
             _request["description"] = description
         if flagged is not OMIT:
@@ -161,7 +187,9 @@ class IncomeInvoiceRechnungClient:
             _request["line_items"] = line_items
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "income/invoices"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", "income/invoices"
+            ),
             json=jsonable_encoder(_request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -169,7 +197,9 @@ class IncomeInvoiceRechnungClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -190,7 +220,9 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -214,10 +246,14 @@ class IncomeInvoiceRechnungClient:
         document_date: typing.Optional[str] = OMIT,
         supply_date: typing.Optional[str] = OMIT,
         customer: typing.Optional[PutIncomeInvoicesIdRequestCustomer] = OMIT,
-        custom_template: typing.Optional[PutIncomeInvoicesIdRequestCustomTemplate] = OMIT,
+        custom_template: typing.Optional[
+            PutIncomeInvoicesIdRequestCustomTemplate
+        ] = OMIT,
         billing: typing.Optional[PutIncomeInvoicesIdRequestBilling] = OMIT,
         payment_term: typing.Optional[PutIncomeInvoicesIdRequestPaymentTerm] = OMIT,
-        line_items: typing.Optional[typing.List[PutIncomeInvoicesIdRequestLineItemsItem]] = OMIT,
+        line_items: typing.Optional[
+            typing.List[PutIncomeInvoicesIdRequestLineItemsItem]
+        ] = OMIT,
     ) -> None:
         """
         Cost in API Credits: 1
@@ -273,7 +309,9 @@ class IncomeInvoiceRechnungClient:
             _request["line_items"] = line_items
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"
+            ),
             json=jsonable_encoder(_request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -283,7 +321,9 @@ class IncomeInvoiceRechnungClient:
         if _response.status_code == 404:
             raise NotFoundError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -304,7 +344,9 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -332,7 +374,10 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/archive"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/archive",
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -358,7 +403,10 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/unarchive"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/unarchive",
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -384,14 +432,19 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/cancel"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/cancel",
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -427,7 +480,10 @@ class IncomeInvoiceRechnungClient:
             _request["email"] = email
         _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/deliver"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/deliver",
+            ),
             json=jsonable_encoder(_request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -435,7 +491,9 @@ class IncomeInvoiceRechnungClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -454,7 +512,9 @@ class IncomeInvoiceRechnungClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/pdf"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/pdf"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -479,7 +539,8 @@ class AsyncIncomeInvoiceRechnungClient:
         order_by: typing.Optional[str] = None,
         order_direction: typing.Optional[
             typing.Union[
-                GetIncomeInvoicesRequestOrderDirectionItem, typing.List[GetIncomeInvoicesRequestOrderDirectionItem]
+                GetIncomeInvoicesRequestOrderDirectionItem,
+                typing.List[GetIncomeInvoicesRequestOrderDirectionItem],
             ]
         ] = None,
         company_id: typing.Optional[int] = None,
@@ -515,7 +576,9 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "income/invoices"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", "income/invoices"
+            ),
             params=remove_none_from_dict(
                 {
                     "page": page,
@@ -548,10 +611,14 @@ class AsyncIncomeInvoiceRechnungClient:
         document_date: typing.Optional[str] = OMIT,
         supply_date: typing.Optional[str] = OMIT,
         customer: typing.Optional[PostIncomeInvoicesRequestCustomer] = OMIT,
-        custom_template: typing.Optional[PostIncomeInvoicesRequestCustomTemplate] = OMIT,
+        custom_template: typing.Optional[
+            PostIncomeInvoicesRequestCustomTemplate
+        ] = OMIT,
         billing: typing.Optional[PostIncomeInvoicesRequestBilling] = OMIT,
         payment_term: PostIncomeInvoicesRequestPaymentTerm,
-        line_items: typing.Optional[typing.List[PostIncomeInvoicesRequestLineItemsItem]] = OMIT,
+        line_items: typing.Optional[
+            typing.List[PostIncomeInvoicesRequestLineItemsItem]
+        ] = OMIT,
     ) -> None:
         """
         Cost in API Credits: 50
@@ -577,7 +644,10 @@ class AsyncIncomeInvoiceRechnungClient:
 
             - line_items: typing.Optional[typing.List[PostIncomeInvoicesRequestLineItemsItem]].
         """
-        _request: typing.Dict[str, typing.Any] = {"name": name, "payment_term": payment_term}
+        _request: typing.Dict[str, typing.Any] = {
+            "name": name,
+            "payment_term": payment_term,
+        }
         if description is not OMIT:
             _request["description"] = description
         if flagged is not OMIT:
@@ -596,7 +666,9 @@ class AsyncIncomeInvoiceRechnungClient:
             _request["line_items"] = line_items
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "income/invoices"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", "income/invoices"
+            ),
             json=jsonable_encoder(_request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -604,7 +676,9 @@ class AsyncIncomeInvoiceRechnungClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -625,7 +699,9 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -649,10 +725,14 @@ class AsyncIncomeInvoiceRechnungClient:
         document_date: typing.Optional[str] = OMIT,
         supply_date: typing.Optional[str] = OMIT,
         customer: typing.Optional[PutIncomeInvoicesIdRequestCustomer] = OMIT,
-        custom_template: typing.Optional[PutIncomeInvoicesIdRequestCustomTemplate] = OMIT,
+        custom_template: typing.Optional[
+            PutIncomeInvoicesIdRequestCustomTemplate
+        ] = OMIT,
         billing: typing.Optional[PutIncomeInvoicesIdRequestBilling] = OMIT,
         payment_term: typing.Optional[PutIncomeInvoicesIdRequestPaymentTerm] = OMIT,
-        line_items: typing.Optional[typing.List[PutIncomeInvoicesIdRequestLineItemsItem]] = OMIT,
+        line_items: typing.Optional[
+            typing.List[PutIncomeInvoicesIdRequestLineItemsItem]
+        ] = OMIT,
     ) -> None:
         """
         Cost in API Credits: 1
@@ -708,7 +788,9 @@ class AsyncIncomeInvoiceRechnungClient:
             _request["line_items"] = line_items
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"
+            ),
             json=jsonable_encoder(_request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -718,7 +800,9 @@ class AsyncIncomeInvoiceRechnungClient:
         if _response.status_code == 404:
             raise NotFoundError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -739,7 +823,9 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -767,7 +853,10 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/archive"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/archive",
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -793,7 +882,10 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/unarchive"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/unarchive",
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
@@ -819,14 +911,19 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/cancel"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/cancel",
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -862,7 +959,10 @@ class AsyncIncomeInvoiceRechnungClient:
             _request["email"] = email
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/deliver"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/",
+                f"income/invoices/{id}/deliver",
+            ),
             json=jsonable_encoder(_request),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
@@ -870,7 +970,9 @@ class AsyncIncomeInvoiceRechnungClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 422:
-            raise UnprocessableEntityError(pydantic.parse_obj_as(typing.Any, _response.json()))  # type: ignore
+            raise UnprocessableEntityError(
+                pydantic.parse_obj_as(typing.Any, _response.json())
+            )  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -889,7 +991,9 @@ class AsyncIncomeInvoiceRechnungClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/pdf"),
+            urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"income/invoices/{id}/pdf"
+            ),
             headers=self._client_wrapper.get_headers(),
             timeout=60,
         )

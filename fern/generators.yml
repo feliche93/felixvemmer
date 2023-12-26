@@ -2,10 +2,8 @@ default-group: local
 groups:
   local:
     generators:
-      - name: fernapi/fern-python-sdk
-        version: 1.0.0-rc0
-        config:
-          client_class_name: "PapierkramClient"
+      - name: fernapi/fern-typescript-node-sdk
+        version: 0.7.2
         output:
           location: local-file-system
-          path: ../modal_flows/modal_flows/papierkram
+          path: ../generated/typescript

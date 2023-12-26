@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { BlogPostGrid } from '@/components/blog-post-grid'
 import { CalCom } from '@/components/cal-com'
+import { Kpis } from '@/components/kpis'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 import Testimonials from '@/components/testimonials'
 import { buttonVariants } from '@/components/ui/button'
@@ -69,6 +70,8 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
           </div>
         </PageHeader>
       </FadeIn>
+      {/* KPIs */}
+      <Kpis />
       {/* Skills */}
       <PageIntro centered title={t('skills.title')} eyebrow={t('skills.section')}>
         {t('skills.description')}
