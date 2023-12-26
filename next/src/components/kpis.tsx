@@ -1,8 +1,11 @@
+import { getFreelancingRevenue } from '@/lib/paierkram-api'
 import { getPostHogInsightById } from '@/lib/posthog-api'
 import { Card, Grid, Metric, Text } from '@tremor/react'
 import { FC } from 'react'
 
 export const Kpis: FC = async () => {
+  const freelancingRevenue = await getFreelancingRevenue()
+
   const pageViewsInsight = await getPostHogInsightById({
     id: 120881,
   })
@@ -14,8 +17,12 @@ export const Kpis: FC = async () => {
       metric: pageViewsInsight.result[0].aggregated_value.toLocaleString() as string,
     },
     {
-      title: 'Freelancing Hours sold',
-      metric: undefined,
+      title: 'Total Freelancing Revenue',
+      metric: new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 0,
+      }).format(freelancingRevenue),
     },
     {
       title: 'SaaS MRR',
