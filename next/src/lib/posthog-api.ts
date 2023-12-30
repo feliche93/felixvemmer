@@ -29,5 +29,5 @@ export const getPostHogInsightById = unstable_cache(
     return result
   },
   ['posthog-insight'],
-  { revalidate: 60 * 60 * 12 },
-) // revalidate every 12 hours
+  { revalidate: 3600 },
+) // revalidate every 1 hours
