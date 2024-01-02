@@ -18,7 +18,7 @@ export const Skills: FC<SkillsProps> = async ({ locale }) => {
       icon: AtomIcon,
       languages: ['Javascript', 'Typescript', 'CSS', 'HTML'],
       tools: [
-        'Next.js / Next13',
+        'Next.js / Next14',
         'Tailwind CSS & UI / Daisy UI / ShadcnUI',
         'React Hook Form',
         'Tanstack Table',
