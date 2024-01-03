@@ -54,7 +54,7 @@ def create_application_message(job_post: FreelanceJobPost) -> str:
 
     Frameworks & Libraries Expertise:
 
-    - Next.js / Next13
+    - Next.js / Next14
     - Tailwind CSS & UI / Daisy UI / ShadcnUI
     - React Hook Form
     - Tanstack Table

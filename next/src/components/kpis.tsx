@@ -1,14 +1,25 @@
+import { getTotalLemonSqueezyRevenue } from '@/lib/lemonsqueezy'
 import { getFreelancingRevenue } from '@/lib/paierkram-api'
 import { getPostHogInsightById } from '@/lib/posthog-api'
 import { Card, Grid, Metric, Text } from '@tremor/react'
 import { FC } from 'react'
 
 export const Kpis: FC = async () => {
-  const freelancingRevenue = await getFreelancingRevenue()
+  const freelancingRevenuePromise = getFreelancingRevenue()
 
-  const pageViewsInsight = await getPostHogInsightById({
+  const pageViewsInsightPromise = getPostHogInsightById({
     id: 120881,
   })
+
+  const lemonSqueezyRevenuePromise = getTotalLemonSqueezyRevenue({
+    storeId: '24094',
+  })
+
+  const [freelancingRevenue, pageViewsInsight, lemonSqueezyRevenue] = await Promise.all([
+    freelancingRevenuePromise,
+    pageViewsInsightPromise,
+    lemonSqueezyRevenuePromise,
+  ])
 
   const categories = [
     {
@@ -25,8 +36,12 @@ export const Kpis: FC = async () => {
       }).format(freelancingRevenue),
     },
     {
-      title: 'SaaS MRR',
-      metric: undefined,
+      title: 'Total SaaS Revenue',
+      metric: new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 0,
+      }).format(lemonSqueezyRevenue / 100),
     },
   ]
 
