@@ -24,6 +24,7 @@
     "@clerk/nextjs": "^4.29.1",
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.2",
+    "@lemonsqueezy/lemonsqueezy.js": "^1.2.2",
     "@mdx-js/esbuild": "^3.0.0",
     "@neondatabase/serverless": "^0.6.1",
     "@radix-ui/react-accordion": "^1.1.2",
