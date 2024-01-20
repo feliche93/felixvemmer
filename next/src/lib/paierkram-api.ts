@@ -96,11 +96,13 @@ export const getFreelancingRevenue = unstable_cache(
       return invoice.state === 'paid'
     })
 
+    console.log({ allInvoices })
+
     const totalGross = allInvoices.reduce((sum, invoice) => sum + invoice.total_gross, 0)
     return totalGross
   },
   ['freelancing-revenue'],
   {
-    revalidate: 60 * 60 * 24,
+    revalidate: 43200,
   },
 )
