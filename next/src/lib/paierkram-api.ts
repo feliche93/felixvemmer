@@ -103,6 +103,6 @@ export const getFreelancingRevenue = unstable_cache(
   },
   ['freelancing-revenue'],
   {
-    revalidate: 43200,
+    revalidate: 3600,
   },
 )
