@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 
-import { PosthogProvider } from '@/components/posthog-provider'
+import { PHProvider } from '@/components/posthog-provider'
 import { ThemeProvider } from '@/components/providers'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
@@ -10,8 +10,13 @@ import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 import { locales } from '../../../i18n'
+
+const PostHogPageView = dynamic(() => import('../../components/posthog-page-view'), {
+  ssr: false,
+})
 
 interface LocaleRootLayoutProps {
   children: React.ReactNode
@@ -94,7 +99,7 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
       <html lang={locale} suppressHydrationWarning>
         <head />
         <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-          <PosthogProvider>
+          <PHProvider>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -102,13 +107,14 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
               disableTransitionOnChange
             >
               <div className="relative flex min-h-screen flex-col">
+                <PostHogPageView />
                 <SiteHeader />
                 <div className="flex-1">{children}</div>
                 <SiteFooter />
               </div>
               <TailwindIndicator />
             </ThemeProvider>
-          </PosthogProvider>
+          </PHProvider>
           {/* <ThemeSwitcher /> */}
           {/* <Analytics /> */}
           {/* <NewYorkToaster />
