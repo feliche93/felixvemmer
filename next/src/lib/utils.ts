@@ -25,3 +25,10 @@ export function assertFulfilled<T>(
 ): item is PromiseFulfilledResult<T> {
   return item.status === 'fulfilled'
 }
+
+export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
+  const paramsString = params.toString()
+  const queryString = `${paramsString.length ? '?' : ''}${paramsString}`
+
+  return `${pathname}${queryString}`
+}
