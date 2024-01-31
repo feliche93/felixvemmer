@@ -57,6 +57,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     authors: post.authors.map((author) => ({
       name: author,
     })),
+    alternates: {
+      canonical: absoluteUrl(post.slug),
+    },
     openGraph: {
       title: post.title,
       description: post.description,
