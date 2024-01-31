@@ -1,11 +1,25 @@
 import { Mdx } from '@/components/mdx-components'
+import { absoluteUrl } from '@/lib/utils'
 import { allPages } from 'contentlayer/generated'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 interface PostPageProps {
   params: {
     slug: string[]
     locale: string
+  }
+}
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const page = await getPageFromParams(params)
+
+  return {
+    title: page?.title,
+    description: page?.description,
+    alternates: {
+      canonical: page?.slug ? absoluteUrl(page.slug.replace('pages/', '')) : null,
+    },
   }
 }
 

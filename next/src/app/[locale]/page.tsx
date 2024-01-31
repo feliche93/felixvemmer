@@ -9,11 +9,27 @@ import { buttonVariants } from '@/components/ui/button'
 import { FadeIn } from '@/components/ui/fade-in'
 import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
-import { cn } from '@/lib/utils'
+import { absoluteUrl, cn } from '@/lib/utils'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: {
+    locale: string
+  }
+}): Promise<Metadata> {
+  return {
+    title: 'Felix Vemmer - Freelance Software Engineer',
+    alternates: {
+      canonical: absoluteUrl(`/${locale}`),
+    },
+  }
+}
 
 export default function IndexPage({ params: { locale } }: { params: { locale: string } }) {
   const t = useTranslations('index')
