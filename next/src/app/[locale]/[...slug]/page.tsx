@@ -35,13 +35,15 @@ async function getPageFromParams(params: PostPageProps['params']) {
     null
   }
 
-  const page = allPages.find(
+  const pages = allPages.filter(
     (post) => post.slugAsParams.replace('pages/', '') === slug && post.locale === locale,
   )
 
-  if (!page) {
-    null
+  if (pages.length === 0) {
+    return null
   }
+
+  const page = pages[0]
 
   return page
 }

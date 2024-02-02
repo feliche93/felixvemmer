@@ -31,11 +31,14 @@ async function getPostFromParams(params: PostPageProps['params']) {
   // console.log({
   //   test: `blog/${slug}`,
   // })
-  const post = allPosts.find((post) => post.slugAsParams === `blog/${slug}`)
 
-  if (!post) {
-    null
-  }
+  const posts = allPosts.filter(
+    (post) => post.slugAsParams === `blog/${slug}` && post?.locale === params.locale,
+  )
+
+  if (posts.length === 0) return null
+
+  const post = posts[0]
 
   return post
 }
@@ -114,7 +117,7 @@ export default async function PostPage({ params }: PostPageProps) {
   //   </>
   // )
 
-  if (post === undefined) notFound()
+  if (post === null) notFound()
 
   const authors = post.authors.map((author) =>
     allAuthors.find(({ slug }) => slug === `/authors/${author}`),
