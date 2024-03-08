@@ -176,7 +176,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <article className="">
             <div className="flex flex-wrap-reverse items-center gap-4 pb-4">
               {/* Categories */}
-              <div className="flex gap-1 flex-wrap">
+              <div className="flex gap-2 flex-wrap">
                 {post.categories &&
                   post.categories.map((category, index) => (
                     <Badge className="" key={index}>
