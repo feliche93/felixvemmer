@@ -1,4 +1,4 @@
-import LemonSqueezy from '@lemonsqueezy/lemonsqueezy.js'
+import { getStore, lemonSqueezySetup } from '@lemonsqueezy/lemonsqueezy.js'
 import { unstable_cache } from 'next/cache'
 
 const apiKey = process.env.LEMON_SQUEEZY_BACKLINKGPT_API_KEY
@@ -7,15 +7,41 @@ if (!apiKey) {
   throw new Error('Missing LEMON_SQUEEZY_BACKLINKGPT_API_KEY')
 }
 
-export const lemonSqueezy = new LemonSqueezy(apiKey)
+lemonSqueezySetup({ apiKey })
 
 export const getTotalLemonSqueezyRevenue = unstable_cache(
   async ({ storeId }: { storeId: string }) => {
-    const revenue = await lemonSqueezy.getStore({
-      id: storeId,
-    })
+    const { error, data, statusCode } = await getStore(storeId)
 
-    return revenue.data.attributes.total_revenue
+    if (error) {
+      throw new Error(`Failed to fetch store: ${error}`)
+    }
+
+    if (!data) {
+      throw new Error(`Failed to fetch store: ${statusCode}`)
+    }
+
+    const res = await fetch(
+      `https://api.frankfurter.app/latest?amount=${data.data.attributes.total_revenue}&from=USD&to=EUR`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store',
+      },
+    )
+
+    interface ConversionResponse {
+      amount: number
+      base: string
+      date: string
+      rates: { [key: string]: number }
+    }
+
+    const converted: ConversionResponse = await res.json()
+
+    return Number(converted.rates['EUR'])
   },
   ['lemonsqueezy'],
   { revalidate: 3600 },

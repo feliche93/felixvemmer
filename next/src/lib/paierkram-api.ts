@@ -101,7 +101,7 @@ export const getFreelancingRevenue = unstable_cache(
     const totalGross = allInvoices.reduce((sum, invoice) => sum + invoice.total_gross, 0)
     return totalGross
   },
-  ['freelancing-revenue'],
+  ['papierkram'],
   {
     revalidate: 3600,
   },

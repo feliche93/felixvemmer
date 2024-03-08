@@ -15,6 +15,8 @@ import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { KpisFallback } from '@/components/kpis-fallback'
+import { Suspense } from 'react'
 
 export async function generateMetadata({
   params: { locale },
@@ -85,9 +87,12 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
             </Link>
           </div>
         </PageHeader>
+        {/* KPIs */}
+        <Suspense fallback={<KpisFallback />}>
+          <Kpis />
+        </Suspense>
       </FadeIn>
-      {/* KPIs */}
-      <Kpis />
+
       {/* Skills */}
       <PageIntro centered title={t('skills.title')} eyebrow={t('skills.section')}>
         {t('skills.description')}
