@@ -45,7 +45,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
   return (
     <>
       {/* Hero */}
-      <FadeIn className="container relative">
+      <div className="container relative">
         <PageHeader className="pb-8 flex flex-col items-center">
           {/* <Link
           href="/docs/changelog"
@@ -91,7 +91,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
         <Suspense fallback={<KpisFallback />}>
           <Kpis />
         </Suspense>
-      </FadeIn>
+      </div>
 
       {/* Skills */}
       <PageIntro centered title={t('skills.title')} eyebrow={t('skills.section')}>
@@ -99,18 +99,21 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
       </PageIntro>
       <Skills locale={locale} />
       {/* Latest from blog */}
-      <FadeIn className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
         <PageIntro centered title={t('blog.title')} eyebrow={t('blog.section')} />
         <BlogPostGrid posts={posts} />
-      </FadeIn>
+      </div>
       {/* <FeatureGrid /> */}
       <Testimonials>
         <PageIntro centered title={t('testimonials.title')} eyebrow={t('testimonials.section')} />
       </Testimonials>
-      <FadeIn>
-        <PageIntro centered title={t('bookAMeeeting.title')} eyebrow={t('bookAMeeeting.section')} />
-        <CalCom />
-      </FadeIn>
+      {false && (
+        <div>
+          <PageIntro centered title={t('bookAMeeeting.title')} eyebrow={t('bookAMeeeting.section')} />
+          <CalCom />
+
+        </div>
+      )}
     </>
   )
 }

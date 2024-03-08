@@ -12,7 +12,7 @@ const featuredTestimonial = {
     linkedinUrl: 'https://www.linkedin.com/in/perjanduro/',
     position: 'Co-Founder at MoneyCoach.ai',
     imageUrl:
-      'https://media.licdn.com/dms/image/D4E03AQGsfdZxOg1R3Q/profile-displayphoto-shrink_800_800/0/1672657236253?e=1703116800&v=beta&t=GxWdD4-9wEZ1Hd53cvSbce7AqX7PzO_CTwwQh_Ravtk',
+      '/testimonials/perjan_duro.jpeg',
     logoUrl:
       'https://moneycoach.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmoneycoach-web-logo.ce5031e1.png&w=1920&q=75',
   },
@@ -28,7 +28,7 @@ const testimonialsData = [
           socialUrl: 'https://www.linkedin.com/in/richter-julian/',
           position: 'Founder at DezentralizedFinance.com',
           imageUrl:
-            'https://media.licdn.com/dms/image/C4D03AQHROst7-gdgCA/profile-displayphoto-shrink_400_400/0/1580838009297?e=1703116800&v=beta&t=nYhYpmB_ENrt6zPP2P1CfHk4GtYLYWB-x3X8JZhuRHE',
+            '/testimonials/julian_richter.jpeg',
         },
       },
     ],
@@ -53,9 +53,19 @@ const testimonialsData = [
           socialUrl:
             'https://www.reddit.com/r/nextjs/comments/174v2ua/comment/k4byz37/?utm_source=share&utm_medium=web2x&context=3/',
           position: '@u/michaelfrieze',
-          imageUrl: undefined,
+          imageUrl: '/testimonials/michaelfrieze.png',
         },
       },
+      {
+        body: '@felixvemmer thank you for the @lmsqueezy setup walk-through blog post you have! I was having a hard time figuring out how to test my webhooks locally and you saved me a bunch of time with your article!',
+        author: {
+          name: 'Dorian Develops',
+          socialUrl: 'httpshttps://twitter.com/DorianDevelops',
+          position: '@DorianDevelops',
+          imageUrl:
+            '/testimonials/dorian_develops.jpeg',
+        },
+      }
     ],
     [
       {
@@ -65,7 +75,7 @@ const testimonialsData = [
           socialUrl:
             'https://www.reddit.com/r/nextjs/comments/15fplwb/comment/jug0f4z/?utm_source=share&utm_medium=web2x&context=3',
           position: '@u/Due_Advisor925',
-          imageUrl: undefined,
+          imageUrl: '/testimonials/due_advisor_925.png',
         },
       },
       {
@@ -85,53 +95,17 @@ const testimonialsData = [
           socialUrl: 'https://www.linkedin.com/in/danielbiene/',
           position: 'Digital Entrepreneur',
           imageUrl:
-            'https://media.licdn.com/dms/image/D4E03AQH_gooIdJZMqw/profile-displayphoto-shrink_400_400/0/1687530238993?e=1704931200&v=beta&t=za2Y_ITdy6Ut1S1AQY-0woukbrAVnv12DZMc69p6exY',
+            '/testimonials/daniel_biene.jpeg',
         },
       },
+
       // More testimonials...
     ],
-    //     [
-    //       {
-    //         body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem undefineda blanditiis.',
-    //         author: {
-    //           name: 'Lindsay Walton',
-    //           handle: 'lindsaywalton',
-    //           imageUrl:
-    //             'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    //         },
-    //       },
-    //       // More testimonials...
-    //     ],
-    //   ],
-    //   [
-    //     [
-    //       {
-    //         body: 'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
-    //         author: {
-    //           name: 'Tom Cook',
-    //           handle: 'tomcook',
-    //           imageUrl:
-    //             'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    //         },
-    //       },
-    //       // More testimonials...
-    //     ],
-    //     [
-    //       {
-    //         body: 'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
-    //         author: {
-    //           name: 'Leonard Krasner',
-    //           handle: 'leonardkrasner',
-    //           imageUrl:
-    //             'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    //         },
-    //       },
-    //       // More testimonials...
-    //     ],
+
   ],
 ]
 
-interface Testimonial extends PropsWithChildren {}
+interface Testimonial extends PropsWithChildren { }
 
 export default async function Testimonials({ children }: Testimonial) {
   return (
