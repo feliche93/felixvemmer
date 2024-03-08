@@ -18,6 +18,7 @@ const featuredTestimonial = {
   },
 }
 
+
 const testimonialsData = [
   [
     [
@@ -31,7 +32,18 @@ const testimonialsData = [
             '/testimonials/julian_richter.jpeg',
         },
       },
+      {
+        body: 'This is an awesome blog post. Thanks!',
+        author: {
+          name: 'Michael Frieze',
+          socialUrl:
+            'https://www.reddit.com/r/nextjs/comments/174v2ua/comment/k4byz37/?utm_source=share&utm_medium=web2x&context=3/',
+          position: '@u/michaelfrieze',
+          imageUrl: '/testimonials/michaelfrieze.png',
+        },
+      },
     ],
+
     [
       {
         body: 'This is a good summary! I’m glad you enjoyed the book, and thanks for sharing your thoughts.',
@@ -46,14 +58,38 @@ const testimonialsData = [
       },
     ],
     [
+
       {
-        body: 'This is an awesome blog post. Thanks!',
+        body: 'Thank you very much for creating this article. I am a beginner with Next.js, and I found your piece extremely helpful. It also led me to explore the rest of your impressive blog 🤩',
         author: {
-          name: 'Michael Frieze',
+          name: 'Pierre Rognion',
           socialUrl:
-            'https://www.reddit.com/r/nextjs/comments/174v2ua/comment/k4byz37/?utm_source=share&utm_medium=web2x&context=3/',
-          position: '@u/michaelfrieze',
-          imageUrl: '/testimonials/michaelfrieze.png',
+            'https://www.linkedin.com/feed/update/urn:li:activity:7117758220042915840?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7117758220042915840%2C7121397129381568512%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287121397129381568512%2Curn%3Ali%3Aactivity%3A7117758220042915840%29',
+          position: 'AI Manager @Twelve Consulting',
+          imageUrl: '/testimonials/pierre-rognion.jpeg',
+        },
+      },
+    ],
+    [
+      {
+        body: "Many thanks for your detailed and informed advice on choosing a tech stack for our health startup. The level of detail in your assessment was unexpected and highly appreciated. Your checklist, with its clear and useful tips, has been invaluable—it pointed out things we hadn't thought of by ourselves.",
+        author: {
+          name: 'Daniel Biene',
+          socialUrl: 'https://www.linkedin.com/in/danielbiene/',
+          position: 'Digital Entrepreneur',
+          imageUrl:
+            '/testimonials/daniel_biene.jpeg',
+        },
+      },
+
+      {
+        body: 'As a recent bootcamp grad who is often overwhelmed by how much is out there and how the bar seems so much higher for a chance at employment, stuff like this is super helpful. Really appreciate it! It was nice to see some of my current frameworks included',
+        author: {
+          name: 'Due_Advisor925',
+          socialUrl:
+            'https://www.reddit.com/r/nextjs/comments/15fplwb/comment/jug0f4z/?utm_source=share&utm_medium=web2x&context=3',
+          position: '@u/Due_Advisor925',
+          imageUrl: '/testimonials/due_advisor_925.png',
         },
       },
       {
@@ -67,43 +103,9 @@ const testimonialsData = [
         },
       }
     ],
-    [
-      {
-        body: 'As a recent bootcamp grad who is often overwhelmed by how much is out there and how the bar seems so much higher for a chance at employment, stuff like this is super helpful. Really appreciate it! It was nice to see some of my current frameworks included',
-        author: {
-          name: 'Due_Advisor925',
-          socialUrl:
-            'https://www.reddit.com/r/nextjs/comments/15fplwb/comment/jug0f4z/?utm_source=share&utm_medium=web2x&context=3',
-          position: '@u/Due_Advisor925',
-          imageUrl: '/testimonials/due_advisor_925.png',
-        },
-      },
-      {
-        body: 'Thank you very much for creating this article. I am a beginner with Next.js, and I found your piece extremely helpful. It also led me to explore the rest of your impressive blog 🤩',
-        author: {
-          name: 'Pierre Rognion',
-          socialUrl:
-            'https://www.linkedin.com/feed/update/urn:li:activity:7117758220042915840?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7117758220042915840%2C7121397129381568512%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287121397129381568512%2Curn%3Ali%3Aactivity%3A7117758220042915840%29',
-          position: 'AI Manager @Twelve Consulting',
-          imageUrl: '/testimonials/pierre-rognion.jpeg',
-        },
-      },
-      {
-        body: "Many thanks for your detailed and informed advice on choosing a tech stack for our health startup. The level of detail in your assessment was unexpected and highly appreciated. Your checklist, with its clear and useful tips, has been invaluable—it pointed out things we hadn't thought of by ourselves.",
-        author: {
-          name: 'Daniel Biene',
-          socialUrl: 'https://www.linkedin.com/in/danielbiene/',
-          position: 'Digital Entrepreneur',
-          imageUrl:
-            '/testimonials/daniel_biene.jpeg',
-        },
-      },
-
-      // More testimonials...
-    ],
-
   ],
 ]
+
 
 interface Testimonial extends PropsWithChildren { }
 
@@ -145,7 +147,7 @@ export default async function Testimonials({ children }: Testimonial) {
             </figcaption>
           </Card>
           {testimonialsData.map((columnGroup, columnGroupIdx) => (
-            <div key={columnGroupIdx} className="space-y-8 xl:contents xl:space-y-0">
+            <div key={columnGroupIdx} className="space-y-8 xl:contents xl:space-y-0 sm:col-span-2">
               {columnGroup.map((column, columnIdx) => (
                 <div
                   key={columnIdx}
