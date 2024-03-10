@@ -46,7 +46,6 @@ export async function generateMetadata({
   return generatePageMeta({
     locale: locale,
     url: `${siteConfig.url}/${locale}`,
-    // Add more parameters as needed, for example, image, publishedAt, etc.
   })
 }
 

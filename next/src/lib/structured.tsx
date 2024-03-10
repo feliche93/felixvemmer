@@ -19,9 +19,7 @@ interface NewsArticleProps {
   headline: string
   datePublished: string
   dateModified: string
-  authorName: string
-  authorId: string
-  commentCount: number
+  commentCount?: number
   imageUrl: string
   articleSection: string[]
   keywords: string[]
@@ -64,7 +62,7 @@ export const NewsArticleStructuredData: React.FC<NewsArticleProps> = ({
       '@type': 'WebPage',
       '@id': `${siteConfig.url}/${id}`,
     },
-    publisher: organizationData,
+    publisher: authorData,
     thumbnailUrl: imageUrl,
     inLanguage: 'en-US',
   }

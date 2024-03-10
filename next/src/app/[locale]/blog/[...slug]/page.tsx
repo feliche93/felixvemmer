@@ -12,12 +12,14 @@ import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { siteConfig } from '@/config/site'
 import { getTableOfContents } from '@/lib/toc'
-import { absoluteUrl, cn, formatDate } from '@/lib/utils'
+import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 import { Article } from 'schema-dts'
+import { generatePageMeta } from '@/lib/seo'
+import { NewsArticleStructuredData } from '@/lib/structured'
 
 interface PostPageProps {
   params: {
@@ -43,44 +45,30 @@ async function getPostFromParams(params: PostPageProps['params']) {
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const post = await getPostFromParams(params)
 
+
+
   if (!post) return notFound()
 
-  const ogUrl = new URL(`${siteConfig.url}/api/og`)
-  ogUrl.searchParams.set('heading', post.title)
-  ogUrl.searchParams.set('type', 'Blog Post')
-  ogUrl.searchParams.set('mode', 'dark')
 
-  return {
+  const searchParams = new URLSearchParams()
+
+  searchParams.set('heading', post.title)
+  searchParams.set('type', 'Blog Post')
+  searchParams.set('mode', 'dark')
+
+  const ogUrl = createUrl('/api/og', searchParams)
+
+  const { locale } = params
+
+  return generatePageMeta({
+    locale: locale,
+    url: `${siteConfig.url}/${locale}`,
+    image: ogUrl,
+    image_alt: post.title,
     title: post?.metaTitle ?? post.title,
     description: post?.metaDescription ?? post.description,
-    keywords: post?.keywords ?? [],
-    authors: post.authors.map((author) => ({
-      name: author,
-    })),
-    alternates: {
-      canonical: absoluteUrl(post.slug),
-    },
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: 'article',
-      url: absoluteUrl(post.slug),
-      images: [
-        {
-          url: absoluteUrl(post.image),
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
-      images: [absoluteUrl(post.image)],
-    },
-  }
+    keywords: post?.keywords
+  })
 }
 
 export async function generateStaticParams(): Promise<PostPageProps['params'][]> {
@@ -97,22 +85,6 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const t = await getTranslations('blog')
 
-  // return (
-  //   <>
-  //     <pre>{JSON.stringify(post, null, 2)}</pre>
-  //     <pre>{JSON.stringify(params, null, 2)}</pre>
-  //     <pre>
-  //       {JSON.stringify(
-  //         {
-  //           allPosts,
-  //           allAuthors,
-  //         },
-  //         null,
-  //         2,
-  //       )}
-  //     </pre>
-  //   </>
-  // )
 
   if (post === undefined) notFound()
 
@@ -124,52 +96,26 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
-  const article: Article = {
-    '@type': 'Article',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Felix Vemmer',
-      url: absoluteUrl('/'),
-      logo: {
-        '@type': 'ImageObject',
-        url: absoluteUrl('/logos/felix-vemmer.png'),
-      },
-    },
-    author: authors.map((author) => ({
-      '@type': 'Person',
-      name: author?.title,
-      image: {
-        '@type': 'ImageObject',
-        url: author?.avatar,
-      },
-      url: absoluteUrl(author?.slug ?? '/'),
-      sameAs: [author?.twitter].filter(Boolean) as string[],
-    })),
-    headline: post.title,
-    url: absoluteUrl(post.slug),
-    datePublished: post.date,
-    dateModified: post.date,
-    image: {
-      '@type': 'ImageObject',
-      url: post.image,
-    },
-    keywords: post?.keywords && post?.keywords?.length > 0 ? post.keywords.join(', ') : undefined,
-    description: post.description,
-    mainEntityOfPage: absoluteUrl(post.slug),
-  }
+  const searchParams = new URLSearchParams()
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    ...article,
-  }
+  searchParams.set('heading', post.title)
+  searchParams.set('type', 'Blog Post')
+  searchParams.set('mode', 'dark')
+
+  const ogUrl = createUrl('/api/og', searchParams)
 
   const toc = await getTableOfContents(post.body.raw)
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <NewsArticleStructuredData
+        id={absoluteUrl(post.slug)}
+        headline={post.metaTitle ?? post.title}
+        datePublished={post.date}
+        dateModified={post.date}
+        imageUrl={ogUrl}
+        keywords={post?.keywords ?? []}
+        articleSection={post.categories}
       />
       <main className="px-4 md:px-8 mx-auto max-w-6xl relative py-6 lg:grid lg:grid-cols-[1fr_300px] md:gap-5 lg:gap-10 lg:py-10 xl:gap-20">
         <div className="prose prose-p:text-base sm:prose-p:text-lg mx-auto sm:max-w-2xl md:max-w-2xl">
