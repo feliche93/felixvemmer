@@ -8,8 +8,9 @@ import { cn } from '@/lib/utils'
 import { LanguageToggle } from './language-toggle'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
+import { AuthClerkHeader } from './auth-clerk-header'
 
-export function SiteHeader() {
+export async function SiteHeader() {
   return (
     <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
       <div className="container flex h-14 items-center">
@@ -62,6 +63,7 @@ export function SiteHeader() {
             </Link>
             <ModeToggle />
             <LanguageToggle />
+            <AuthClerkHeader />
           </nav>
         </div>
       </div>

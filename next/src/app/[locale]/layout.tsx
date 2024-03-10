@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import { locales } from '../../../i18n'
 import { StructuredData } from '@/lib/structured'
 import { generatePageMeta } from '@/lib/seo'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const PostHogPageView = dynamic(() => import('../../components/posthog-page-view'), {
   ssr: false,
@@ -57,32 +58,34 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
 
   return (
     <>
-      <html lang={locale} suppressHydrationWarning>
-        <head />
-        <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-          <StructuredData />
-          <PHProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <div className="relative flex min-h-screen flex-col">
-                <PostHogPageView />
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-                <SiteFooter />
-              </div>
-              <TailwindIndicator />
-            </ThemeProvider>
-          </PHProvider>
-          {/* <ThemeSwitcher /> */}
-          {/* <Analytics /> */}
-          {/* <NewYorkToaster />
+      <ClerkProvider>
+        <html lang={locale} suppressHydrationWarning>
+          <head />
+          <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+            <StructuredData />
+            <PHProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <div className="relative flex min-h-screen flex-col">
+                  <PostHogPageView />
+                  <SiteHeader />
+                  <div className="flex-1">{children}</div>
+                  <SiteFooter />
+                </div>
+                <TailwindIndicator />
+              </ThemeProvider>
+            </PHProvider>
+            {/* <ThemeSwitcher /> */}
+            {/* <Analytics /> */}
+            {/* <NewYorkToaster />
           <DefaultToaster /> */}
-        </body>
-      </html>
+          </body>
+        </html>
+      </ClerkProvider>
     </>
   )
 }

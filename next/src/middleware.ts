@@ -1,16 +1,34 @@
+import { authMiddleware } from '@clerk/nextjs'
 import createMiddleware from 'next-intl/middleware'
 import { locales } from '../i18n'
+import { localePrefix, pathnames } from './app/navigation'
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales: locales,
-
-  // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
+const intlMiddleware = createMiddleware({
+  locales,
+  pathnames,
+  localePrefix,
   defaultLocale: 'en',
 })
 
+export default authMiddleware({
+  beforeAuth(request) {
+    return intlMiddleware(request)
+  },
+
+  // Ensure that locale-specific sign in pages are public
+  publicRoutes: [
+    '/:locale',
+    '/:locale/sign-in',
+    '/:locale/sign-up',
+    // blog
+    '/:locale/blog/:path*',
+    '/:locale/about',
+    '/:locale/tech-stack',
+    '/:locale/hardware',
+    '/:locale/consulting-services',
+  ],
+})
+
 export const config = {
-  // Skip all paths that should not be internationalized. This example skips
-  // certain folders and all pathnames with a dot (e.g. favicon.ico)
   matcher: ['/((?!api|_next|_vercel|ingest|.*\\..*).*)'],
 }

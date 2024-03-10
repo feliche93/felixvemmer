@@ -1,12 +1,11 @@
 'use client'
 
-import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
-
 import { navigationConfig } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { Link } from '@/app/navigation'
 
 export function MainNav() {
   const pathname = usePathname()
@@ -33,6 +32,7 @@ export function MainNav() {
           return (
             <Link
               key={item.title}
+              // @ts-expect-error
               href={item.href}
               className={cn(
                 'transition-colors hover:text-foreground/80',
@@ -44,6 +44,7 @@ export function MainNav() {
           )
         })}
       </nav>
+
     </div>
   )
 }
