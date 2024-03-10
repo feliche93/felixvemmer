@@ -8,15 +8,10 @@ import type {
   BreadcrumbList,
   Graph,
   Organization,
+  Person,
   WebSite,
   WithContext,
 } from 'schema-dts'
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-
-if (!baseUrl) {
-  throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
-}
 
 // Define a TypeScript type for the component's props
 interface NewsArticleProps {
@@ -55,7 +50,7 @@ export const NewsArticleStructuredData: React.FC<NewsArticleProps> = ({
     headline: headline,
     datePublished: isoDatePublished,
     dateModified: isoDateModified,
-    author: organizationData,
+    author: authorData,
     commentCount: commentCount,
     image: {
       '@type': 'ImageObject',
@@ -67,7 +62,7 @@ export const NewsArticleStructuredData: React.FC<NewsArticleProps> = ({
     keywords: keywords.join(', '),
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${baseUrl}/${id}`,
+      '@id': `${siteConfig.url}/${id}`,
     },
     publisher: organizationData,
     thumbnailUrl: imageUrl,
@@ -88,24 +83,39 @@ export const NewsArticleStructuredData: React.FC<NewsArticleProps> = ({
 const organizationData: WithContext<Organization> = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: siteConfig.name,
-  url: baseUrl,
-  logo: siteConfig.logo,
+  name: 'FV Ventures UG',
+  url: siteConfig.url,
+  logo: siteConfig.ogImage,
+}
+
+const authorData: WithContext<Person> = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Felix Vemmer',
+  url: siteConfig.url,
+  image: siteConfig.logo,
+  sameAs: [
+    siteConfig.links.github,
+    siteConfig.links.linkedin,
+    siteConfig.links.twitter,
+  ],
+  jobTitle: 'Full-Stack Developer & Indiepreneur',
+  worksFor: organizationData,
 }
 
 const websiteData: WithContext<WebSite> = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: siteConfig.name,
-  url: baseUrl,
-  publisher: organizationData,
+  url: siteConfig.url,
+  publisher: authorData,
 }
 
 // Define the StructuredData component
 export const StructuredData: React.FC = () => {
   const graph: Graph = {
     '@context': 'https://schema.org',
-    '@graph': [organizationData, websiteData],
+    '@graph': [organizationData, websiteData, authorData],
   }
   return (
     <Script

@@ -5,7 +5,7 @@ import { type Twitter } from 'next/dist/lib/metadata/types/twitter-types'
 import { type StaticImageData } from 'next/image'
 
 
-const title = 'Felix Vemmer: Freelance Full-Stack Developer and Indiepreneur based in Berlin'
+const title = 'Freelance Full-Stack Developer and Indiepreneur based in Berlin'
 const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
 
 export const rootOpenGraph: OpenGraph = {
@@ -105,12 +105,12 @@ export function generatePageMeta({
       ...rootOpenGraph,
       locale,
       url,
-      title: `${title} - ${siteName ?? rootOpenGraph.siteName}`,
+      title: title ?? siteName ?? rootOpenGraph.siteName,
       description,
     } as OpenGraph,
     twitter: {
       ...rootTwitter,
-      title: `${title} - ${siteName ?? rootOpenGraph.siteName}`,
+      title: title ?? siteName ?? rootOpenGraph.siteName,
       description,
     } as Twitter,
   } as Metadata
