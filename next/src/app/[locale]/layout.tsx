@@ -13,6 +13,8 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 import { locales } from '../../../i18n'
+import { StructuredData } from '@/lib/structured'
+import { generatePageMeta } from '@/lib/seo'
 
 const PostHogPageView = dynamic(() => import('../../components/posthog-page-view'), {
   ssr: false,
@@ -41,51 +43,11 @@ export async function generateMetadata({
 
   const t = await getTranslations('site')
 
-  return {
-    metadataBase: new URL(siteConfig.url),
-    title: {
-      default: siteConfig.name,
-      template: `%s - ${siteConfig.name}`,
-    },
-    description: t('description'),
-    keywords: ['Next.js', 'React', 'Tailwind CSS', 'Server Components', 'Radix UI'],
-    authors: [
-      {
-        name: 'Felix Vemmer',
-        url: 'https://felixvemmer.com',
-      },
-    ],
-    creator: 'Felix Vemmer',
-    openGraph: {
-      type: 'website',
-      locale: 'en_US',
-      url: siteConfig.url,
-      title: siteConfig.name,
-      description: t('description'),
-      siteName: siteConfig.name,
-      images: [
-        {
-          url: siteConfig.ogImage,
-          width: 1200,
-          height: 630,
-          alt: siteConfig.name,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: siteConfig.name,
-      description: t('description'),
-      images: [siteConfig.ogImage],
-      creator: '@felixvemmer',
-    },
-    icons: {
-      icon: '/favicon.ico',
-      shortcut: '/favicon-16x16.png',
-      apple: '/apple-touch-icon.png',
-    },
-    manifest: `${siteConfig.url}/site.webmanifest`,
-  }
+  return generatePageMeta({
+    locale: locale,
+    url: `${siteConfig.url}/${locale}`,
+    // Add more parameters as needed, for example, image, publishedAt, etc.
+  })
 }
 
 export default function LocaleRootLayout({ children, params: { locale } }: LocaleRootLayoutProps) {
@@ -99,6 +61,7 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
       <html lang={locale} suppressHydrationWarning>
         <head />
         <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+          <StructuredData />
           <PHProvider>
             <ThemeProvider
               attribute="class"

@@ -1,8 +1,14 @@
+import { absoluteUrl } from '@/lib/utils'
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+if (!baseUrl) throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
+
 export const siteConfig = {
   name: 'Felix Vemmer',
-  url: 'https://www.felixvemmer.com',
-  ogImage:
-    'https://www.felixvemmer.com/content/images/2023/08/Hey--I-am-Felix----Welcome-to-my-blog-where--you-ll-find-straight-to-the-point-insights-and-practical-advice-on-Python--TypeScript--and-all-things-full-stack.-1.png',
+  url: baseUrl,
+  logo: absoluteUrl('/logos/felix-vemmer.png'),
+  ogImage: absoluteUrl('/og.webp'),
   links: {
     twitter: 'https://twitter.com/felixvemmer',
     github: 'https://github.com/feliche93',

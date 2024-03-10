@@ -1,17 +1,17 @@
+import { siteConfig } from '@/config/site'
 import { type Metadata } from 'next'
 import { type OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import { type Twitter } from 'next/dist/lib/metadata/types/twitter-types'
 import { type StaticImageData } from 'next/image'
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-if (!baseUrl) throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
 
 const title = 'Felix Vemmer: Freelance Full-Stack Developer and Indiepreneur based in Berlin'
 const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
+
 export const rootOpenGraph: OpenGraph = {
   locale: 'en',
   type: 'website',
-  url: baseUrl,
+  url: siteConfig.url,
   siteName: 'Felix Vemmer',
   title,
   description,
@@ -21,10 +21,11 @@ export const rootTwitter: Twitter = {
   title,
   description,
   card: 'summary_large_image',
+  site: '@felixvemmer',
 }
 
 export const rootMetadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(siteConfig.url),
   title,
   description,
   applicationName: 'Felix Vemmer',
@@ -66,6 +67,17 @@ export function generatePageMeta({
   author = 'Felix Vemmer',
   siteName = rootOpenGraph.siteName,
   feed,
+  keywords = [
+    "Felix Vemmer",
+    "Freelance Software Engineer",
+    "Full-stack developer",
+    "Python",
+    "TypeScript",
+    "Next.js",
+    "React",
+    "Indiepreneur",
+    "Tech Stack",
+  ],
 }: {
   locale?: string
   title?: string
@@ -78,11 +90,13 @@ export function generatePageMeta({
   author?: string
   siteName?: string
   feed?: string
+  keywords?: string[]
 } = {}): Metadata {
   const metadata = {
     ...rootMetadata,
     title,
     description,
+    keywords,
     publisher: siteName,
     alternates: {
       canonical: url,
@@ -109,7 +123,7 @@ export function generatePageMeta({
       modifiedTime: updatedAt ?? publishedAt,
       authors: [author],
       section: siteName,
-      tags: ['gift', 'gift-ideas', 'gift-finder', 'gift-idea-generator'],
+      tags: keywords.join(', '),
     }
     metadata.creator = author
   }

@@ -90,7 +90,7 @@ const organizationData: WithContext<Organization> = {
   '@type': 'Organization',
   name: siteConfig.name,
   url: baseUrl,
-  logo: `${baseUrl}/logo.png`,
+  logo: siteConfig.logo,
 }
 
 const websiteData: WithContext<WebSite> = {
