@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   return generatePageMeta({
     locale: locale,
-    url: `${siteConfig.url}/${locale}`,
+    url: absoluteUrl(post.slug),
     image: absoluteUrl(post.image),
     image_alt: post.title,
     title: post?.metaTitle ?? post.title,
