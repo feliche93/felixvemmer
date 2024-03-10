@@ -92,12 +92,25 @@ export const getFreelancingRevenue = unstable_cache(
     // console log all unique states
     // console.log([...new Set(allInvoices.map((invoice) => invoice.state))])
 
+    // return allInvoices.map((invoice) => {
+    //   return {
+    //     state: invoice.state,
+    //     total_gross: invoice.total_gross,
+    //     outstanding_amount: invoice.outstanding_amount,
+    //     document_date: invoice.document_date,
+    //     payment_date: invoice.paid_at_date,
+    //   }
+    // })
+
+    const currentYear = new Date().getFullYear()
     allInvoices = allInvoices.filter((invoice) => {
-      return invoice.state === 'paid'
+      const invoiceYear = new Date(invoice.document_date).getFullYear()
+      return (
+        invoice.state === 'paid' && invoice.paid_at_date // &&
+        // invoice.document_date &&
+        // invoiceYear === currentYear
+      )
     })
-
-    console.log({ allInvoices })
-
     const totalGross = allInvoices.reduce((sum, invoice) => sum + invoice.total_gross, 0)
     return totalGross
   },
