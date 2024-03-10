@@ -157,7 +157,7 @@ dependencies:
     version: 2.0.0-alpha.14
   drizzle-orm:
     specifier: ^0.30.0
-    version: 0.30.0(@neondatabase/serverless@0.9.0)(@opentelemetry/api@1.8.0)(@types/react@18.2.64)(react@18.2.0)
+    version: 0.30.1(@neondatabase/serverless@0.9.0)(@opentelemetry/api@1.8.0)(@types/react@18.2.64)(react@18.2.0)
   eslint:
     specifier: 8.57.0
     version: 8.57.0
@@ -193,7 +193,7 @@ dependencies:
     version: 8.4.35
   posthog-js:
     specifier: ^1.111.3
-    version: 1.111.3
+    version: 1.112.0
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -227,9 +227,6 @@ dependencies:
   remark-gfm:
     specifier: ^3.0.1
     version: 3.0.1
-  schema-dts:
-    specifier: ^1.1.2
-    version: 1.1.2(typescript@5.4.2)
   tailwind-merge:
     specifier: ^2.2.1
     version: 2.2.1
@@ -280,6 +277,9 @@ devDependencies:
   prettier-plugin-tailwindcss:
     specifier: ^0.5.12
     version: 0.5.12(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier-plugin-organize-imports@3.2.4)(prettier@3.2.5)
+  schema-dts:
+    specifier: ^1.1.2
+    version: 1.1.2(typescript@5.4.2)
 
 packages:
 
@@ -314,7 +314,7 @@ packages:
     resolution: {integrity: sha512-oLcVCTeIFadUoArDTwpluncplrYBmTCCZZgXCbgNGvOBBiSDDK3eWO4b/+eOTli5tKv1lg+a5/NAXg+nTcei1w==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.17.0
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: true
@@ -380,7 +380,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.17.0
     dev: true
 
   /@babel/runtime@7.24.0:
@@ -4018,7 +4018,7 @@ packages:
       is-glob: 4.0.3
       minimatch: 9.0.3
       semver: 7.6.0
-      ts-api-utils: 1.2.1(typescript@5.4.2)
+      ts-api-utils: 1.3.0(typescript@5.4.2)
       typescript: 5.4.2
     transitivePeerDependencies:
       - supports-color
@@ -4336,7 +4336,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001596
-      electron-to-chromium: 1.4.698
+      electron-to-chromium: 1.4.699
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
     dev: false
@@ -4359,7 +4359,7 @@ packages:
       es-errors: 1.3.0
       function-bind: 1.1.2
       get-intrinsic: 1.2.4
-      set-function-length: 1.2.1
+      set-function-length: 1.2.2
     dev: false
 
   /callsites@3.1.0:
@@ -4940,13 +4940,14 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.0(@neondatabase/serverless@0.9.0)(@opentelemetry/api@1.8.0)(@types/react@18.2.64)(react@18.2.0):
-    resolution: {integrity: sha512-SupNouCdvosjzQpLinqnyIu7bBfsUKiaWXfUZ0IyDtwK8rWa2zQ4AOWCda86VJVxgb8xZ1l8vKvlLHyTBalB/g==}
+  /drizzle-orm@0.30.1(@neondatabase/serverless@0.9.0)(@opentelemetry/api@1.8.0)(@types/react@18.2.64)(react@18.2.0):
+    resolution: {integrity: sha512-5P6CXl4XyWtDDiYOX/jYOJp1HTUmBlXRAwaq+muUOgaSykMEy5sJesCxceMT0oCGvxeWkKfSXo5owLnfKwCIdw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
       '@libsql/client': '*'
       '@neondatabase/serverless': '>=0.1'
+      '@op-engineering/op-sqlite': '>=2'
       '@opentelemetry/api': ^1.4.1
       '@planetscale/database': '>=1'
       '@types/better-sqlite3': '*'
@@ -4973,6 +4974,8 @@ packages:
       '@libsql/client':
         optional: true
       '@neondatabase/serverless':
+        optional: true
+      '@op-engineering/op-sqlite':
         optional: true
       '@opentelemetry/api':
         optional: true
@@ -5020,8 +5023,8 @@ packages:
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  /electron-to-chromium@1.4.698:
-    resolution: {integrity: sha512-f9iZD1t3CLy1AS6vzM5EKGa6p9pRcOeEFXRFbaG2Ta+Oe7MkfRQ3fsvPYidzHe1h4i0JvIvpcY55C+B6BZNGtQ==}
+  /electron-to-chromium@1.4.699:
+    resolution: {integrity: sha512-I7q3BbQi6e4tJJN5CRcyvxhK0iJb34TV8eJQcgh+fR2fQ8miMgZcEInckCo1U9exDHbfz7DLDnFn8oqH/VcRKw==}
     dev: false
 
   /emoji-regex@10.3.0:
@@ -5092,7 +5095,7 @@ packages:
       object-keys: 1.1.1
       object.assign: 4.1.5
       regexp.prototype.flags: 1.5.2
-      safe-array-concat: 1.1.0
+      safe-array-concat: 1.1.2
       safe-regex-test: 1.0.3
       string.prototype.trim: 1.2.8
       string.prototype.trimend: 1.0.7
@@ -5139,7 +5142,7 @@ packages:
       has-symbols: 1.0.3
       internal-slot: 1.0.7
       iterator.prototype: 1.1.2
-      safe-array-concat: 1.1.0
+      safe-array-concat: 1.1.2
     dev: false
 
   /es-set-tostringtag@2.0.3:
@@ -6619,8 +6622,9 @@ packages:
   /is-hexadecimal@2.0.1:
     resolution: {integrity: sha512-DgZQp241c8oO6cA1SbTEWiXeoxV42vlcJxgH+B3hi1AiqqKruZR3ZGF8In3fj4+/y/7rHvlOZLZtgJ/4ttYGZg==}
 
-  /is-map@2.0.2:
-    resolution: {integrity: sha512-cOZFQQozTha1f4MxLFzlgKYPTyj26picdZTx82hbc/Xf4K/tZOOXSCkMvU4pKioRXGDLJRn0GM7Upe7kR721yg==}
+  /is-map@2.0.3:
+    resolution: {integrity: sha512-1Qed0/Hr2m+YqxnM09CjA2d/i6YZNfF6R2oRAOj36eUdS6qIV/huPJNSEpKbupewFs+ZsJlxsjjPbc0/afW6Lw==}
+    engines: {node: '>= 0.4'}
     dev: false
 
   /is-negative-zero@2.0.3:
@@ -6670,8 +6674,9 @@ packages:
       has-tostringtag: 1.0.2
     dev: false
 
-  /is-set@2.0.2:
-    resolution: {integrity: sha512-+2cnTEZeY5z/iXGbLhPrOAaK/Mau5k5eXq9j14CpRTftq0pAJu2MwVRSZhyZWBzx3o6X795Lz6Bpb6R0GKf37g==}
+  /is-set@2.0.3:
+    resolution: {integrity: sha512-iPAjerrse27/ygGLxw+EBR9agv9Y6uLeYVJMu+QNCoouJ1/1ri0mGrcWpfCqFZuzzx3WjtwxG098X+n4OuRkPg==}
+    engines: {node: '>= 0.4'}
     dev: false
 
   /is-shared-array-buffer@1.0.3:
@@ -6702,8 +6707,9 @@ packages:
       which-typed-array: 1.1.14
     dev: false
 
-  /is-weakmap@2.0.1:
-    resolution: {integrity: sha512-NSBR4kH5oVj1Uwvv970ruUkCV7O1mzgVFO4/rev2cLRda9Tm9HrL70ZPut4rOHgY0FNrUu9BCbXA2sdQ+x0chA==}
+  /is-weakmap@2.0.2:
+    resolution: {integrity: sha512-K5pXYOm9wqY1RgjpL3YTkF39tni1XajUIkawTLUo9EZEVUFga5gSQJF8nNS7ZwJQ02y+1YCNYcMh+HIf1ZqE+w==}
+    engines: {node: '>= 0.4'}
     dev: false
 
   /is-weakref@1.0.2:
@@ -6712,8 +6718,9 @@ packages:
       call-bind: 1.0.7
     dev: false
 
-  /is-weakset@2.0.2:
-    resolution: {integrity: sha512-t2yVvttHkQktwnNNmBQ98AhENLdPUTDTE21uPqAQ0ARwQfGeQKRVS0NNurH7bTf7RrvcVn1OOge45CnBeHCSmg==}
+  /is-weakset@2.0.3:
+    resolution: {integrity: sha512-LvIm3/KWzS9oRFHugab7d+M/GcBXuXX5xZkzPmN+NxihdQlZUQ4dWuSV1xR/sq6upL1TJEDrfBgRepHFdBtSNQ==}
+    engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.7
       get-intrinsic: 1.2.4
@@ -8089,7 +8096,7 @@ packages:
       negotiator: 0.6.3
       next: 14.2.0-canary.8(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      use-intl: 3.9.3(react@18.2.0)
+      use-intl: 3.9.4(react@18.2.0)
     dev: false
 
   /next-themes@0.2.1(next@14.2.0-canary.8)(react-dom@18.2.0)(react@18.2.0):
@@ -8556,8 +8563,8 @@ packages:
       xtend: 4.0.2
     dev: false
 
-  /posthog-js@1.111.3:
-    resolution: {integrity: sha512-Ie04OWI4dzYoPbPXv8mgwEoklexA8RqwH0kYTZdMxY0T78Rym/yj9jwhYK+2NGgDATAVp9KMsz9MbdkchGWoHA==}
+  /posthog-js@1.112.0:
+    resolution: {integrity: sha512-GQ97lTjlVSTRcXtc9exmNS6PCx3DSmSRMjv4iwCs8+4z6ENx0mJKfiw0VQVsuthNByYXq+nW0Fao36YPl/USRg==}
     dependencies:
       fflate: 0.4.8
       preact: 10.19.6
@@ -9191,8 +9198,8 @@ packages:
     dependencies:
       mri: 1.2.0
 
-  /safe-array-concat@1.1.0:
-    resolution: {integrity: sha512-ZdQ0Jeb9Ofti4hbt5lX3T2JcAamT9hfzYU1MNB+z/jaEbB6wfFfPIR/zEORmZqobkCCJhSjodobH6WHNmJ97dg==}
+  /safe-array-concat@1.1.2:
+    resolution: {integrity: sha512-vj6RsCsWBCf19jIeHEfkRMw8DPiBb+DMXklQ/1SGDHOMlHdPUkZXFQ2YdplS23zESTijAcurb1aSgJA3AgMu1Q==}
     engines: {node: '>=0.4'}
     dependencies:
       call-bind: 1.0.7
@@ -9226,7 +9233,7 @@ packages:
       typescript: '>=4.1.0'
     dependencies:
       typescript: 5.4.2
-    dev: false
+    dev: true
 
   /section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
@@ -9248,8 +9255,8 @@ packages:
     dependencies:
       lru-cache: 6.0.0
 
-  /set-function-length@1.2.1:
-    resolution: {integrity: sha512-j4t6ccc+VsKwYHso+kElc5neZpjtq9EnRICFZtWyBsLojhmeF/ZBd/elqm22WJh/BziDe/SBiOeAt0m2mfLD0g==}
+  /set-function-length@1.2.2:
+    resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
     dependencies:
       define-data-property: 1.1.4
@@ -9730,8 +9737,8 @@ packages:
   /trough@2.2.0:
     resolution: {integrity: sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==}
 
-  /ts-api-utils@1.2.1(typescript@5.4.2):
-    resolution: {integrity: sha512-RIYA36cJn2WiH9Hy77hdF9r7oEwxAtB/TS9/S4Qd90Ap4z5FSiin5zEiTL44OII1Y3IIlEvxwxFUVgrHSZ/UpA==}
+  /ts-api-utils@1.3.0(typescript@5.4.2):
+    resolution: {integrity: sha512-UQMIo7pb8WRomKR1/+MFVLTroIvDVtMX3K6OUir8ynLyzB8Jeriont2bTAtmNPa1ekAgN7YPDyf6V+ygrdU+eQ==}
     engines: {node: '>=16'}
     peerDependencies:
       typescript: '>=4.2.0'
@@ -10072,8 +10079,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /use-intl@3.9.3(react@18.2.0):
-    resolution: {integrity: sha512-M022G+p3nW6P1edJvYDYmV353OI+rlvwjupjuXkX6/sjoareG5fvlUfLXkHXO3f6Gzit1ReZAAlnW50eOFLYfg==}
+  /use-intl@3.9.4(react@18.2.0):
+    resolution: {integrity: sha512-z53WpHqVMnIV23YO92nUhXePjPk18VIYQayMQbPYe7wPEau7IhXcZqWLC5xrzpj7HORKzwmHDOzDQ6X09BbsTA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -10265,17 +10272,18 @@ packages:
       is-weakref: 1.0.2
       isarray: 2.0.5
       which-boxed-primitive: 1.0.2
-      which-collection: 1.0.1
+      which-collection: 1.0.2
       which-typed-array: 1.1.14
     dev: false
 
-  /which-collection@1.0.1:
-    resolution: {integrity: sha512-W8xeTUwaln8i3K/cY1nGXzdnVZlidBcagyNFtBdD5kxnb4TvGKR7FfSIS3mYpwWS1QUCutfKz8IY8RjftB0+1A==}
+  /which-collection@1.0.2:
+    resolution: {integrity: sha512-K4jVyjnBdgvc86Y6BkaLZEN933SwYOuBFkdmBu9ZfkcAbdVbpITnDmjvZ/aQjRXQrv5EPkTnD1s39GiiqbngCw==}
+    engines: {node: '>= 0.4'}
     dependencies:
-      is-map: 2.0.2
-      is-set: 2.0.2
-      is-weakmap: 2.0.1
-      is-weakset: 2.0.2
+      is-map: 2.0.3
+      is-set: 2.0.3
+      is-weakmap: 2.0.2
+      is-weakset: 2.0.3
     dev: false
 
   /which-typed-array@1.1.14:

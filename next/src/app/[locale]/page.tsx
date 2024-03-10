@@ -17,30 +17,38 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { KpisFallback } from '@/components/kpis-fallback'
 import { Suspense } from 'react'
+import { getTotalPageViewsByPath } from '@/lib/posthog-api'
+import { generatePageMeta } from '@/lib/seo'
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: {
-    locale: string
-  }
-}): Promise<Metadata> {
-  return {
-    title: 'Felix Vemmer - Freelance Software Engineer',
-    alternates: {
-      canonical: absoluteUrl(`/${locale}`),
-    },
-  }
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  return generatePageMeta({
+    locale,
+    url: `/${locale}`,
+    image: '/og.webp',
+  })
 }
 
 export default function IndexPage({ params: { locale } }: { params: { locale: string } }) {
   const t = useTranslations('index')
 
-  const posts = allPosts
+
+  let posts = allPosts
     .filter((post) => post.published)
     .filter((post) => post.locale === locale)
     .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
     .slice(0, 6)
+
+  // TODO: Sort by Views
+  // let postsWithView = await Promise.all(posts.map(async (post) => {
+  //   const views = await getTotalPageViewsByPath({ path: post.slug });
+  //   return {
+  //     ...post,
+  //     views,
+  //   };
+  // }))
+
+  // postsWithView.sort((a, b) => (b.views || 0) - (a.views || 0))
+  //   .slice(0, 6)
 
   return (
     <>
