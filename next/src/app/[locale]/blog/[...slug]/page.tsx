@@ -113,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
         headline={post.metaTitle ?? post.title}
         datePublished={post.date}
         dateModified={post.date}
-        imageUrl={ogUrl}
+        imageUrl={absoluteUrl(post.image)}
         keywords={post?.keywords ?? []}
         articleSection={post.categories}
       />
