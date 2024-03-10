@@ -78,19 +78,20 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
           <PageHeaderDescription className="text-center">
             {t('hero.description')}
           </PageHeaderDescription>
-          <div className="flex w-full justify-center items-center space-x-4 pb-8 pt-4 md:pb-10">
+          <div className="flex w-full sm:w-fit flex-col sm:flex-row justify-center items-center gap-4 pb-8 pt-4 md:pb-10">
             <Link
               href="/consulting-services"
               className={cn(
                 buttonVariants({
                   variant: 'default',
                   size: 'lg',
+                  className: 'w-full'
                 }),
               )}
             >
               {t('hero.primaryCTA')}
             </Link>
-            <Link href={'/blog'} className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
+            <Link href={'/blog'} className={cn(buttonVariants({ variant: 'outline', size: 'lg', className: 'w-full' }))}>
               {t('hero.secondaryCTA')}
             </Link>
           </div>

@@ -66,7 +66,7 @@ export const Skills: FC<SkillsProps> = async ({ locale }) => {
         <div className="grid grid-cols-1 gap-12 lg:gap-8 sm:grid-cols-1 lg:grid-cols-3">
           {features.map((feature, index: number) => (
             <Card key={index}>
-              <div className="flow-root h-full rounded-lg bg-base-100 px-6 pb-8 shadow">
+              <div className="flow-root h-full rounded-lg px-6 pb-8 shadow">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center rounded-md bg-primary p-3 shadow-lg">
