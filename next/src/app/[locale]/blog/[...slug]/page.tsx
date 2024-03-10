@@ -21,14 +21,14 @@ import { Article } from 'schema-dts'
 import { generatePageMeta } from '@/lib/seo'
 import { NewsArticleStructuredData } from '@/lib/structured'
 
-interface PostPageProps {
+export interface PostPageProps {
   params: {
     slug: string[]
     locale: string
   }
 }
 
-async function getPostFromParams(params: PostPageProps['params']) {
+export async function getPostFromParams(params: PostPageProps['params']) {
   const slug = params?.slug
   // console.log({
   //   test: `blog/${slug}`,
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   return generatePageMeta({
     locale: locale,
     url: `${siteConfig.url}/${locale}`,
-    image: ogUrl,
+    image: absoluteUrl(post.image),
     image_alt: post.title,
     title: post?.metaTitle ?? post.title,
     description: post?.metaDescription ?? post.description,
