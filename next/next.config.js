@@ -20,24 +20,28 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/*/pages/tech-stack',
-        destination: '/*/tech-stack',
+        source: '/:locale/pages/tech-stack',
+        destination: '/:locale/tech-stack',
         permanent: true,
+        locale: false, // Add this if you want to manually handle locales in the path
       },
       {
-        source: '/*/pages/hardware',
-        destination: '/*/hardware',
+        source: '/:locale/pages/hardware',
+        destination: '/:locale/hardware',
         permanent: true,
+        locale: false, // Add this if you want to manually handle locales in the path
       },
       {
-        source: '/*/pages/consulting-services',
-        destination: '/*/consulting-services',
+        source: '/:locale/pages/consulting-services',
+        destination: '/:locale/consulting-services',
         permanent: true,
+        locale: false, // Add this if you want to manually handle locales in the path
       },
       {
-        source: '/*/pages/about',
-        destination: '/*/about',
+        source: '/:locale/pages/about',
+        destination: '/:locale/about',
         permanent: true,
+        locale: false, // Add this if you want to manually handle locales in the path
       },
     ]
   },
