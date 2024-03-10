@@ -17,6 +17,30 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/*/pages/tech-stack',
+        destination: '/*/tech-stack',
+        permanent: true,
+      },
+      {
+        source: '/*/pages/hardware',
+        destination: '/*/hardware',
+        permanent: true,
+      },
+      {
+        source: '/*/pages/consulting-services',
+        destination: '/*/consulting-services',
+        permanent: true,
+      },
+      {
+        source: '/*/pages/about',
+        destination: '/*/about',
+        permanent: true,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
