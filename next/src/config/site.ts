@@ -11,7 +11,7 @@ export const siteConfig = {
   ogImage: absoluteUrl('/og.webp'),
   links: {
     twitter: 'https://twitter.com/felixvemmer',
-    github: 'https://github.com/feliche93',
+    github: 'https://github.com/feliche93/cryptoneur',
     linkedin: 'https://www.linkedin.com/in/felix-vemmer/',
   },
 }

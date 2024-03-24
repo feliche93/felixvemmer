@@ -26,6 +26,7 @@ export default authMiddleware({
     '/:locale/tech-stack',
     '/:locale/hardware',
     '/:locale/consulting-services',
+    '/:locale/playground',
   ],
 })
 

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "mdx_blogpost_crew"
+version = "0.1.0"
+description = "mdx_blogpost_crew using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = {extras = ["tools"], version = "^0.22.2"}
+
+[tool.poetry.scripts]
+mdx_blogpost_crew = "mdx_blogpost_crew.main:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

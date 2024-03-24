@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
-
 import { PHProvider } from '@/components/posthog-provider'
 import { ThemeProvider } from '@/components/providers'
 import { SiteFooter } from '@/components/site-footer'
@@ -16,6 +15,7 @@ import { locales } from '../../../i18n'
 import { StructuredData } from '@/lib/structured'
 import { generatePageMeta } from '@/lib/seo'
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/toaster"
 
 const PostHogPageView = dynamic(() => import('../../components/posthog-page-view'), {
   ssr: false,
@@ -83,6 +83,8 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
             {/* <Analytics /> */}
             {/* <NewYorkToaster />
           <DefaultToaster /> */}
+            <Toaster />
+
           </body>
         </html>
       </ClerkProvider>
