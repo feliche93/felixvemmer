@@ -3,24 +3,26 @@ import Link from 'next/link'
 import { BlogPostGrid } from '@/components/blog-post-grid'
 import { CalCom } from '@/components/cal-com'
 import { Kpis } from '@/components/kpis'
+import { KpisFallback } from '@/components/kpis-fallback'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 import Testimonials from '@/components/testimonials'
 import { buttonVariants } from '@/components/ui/button'
-import { FadeIn } from '@/components/ui/fade-in'
 import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
-import { absoluteUrl, cn } from '@/lib/utils'
+import { generatePageMeta } from '@/lib/seo'
+import { cn } from '@/lib/utils'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { KpisFallback } from '@/components/kpis-fallback'
 import { Suspense } from 'react'
-import { getTotalPageViewsByPath } from '@/lib/posthog-api'
-import { generatePageMeta } from '@/lib/seo'
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string }
+}): Promise<Metadata> {
   return generatePageMeta({
     locale,
     url: `/${locale}`,
@@ -30,7 +32,6 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 export default function IndexPage({ params: { locale } }: { params: { locale: string } }) {
   const t = useTranslations('index')
-
 
   let posts = allPosts
     .filter((post) => post.published)
@@ -85,13 +86,18 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
                 buttonVariants({
                   variant: 'default',
                   size: 'lg',
-                  className: 'w-full'
+                  className: 'w-full',
                 }),
               )}
             >
               {t('hero.primaryCTA')}
             </Link>
-            <Link href={'/blog'} className={cn(buttonVariants({ variant: 'outline', size: 'lg', className: 'w-full' }))}>
+            <Link
+              href={'/blog'}
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'lg', className: 'w-full' }),
+              )}
+            >
               {t('hero.secondaryCTA')}
             </Link>
           </div>
@@ -118,9 +124,12 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
       </Testimonials>
       {false && (
         <div>
-          <PageIntro centered title={t('bookAMeeeting.title')} eyebrow={t('bookAMeeeting.section')} />
+          <PageIntro
+            centered
+            title={t('bookAMeeeting.title')}
+            eyebrow={t('bookAMeeeting.section')}
+          />
           <CalCom />
-
         </div>
       )}
     </>

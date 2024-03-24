@@ -6,20 +6,18 @@ import { Mdx } from '@/components/mdx-components'
 import '@/styles/mdx.css'
 import Image from 'next/image'
 
+import { Link } from '@/app/navigation'
 import { Icons } from '@/components/icons'
 import { DashboardTableOfContents } from '@/components/toc'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
-import { siteConfig } from '@/config/site'
+import { generatePageMeta } from '@/lib/seo'
+import { NewsArticleStructuredData } from '@/lib/structured'
 import { getTableOfContents } from '@/lib/toc'
 import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
-import Link from 'next/link'
-import { Article } from 'schema-dts'
-import { generatePageMeta } from '@/lib/seo'
-import { NewsArticleStructuredData } from '@/lib/structured'
 
 export interface PostPageProps {
   params: {
@@ -45,10 +43,7 @@ export async function getPostFromParams(params: PostPageProps['params']) {
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const post = await getPostFromParams(params)
 
-
-
   if (!post) return notFound()
-
 
   const searchParams = new URLSearchParams()
 
@@ -67,7 +62,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     image_alt: post.title,
     title: post?.metaTitle ?? post.title,
     description: post?.metaDescription ?? post.description,
-    keywords: post?.keywords
+    keywords: post?.keywords,
   })
 }
 
@@ -84,7 +79,6 @@ export default async function PostPage({ params }: PostPageProps) {
   unstable_setRequestLocale(params.locale || 'en')
 
   const t = await getTranslations('blog')
-
 
   if (post === undefined) notFound()
 
