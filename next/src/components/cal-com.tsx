@@ -19,7 +19,7 @@ export function CalCom() {
         theme: resolvedTheme === 'dark' ? 'dark' : 'light',
       })
     })()
-  }, [])
+  }, [resolvedTheme])
 
   return (
     <Cal
