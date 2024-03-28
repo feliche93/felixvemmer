@@ -21,6 +21,7 @@ const SSubscribe = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address',
   }),
+  newsletter: z.coerce.boolean().optional().default(true),
   pendingVerification: z.boolean().optional(),
   code: z.string().optional(),
   mode: z.literal('sign-up').or(z.literal('sign-in')).default('sign-up'),
@@ -42,6 +43,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
       pendingVerification: false,
       code: '',
       mode: 'sign-up',
+      newsletter: true,
     },
   })
 
@@ -170,7 +172,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
   if (form.watch('pendingVerification')) {
     return (
       <>
-        <pre>
+        {/* <pre>
           {JSON.stringify(
             {
               errors: form.formState.errors,
@@ -179,8 +181,8 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
             null,
             2,
           )}
-        </pre>{' '}
-        <Card className="my-4 flex flex-col items-center">
+        </pre>{' '} */}
+        <Card className="my-12 flex flex-col items-center">
           <CardHeader>
             <CardTitle>Enter verification code</CardTitle>
           </CardHeader>
@@ -211,7 +213,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
                 />
                 <Button type="submit">
                   {form.formState.isSubmitting ? (
-                    <Loader2Icon className="animate-spin size-2" />
+                    <Loader2Icon className="animate-spin mr-2 size-4" />
                   ) : null}
                   Verify
                 </Button>
@@ -225,7 +227,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
 
   return (
     <>
-      <pre>
+      {/* <pre>
         {JSON.stringify(
           {
             errors: form.formState.errors,
@@ -234,8 +236,8 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
           null,
           2,
         )}
-      </pre>
-      <Card className="my-4 flex flex-col items-center">
+      </pre> */}
+      <Card className="my-12 flex flex-col items-center">
         <CardHeader>
           <CardTitle>
             {form.watch('mode') === 'sign-up'
@@ -246,45 +248,65 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
         <CardContent>
           {form.watch('mode') === 'sign-up'
             ? 'Become a free member to get access to all subscriber-only content.'
-            : 'Sign in to continue reading.'}
+            : 'Enter your email to sign in and continue reading.'}
         </CardContent>
         <CardFooter className="gap-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-row gap-2">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input className="w-60" placeholder="" type="email" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      Already a user?{' '}
-                      <Button
-                        className="p-0"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          const value = form.watch('mode') === 'sign-in' ? 'sign-up' : 'sign-in'
-                          form.setValue('mode', value)
-                        }}
-                        variant={'link'}
-                      >
-                        {form.watch('mode') === 'sign-in' ? 'Sign up' : 'Sign in'}
-                      </Button>
-                    </FormDescription>
+            <div className="flex flex-col items-center">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="">
+                <div className="flex flex-row gap-2">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input className="w-60" placeholder="" type="email" {...field} />
+                        </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">
-                {form.formState.isSubmitting ? (
-                  <Loader2Icon className="animate-spin size-2" />
-                ) : null}
-                {form.watch('mode') === 'sign-up' ? 'Subscribe' : 'Sign in'}
-              </Button>
-            </form>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit">
+                    {form.formState.isSubmitting ? (
+                      <Loader2Icon className="animate-spin mr-2 size-4" />
+                    ) : null}
+                    {form.watch('mode') === 'sign-up' ? 'Subscribe' : 'Sign in'}
+                  </Button>
+                </div>
+                {/* {form.watch('mode') === 'sign-up' && (
+                  <FormField
+                    control={form.control}
+                    name="newsletter"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start justify-center space-x-3 space-y-0 my-3">
+                        <FormControl>
+                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Subscribe to newsletter</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                )} */}
+              </form>
+              <FormDescription className="pt-2">
+                Already a reader?{' '}
+                <Button
+                  className="p-0"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const value = form.watch('mode') === 'sign-in' ? 'sign-up' : 'sign-in'
+                    form.setValue('mode', value)
+                  }}
+                  variant={'link'}
+                >
+                  {form.watch('mode') === 'sign-in' ? 'Sign up' : 'Sign in'}
+                </Button>
+              </FormDescription>
+            </div>
           </Form>
         </CardFooter>
       </Card>
