@@ -2,313 +2,299 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PaginatedPluginConfigList } from '../models/PaginatedPluginConfigList';
-import type { PaginatedPluginLogEntryList } from '../models/PaginatedPluginLogEntryList';
-import type { PatchedPluginConfig } from '../models/PatchedPluginConfig';
-import type { PluginConfig } from '../models/PluginConfig';
-
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { PaginatedPluginConfigList } from '../models/PaginatedPluginConfigList'
+import type { PaginatedPluginLogEntryList } from '../models/PaginatedPluginLogEntryList'
+import type { PatchedPluginConfig } from '../models/PatchedPluginConfig'
+import type { PluginConfig } from '../models/PluginConfig'
 export class PluginConfigsService {
-
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
-
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
+  /**
+   * @returns PaginatedPluginConfigList
+   * @throws ApiError
+   */
+  public pluginConfigsList({
+    projectId,
+    limit,
+    offset,
+  }: {
     /**
-     * @returns PaginatedPluginConfigList
-     * @throws ApiError
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
-    public pluginConfigsList({
-        projectId,
-        limit,
-        offset,
-    }: {
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        /**
-         * Number of results to return per page.
-         */
-        limit?: number,
-        /**
-         * The initial index from which to return the results.
-         */
-        offset?: number,
-    }): CancelablePromise<PaginatedPluginConfigList> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/projects/{project_id}/plugin_configs/',
-            path: {
-                'project_id': projectId,
-            },
-            query: {
-                'limit': limit,
-                'offset': offset,
-            },
-        });
-    }
-
+    projectId: string
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * Number of results to return per page.
      */
-    public pluginConfigsCreate({
-        projectId,
-        requestBody,
-    }: {
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        requestBody: PluginConfig,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/api/projects/{project_id}/plugin_configs/',
-            path: {
-                'project_id': projectId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    limit?: number
     /**
-     * @returns PaginatedPluginLogEntryList
-     * @throws ApiError
+     * The initial index from which to return the results.
      */
-    public pluginConfigsLogsList({
-        parentLookupPluginConfigId,
-        projectId,
-        limit,
-        offset,
-    }: {
-        parentLookupPluginConfigId: string,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        /**
-         * Number of results to return per page.
-         */
-        limit?: number,
-        /**
-         * The initial index from which to return the results.
-         */
-        offset?: number,
-    }): CancelablePromise<PaginatedPluginLogEntryList> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/projects/{project_id}/plugin_configs/{parent_lookup_plugin_config_id}/logs/',
-            path: {
-                'parent_lookup_plugin_config_id': parentLookupPluginConfigId,
-                'project_id': projectId,
-            },
-            query: {
-                'limit': limit,
-                'offset': offset,
-            },
-        });
-    }
-
+    offset?: number
+  }): CancelablePromise<PaginatedPluginConfigList> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/projects/{project_id}/plugin_configs/',
+      path: {
+        project_id: projectId,
+      },
+      query: {
+        limit: limit,
+        offset: offset,
+      },
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsCreate({
+    projectId,
+    requestBody,
+  }: {
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
-    public pluginConfigsRetrieve({
-        id,
-        projectId,
-    }: {
-        /**
-         * A unique integer value identifying this plugin config.
-         */
-        id: number,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/projects/{project_id}/plugin_configs/{id}/',
-            path: {
-                'id': id,
-                'project_id': projectId,
-            },
-        });
-    }
-
+    projectId: string
+    requestBody: PluginConfig
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/api/projects/{project_id}/plugin_configs/',
+      path: {
+        project_id: projectId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns PaginatedPluginLogEntryList
+   * @throws ApiError
+   */
+  public pluginConfigsLogsList({
+    parentLookupPluginConfigId,
+    projectId,
+    limit,
+    offset,
+  }: {
+    parentLookupPluginConfigId: string
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
-    public pluginConfigsUpdate({
-        id,
-        projectId,
-        requestBody,
-    }: {
-        /**
-         * A unique integer value identifying this plugin config.
-         */
-        id: number,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        requestBody: PluginConfig,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'PUT',
-            url: '/api/projects/{project_id}/plugin_configs/{id}/',
-            path: {
-                'id': id,
-                'project_id': projectId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    projectId: string
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * Number of results to return per page.
      */
-    public pluginConfigsPartialUpdate({
-        id,
-        projectId,
-        requestBody,
-    }: {
-        /**
-         * A unique integer value identifying this plugin config.
-         */
-        id: number,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        requestBody?: PatchedPluginConfig,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'PATCH',
-            url: '/api/projects/{project_id}/plugin_configs/{id}/',
-            path: {
-                'id': id,
-                'project_id': projectId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    limit?: number
     /**
-     * @returns void
-     * @throws ApiError
+     * The initial index from which to return the results.
      */
-    public pluginConfigsDestroy({
-        id,
-        projectId,
-    }: {
-        /**
-         * A unique integer value identifying this plugin config.
-         */
-        id: number,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-    }): CancelablePromise<void> {
-        return this.httpRequest.request({
-            method: 'DELETE',
-            url: '/api/projects/{project_id}/plugin_configs/{id}/',
-            path: {
-                'id': id,
-                'project_id': projectId,
-            },
-        });
-    }
-
+    offset?: number
+  }): CancelablePromise<PaginatedPluginLogEntryList> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/projects/{project_id}/plugin_configs/{parent_lookup_plugin_config_id}/logs/',
+      path: {
+        parent_lookup_plugin_config_id: parentLookupPluginConfigId,
+        project_id: projectId,
+      },
+      query: {
+        limit: limit,
+        offset: offset,
+      },
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsRetrieve({
+    id,
+    projectId,
+  }: {
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * A unique integer value identifying this plugin config.
      */
-    public pluginConfigsFrontendRetrieve({
-        id,
-        projectId,
-    }: {
-        /**
-         * A unique integer value identifying this plugin config.
-         */
-        id: number,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/projects/{project_id}/plugin_configs/{id}/frontend/',
-            path: {
-                'id': id,
-                'project_id': projectId,
-            },
-        });
-    }
-
+    id: number
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
-    public pluginConfigsJobCreate({
-        id,
-        projectId,
-        requestBody,
-    }: {
-        /**
-         * A unique integer value identifying this plugin config.
-         */
-        id: number,
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        requestBody: PluginConfig,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/api/projects/{project_id}/plugin_configs/{id}/job/',
-            path: {
-                'id': id,
-                'project_id': projectId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    projectId: string
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      path: {
+        id: id,
+        project_id: projectId,
+      },
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsUpdate({
+    id,
+    projectId,
+    requestBody,
+  }: {
     /**
-     * @returns PluginConfig
-     * @throws ApiError
+     * A unique integer value identifying this plugin config.
      */
-    public pluginConfigsRearrangePartialUpdate({
-        projectId,
-        requestBody,
-    }: {
-        /**
-         * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
-         */
-        projectId: string,
-        requestBody?: PatchedPluginConfig,
-    }): CancelablePromise<PluginConfig> {
-        return this.httpRequest.request({
-            method: 'PATCH',
-            url: '/api/projects/{project_id}/plugin_configs/rearrange/',
-            path: {
-                'project_id': projectId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    id: number
+    /**
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
+     */
+    projectId: string
+    requestBody: PluginConfig
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'PUT',
+      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      path: {
+        id: id,
+        project_id: projectId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsPartialUpdate({
+    id,
+    projectId,
+    requestBody,
+  }: {
+    /**
+     * A unique integer value identifying this plugin config.
+     */
+    id: number
+    /**
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
+     */
+    projectId: string
+    requestBody?: PatchedPluginConfig
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'PATCH',
+      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      path: {
+        id: id,
+        project_id: projectId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns void
+   * @throws ApiError
+   */
+  public pluginConfigsDestroy({
+    id,
+    projectId,
+  }: {
+    /**
+     * A unique integer value identifying this plugin config.
+     */
+    id: number
+    /**
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
+     */
+    projectId: string
+  }): CancelablePromise<void> {
+    return this.httpRequest.request({
+      method: 'DELETE',
+      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      path: {
+        id: id,
+        project_id: projectId,
+      },
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsFrontendRetrieve({
+    id,
+    projectId,
+  }: {
+    /**
+     * A unique integer value identifying this plugin config.
+     */
+    id: number
+    /**
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
+     */
+    projectId: string
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/projects/{project_id}/plugin_configs/{id}/frontend/',
+      path: {
+        id: id,
+        project_id: projectId,
+      },
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsJobCreate({
+    id,
+    projectId,
+    requestBody,
+  }: {
+    /**
+     * A unique integer value identifying this plugin config.
+     */
+    id: number
+    /**
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
+     */
+    projectId: string
+    requestBody: PluginConfig
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/api/projects/{project_id}/plugin_configs/{id}/job/',
+      path: {
+        id: id,
+        project_id: projectId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns PluginConfig
+   * @throws ApiError
+   */
+  public pluginConfigsRearrangePartialUpdate({
+    projectId,
+    requestBody,
+  }: {
+    /**
+     * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
+     */
+    projectId: string
+    requestBody?: PatchedPluginConfig
+  }): CancelablePromise<PluginConfig> {
+    return this.httpRequest.request({
+      method: 'PATCH',
+      url: '/api/projects/{project_id}/plugin_configs/rearrange/',
+      path: {
+        project_id: projectId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
 }

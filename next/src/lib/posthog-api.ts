@@ -28,7 +28,7 @@ export const getPostHogInsightById = unstable_cache(
     })
     return result
   },
-  ['posthog'],
+  ['getPostHogInsightById'],
   { revalidate: 3600 },
 ) // revalidate every 1 hours
 
@@ -36,13 +36,14 @@ export const getTotalPageViewsByPath = unstable_cache(
   async ({ path }: { path: string }) => {
     const insight = await posthogApi.insights.insightsRetrieve({
       projectId,
+      refresh: true,
       id: 99083,
       format: 'json',
     })
 
     let toalPageViews: number | undefined = undefined
 
-    if (!insight.result.length) return toalPageViews
+    if (!insight?.result?.length) return toalPageViews
 
     const result = insight.result as unknown as Array<{
       aggregated_value: number
@@ -55,6 +56,6 @@ export const getTotalPageViewsByPath = unstable_cache(
 
     return toalPageViews
   },
-  ['posthog'],
+  ['getTotalPageViewsByPath'],
   { revalidate: 3600 },
 ) // revalidate every 1 hours

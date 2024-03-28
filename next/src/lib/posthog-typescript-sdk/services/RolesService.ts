@@ -2,262 +2,249 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PaginatedRoleList } from '../models/PaginatedRoleList';
-import type { PaginatedRoleMembershipList } from '../models/PaginatedRoleMembershipList';
-import type { PatchedRole } from '../models/PatchedRole';
-import type { Role } from '../models/Role';
-import type { RoleMembership } from '../models/RoleMembership';
-
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { PaginatedRoleList } from '../models/PaginatedRoleList'
+import type { PaginatedRoleMembershipList } from '../models/PaginatedRoleMembershipList'
+import type { PatchedRole } from '../models/PatchedRole'
+import type { Role } from '../models/Role'
+import type { RoleMembership } from '../models/RoleMembership'
 export class RolesService {
-
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
-
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
+  /**
+   * @returns PaginatedRoleList
+   * @throws ApiError
+   */
+  public rolesList({
+    parentLookupOrganizationId,
+    limit,
+    offset,
+  }: {
+    parentLookupOrganizationId: string
     /**
-     * @returns PaginatedRoleList
-     * @throws ApiError
+     * Number of results to return per page.
      */
-    public rolesList({
-        parentLookupOrganizationId,
-        limit,
-        offset,
-    }: {
-        parentLookupOrganizationId: string,
-        /**
-         * Number of results to return per page.
-         */
-        limit?: number,
-        /**
-         * The initial index from which to return the results.
-         */
-        offset?: number,
-    }): CancelablePromise<PaginatedRoleList> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/',
-            path: {
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-            },
-            query: {
-                'limit': limit,
-                'offset': offset,
-            },
-        });
-    }
-
+    limit?: number
     /**
-     * @returns Role
-     * @throws ApiError
+     * The initial index from which to return the results.
      */
-    public rolesCreate({
-        parentLookupOrganizationId,
-        requestBody,
-    }: {
-        parentLookupOrganizationId: string,
-        requestBody: Role,
-    }): CancelablePromise<Role> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/',
-            path: {
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    offset?: number
+  }): CancelablePromise<PaginatedRoleList> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/',
+      path: {
+        parent_lookup_organization_id: parentLookupOrganizationId,
+      },
+      query: {
+        limit: limit,
+        offset: offset,
+      },
+    })
+  }
+  /**
+   * @returns Role
+   * @throws ApiError
+   */
+  public rolesCreate({
+    parentLookupOrganizationId,
+    requestBody,
+  }: {
+    parentLookupOrganizationId: string
+    requestBody: Role
+  }): CancelablePromise<Role> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/',
+      path: {
+        parent_lookup_organization_id: parentLookupOrganizationId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns PaginatedRoleMembershipList
+   * @throws ApiError
+   */
+  public rolesRoleMembershipsList({
+    parentLookupOrganizationId,
+    parentLookupRoleId,
+    limit,
+    offset,
+  }: {
+    parentLookupOrganizationId: string
+    parentLookupRoleId: string
     /**
-     * @returns PaginatedRoleMembershipList
-     * @throws ApiError
+     * Number of results to return per page.
      */
-    public rolesRoleMembershipsList({
-        parentLookupOrganizationId,
-        parentLookupRoleId,
-        limit,
-        offset,
-    }: {
-        parentLookupOrganizationId: string,
-        parentLookupRoleId: string,
-        /**
-         * Number of results to return per page.
-         */
-        limit?: number,
-        /**
-         * The initial index from which to return the results.
-         */
-        offset?: number,
-    }): CancelablePromise<PaginatedRoleMembershipList> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
-            path: {
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-                'parent_lookup_role_id': parentLookupRoleId,
-            },
-            query: {
-                'limit': limit,
-                'offset': offset,
-            },
-        });
-    }
-
+    limit?: number
     /**
-     * @returns RoleMembership
-     * @throws ApiError
+     * The initial index from which to return the results.
      */
-    public rolesRoleMembershipsCreate({
-        parentLookupOrganizationId,
-        parentLookupRoleId,
-        requestBody,
-    }: {
-        parentLookupOrganizationId: string,
-        parentLookupRoleId: string,
-        requestBody: RoleMembership,
-    }): CancelablePromise<RoleMembership> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
-            path: {
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-                'parent_lookup_role_id': parentLookupRoleId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    offset?: number
+  }): CancelablePromise<PaginatedRoleMembershipList> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
+      path: {
+        parent_lookup_organization_id: parentLookupOrganizationId,
+        parent_lookup_role_id: parentLookupRoleId,
+      },
+      query: {
+        limit: limit,
+        offset: offset,
+      },
+    })
+  }
+  /**
+   * @returns RoleMembership
+   * @throws ApiError
+   */
+  public rolesRoleMembershipsCreate({
+    parentLookupOrganizationId,
+    parentLookupRoleId,
+    requestBody,
+  }: {
+    parentLookupOrganizationId: string
+    parentLookupRoleId: string
+    requestBody: RoleMembership
+  }): CancelablePromise<RoleMembership> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
+      path: {
+        parent_lookup_organization_id: parentLookupOrganizationId,
+        parent_lookup_role_id: parentLookupRoleId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns void
+   * @throws ApiError
+   */
+  public rolesRoleMembershipsDestroy({
+    id,
+    parentLookupOrganizationId,
+    parentLookupRoleId,
+  }: {
     /**
-     * @returns void
-     * @throws ApiError
+     * A UUID string identifying this role membership.
      */
-    public rolesRoleMembershipsDestroy({
-        id,
-        parentLookupOrganizationId,
-        parentLookupRoleId,
-    }: {
-        /**
-         * A UUID string identifying this role membership.
-         */
-        id: string,
-        parentLookupOrganizationId: string,
-        parentLookupRoleId: string,
-    }): CancelablePromise<void> {
-        return this.httpRequest.request({
-            method: 'DELETE',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/',
-            path: {
-                'id': id,
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-                'parent_lookup_role_id': parentLookupRoleId,
-            },
-        });
-    }
-
+    id: string
+    parentLookupOrganizationId: string
+    parentLookupRoleId: string
+  }): CancelablePromise<void> {
+    return this.httpRequest.request({
+      method: 'DELETE',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/',
+      path: {
+        id: id,
+        parent_lookup_organization_id: parentLookupOrganizationId,
+        parent_lookup_role_id: parentLookupRoleId,
+      },
+    })
+  }
+  /**
+   * @returns Role
+   * @throws ApiError
+   */
+  public rolesRetrieve({
+    id,
+    parentLookupOrganizationId,
+  }: {
     /**
-     * @returns Role
-     * @throws ApiError
+     * A UUID string identifying this role.
      */
-    public rolesRetrieve({
-        id,
-        parentLookupOrganizationId,
-    }: {
-        /**
-         * A UUID string identifying this role.
-         */
-        id: string,
-        parentLookupOrganizationId: string,
-    }): CancelablePromise<Role> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
-            path: {
-                'id': id,
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-            },
-        });
-    }
-
+    id: string
+    parentLookupOrganizationId: string
+  }): CancelablePromise<Role> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      path: {
+        id: id,
+        parent_lookup_organization_id: parentLookupOrganizationId,
+      },
+    })
+  }
+  /**
+   * @returns Role
+   * @throws ApiError
+   */
+  public rolesUpdate({
+    id,
+    parentLookupOrganizationId,
+    requestBody,
+  }: {
     /**
-     * @returns Role
-     * @throws ApiError
+     * A UUID string identifying this role.
      */
-    public rolesUpdate({
-        id,
-        parentLookupOrganizationId,
-        requestBody,
-    }: {
-        /**
-         * A UUID string identifying this role.
-         */
-        id: string,
-        parentLookupOrganizationId: string,
-        requestBody: Role,
-    }): CancelablePromise<Role> {
-        return this.httpRequest.request({
-            method: 'PUT',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
-            path: {
-                'id': id,
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    id: string
+    parentLookupOrganizationId: string
+    requestBody: Role
+  }): CancelablePromise<Role> {
+    return this.httpRequest.request({
+      method: 'PUT',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      path: {
+        id: id,
+        parent_lookup_organization_id: parentLookupOrganizationId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns Role
+   * @throws ApiError
+   */
+  public rolesPartialUpdate({
+    id,
+    parentLookupOrganizationId,
+    requestBody,
+  }: {
     /**
-     * @returns Role
-     * @throws ApiError
+     * A UUID string identifying this role.
      */
-    public rolesPartialUpdate({
-        id,
-        parentLookupOrganizationId,
-        requestBody,
-    }: {
-        /**
-         * A UUID string identifying this role.
-         */
-        id: string,
-        parentLookupOrganizationId: string,
-        requestBody?: PatchedRole,
-    }): CancelablePromise<Role> {
-        return this.httpRequest.request({
-            method: 'PATCH',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
-            path: {
-                'id': id,
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
+    id: string
+    parentLookupOrganizationId: string
+    requestBody?: PatchedRole
+  }): CancelablePromise<Role> {
+    return this.httpRequest.request({
+      method: 'PATCH',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      path: {
+        id: id,
+        parent_lookup_organization_id: parentLookupOrganizationId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    })
+  }
+  /**
+   * @returns void
+   * @throws ApiError
+   */
+  public rolesDestroy({
+    id,
+    parentLookupOrganizationId,
+  }: {
     /**
-     * @returns void
-     * @throws ApiError
+     * A UUID string identifying this role.
      */
-    public rolesDestroy({
-        id,
-        parentLookupOrganizationId,
-    }: {
-        /**
-         * A UUID string identifying this role.
-         */
-        id: string,
-        parentLookupOrganizationId: string,
-    }): CancelablePromise<void> {
-        return this.httpRequest.request({
-            method: 'DELETE',
-            url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
-            path: {
-                'id': id,
-                'parent_lookup_organization_id': parentLookupOrganizationId,
-            },
-        });
-    }
-
+    id: string
+    parentLookupOrganizationId: string
+  }): CancelablePromise<void> {
+    return this.httpRequest.request({
+      method: 'DELETE',
+      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      path: {
+        id: id,
+        parent_lookup_organization_id: parentLookupOrganizationId,
+      },
+    })
+  }
 }

@@ -2,13 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import type { Experiment } from './Experiment';
-
+import type { Experiment } from './Experiment'
 export type PaginatedExperimentList = {
-    count?: number;
-    next?: string | null;
-    previous?: string | null;
-    results?: Array<Experiment>;
-};
-
+  count?: number
+  next?: string | null
+  previous?: string | null
+  results?: Array<Experiment>
+}

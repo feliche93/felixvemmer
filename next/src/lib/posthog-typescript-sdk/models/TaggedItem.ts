@@ -2,8 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type TaggedItem = {
-    readonly tag: string;
-};
-
+  readonly tag: string
+}

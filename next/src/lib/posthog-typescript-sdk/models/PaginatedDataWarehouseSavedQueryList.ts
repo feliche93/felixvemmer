@@ -2,13 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import type { DataWarehouseSavedQuery } from './DataWarehouseSavedQuery';
-
+import type { DataWarehouseSavedQuery } from './DataWarehouseSavedQuery'
 export type PaginatedDataWarehouseSavedQueryList = {
-    count?: number;
-    next?: string | null;
-    previous?: string | null;
-    results?: Array<DataWarehouseSavedQuery>;
-};
-
+  count?: number
+  next?: string | null
+  previous?: string | null
+  results?: Array<DataWarehouseSavedQuery>
+}

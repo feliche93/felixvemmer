@@ -2,13 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import type { EnterpriseEventDefinition } from './EnterpriseEventDefinition';
-
+import type { EnterpriseEventDefinition } from './EnterpriseEventDefinition'
 export type PaginatedEnterpriseEventDefinitionList = {
-    count?: number;
-    next?: string | null;
-    previous?: string | null;
-    results?: Array<EnterpriseEventDefinition>;
-};
-
+  count?: number
+  next?: string | null
+  previous?: string | null
+  results?: Array<EnterpriseEventDefinition>
+}

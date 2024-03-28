@@ -2,13 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import type { OrganizationResourceAccess } from './OrganizationResourceAccess';
-
+import type { OrganizationResourceAccess } from './OrganizationResourceAccess'
 export type PaginatedOrganizationResourceAccessList = {
-    count?: number;
-    next?: string | null;
-    previous?: string | null;
-    results?: Array<OrganizationResourceAccess>;
-};
-
+  count?: number
+  next?: string | null
+  previous?: string | null
+  results?: Array<OrganizationResourceAccess>
+}

@@ -2,13 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type PatchedPerson = {
-    readonly id?: number;
-    readonly name?: string;
-    readonly distinct_ids?: Array<string>;
-    properties?: Record<string, any>;
-    readonly created_at?: string;
-    readonly uuid?: string;
-};
-
+  readonly id?: number
+  readonly name?: string
+  readonly distinct_ids?: Array<string>
+  properties?: Record<string, any>
+  readonly created_at?: string
+  readonly uuid?: string
+}

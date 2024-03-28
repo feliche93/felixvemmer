@@ -3,21 +3,13 @@ from mdx_blogpost_crew.crew import MdxBlogpostCrewCrew
 
 
 def run():
-    # Example inputs for testing
-    company_description = "A leading provider of AI-driven marketing solutions, specializing in personalized customer engagement and analytics."
-    company_domain = "aimarketing.com"
-    hiring_needs = "Senior SEO Specialist, Content Marketing Manager"
-    specific_benefits = (
-        "Remote work flexibility, health and wellness programs, stock options"
-    )
+    # inputs = {"keyword": "backlink gpt", "num_results": 1}
+    inputs = {"person_name": "Iva Gjolli"}
+    crew = MdxBlogpostCrewCrew().crew()
 
-    # Prepare inputs for the crew
-    inputs = {
-        "company_description": company_description,
-        "company_domain": company_domain,
-        "hiring_needs": hiring_needs,
-        "specific_benefits": specific_benefits,
-    }
+    results = crew.kickoff(inputs=inputs)
 
-    # Kickoff the crew with the provided inputs
-    MdxBlogpostCrewCrew().crew().kickoff(inputs=inputs)
+    print("Crew usage", crew.usage_metrics)
+
+    print("Crew work results:")
+    print(results)

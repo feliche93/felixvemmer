@@ -2,13 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import type { SessionRecordingPlaylist } from './SessionRecordingPlaylist';
-
+import type { SessionRecordingPlaylist } from './SessionRecordingPlaylist'
 export type PaginatedSessionRecordingPlaylistList = {
-    count?: number;
-    next?: string | null;
-    previous?: string | null;
-    results?: Array<SessionRecordingPlaylist>;
-};
-
+  count?: number
+  next?: string | null
+  previous?: string | null
+  results?: Array<SessionRecordingPlaylist>
+}

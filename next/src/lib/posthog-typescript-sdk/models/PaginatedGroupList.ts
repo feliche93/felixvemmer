@@ -2,12 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import type { Group } from './Group';
-
+import type { Group } from './Group'
 export type PaginatedGroupList = {
-    next?: string | null;
-    previous?: string | null;
-    results?: Array<Group>;
-};
-
+  next?: string | null
+  previous?: string | null
+  results?: Array<Group>
+}
