@@ -33,7 +33,7 @@ export const Skills: FC<SkillsProps> = async ({ locale }) => {
       icon: BrainCircuit,
       languages: ['Python', 'SQL'],
       tools: [
-        'Langchain',
+        'Langchain, Instructor, CrewAI',
         'Postgres: Neon / Supabase',
         'DBT',
         'Pandas',
