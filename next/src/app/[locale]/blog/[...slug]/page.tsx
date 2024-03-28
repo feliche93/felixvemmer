@@ -8,9 +8,11 @@ import Image from 'next/image'
 
 import { Link } from '@/app/navigation'
 import { Icons } from '@/components/icons'
+import { PageViews } from '@/components/page-views'
 import { DashboardTableOfContents } from '@/components/toc'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { generatePageMeta } from '@/lib/seo'
 import { NewsArticleStructuredData } from '@/lib/structured'
 import { getTableOfContents } from '@/lib/toc'
@@ -18,6 +20,7 @@ import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { Suspense } from 'react'
 
 export interface PostPageProps {
   params: {
@@ -147,7 +150,13 @@ export default async function PostPage({ params }: PostPageProps) {
               />
               <div className="flex flex-col gap-1 text-sm">
                 <span className="text-lg font-bold">{authors[0].title}</span>
-                <span>{formatDate(post.date)}</span>
+                <div className="flex items-center gap-2 h-4">
+                  <span>{formatDate(post.date)}</span>
+                  <Separator orientation="vertical" />
+                  <Suspense fallback={null}>
+                    <PageViews slug={post.slug} />
+                  </Suspense>
+                </div>
               </div>
             </div>
             {/* Cover Image */}
