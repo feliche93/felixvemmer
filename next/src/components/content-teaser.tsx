@@ -38,6 +38,8 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
   const router = useRouter()
   const pathname = usePathname()
 
+  console.log({ isBot })
+
   const form = useForm<TSubscribe>({
     resolver: zodResolver(SSubscribe),
     defaultValues: {
@@ -232,16 +234,18 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
 
   return (
     <>
-      {/* <pre>
+      <pre>
         {JSON.stringify(
           {
+            hello: 'world',
+            isBot: isBot,
             errors: form.formState.errors,
             watch: form.watch(),
           },
           null,
           2,
         )}
-      </pre> */}
+      </pre>
       <Card className="my-12 flex flex-col items-center">
         <CardHeader>
           <CardTitle>
