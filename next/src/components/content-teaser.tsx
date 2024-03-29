@@ -15,7 +15,9 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } 
 import { Input } from './ui/input'
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from './ui/input-otp'
 
-export interface ContentTeaserProps extends PropsWithChildren<any> {}
+export interface ContentTeaserProps extends PropsWithChildren {
+  isBot?: boolean
+}
 
 const SSubscribe = z.object({
   email: z.string().email({
@@ -29,7 +31,7 @@ const SSubscribe = z.object({
 
 export type TSubscribe = z.infer<typeof SSubscribe>
 
-export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
+export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
   const { isLoaded: isLoadedSignIn, isSignedIn } = useAuth()
   const { isLoaded: isLoadedSignUp, signUp, setActive } = useSignUp()
   const { signIn } = useSignIn()
@@ -47,7 +49,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
     },
   })
 
-  if (isLoadedSignIn && isSignedIn) {
+  if (isBot || (isLoadedSignIn && isSignedIn)) {
     // If the user is allowed, show the full content
     return <>{children}</>
   }
@@ -187,9 +189,12 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
             <CardTitle>Enter verification code</CardTitle>
           </CardHeader>
           <CardContent>Enter the verification code which was sent to your email.</CardContent>
-          <CardFooter className="gap-4">
+          <CardFooter className="gap-0">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onVerify)} className="flex flex-row gap-2">
+              <form
+                onSubmit={form.handleSubmit(onVerify)}
+                className="flex flex-col sm:flex-row gap-2"
+              >
                 <FormField
                   control={form.control}
                   name="code"
@@ -250,11 +255,11 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children }) => {
             ? 'Become a free member to get access to all subscriber-only content.'
             : 'Enter your email to sign in and continue reading.'}
         </CardContent>
-        <CardFooter className="gap-4">
+        <CardFooter>
           <Form {...form}>
             <div className="flex flex-col items-center">
-              <form onSubmit={form.handleSubmit(onSubmit)} className="">
-                <div className="flex flex-row gap-2">
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <div className="flex flex-col sm:flex-row gap-2">
                   <FormField
                     control={form.control}
                     name="email"

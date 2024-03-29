@@ -20,6 +20,8 @@ import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { headers } from 'next/headers'
+import { userAgent } from 'next/server'
 import { Suspense } from 'react'
 
 export interface PostPageProps {
@@ -77,6 +79,10 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 // }
 
 export default async function PostPage({ params }: PostPageProps) {
+  const { isBot } = userAgent({
+    headers: headers(),
+  })
+
   const post = await getPostFromParams(params)
 
   unstable_setRequestLocale(params.locale || 'en')
@@ -169,7 +175,7 @@ export default async function PostPage({ params }: PostPageProps) {
               src={post.image}
             />
             {/* Content */}
-            <Mdx code={post.body.code} />
+            <Mdx isBot={isBot} code={post.body.code} />
           </article>
           <hr className="my-8" />
           <div className="flex justify-center py-6 lg:py-10">

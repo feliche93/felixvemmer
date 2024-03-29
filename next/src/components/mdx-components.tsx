@@ -209,16 +209,19 @@ const components = {
       {...props}
     />
   ),
-  ContentTeaser: ({ children, ...props }: React.ComponentProps<typeof ContentTeaser>) => (
-    <ContentTeaser {...props}>{children}</ContentTeaser>
+  ContentTeaser: ({ isBot, children, ...props }: React.ComponentProps<typeof ContentTeaser>) => (
+    <ContentTeaser isBot={isBot} {...props}>
+      {children}
+    </ContentTeaser>
   ),
 }
 
 interface MdxProps {
   code: string
+  isBot: boolean
 }
 
-export function Mdx({ code }: MdxProps) {
+export function Mdx({ code, isBot }: MdxProps) {
   const [config] = useConfig()
   const Component = useMDXComponent(code, {
     style: config.style,
@@ -227,7 +230,7 @@ export function Mdx({ code }: MdxProps) {
   return (
     <div className="mdx">
       {/* @ts-ignore */}
-      <Component components={components} />
+      <Component isBot={isBot} components={components} />
     </div>
   )
 }
