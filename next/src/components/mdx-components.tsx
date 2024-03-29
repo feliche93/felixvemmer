@@ -218,7 +218,7 @@ const components = {
 
 interface MdxProps {
   code: string
-  isBot: boolean
+  isBot?: boolean
 }
 
 export function Mdx({ code, isBot }: MdxProps) {
