@@ -1,8 +1,13 @@
+from pathlib import Path
+from tabnanny import verbose
 from textwrap import dedent
 from typing import List, Optional
 from crewai import Task
 from crewai import Agent
-from felixvemmer_crew.models import SFindTopRankingSerpsForKeywordTaskOutput
+from felixvemmer_crew.models import (
+    SExtractWebsiteContentTaskOutput,
+    SFindTopRankingSerpsForKeywordTaskOutput,
+)
 
 
 class Tasks:
@@ -20,41 +25,52 @@ class Tasks:
             ),
             agent=agent,
             output_pydantic=SFindTopRankingSerpsForKeywordTaskOutput,
+            # human_input=True,
         )
 
     def extract_website_content_task(
-        self, agent: Agent, num_websites: int, context: Optional[List["Task"]]
+        self, agent: Agent, context: Optional[List["Task"]]
     ) -> Task:
-        return Task(
-            description=dedent(
-                f"""\
-								Extract the body text, title, meta title, meta description, meta image URL, 
-                and favicon image URL for the list of the three {num_websites} given website urls. 
-                Analyze the extracted content to understand the key factors contributing to the 
-                website's SEO performance."""
-            ),
-            expected_output=dedent(
-                """\
-								A list of websites with their content, title, meta description, meta image, favicon, and body text, along with an analysis of the key SEO factors."""
-            ),
-            agent=agent,
-            context=context,
-        )
+        return 
 
     def create_content_outline_task(
-        self, agent: Agent, num_websites: int, keyword: str
+        self,
+        agent: Agent,
+        num_websites: int,
+        keyword: str,
+        context: Optional[List["Task"]],
     ) -> Task:
         return Task(
+            # human_input=True,
+            context=context,
             description=dedent(
-                f"""\
-								Create a content outline for the keyword {keyword} based on the top {num_websites} 
-                ranking websites body text, title, meta description, meta image, favicon, and body text. 
-                Identify common themes, topics, and strategies used by these top-ranking pages to inform
-                the content strategy."""
+                f"""
+                Create a content outline for the keyword {keyword} based on the {num_websites} extracted website contents. 
+                Paying particular attention to the structure and organization of the content, e.g. what titles, headlines, subheadlines, meta descriptions are used.
+
+                The extracted content is saved in JSON files in the extracted_websites folder with the domain name as the filename.
+                """
             ),
+            output_file=f"{keyword.lower().replace(' ', '_')}.md",
+            # output_file=(
+            #     Path(__file__).resolve().parents[2]
+            #     / "crew_files"
+            #     / "content_outlines"
+            #     / f"{keyword.lower().replace(' ', '_')}.md"
+            # ).as_posix(),
             expected_output=dedent(
                 """
-                A document giving a content outline in the following format as shown in this example:
+                A document that includes everything you need to properly outline your blog articles, including the:
+
+                - Target keyword.
+                - Search intent of your target keyword.
+                - Approach angle.
+                - Goal of your content.
+                - Unique selling proposition (USP).
+                - Title of the article.
+                - Headings and subheadings of your content.
+
+                Here is a content outline example:
                                                               
                 # Title Ideas
 
@@ -118,10 +134,17 @@ class Tasks:
                 8. Simmer noodles in boiling water
                 9. Serve with desired veggies, meats, and broth
 
-                ## Instructions and Ingredients Box
-
-                End with this section.
                 """
             ),
             agent=agent,
         )
+
+    def create_first_draft_task(
+        self,
+        agent: Agent,
+        context: Optional[List["Task"]],
+        keyword: str,
+    ) -> Task:
+        return 
+
+  def imp

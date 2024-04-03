@@ -14,7 +14,7 @@ class SFindTopRankingSerpsForKeywordTaskOutput(BaseModel):
     top_ranking_serps: List[SerpOutput]
 
 
-class ExtractWebsiteContentTask(BaseModel):
+class SExtractWebsiteContentTaskOutput(BaseModel):
     """Extract Website Content Task Output"""
 
     extracted_websites: List[WebsiteContentOutputSchema]

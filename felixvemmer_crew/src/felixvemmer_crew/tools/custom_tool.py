@@ -1,5 +1,6 @@
 from textwrap import dedent
 from typing import List, Optional, Type
+from urllib.parse import urlparse
 import httpx
 from dotenv import load_dotenv
 import os
@@ -8,6 +9,7 @@ from crewai_tools.tools.base_tool import BaseTool
 from bs4 import BeautifulSoup
 from html2text import HTML2Text
 from playwright.sync_api import sync_playwright
+from pathlib import Path
 
 load_dotenv()
 
@@ -33,7 +35,10 @@ class ScrapingRobotResults(BaseModel):
 class ScrapingRobotTool(BaseTool):
     name: str = "Scraping Robot"
     description: str = dedent(
-        """A tool that can be used to extract the top ranking search results from google for a given keyword. It retruns a list of search results with their title and url whre the first result is the top ranking result."""
+        """A tool that can be used to extract the top ranking search 
+        results from google for a given keyword. It retruns a list of 
+        search results with their title and url whre the first result 
+        is the top ranking result."""
     )
     args_schema: Type[BaseModel] = ScrapingRobotArgs
 
@@ -110,11 +115,21 @@ class WebsiteContentOutputSchema(BaseModel):
 
 class PlaywrightScrapingTool(BaseTool):
     name: str = "Playwright Scraping Tool"
-    description: str = "A tool that can be used to scrape website text, meta title, meta description, meta image, and favicon image url from a website using Playwright."
+
+    description: str = dedent(
+        """"A tool that can be used to scrape website text, meta title, meta description, meta image, 
+        and favicon image url from a website using Playwright.
+        
+        The extracted content is saved to a json file.
+        "
+"""
+    )
     args_schema: Type[BaseModel] = PlaywrightScrapingToolArgs
 
-    def _run(self, url: str) -> WebsiteContentOutputSchema:
-        return self.get_website_content(PlaywrightScrapingToolArgs(url=url))
+    def _run(self, url: str) -> str:
+        content = self.get_website_content(PlaywrightScrapingToolArgs(url=url))
+        filename = self.save_website_content(content, url)
+        return filename
 
     def convert_content_to_soup(self, content: str) -> BeautifulSoup:
         """Convert html content to soup
@@ -130,20 +145,42 @@ class PlaywrightScrapingTool(BaseTool):
 
     def convert_content_to_markdown(self, content: str) -> str:
         """
-        Convert HTML content to markdown format.
+        Convert HTML content to markdown format, including proper conversion of h1, h2, etc., headings.
 
         Args:
             content (str): The HTML content to be converted.
 
         Returns:
-            str: The converted markdown content.
+            str: The converted markdown content with headings.
         """
 
         text_maker = HTML2Text()
         text_maker.ignore_links = False
         text_maker.ignore_images = True
+        text_maker.body_width = 0  # Prevents line wrapping to maintain formatting
+        text_maker.single_line_break = True  # Ensures single line breaks are recognized, important for markdown formatting
         markdown = text_maker.handle(content)
         return markdown
+
+    def save_website_content(
+        self, content: WebsiteContentOutputSchema, url: str
+    ) -> str:
+        """Save the content of a website to a file."""
+        parsed_url = urlparse(url)
+        domain_parts = parsed_url.netloc.split(".")
+        if len(domain_parts) > 2:
+            # Removes subdomain if present, e.g., 'www'
+            domain_name = domain_parts[-2]
+        else:
+            domain_name = domain_parts[0]
+        folder_path = Path(__file__).parent.parent / "crew_files" / "extracted_websites"
+        folder_path.mkdir(parents=True, exist_ok=True)
+        file_path = folder_path / f"{domain_name}.json"
+
+        with open(file_path, "w") as f:
+            f.write(content.json())  # Writes the content as JSON
+
+        return file_path.as_posix()
 
     def get_website_content(
         self,
