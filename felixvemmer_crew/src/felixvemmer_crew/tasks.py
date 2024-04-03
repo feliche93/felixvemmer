@@ -12,14 +12,11 @@ class Tasks:
         return Task(
             description=dedent(
                 f"""\
-								Identify the top relevant {num_websites} search results for the keyword {keyword}. 
-                Analyze the content, relevance, and authority of these websites to understand why they 
-                rank well for the given keyword."""
+								Find the title and url for the top {num_websites} search results for a given keyword {keyword}."""
             ),
             expected_output=dedent(
                 """\
-								A list of relevant websites with their title and URL, along with an analysis of 
-                their content, relevance, and authority."""
+								A list of the top {num_websites} search results for the {keyword} with their title and URL."""
             ),
             agent=agent,
             output_pydantic=SFindTopRankingSerpsForKeywordTaskOutput,

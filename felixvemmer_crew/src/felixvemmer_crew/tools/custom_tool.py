@@ -1,3 +1,4 @@
+from textwrap import dedent
 from typing import List, Optional, Type
 import httpx
 from dotenv import load_dotenv
@@ -17,17 +18,23 @@ class ScrapingRobotArgs(BaseModel):
 
 
 class ScrapingRobotResult(BaseModel):
+    """A search result from google for a given keyword."""
+
     title: str = Field(..., title="The title of the search result")
     url: str = Field(..., title="The URL of the search result")
 
 
 class ScrapingRobotResults(BaseModel):
+    """A list of the top ranking search results from google for a given keyword."""
+
     results: List[ScrapingRobotResult] = Field(..., title="The search results")
 
 
 class ScrapingRobotTool(BaseTool):
     name: str = "Scraping Robot"
-    description: str = "A tool that can be used to extract search results from google for a given keyword."
+    description: str = dedent(
+        """A tool that can be used to extract the top ranking search results from google for a given keyword. It retruns a list of search results with their title and url whre the first result is the top ranking result."""
+    )
     args_schema: Type[BaseModel] = ScrapingRobotArgs
 
     def __init__(self, **kwargs):

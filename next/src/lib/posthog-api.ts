@@ -34,27 +34,34 @@ export const getPostHogInsightById = unstable_cache(
 
 export const getTotalPageViewsByPath = unstable_cache(
   async ({ path }: { path: string }) => {
-    const insight = await posthogApi.insights.insightsRetrieve({
-      projectId,
-      refresh: true,
-      id: 99083,
-      format: 'json',
-    })
+    try {
+      const insight = await posthogApi.insights.insightsRetrieve({
+        projectId,
+        refresh: true,
+        id: 99083,
+        format: 'json',
+      })
 
-    let toalPageViews: number | undefined = undefined
+      console.log({ insight })
 
-    if (!insight?.result?.length) return toalPageViews
+      let toalPageViews: number | undefined = undefined
 
-    const result = insight.result as unknown as Array<{
-      aggregated_value: number
-      label: string
-    }>
+      if (!insight?.result?.length) return toalPageViews
 
-    toalPageViews = result.find((item) =>
-      item.label.includes(path.replace('/en', '')),
-    )?.aggregated_value
+      const result = insight.result as unknown as Array<{
+        aggregated_value: number
+        label: string
+      }>
 
-    return toalPageViews
+      toalPageViews = result.find((item) =>
+        item.label.includes(path.replace('/en', '')),
+      )?.aggregated_value
+
+      return toalPageViews
+    } catch (error) {
+      console.error(error)
+      return 0
+    }
   },
   ['getTotalPageViewsByPath'],
   { revalidate: 3600 },

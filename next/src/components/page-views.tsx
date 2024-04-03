@@ -8,7 +8,12 @@ export interface PageViewsProps {
   className?: string
 }
 export const PageViews: FC<PageViewsProps> = async ({ slug, className }) => {
-  const pageviews = await getTotalPageViewsByPath({ path: slug })
+  let pageviews
+  try {
+    pageviews = await getTotalPageViewsByPath({ path: slug })
+  } catch (error) {
+    console.error(error)
+  }
 
   if (!pageviews) return null
 

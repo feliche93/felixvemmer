@@ -24,11 +24,11 @@ find_top_ranking_serps_for_keyword_task = tasks.find_top_ranking_serps_for_keywo
     keyword=keyword,
 )
 
-extract_website_content_task = tasks.extract_website_content_task(
-    agent=research_analyst,
-    num_websites=num_websites,
-    context=[find_top_ranking_serps_for_keyword_task],
-)
+# extract_website_content_task = tasks.extract_website_content_task(
+#     agent=research_analyst,
+#     num_websites=num_websites,
+#     context=[find_top_ranking_serps_for_keyword_task],
+# )
 
 # create_content_outline_task = tasks.create_content_outline_task(
 #     content_writer, num_websites, keyword
@@ -44,7 +44,7 @@ crew = Crew(
     ],
     process=Process.sequential,
     verbose=2,
-    memory=True,
+    # memory=True,
     # cache=True,
 )
 
