@@ -57,7 +57,3 @@ Write out each step with pictures showing how it’s done:
 7. Cut dough into long strips of noodles with the pasta machine
 8. Simmer noodles in boiling water
 9. Serve with desired veggies, meats, and broth
-
-## Instructions and Ingredients Box
-
-End with this section.

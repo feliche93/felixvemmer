@@ -3,15 +3,9 @@ from dotenv import load_dotenv
 from crewai import Crew
 from crewai.process import Process
 from pathlib import Path
-from textwrap import dedent
 from crewai import Task
 from crewai import Agent
-from felixvemmer_crew.models import (
-    SFindTopRankingSerpsForKeywordTaskOutput,
-)
-from pathlib import Path
-from textwrap import dedent
-from crewai import Agent
+from felixvemmer_crew.models import SFindTopRankingSerpsForKeywordTaskOutput
 from felixvemmer_crew.tools.custom_tool import ScrapingRobotTool, PlaywrightScrapingTool
 from crewai_tools.tools import FileReadTool, DirectoryReadTool
 
@@ -19,8 +13,8 @@ from crewai_tools.tools import FileReadTool, DirectoryReadTool
 load_dotenv()
 
 
-keyword = "best llm agent frameworks"  # input("What is the keyword to research?\n")
-num_websites = 2  # int(input("How many top ranking websites to analyze?\n"))
+keyword = "crewai vs autogen"  # input("What is the keyword to research?\n")
+num_websites = 3  # int(input("How many top ranking websites to analyze?\n"))
 publishing_website = "https://www.backlinkgpt.com"
 
 root_path = Path(__file__).resolve().parent
@@ -157,31 +151,36 @@ create_content_outline_task = Task(
     agent=seo_analyst,
 )
 
-create_first_draft_task = Task(
+expand_content_outline = Task(
     description=dedent(
-        """Create a first draft of a blog post in the style of Paul Graham, following the structure given in the content outline.
-
-                When writing the first draft of the blog post, write the essay exactly like Paul Graham would write it.
-                
-                - Essay should be written in a simple, conversational style, not in a grandiose or academic style.
-                - Use the same style, vocabulary level, and sentence structure as Paul Graham.
-                - Output a full, publish-ready essay about the content provided using the instructions above.
-                - Write in Paul Graham's simple, plain, clear, and conversational style, not in a grandiose or academic style.
-                - Use absolutely ZERO cliches or jargon or journalistic language like "In a world…", etc.
-                - Do not use cliches or jargon.
-                - Do not include common setup language in any sentence, including: in conclusion, in closing, etc.
-                """
+        """
+        Review the given content outline and expand it with factual and detailed content based on your research.
+        """
     ),
     expected_output=dedent(
-        """A first draft of a blog post in the style of Paul Graham based on the content outline.
-                """
+        """
+        "A file exactly following the format of `example_content_outline.md` file with more detailed infos.
+        """
     ),
-    agent=content_writer,
+    agent=research_analyst,
     context=[create_content_outline_task],
-    # human_input=True,
-    output_file="first_draft.md",
-    verbose=True,
 )
+
+# create_first_draft_task = Task(
+#     description=dedent(
+#         """
+#         """
+#     ),
+#     expected_output=dedent(
+#         """A first draft of a blog post based on the content outline, focusing on the USP, Content Angle, Audience and the structure of the content outline.
+#         """
+#     ),
+#     agent=content_writer,
+#     context=[create_content_outline_task],
+#     # human_input=True,
+#     output_file="first_draft.md",
+#     verbose=True,
+# )
 
 # Instantiate the crew with a sequential process
 crew = Crew(
@@ -190,7 +189,7 @@ crew = Crew(
         find_top_ranking_serps_for_keyword_task,
         extract_website_content_task,
         create_content_outline_task,
-        # create_first_draft_task,
+        expand_content_outline,
     ],
     process=Process.sequential,
     verbose=2,
