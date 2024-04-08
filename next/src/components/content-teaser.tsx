@@ -64,7 +64,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
     }
     setShowContentTeaser(true)
     console.log('showContentTeaser')
-  }, [isLoadedSignIn, isSignedIn, isBot, showContentTeaser])
+  }, [isLoadedSignIn, isSignedIn, isBot])
 
   if (!showContentTeaser) {
     // If the user is allowed, show the full content
@@ -190,7 +190,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
   if (form.watch('pendingVerification')) {
     return (
       <>
-        <pre>
+        {/* <pre>
           {JSON.stringify(
             {
               errors: form.formState.errors,
@@ -200,7 +200,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
             null,
             2,
           )}
-        </pre>{' '}
+        </pre>{' '} */}
         <Card className="my-12 flex flex-col items-center">
           <CardHeader>
             <CardTitle>Enter verification code</CardTitle>
@@ -249,7 +249,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
 
   return (
     <>
-      <pre>
+      {/* <pre>
         {JSON.stringify(
           {
             hello: 'world',
@@ -262,7 +262,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
           null,
           2,
         )}
-      </pre>
+      </pre> */}
       <Button onClick={() => setShowContentTeaser(false)}>Close</Button>
       <Card className="my-12 flex flex-col items-center">
         <CardHeader>
