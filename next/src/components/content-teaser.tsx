@@ -263,7 +263,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
           2,
         )}
       </pre> */}
-      <Button onClick={() => setShowContentTeaser(false)}>Close</Button>
+      {/* <Button onClick={() => setShowContentTeaser(false)}>Close</Button> */}
       <Card className="my-12 flex flex-col items-center">
         <CardHeader>
           <CardTitle>
