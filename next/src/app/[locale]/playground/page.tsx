@@ -9,7 +9,8 @@ export default function PlaygroundPage() {
   return (
     <>
       <pre>{JSON.stringify(isBot, null, 2)}</pre>
-      <ContentTeaser isBot={isBot}>
+      <p>This is not hidden</p>
+      <ContentTeaser>
         <h1>This is hidden</h1>
       </ContentTeaser>
     </>
