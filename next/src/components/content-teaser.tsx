@@ -1,12 +1,10 @@
 'use client'
 
-import { useContentTeaser } from '@/hooks/use-content-teaser'
-import { useAuth, useSignIn, useSignUp } from '@clerk/nextjs'
+import { useSignIn, useSignUp } from '@clerk/nextjs'
 import { EmailCodeFactor } from '@clerk/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2Icon } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
-import { FC, PropsWithChildren, useEffect } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -16,9 +14,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } 
 import { Input } from './ui/input'
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from './ui/input-otp'
 
-export interface ContentTeaserProps extends PropsWithChildren {
-  isBot?: boolean
-}
+export interface ContentTeaserProps extends PropsWithChildren {}
 
 const SSubscribe = z.object({
   email: z.string().email({
@@ -32,13 +28,9 @@ const SSubscribe = z.object({
 
 export type TSubscribe = z.infer<typeof SSubscribe>
 
-export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
-  const { isLoaded: isLoadedSignIn, isSignedIn } = useAuth()
+export const ContentTeaser: FC<ContentTeaserProps> = () => {
   const { isLoaded: isLoadedSignUp, signUp, setActive } = useSignUp()
   const { signIn } = useSignIn()
-  const pathname = usePathname()
-  const router = useRouter()
-  const [showContentTeaser, setShowContentTeaser] = useContentTeaser()
 
   const form = useForm<TSubscribe>({
     resolver: zodResolver(SSubscribe),
@@ -50,26 +42,6 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
       newsletter: true,
     },
   })
-
-  useEffect(() => {
-    if (isBot) {
-      console.log('Early return isBot')
-      setShowContentTeaser(false)
-      return
-    }
-    if (isLoadedSignIn && isSignedIn) {
-      console.log('Early return isSignedIn')
-      setShowContentTeaser(false)
-      return
-    }
-    setShowContentTeaser(true)
-    console.log('showContentTeaser')
-  }, [isLoadedSignIn, isSignedIn, isBot])
-
-  if (!showContentTeaser) {
-    // If the user is allowed, show the full content
-    return <>{children}</>
-  }
 
   async function onSubmit(values: TSubscribe) {
     if (!isLoadedSignUp) {

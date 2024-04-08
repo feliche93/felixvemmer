@@ -18,13 +18,15 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { YouTubeEmbed } from '@/components/youtube-embed'
 import { useConfig } from '@/hooks/use-config'
+import { useContentTeaser } from '@/hooks/use-content-teaser'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@clerk/nextjs'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import NextImage, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
+import { useEffect } from 'react'
 import { Tweet } from 'react-tweet'
-import ContentTeaser from './content-teaser'
 import { ProtectedContent } from './protected-content'
 
 const components = {
@@ -222,9 +224,27 @@ interface MdxProps {
 
 export function Mdx({ code, isBot }: MdxProps) {
   const [config] = useConfig()
+  const { isLoaded, isSignedIn } = useAuth()
   const Component = useMDXComponent(code, {
     style: config.style,
   })
+
+  const [showContentTeaser, setShowContentTeaser] = useContentTeaser()
+
+  useEffect(() => {
+    if (isBot) {
+      console.log('Early return isBot')
+      setShowContentTeaser(false)
+      return
+    }
+    if (isLoaded && isSignedIn) {
+      console.log('Early return isSignedIn')
+      setShowContentTeaser(false)
+      return
+    }
+    setShowContentTeaser(true)
+    console.log('showContentTeaser')
+  }, [isLoaded, isSignedIn, isBot])
 
   return (
     <>
@@ -232,7 +252,6 @@ export function Mdx({ code, isBot }: MdxProps) {
         {/* @ts-ignore */}
         <Component components={components} />
       </div>
-      <ContentTeaser isBot={isBot} />
     </>
   )
 }
