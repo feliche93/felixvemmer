@@ -25,6 +25,7 @@ import Link from 'next/link'
 import * as React from 'react'
 import { Tweet } from 'react-tweet'
 import ContentTeaser from './content-teaser'
+import { ProtectedContent } from './protected-content'
 
 const components = {
   CalCom,
@@ -209,22 +210,8 @@ const components = {
       {...props}
     />
   ),
-  ContentTeaser: ({ isBot, children, ...props }: React.ComponentProps<typeof ContentTeaser>) => (
-    <>
-      <pre>
-        {JSON.stringify(
-          {
-            isBot,
-            ...props,
-          },
-          null,
-          2,
-        )}
-      </pre>
-      <ContentTeaser isBot={isBot} {...props}>
-        {children}
-      </ContentTeaser>
-    </>
+  ProtectedContent: ({ ...props }: React.ComponentProps<typeof ProtectedContent>) => (
+    <ProtectedContent {...props} />
   ),
 }
 
@@ -237,13 +224,15 @@ export function Mdx({ code, isBot }: MdxProps) {
   const [config] = useConfig()
   const Component = useMDXComponent(code, {
     style: config.style,
-    isBot: isBot,
   })
 
   return (
-    <div className="mdx">
-      {/* @ts-ignore */}
-      <Component isBot={isBot} components={components} />
-    </div>
+    <>
+      <div className="mdx">
+        {/* @ts-ignore */}
+        <Component components={components} />
+      </div>
+      <ContentTeaser isBot={isBot} />
+    </>
   )
 }

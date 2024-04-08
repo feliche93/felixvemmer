@@ -1,11 +1,12 @@
 'use client'
 
+import { useContentTeaser } from '@/hooks/use-content-teaser'
 import { useAuth, useSignIn, useSignUp } from '@clerk/nextjs'
 import { EmailCodeFactor } from '@clerk/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2Icon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -35,10 +36,9 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
   const { isLoaded: isLoadedSignIn, isSignedIn } = useAuth()
   const { isLoaded: isLoadedSignUp, signUp, setActive } = useSignUp()
   const { signIn } = useSignIn()
-  const router = useRouter()
   const pathname = usePathname()
-
-  console.log({ isBot })
+  const router = useRouter()
+  const [showContentTeaser, setShowContentTeaser] = useContentTeaser()
 
   const form = useForm<TSubscribe>({
     resolver: zodResolver(SSubscribe),
@@ -51,7 +51,22 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
     },
   })
 
-  if (isBot || (isLoadedSignIn && isSignedIn)) {
+  useEffect(() => {
+    if (isBot) {
+      console.log('Early return isBot')
+      setShowContentTeaser(false)
+      return
+    }
+    if (isLoadedSignIn && isSignedIn) {
+      console.log('Early return isSignedIn')
+      setShowContentTeaser(false)
+      return
+    }
+    setShowContentTeaser(true)
+    console.log('showContentTeaser')
+  }, [isLoadedSignIn, isSignedIn, isBot, showContentTeaser])
+
+  if (!showContentTeaser) {
     // If the user is allowed, show the full content
     return <>{children}</>
   }
@@ -124,7 +139,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
         }
         if (completeSignUp.status === 'complete') {
           await setActive({ session: completeSignUp.createdSessionId })
-          router.refresh()
+
           return
         }
       } catch (err: any) {
@@ -160,8 +175,7 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
         // If verification was completed, create a session for the user
         if (completeSignIn.status === 'complete') {
           await setActive({ session: completeSignIn.createdSessionId })
-          // Redirect user
-          router.refresh()
+
           return
         }
       } catch (err: any) {
@@ -176,16 +190,17 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
   if (form.watch('pendingVerification')) {
     return (
       <>
-        {/* <pre>
+        <pre>
           {JSON.stringify(
             {
               errors: form.formState.errors,
               watch: form.watch(),
+              showContentTeaser,
             },
             null,
             2,
           )}
-        </pre>{' '} */}
+        </pre>{' '}
         <Card className="my-12 flex flex-col items-center">
           <CardHeader>
             <CardTitle>Enter verification code</CardTitle>
@@ -241,11 +256,14 @@ export const ContentTeaser: FC<ContentTeaserProps> = ({ children, isBot }) => {
             isBot: isBot,
             errors: form.formState.errors,
             watch: form.watch(),
+            pathname,
+            showContentTeaser,
           },
           null,
           2,
         )}
       </pre>
+      <Button onClick={() => setShowContentTeaser(false)}>Close</Button>
       <Card className="my-12 flex flex-col items-center">
         <CardHeader>
           <CardTitle>
