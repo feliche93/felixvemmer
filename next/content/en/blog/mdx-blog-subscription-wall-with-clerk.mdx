@@ -1,6 +1,6 @@
 ---
-image: '/posts/why-next-js/twitter-card.png'
-title: "Build a Blog Subscription Wall with Clerk and ContentLayer for your MDX Blog"
+image: '/posts/mdx-blog-subscription-wall-with-clerk/cover-image.png'
+title: "How to Build a Blog Subscription Wall with Clerk and ContentLayer for your MDX Blog"
 description: 'In this article, we will build a subscription wall for your MDX blog using Clerk, an easy to use auth provider and integrate it into our blog using MDX and Contentlayer.'
 metaTitle: 'Build a Subscription Wall with Clerk for your MDX Blog'
 metaDescription: "Learn to create a subscription wall for your MDX blog with Clerk, enhancing content access control efficiently."
@@ -490,6 +490,35 @@ Simply use the [`userAgent` function](https://nextjs.org/docs/app/api-reference/
 
 To make sure this works for Google you can use the [Rich Results Test](https://search.google.com/test/rich-results) to see if Google is able to get past your `ProtectedContent` component.
 
-Testing it on the 
+Testing it on this blogpost shows that I was able to see the protected content:
 
+> Google should be able to index this.
+
+inside this `ProtectedContent` component.
+
+```mdx  
+
+The next step is to create a card component that will be shown to the user if they are not logged in.
+
+<ProtectedContent>
+Google should be able to index this.
+</ProtectedContent>
+
+```
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/mdx-blog-subscription-wall-with-clerk/google-user-agent-check.png"
+  alt="Google indexing"
+  width={1000}
+  height={500}
+/>
+
+## Wrapping Up
+
+This concludes the guide on how to create a subscription wall for your MDX blog using Clerk.
+
+I hope you found this guide useful and I'm looking forward to hearing your thoughts or see you in my Clerk dashboard as a new subscribed user.
+
+If you're curious how my blog subscribers are developing follow me on [X](https://twitter.com/felixvemmer) to not miss out.
 
