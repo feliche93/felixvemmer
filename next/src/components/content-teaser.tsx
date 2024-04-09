@@ -20,7 +20,6 @@ const SSubscribe = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address',
   }),
-  newsletter: z.coerce.boolean().optional().default(true),
   pendingVerification: z.boolean().optional(),
   code: z.string().optional(),
   mode: z.literal('sign-up').or(z.literal('sign-in')).default('sign-up'),
@@ -39,7 +38,6 @@ export const ContentTeaser: FC<ContentTeaserProps> = () => {
       pendingVerification: false,
       code: '',
       mode: 'sign-up',
-      newsletter: true,
     },
   })
 
@@ -54,10 +52,8 @@ export const ContentTeaser: FC<ContentTeaserProps> = () => {
           emailAddress: values.email,
         })
 
-        // send the email.
         await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
 
-        // change the UI to our pending section.
         form.setValue('pendingVerification', true)
         toast.success('Please enter the verification code which was sent to your email.')
       } catch (err: any) {
@@ -235,7 +231,6 @@ export const ContentTeaser: FC<ContentTeaserProps> = () => {
           2,
         )}
       </pre> */}
-      {/* <Button onClick={() => setShowContentTeaser(false)}>Close</Button> */}
       <Card className="my-12 flex flex-col items-center">
         <CardHeader>
           <CardTitle>
@@ -262,7 +257,6 @@ export const ContentTeaser: FC<ContentTeaserProps> = () => {
                         <FormControl>
                           <Input className="w-60" placeholder="" type="email" {...field} />
                         </FormControl>
-
                         <FormMessage />
                       </FormItem>
                     )}
@@ -274,22 +268,6 @@ export const ContentTeaser: FC<ContentTeaserProps> = () => {
                     {form.watch('mode') === 'sign-up' ? 'Subscribe' : 'Sign in'}
                   </Button>
                 </div>
-                {/* {form.watch('mode') === 'sign-up' && (
-                  <FormField
-                    control={form.control}
-                    name="newsletter"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start justify-center space-x-3 space-y-0 my-3">
-                        <FormControl>
-                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>Subscribe to newsletter</FormLabel>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                )} */}
               </form>
               <FormDescription className="pt-2">
                 Already a reader?{' '}

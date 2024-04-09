@@ -281,21 +281,21 @@ export function Mdx({ code, isBot }: MdxProps) {
     style: config.style,
   })
 
-  const [showContentTeaser, setShowContentTeaser] = useContentTeaser()
+  const [_, setShowContentTeaser] = useContentTeaser()
 
   useEffect(() => {
     if (isBot) {
-      console.log('Early return isBot')
+      // console.log('Early return isBot')
       setShowContentTeaser(false)
       return
     }
     if (isLoaded && isSignedIn) {
-      console.log('Early return isSignedIn')
+      // console.log('Early return isSignedIn')
       setShowContentTeaser(false)
       return
     }
     setShowContentTeaser(true)
-    console.log('showContentTeaser')
+    // console.log('showContentTeaser')
   }, [isLoaded, isSignedIn, isBot])
 
   return (

@@ -7,12 +7,20 @@ export default function PlaygroundPage() {
     headers: headers(),
   })
   return (
-    <>
-      <pre>{JSON.stringify(isBot, null, 2)}</pre>
+    <div className="max-w-lg mx-auto">
+      <pre className="p-8">
+        {JSON.stringify(
+          {
+            isBot,
+          },
+          null,
+          2,
+        )}
+      </pre>
       <p>This is not hidden</p>
       <ContentTeaser>
         <h1>This is hidden</h1>
       </ContentTeaser>
-    </>
+    </div>
   )
 }
