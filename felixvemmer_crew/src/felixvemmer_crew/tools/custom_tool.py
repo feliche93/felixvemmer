@@ -1,6 +1,7 @@
 from textwrap import dedent
 from typing import List, Optional, Type
 from urllib.parse import urlparse
+import uuid
 import httpx
 from dotenv import load_dotenv
 import os
@@ -116,14 +117,16 @@ class WebsiteContentOutputSchema(BaseModel):
 class PlaywrightScrapingTool(BaseTool):
     name: str = "Playwright Scraping Tool"
 
-    description: str = dedent(
-        """"A tool that can be used to scrape website text, meta title, meta description, meta image, 
-        and favicon image url from a website using Playwright.
-        
-        The extracted content is saved to a json file.
-        "
-"""
+    folder_path: Path = (
+        Path(__file__).parent.parent / "files" / "playwright_scraping_tool"
     )
+    description: str = dedent(
+        f"""\
+        A tool that can be used to scrape website text, meta title, meta description, meta image, and favicon image url from a website using Playwright.
+        The extracted content is saved to a json file with a random uuid in {folder_path.as_posix()}.
+        """
+    )
+
     args_schema: Type[BaseModel] = PlaywrightScrapingToolArgs
 
     def _run(self, url: str) -> str:
@@ -166,16 +169,10 @@ class PlaywrightScrapingTool(BaseTool):
         self, content: WebsiteContentOutputSchema, url: str
     ) -> str:
         """Save the content of a website to a file."""
-        parsed_url = urlparse(url)
-        domain_parts = parsed_url.netloc.split(".")
-        if len(domain_parts) > 2:
-            # Removes subdomain if present, e.g., 'www'
-            domain_name = domain_parts[-2]
-        else:
-            domain_name = domain_parts[0]
-        folder_path = Path(__file__).parent.parent / "crew_files" / "extracted_websites"
-        folder_path.mkdir(parents=True, exist_ok=True)
-        file_path = folder_path / f"{domain_name}.json"
+
+        self.folder_path.mkdir(parents=True, exist_ok=True)
+        file_uuid = str(uuid.uuid4())
+        file_path = self.folder_path / f"{file_uuid}.json"
 
         with open(file_path, "w") as f:
             f.write(content.json())  # Writes the content as JSON

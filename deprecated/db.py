@@ -56,7 +56,9 @@ def insert_platform_statistic(
         None
     """
     with session:
-        platform = session.exec(select(FreelancePlatform).where(FreelancePlatform.url == full_url)).first()
+        platform = session.exec(
+            select(FreelancePlatform).where(FreelancePlatform.url == full_url)
+        ).first()
 
         if platform is None:
             raise ValueError(f"No platform found with URL {full_url}")
@@ -68,25 +70,37 @@ def insert_platform_statistic(
         ).first()
 
         if previous_stat is None:
-            raise ValueError(f"No previous statistic found for platform {platform.name}")
+            raise ValueError(
+                f"No previous statistic found for platform {platform.name}"
+            )
 
         # Check if the previous_stat date is equal to the input date
-        print(f"Checking if previous_stat.date ({previous_stat.date}) is equal to input date ({date})")
+        print(
+            f"Checking if previous_stat.date ({previous_stat.date}) is equal to input date ({date})"
+        )
         if previous_stat.date == date:
             print("Statistic for this date is already present.")
             return
         else:
-            print("Statistic for this date is not present, proceeding with the function.")
+            print(
+                "Statistic for this date is not present, proceeding with the function."
+            )
 
         # If profile_visits_total is provided, calculate profile_visits based on the previous date
         if profile_visits_total is not None:
-            profile_visits = profile_visits_total - (previous_stat.profile_visits_total if previous_stat else 0)
+            profile_visits = profile_visits_total - (
+                previous_stat.profile_visits_total if previous_stat else 0
+            )
         elif profile_visits is not None:
             # If profile_visits is provided, calculate profile_visits_total based on
             # the previous date
-            profile_visits_total = (previous_stat.profile_visits_total if previous_stat else 0) + profile_visits
+            profile_visits_total = (
+                previous_stat.profile_visits_total if previous_stat else 0
+            ) + profile_visits
         else:
-            raise ValueError("Either profile visits or profile visits total with a date must be provided")
+            raise ValueError(
+                "Either profile visits or profile visits total with a date must be provided"
+            )
 
         print(f"Date before creating FreelancePlatformStatistic: {date}")
 
@@ -150,13 +164,17 @@ def upsert_job_post(job_post: FreelanceJobPost) -> FreelanceJobPost:
     print(f"Upserting job post: {job_post.dict()}")
 
     with session:
-        existing_job_post = session.exec(select(FreelanceJobPost).where(FreelanceJobPost.url == job_post.url)).first()
+        existing_job_post = session.exec(
+            select(FreelanceJobPost).where(FreelanceJobPost.url == job_post.url)
+        ).first()
 
         if existing_job_post and existing_job_post.id is not None:
             print(f"Found existing job post with id {existing_job_post.id}.")
             return existing_job_post
 
-        print(f"Job post with url {job_post.url} not found in the database. Inserting new job post.")
+        print(
+            f"Job post with url {job_post.url} not found in the database. Inserting new job post."
+        )
         session.add(job_post)
         session.commit()
         session.refresh(job_post)
@@ -182,7 +200,9 @@ def find_new_jobs() -> List[FreelanceJobPost]:
         # Get the job posts that were created in the last 24 hours
         new_jobs = session.exec(
             select(FreelanceJobPost)
-            .where(FreelanceJobPost.timestamp_posted >= datetime.now() - timedelta(days=1))
+            .where(
+                FreelanceJobPost.timestamp_posted >= datetime.now() - timedelta(days=1)
+            )
             .where(FreelanceJobPost.status == JobStatus.SCRAPED)
             .order_by(FreelanceJobPost.timestamp_posted.desc())  # type: ignore
         ).all()
@@ -207,7 +227,9 @@ def get_job_post_by_id(job_post_id: int) -> FreelanceJobPost:
     """
     with session:
         # Retrieve the job post
-        job_post = session.exec(select(FreelanceJobPost).where(FreelanceJobPost.id == job_post_id)).first()
+        job_post = session.exec(
+            select(FreelanceJobPost).where(FreelanceJobPost.id == job_post_id)
+        ).first()
 
         # If the job post does not exist, raise an exception
         if job_post is None:

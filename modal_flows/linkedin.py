@@ -1,71 +1,73 @@
-import os
+import json
+from typing import Any, Optional
 from dotenv import load_dotenv
-from playwright.async_api import async_playwright
-import asyncio
+import os
+from playwright_browser import Playwright
+from instructor_extract import InstructorExtract
+# Load environment variables from .env file at the start of the script
 
 
-class LinkedIn:
-    def __init__(self, email=None, password=None, headless=False):
-        load_dotenv()
-        self.email = email if email else os.getenv(key="LINKEDIN_EMAIL")
-        self.password = password if password else os.getenv(key="LINKEDIN_PASSWORD")
-        self.headless = headless
-
-    async def _intialize_playwright(self):
-        pw = await async_playwright().start()  # pylint: disable=invalid-name
-        browser = await pw.chromium.launch(headless=self.headless)
-
-        context = await browser.new_context(
-            locale="de-DE",
-            # viewport={"width": 1920, "height": 1080}
-        )
-
-        page = await context.new_page()
-
-        return browser, page
+class LinkedIn(Playwright):
+    def __init__(
+        self,
+        headless: bool = False,
+    ):
+        super().__init__(headless)
+        self.instructor_extract = InstructorExtract()
 
     async def _login(self):
-        if not self.email:
-            raise ValueError("Email is required")
+        cookies = await self.load_cookies()
+        if cookies:
+            await self.context.add_cookies(cookies)
+        else:
+            load_dotenv(".env")
 
-        if not self.password:
-            raise ValueError("Password is required")
+            email = os.getenv("LINKEDIN_EMAIL")
+            password = os.getenv("LINKEDIN_PASSWORD")
+            if not email or not password:
+                raise ValueError("Email and password are required for login")
 
-        login_url = "https://www.linkedin.com/uas/login"
+            login_url = "https://www.linkedin.com/uas/login"
+            await self.page.goto(login_url)
+            await self.page.fill("#username", email)
+            await self.page.fill("#password", password)
+            await self.page.click("button[type='submit']")
 
-        browser, page = await self._intialize_playwright()
+            # Confirm authentication via CLI
+            input("Press Enter to continue...")
 
-        await page.goto(login_url)
+            await self.save_cookies()
 
-        await page.fill("#username", self.email)
-        await page.fill("#password", self.password)
+    async def _get_profile_stats(self):
+        # Navigate to profile stats page and print its content
+        await self.page.goto("https://www.linkedin.com/dashboard")
 
-        await page.click("button[type='submit']")
+        stats_content = await self.get_page_content_as_markdown()
 
-        # make user confirm via cli that auth passed
-        input("Press Enter to continue...")
+        linkedin_stats = self.instructor_extract.extract_linkedin_profile_stats(
+            stats_content
+        )
 
-        cookies = await browser.contexts[0].cookies()
+    async def save_cookies(self):
+        # Save cookies to a file
+        cookies = await self.browser.contexts[0].cookies()
+        with open("cookies.json", "w") as f:
+            json.dump(cookies, f)
 
-        li_at = None
-
-        for cookie in cookies:
-            if cookie.get("name") == "li_at":
-                li_at = cookie.get("value")
-                break
-
-        if not li_at:
-            raise ValueError("Could not find li_at cookie")
-
-        self.li_at = li_at
-
-        print("Logging in...")
+    async def load_cookies(self) -> Optional[Any]:
+        # Load cookies from a file if it exists
+        try:
+            with open("cookies.json", "r") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return None
 
 
 async def main():
+    # Main function to run the LinkedIn automation
     linkedin = LinkedIn()
-    await linkedin._login()
+    self = linkedin
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())

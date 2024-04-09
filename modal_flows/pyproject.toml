@@ -37,9 +37,10 @@ marvin = "^2.3.0"
 sqlmodel = "^0.0.16"
 pendulum = "^3.0.0"
 tenacity = "^8.2.3"
-crewai = {extras = ["tools"], version = "^0.22.5"}
 langchain = "^0.1.13"
 langsmith = "^0.1.31"
+instructor = "^1.0.0"
+anthropic = "^0.21.3"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.6"
