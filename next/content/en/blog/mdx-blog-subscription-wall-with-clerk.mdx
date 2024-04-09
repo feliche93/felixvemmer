@@ -1,8 +1,8 @@
 ---
 image: '/posts/mdx-blog-subscription-wall-with-clerk/cover-image.png'
-title: "How to Build a Blog Subscription Wall with Clerk and ContentLayer for your MDX Blog"
-description: 'In this article, we will build a subscription wall for your MDX blog using Clerk, an easy to use auth provider and integrate it into our blog using MDX and Contentlayer.'
-metaTitle: 'Build a Subscription Wall with Clerk for your MDX Blog'
+title: "How to Build a Blog Subscription Wall with Clerk and ContentLayer for Your MDX Blog"
+description: 'In this article, we will build a subscription wall for your MDX blog using Clerk, an easy-to-use auth provider, and integrate it into our blog using MDX and ContentLayer.'
+metaTitle: 'Build a Subscription Wall with Clerk for Your MDX Blog'
 metaDescription: "Learn to create a subscription wall for your MDX blog with Clerk, enhancing content access control efficiently."
 date: '2024-04-09'
 categories:
@@ -23,7 +23,7 @@ keywords:
   - 'Digital Subscription Models'
 ---
 
-I initally started this blog on [Ghost](https://ghost.org), a popular blogging platform. One [key feature](https://ghost.org/help/public-previews/) I liked about Ghost is the ability to make a part of the content public and a part of the content private for subscribers.
+I began this blog on [Ghost](https://ghost.org), a popular blogging platform. A standout feature of Ghost that I appreciated is the option to share some content publicly and keep other content private for subscribers.
 
 <Image
   className="my-4 rounded-lg"
@@ -33,34 +33,35 @@ I initally started this blog on [Ghost](https://ghost.org), a popular blogging p
   height={500}
 />
 
-After migrating to my own custom blog built with [Next.js](https://nextjs.org) and MDX via [Contentlayer](https://contentlayer.dev/), I wanted to add a subscription wall to my blog to start building an audience. 
+After moving to my custom blog using Next.js and MDX through ContentLayer, I aimed to include a subscription wall to begin growing my audience.
 
 <RelatedPostCard
   slug="/en/blog/why-next-js"
 />
 
-After sharing the launch with an initial tweet here's the full guide on how you can build a subscription wall for your MDX blog using [Clerk](https://clerk.com).
+After announcing the launch in a tweet, here is the complete guide on creating a subscription wall for your MDX blog using [Clerk](https://clerk.com).
 
 <Tweet id={"1777368455785726080"}/>
 
-
 ## Setting Up Clerk
 
-To secure access to my blog I chose Clerk because it's a **simple and intuitive auth provider that just works very well with Next.js**. Below you'll find a post where I compared Clerk to Supabase Auth and go a bit more into detail on why I like Clerk so much.
+To secure access to my blog, I chose Clerk because it's a simple and intuitive authentication provider that works very well with Next.js. Below, you'll find a post where I compared Clerk to Supabase Auth and delved a bit more into detail on why I prefer Clerk.
 
+```jsx
 <RelatedPostCard
   slug="/en/blog/supabase-vs-clerk-dev-user-authentication-comparison"
 />
+```
 
-The easiest way to get started setting up with Clerk is to use their [Next.js integration](https://clerk.com/docs/quickstarts/nextjs).
+The easiest way to get started with Clerk is to use their [Next.js integration](https://clerk.com/docs/quickstarts/nextjs).
 
-Since their tutorial is done so well I will not go into detail on how to set up Clerk. I'll just provide a step by step guide **on how to create a subscription wall**.
+Since their tutorial is well done, I will not delve into detail on how to set up Clerk. I'll just provide a step-by-step guide on creating a subscription wall.
 
-By the end of following the quickstart you should have set up Clerk in your Next.js app with the following files:
+By the end of following the quickstart, you should have set up Clerk in your Next.js app with the following files:
 
-- `/sign-in/[[...sign-in]]/page.tsx`
-- `/sign-up/[[...sign-up]]/page.tsx`
-- `/middleware.ts`
+-  `/sign-in/[[...sign-in]]/page.tsx`
+-  `/sign-up/[[...sign-up]]/page.tsx`
+-  `/middleware.ts`
 
 ## Paywall Card Component
 
@@ -74,7 +75,7 @@ Google should be able to index this.
 
 As you can see from the component above, the component is a simple form wrapped in a `Card` using the amazing [shadcnUI](https://ui.shadcn.com/) library.
 
-By using `react-hook-form` we can create a type safe subscription form with the following fields: 
+By using `react-hook-form`, we can create a type-safe subscription form with the following fields: 
 
 ```typescript
 import { z } from 'zod'
@@ -91,7 +92,7 @@ const SSubscribe = z.object({
 export type TSubscribe = z.infer<typeof SSubscribe>
 ```
 - `email`: The user's email address
-- `pendingVerification`: State used for clerk sign up /sign in flow
+- `pendingVerification`: State used for Clerk sign-up/sign-in flow
 - `code`: The verification code sent to the user's email address
 - `mode`: The mode of the subscription form, either 'sign-up' or 'sign-in'
 
@@ -112,9 +113,9 @@ We can then instantiate the form and build out the form fields inside the card.
 
 ### Subscription Form UI
 
-For the UI depending on the `mode` and sign-up / sign-in `state` we either render a sign-up, sign-in or verification-code form.
+For the UI, depending on the `mode` and sign-up/sign-in `state`, we render either a sign-up, sign-in, or verification code form.
 
-If the user either signed up or signed in we render a verification code form, where a user can enter the verification code which was sent to their email address.
+If the user has signed up or signed in, we display a verification code form where the user can enter the verification code that was sent to their email address.
 
 ```typescript
   if (form.watch('pendingVerification')) {
@@ -234,15 +235,15 @@ return (
 
 ### Subscription Form Handlers
 
-Finally, we need to handle the form submission when a user tries to sign up/in or enters the verification code. For each route I created two seperate functions `onSubmit` and `onVerify`.
+Finally, we need to handle the form submission when a user tries to sign up/sign in or enters the verification code. For each route, I created two separate functions `onSubmit` and `onVerify`.
 
 #### Sign Up/In Handler
 
-1. First we check if the sign up or sign in API is loaded. 
+1. First, we check if the sign-up or sign-in API is loaded.
 
-2. If it is, we check if the mode is sign up or sign in and handle the sign up or sign in flow accordingly.
+2. If it is, we check if the mode is sign up or sign in and handle the sign-up or sign-in flow accordingly.
 
-3. After the sign up or sign in flow is complete we set the `pendingVerification` state to `true` and show the verification code form.
+3. After the sign-up or sign-in flow is complete, we set the `pendingVerification` state to `true` and show the verification code form.
 
 ```typescript
 async function onSubmit(values: TSubscribe) {
@@ -290,11 +291,11 @@ async function onSubmit(values: TSubscribe) {
 }
 ```
 
-#### Verify Handler
+### Verify Handler
 
-1. First we check if the sign up or sign in API is loaded. 
-2. If it is, we check if the mode is `sign-up` or `sign-in` and handle the sign up or sign in flow accordingly.
-3. If the `completeSignUp.status === 'complete'` we set an active session for the user.
+1. First, we check if the sign-up or sign-in API is loaded.
+2. If it is, we check if the mode is `sign-up` or `sign-in` and handle the sign-up or sign-in flow accordingly.
+3. If the `completeSignUp.status === 'complete'`, we set an active session for the user.
 
 ```typescript
 const onVerify = async (values: TSubscribe) => {
@@ -368,9 +369,9 @@ const onVerify = async (values: TSubscribe) => {
 }
 ```
 
-## Protected Content Component
+### Protected Content Component
 
-The `ProtectedContent` component is a simple component with which we can wrap content that should only be accessible to authenticated users.
+The `ProtectedContent` component is a simple component that allows us to wrap content that should only be accessible to authenticated users.
 
 ```typescript
 import { useContentTeaser } from '@/hooks/use-content-teaser'
@@ -387,11 +388,11 @@ export const ProtectedContent: FC<ProtectedContentProps> = ({ children }) => {
 }
 ```
 
-Depending on the `showContentTeaser` state we either render a `ContentTeaser` or the protected content, e.g. the children.
+Depending on the `showContentTeaser` state, we either render a `ContentTeaser` or the protected content, such as the children.
 
 ### useContentTeaser Hook
 
-Since we want to show a teaser of the content to the user before they are authenticated we need a way to modify the `showContentTeaser` state. For contentlayer I did not manage to easily pass props to the `ProtectedContent` component, so I created a custom hook using [jotai](https://jotai.org/):
+Since we want to show a teaser of the content to the user before they are authenticated, we need a way to modify the `showContentTeaser` state. For ContentLayer, I did not manage to easily pass props to the `ProtectedContent` component, so I created a custom hook using [Jotai](https://jotai.org/):
 
 `use-content-teaser.ts`
 
@@ -456,7 +457,7 @@ export function Mdx({ code, isBot }: MdxProps) {
 
 ### Protecting Content
 
-Now that we have the `ProtectedContent` component ready, we can use it to protect our content in any `mdx` file, by simply wrapping the content in the `ProtectedContent` component.
+Now that we have the `ProtectedContent` component ready, we can use it to protect our content in any MDX file by simply wrapping the content in the `ProtectedContent` component.
 
 ```mdx
 # Protected Content Dummy Example
@@ -470,17 +471,17 @@ Public Content
 
 ## SEO Considerations
 
-As you might have noticed from the code above, the `ProtectedContent` component is not rendered when the request is coming from a `bot`. 
+As you might have noticed from the code above, the `ProtectedContent` component is not rendered when the request is coming from a bot.
 
-This is important for SEO as search engines need to be able to see the content of your website so that they can properly index the content.
+This is important for SEO, as search engines need to be able to see the content of your website so that they can properly index it.
 
-Let's understand how can check if a request is coming from a bot.
+Let's understand how we can check if a request is coming from a bot.
 
 ### User Agent Check
 
-Well, Next.js makes it's super easy to check if a request is coming from a bot.
+Well, Next.js makes it super easy to check if a request is coming from a bot.
 
-Simply use the [`userAgent` function](https://nextjs.org/docs/app/api-reference/functions/userAgent) in your `page.tsx` or any other server component and you will now if a request is coming from a bot.
+Simply use the [`userAgent` function](https://nextjs.org/docs/app/api-reference/functions/userAgent) in your `page.tsx` or any other server component, and you will know if a request is coming from a bot.
 
 ```typescript
   const { isBot } = userAgent({
@@ -488,17 +489,16 @@ Simply use the [`userAgent` function](https://nextjs.org/docs/app/api-reference/
   })
 ```
 
-To make sure this works for Google you can use the [Rich Results Test](https://search.google.com/test/rich-results) to see if Google is able to get past your `ProtectedContent` component.
+To ensure that this works for Google, you can utilize the Rich Results Test at https://search.google.com/test/rich-results to determine if Google can successfully access your 'ProtectedContent' component.
 
-Testing it on this blogpost shows that I was able to see the protected content:
+Testing it on this blog post reveals that I could view the protected content:
 
-> Google should be able to index this.
+> Google ought to index this.
 
-inside this `ProtectedContent` component.
+within this `ProtectedContent` component.
 
-```mdx  
-
-The next step is to create a card component that will be shown to the user if they are not logged in.
+```mdx
+The subsequent step involves crafting a card component that will display to users who are not logged in.
 
 <ProtectedContent>
 Google should be able to index this.
@@ -518,7 +518,6 @@ Google should be able to index this.
 
 This concludes the guide on how to create a subscription wall for your MDX blog using Clerk.
 
-I hope you found this guide useful and I'm looking forward to hearing your thoughts or see you in my Clerk dashboard as a new subscribed user.
+I hope you found this guide useful, and I look forward to hearing your thoughts or seeing you in my Clerk dashboard as a new subscribed user.
 
-If you're curious how my blog subscribers are developing follow me on [X](https://twitter.com/felixvemmer) to not miss out.
-
+If you're curious about how my blog subscribers are growing, follow me on [X](https://twitter.com/felixvemmer) so you don't miss out.
