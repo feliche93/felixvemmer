@@ -125,6 +125,7 @@
     "remark-gfm": "3.0.1",
     "schema-dts": "^1.1.2",
     "shiki": "^1.2.4",
+    "shiki-languages": "^0.2.7",
     "unist-builder": "3.0.0",
     "unist-util-visit": "4.1.2"
   }

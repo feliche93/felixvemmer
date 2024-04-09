@@ -6,6 +6,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { codeImport } from 'remark-code-import'
 import remarkGfm from 'remark-gfm'
+import shikiLanguages from 'shiki-languages' // Import shiki languages
 import { visit } from 'unist-util-visit'
 import { rehypeComponent } from './src/lib/rehype-component'
 import { rehypeNpmCommand } from './src/lib/rehype-npm-command'
@@ -269,7 +270,21 @@ export default makeSource({
         {
           getHighlighter: async () => {
             const theme = await loadTheme(path.join(process.cwd(), '/src/lib/themes/dark.json'))
-            return await getHighlighter({ theme })
+            return await getHighlighter({
+              theme,
+              langs: [
+                // Specify the languages you want to include for syntax highlighting
+                'javascript',
+                'typescript',
+                'css',
+                'html',
+                shikiLanguages.javascript,
+                shikiLanguages.typescript,
+                shikiLanguages.css,
+                shikiLanguages.html,
+                // ... add other languages as needed
+              ],
+            })
           },
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty

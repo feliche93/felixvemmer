@@ -1,5 +1,6 @@
 import { Mdx } from '@/components/mdx-components'
 import { absoluteUrl } from '@/lib/utils'
+import '@/styles/mdx.css'
 import { allPages } from 'contentlayer/generated'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'

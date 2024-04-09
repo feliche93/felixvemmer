@@ -1,21 +1,21 @@
-[data-theme='light'] {
+[data-theme="light"] {
   display: block;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   display: none;
 }
 
-.dark [data-theme='light'] {
+.dark [data-theme="light"] {
   display: none;
 }
 
-.dark [data-theme='dark'] {
+.dark [data-theme="dark"] {
   display: block;
 }
 
 [data-rehype-pretty-code-fragment] {
-  @apply relative;
+  @apply relative text-white;
 }
 
 [data-rehype-pretty-code-fragment] code {
@@ -25,7 +25,7 @@
 }
 
 [data-rehype-pretty-code-fragment] .line {
-  @apply inline-block min-h-[1rem] w-full px-4 py-0.5;
+  @apply px-4 min-h-[1rem] py-0.5 w-full inline-block;
 }
 
 [data-rehype-pretty-code-fragment] [data-line-numbers] .line {
@@ -33,7 +33,7 @@
 }
 
 [data-rehype-pretty-code-fragment] [data-line-numbers] > .line::before {
-  @apply text-xs text-zinc-50/40;
+  @apply text-zinc-50/40 text-xs;
   counter-increment: line;
   content: counter(line);
   display: inline-block;
@@ -51,7 +51,7 @@
 }
 
 [data-rehype-pretty-code-fragment] .word--highlighted {
-  @apply rounded-md border-zinc-700/70 bg-zinc-700/50 p-1;
+  @apply rounded-md bg-zinc-700/50 border-zinc-700/70 p-1;
 }
 
 .dark [data-rehype-pretty-code-fragment] .word--highlighted {
@@ -59,7 +59,7 @@
 }
 
 [data-rehype-pretty-code-title] {
-  @apply mt-2 px-4 pt-6 text-sm font-medium;
+  @apply mt-2 pt-6 px-4 text-sm font-medium;
 }
 
 [data-rehype-pretty-code-title] + pre {
@@ -68,4 +68,8 @@
 
 .mdx > .steps:first-child > h3:first-child {
   @apply mt-0;
+}
+
+.steps > h3 {
+  @apply mt-8 mb-4 text-base font-semibold;
 }
