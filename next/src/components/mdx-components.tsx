@@ -19,7 +19,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { YouTubeEmbed } from '@/components/youtube-embed'
 import { useConfig } from '@/hooks/use-config'
 import { useContentTeaser } from '@/hooks/use-content-teaser'
+import { Event } from '@/lib/events'
 import { cn } from '@/lib/utils'
+import { Style } from '@/registry/styles'
+import { NpmCommands } from '@/types/unist'
 import { useAuth } from '@clerk/nextjs'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import NextImage, { ImageProps } from 'next/image'
@@ -27,7 +30,9 @@ import Link from 'next/link'
 import * as React from 'react'
 import { useEffect } from 'react'
 import { Tweet } from 'react-tweet'
+import { CopyButton, CopyNpmCommandButton } from './copy-button'
 import { ProtectedContent } from './protected-content'
+import { StyleWrapper } from './style-wrapper'
 
 const components = {
   CalCom,
@@ -139,9 +144,56 @@ const components = {
       {...props}
     />
   ),
-  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre className={cn('mb-4 mt-6 overflow-x-auto rounded-lg border p-4', className)} {...props} />
-  ),
+  pre: ({
+    className,
+    __rawString__,
+    __npmCommand__,
+    __yarnCommand__,
+    __pnpmCommand__,
+    __bunCommand__,
+    __withMeta__,
+    __src__,
+    __event__,
+    __style__,
+    ...props
+  }: React.HTMLAttributes<HTMLPreElement> & {
+    __style__?: Style['name']
+    __rawString__?: string
+    __withMeta__?: boolean
+    __src__?: string
+    __event__?: Event['name']
+  } & NpmCommands) => {
+    return (
+      <StyleWrapper styleName={__style__}>
+        <pre
+          className={cn(
+            'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900',
+            className,
+          )}
+          {...props}
+        />
+        {__rawString__ && !__npmCommand__ && (
+          <CopyButton
+            value={__rawString__}
+            src={__src__}
+            event={__event__}
+            className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
+          />
+        )}
+        {__npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __bunCommand__ && (
+          <CopyNpmCommandButton
+            commands={{
+              __npmCommand__,
+              __yarnCommand__,
+              __pnpmCommand__,
+              __bunCommand__,
+            }}
+            className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
+          />
+        )}
+      </StyleWrapper>
+    )
+  },
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
