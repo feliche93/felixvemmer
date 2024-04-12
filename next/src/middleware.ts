@@ -28,6 +28,7 @@ export default authMiddleware({
     '/:locale/consulting-services',
     '/:locale/playground',
     // posthog
+    '/:locale/ingest/:path*',
   ],
 })
 
