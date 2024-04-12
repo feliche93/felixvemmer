@@ -27,6 +27,7 @@ export default authMiddleware({
     '/:locale/hardware',
     '/:locale/consulting-services',
     '/:locale/playground',
+    // posthog
   ],
 })
 
