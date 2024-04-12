@@ -48,7 +48,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/ingest/:path*',
+        source: '/:locale/ingest/:path*',
         destination: 'https://eu.posthog.com/:path*',
       },
     ]
