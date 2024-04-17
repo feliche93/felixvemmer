@@ -28,8 +28,8 @@ export default authMiddleware({
     '/:locale/consulting-services',
     '/:locale/playground',
     // posthog
-    '/:locale/ingest/:path*',
-    '/:locale/api/revalidate-tag',
+    '/ingest/:path*',
+    '/api/revalidate-tag',
     '/api/revalidate-path',
   ],
 })
