@@ -1,11 +1,15 @@
 import { getTotalLemonSqueezyRevenue } from '@/lib/lemonsqueezy'
 import { getFreelancingRevenue } from '@/lib/paierkram-api'
 import { getPostHogInsightById } from '@/lib/posthog-api'
+import { auth } from '@clerk/nextjs/server'
 import { Grid, Metric, Text } from '@tremor/react'
+import Link from 'next/link'
 import { FC } from 'react'
+import { buttonVariants } from './ui/button'
 import { Card } from './ui/card'
 
 export const Kpis: FC = async () => {
+  const { userId } = auth()
   const freelancingRevenuePromise = getFreelancingRevenue()
 
   const pageViewsInsightPromise = getPostHogInsightById({
@@ -30,6 +34,7 @@ export const Kpis: FC = async () => {
     },
     {
       title: 'Total Freelancing Revenue',
+      protected: true,
       metric: new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR',
@@ -38,6 +43,7 @@ export const Kpis: FC = async () => {
     },
     {
       title: 'Total SaaS Revenue',
+      protected: true,
       metric: new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR',
@@ -55,12 +61,31 @@ export const Kpis: FC = async () => {
         numItemsLg={3}
         className="gap-6 max-w-5xl mx-auto container"
       >
-        {categories.map((item) => (
-          <Card key={item.title} className="p-6">
-            <Text>{item.title}</Text>
-            <Metric>{item.metric}</Metric>
-          </Card>
-        ))}
+        {categories.map((item) => {
+          if (item.protected && !userId) {
+            return (
+              <Card key={item.title} className="p-6">
+                <Text>{item.title}</Text>
+                <Metric>
+                  <Link
+                    href={'/sign-up'}
+                    className={buttonVariants({
+                      variant: 'outline',
+                    })}
+                  >
+                    Sign Up to Access
+                  </Link>
+                </Metric>
+              </Card>
+            )
+          }
+          return (
+            <Card key={item.title} className="p-6">
+              <Text>{item.title}</Text>
+              <Metric>{item.metric}</Metric>
+            </Card>
+          )
+        })}
       </Grid>
     </>
   )
