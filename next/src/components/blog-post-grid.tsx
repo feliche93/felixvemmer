@@ -1,6 +1,7 @@
 import { formatDate } from '@/lib/utils'
 import { Post, allAuthors } from 'contentlayer/generated'
 import Image from 'next/image'
+// Do Not use <Link/> from next-intl here, as locale is in url already
 import Link from 'next/link'
 import { FC, Suspense } from 'react'
 import { PageViews } from './page-views'

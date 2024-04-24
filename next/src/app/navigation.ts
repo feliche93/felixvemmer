@@ -12,7 +12,7 @@ export const pathnames = {
   '/blog': '/blog',
   '/sign-in': '/sign-in',
   '/sign-up': '/sign-up',
-
+  '/consulting-services': '/consulting-services',
   // If locales use different paths, you can
   // specify each external path per locale.
   '/about': {

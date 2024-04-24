@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { BlogPostGrid } from '@/components/blog-post-grid'
 import { CalCom } from '@/components/cal-com'
 import { Kpis } from '@/components/kpis'
@@ -17,6 +15,7 @@ import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Suspense } from 'react'
+import { Link } from '../navigation'
 
 export async function generateMetadata({
   params: { locale },

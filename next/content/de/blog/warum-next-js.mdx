@@ -1,12 +1,12 @@
 ---
 image: '/posts/why-next-js/twitter-card.png'
 title: "Der Aufstieg von Next.js: Warum es das Full-Stack-Framework der Wahl für moderne Websites ist"
-description: 'Bei der Auswahl eines Frontend-Frameworks ist Zuverlässigkeit für meine Kunden von größter Bedeutung. Trotz der Erkundung von Optionen wie SvelteKit bleibt "Warum Next.js?" eine häufige Frage. In diesem Artikel erkläre ich, warum Next.js als eine verlässliche Wahl hervorsticht und welche vielversprechende Zukunft es hat.'
-metaTitle: 'Warum Next.js das Full-Stack-Framework für moderne Websites ist'
-metaDescription: "Entdecken Sie, warum Next.js mehr als nur ein Trend ist. Tauchen Sie ein in seine unvergleichliche Zuverlässigkeit und entdecken Sie, warum es die erste Wahl für moderne Webentwicklung ist."
+description: "Bei der Auswahl eines Frontend-Frameworks steht für meine Kunden die Zuverlässigkeit an erster Stelle. Obwohl ich mich mit Optionen wie SvelteKit beschäftigt habe, werde ich immer wieder gefragt: 'Warum Next.js?'. In diesem Artikel erkläre ich, warum Next.js eine verlässliche Wahl ist und welche Zukunft es hat."
+metaTitle: 'Warum Next.js das Full-Stack Framework für moderne Websites ist'
+metaDescription: "Erfahre, warum Next.js mehr als nur ein Trend ist und entdecke, warum es die erste Wahl für moderne Webentwicklung ist."
 date: '2023-11-01'
 categories:
-  - 'Reviews'
+  - 'Rezensionen'
   - 'Typescript'
   - 'Ressourcen'
 authors:
@@ -24,28 +24,32 @@ keywords:
   - 'Clientseitiges Rendering'
   - 'Middleware und Backend-Funktionalitäten'
 ---
-Meine freiberuflichen Kunden fragen oft, welches Frontend-Framework das beste ist. Sie **wollen nicht den neuesten Trend; sie wollen etwas Zuverlässiges**. Ich habe mir neue Optionen wie [SvelteKit] (https://kit.svelte.dev/?ref=felixvemmer.com) angesehen, aber [Next.js] (https://nextjs.org/?ref=felixvemmer.com) hat immer wieder die Nase vorn. Es geht nicht um das Neueste und Beste; es geht darum, **das zu wählen, was sich bewährt hat und verlässlich ist**. In diesem Artikel werden wir uns mit den Hauptgründen befassen, warum ich auf [Next.js](https://nextjs.org/?ref=felixvemmer.com) setze und warum ich optimistisch bin, was die Zukunft angeht.
 
-<Callout className="my-4" title="2 Andere Expertenmeinungen" icon={<Icons.lightBulb />}>
-  Wie es das Schicksal will, bin ich nicht der Einzige, der über Next.js schreibt. Kürzlich veröffentlichte [Kent C.
-  Dodds](https://twitter.com/kentcdodds) einen Beitrag [Warum ich Next.js nicht verwenden werde](https://www.epicweb.dev/why-i-wont-use-nextjs), auf den [Lee
-  Robinson](https://twitter.com/leeerob), VP of Developer Experience bei Vercel, mit [Warum
-  ich Next.js verwende](https://leerob.io/blog/why-i-use-nextjs) antwortete. Beides sind großartige Blogposts.
+Meine Freelance-Kunden fragen mich oft, welches Frontend-Framework am besten ist. Sie **wollen nicht den neuesten Trend; sie wollen etwas Zuverlässiges**. Ich habe mir neue Optionen wie [SvelteKit](https://kit.svelte.dev/?ref=felixvemmer.com) angesehen, aber [Next.js](https://nextjs.org/?ref=felixvemmer.com) liegt immer wieder ganz vorne. Es geht nicht darum, das Neueste und Beste zu wählen, sondern **das zu nehmen, was sich bewährt hat und zuverlässig ist**. In diesem Artikel werden wir uns eingehend mit den Hauptgründen befassen, warum ich auf [Next.js](https://nextjs.org/?ref=felixvemmer.com) setze und warum ich optimistisch in die Zukunft blicke.
+
+<Callout className="my-4" title="2 andere Expertenmeinungen" icon={<Icons.lightBulb />}>
+  Wie das Schicksal so will, bin ich nicht der Einzige, der über Next.js spricht. Vor kurzem hat [Kent C.
+  Dodds](https://twitter.com/kentcdodds) einen Beitrag veröffentlicht [Why I Won't Use
+  Next.js](https://www.epicweb.dev/why-i-wont-use-nextjs), auf den [Lee
+  Robinson](https://twitter.com/leeerob), VP of Developer Experience bei Vercel, mit [Why
+  I'm Using Next.js](https://leerob.io/blog/why-i-use-nextjs). Beide sind sehr lesenswert und ich empfehle
+  empfehle Ihnen, sie ebenfalls zu lesen.
 </Callout>
 
-## Einheitliche Akzeptanz: Das Vertrauen in Next.js bei Kunden und Entwicklern
 
-Mit beachtlichen [**113k Sternen**](https://github.com/vercel/next.js?ref=felixvemmer.com) ⭐ auf [GitHub](https://github.com/vercel/next.js?ref=felixvemmer.com) hat sich Next.js zweifellos einen Namen als führendes Framework in der Welt der Webentwicklung gemacht. Diese Sterne können in gewisser Weise **ein Indikator für die allgemeine Wertschätzung und das Interesse der Entwicklergemeinschaft** sein. Sie sind zwar kein absolutes Maß für die Qualität oder den Erfolg eines Frameworks, geben aber einen Hinweis auf den Grad der Aufmerksamkeit und des Zuspruchs, den Next.js unter seinen Mitstreitern erreicht hat.
+## Unified Adoption: The Trust in Next.js Among Clients and Developers
+
+With a notable [**113k stars**](https://github.com/vercel/next.js?ref=felixvemmer.com) ⭐ on [GitHub](https://github.com/vercel/next.js?ref=felixvemmer.com), Next.js has certainly made its mark as a leading framework in the web development world. These stars can be somewhat **indicative of the general appreciation and interest from the developer community**. While not an absolute measure of a framework's quality or success, it does hint at a level of attention and traction that Next.js has achieved among its peers.
 
 <Image
   className="my-4 rounded-lg"
   src="/posts/why-next-js/CleanShot-2023-10-11-at-11.06.57@2x.png"
-  alt="Sternhistorie führender Full-Stack-Frameworks"
+  alt="Star history of leading full-stack frameworks"
   width={800}
   height={600}
 />
 
-In der digitalen Welt reicht Popularität jedoch nicht aus - es ist entscheidend, das Vertrauen der Branchenführer zu gewinnen. Und Next.js hat genau das getan.
+However, in the digital world, popularity isn't enough—it's crucial to earn the confidence of industry leaders. And Next.js has done just that.
 
 <Image
   className="my-4 rounded-lg"
@@ -55,9 +59,9 @@ In der digitalen Welt reicht Popularität jedoch nicht aus - es ist entscheidend
   height={600}
 />
 
-Große Unternehmen wie [**The Washington Post**](https://www.washingtonpost.com/?ref=felixvemmer.com), **[**Loom**](https://www.loom.com/?ref=felixvemmer.com) und [**Netflix**](https://www.netflix.com/?ref=felixvemmer.com)** haben Next.js in ihre Tech-Stacks integriert und damit bewiesen, dass Next.js für große, stark frequentierte Plattformen nutzbar ist. Sogar [**MrBeast**](https://mrbeast.store/?ref=felixvemmer.com), ein Content Creator mit 100 Millionen YouTube-Abonnenten und einer enormen Präsenz in den sozialen Medien, hat seine Storefront mit Next.js erstellt. Fügt man dieser Liste einflussreiche Plattformen wie [**TikTok**](https://tiktok.com/?ref=felixvemmer.com)**, [**Twitch**](https://www.twitch.tv/?ref=felixvemmer.com) und [**Notion**](https://www.notion.so/?ref=felixvemmer.com)** hinzu, wird deutlich, dass Next.js nicht nur ein Framework ist, sondern ein **vertrauenswürdiger Partner für Unternehmen und Kreative** an der Front der digitalen Revolution.
+Major players like [**The Washington Post,**](https://www.washingtonpost.com/?ref=felixvemmer.com) **[**Loom**](https://www.loom.com/?ref=felixvemmer.com), and [**Netflix**](https://www.netflix.com/?ref=felixvemmer.com)** have integrated Next.js into their tech stacks, demonstrating its capability to handle large-scale, high-traffic platforms. Even [**MrBeast**](https://mrbeast.store/?ref=felixvemmer.com), a content creator with 100 million YouTube subscribers and a massive social media footprint, built his storefront using Next.js. Add to this list influential platforms like [**TikTok**](https://tiktok.com/?ref=felixvemmer.com)**, [**Twitch**](https://www.twitch.tv/?ref=felixvemmer.com), and [**Notion**](https://www.notion.so/?ref=felixvemmer.com)**, and it becomes clear that Next.js isn't just a framework; it's **a trusted partner for businesses and creators** on the frontlines of the digital revolution.
 
-## Leistung und SEO: Die treibenden Kräfte hinter der Verbreitung von Next.js
+## Performance & SEO: The Driving Forces Behind Next.js Adoption
 
 <Image
   className="my-4 rounded-lg"
@@ -67,19 +71,22 @@ Große Unternehmen wie [**The Washington Post**](https://www.washingtonpost.com/
   height={600}
 />
 
-**Server- vs. Client-seitiges Rendering. Illustration von Next.js**
+**Server vs. client side rendering. Illustration by Next.js**
 
-Als Next.js aufkam, bot es den Entwicklern eine revolutionäre Wahlmöglichkeit: **Seiten auf dem Server oder direkt im Browser zu rendern** und ebnete damit den Weg für eine neue Ära der Webentwicklung.
+When Next.js first emerged, it offered a revolutionary choice to developers: **render pages on the server or directly in the browser**, paving the way for a new era in web development.
 
-<Callout className="my-4" title="Client-Rendering vs. Server-Rendering" icon={<Icons.lightBulb />}>
-  **Client Rendering** bedeutet, dass der **Browser** die Webseite mithilfe von JavaScript generiert und aktualisiert,
-  was oft zu dynamischen Interaktionen führt. Im Gegensatz dazu erstellt beim **Server Rendering** der **Server** die
-  die ursprüngliche Seite und liefert dem Browser eine vollständig geformte Seite, was zu schnelleren anfänglichen Ladezeiten führen kann.
-  Ladezeiten.
+<Callout className="my-4" title="Client Rendering vs Server Rendering" icon={<Icons.lightBulb />}>
+  **Client Rendering** is when the **browser** generates and updates the web page using JavaScript,
+  often leading to dynamic interactions. In contrast, **Server Rendering** has the **server** create
+  the initial page, delivering a fully-formed page to the browser, which can provide quicker initial
+  load times.
 </Callout>
 
-Mit der [Einführung von Next.js 13](https://nextjs.org/blog/next-13?ref=felixvemmer.com) hat sich das Spiel noch weiter verändert. Entwickler können nun **auf Komponentenbasis entscheiden**, ob jede einzelne auf dem Server oder dem Client gerendert werden soll. Diese Feinabstimmung gewährleistet sowohl optimale Leistung als auch maximale Flexibilität. Für ein klareres Bild, wann jede Strategie zu nutzen ist, bietet die [Next.js-Dokumentation](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns?ref=felixvemmer.com) eine aufschlussreiche Tabelle.
-
+With the [introduction of Next.js 13](https://nextjs.org/blog/next-13?ref=felixvemmer.com), the game
+has changed even more. Developers can now **decide, on a component-by-component basis**, whether each
+should be rendered on the server or the client. This fine-tuning ensures both optimal performance and
+maximum flexibility.For a clearer picture of when to utilize each strategy, the [Next.js documentation](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns?ref=felixvemmer.com) provides
+an insightful table.
 
 <Image
   className="my-4 rounded-lg"
@@ -169,9 +176,7 @@ Playground](https://vercel.com/templates/next.js/app-directory?ref=felixvemmer.c
 It does not stop there. At its heart are the **Built-in Optimizations** which ensure that your images, fonts, and scripts are fine-tuned for an optimal user experience. These enhancements, specifically tailored for Core Web Vitals, ensure users get the best out of every visit.
 
 ### Optimizing Images with *`next/image`*
-
 Images are a cornerstone of modern web design, often dictating user engagement and perception. Recognizing their pivotal role, the [Next.js `Image` component](https://nextjs.org/docs/app/api-reference/components/image?ref=felixvemmer.com) offers a slew of benefits tailored to enhance both performance and user experience:
-
 - **Optimal Sizing**: Caters to diverse device displays by automatically serving correctly sized images.
 - **Modern Formats**: Embraces cutting-edge image formats like WebP and AVIF, ensuring high quality at reduced file sizes.
 - **Visual Stability**: Prevents disruptive layout shifts by ensuring images maintain their allocated space as they load.
@@ -181,6 +186,7 @@ Images are a cornerstone of modern web design, often dictating user engagement a
 
 ### Optimizing Third-Party Scripts with **_`next/script`_**
 
+<ProtectedContent>
 Third-party scripts, like Google Tag Manager, often adversely affect website performance, which can significantly impede SEO. Next.js addresses this concern with its [`next/script` module](https://nextjs.org/docs/app/api-reference/components/script?ref=felixvemmer.com), providing developers with enhanced control and optimization. The main advantages of using `next/script` are:
 
 - **Strategized Loading**: Tailor how and when scripts load, optimizing website speed.
@@ -438,4 +444,4 @@ The widespread adoption of React means that **there's an abundance of resources
 The success of Next.js is a testament to React's capabilities and its robust ecosystem. By choosing Next.js and, by extension, React, developers are aligning themselves with a **future-proof, continually evolving tech stack that has the backing of an enthusiastic and innovative community**. It's clear: betting on React is betting on a brighter, more efficient, and streamlined web development future.
 
 For my complete tech stack in 2023, check out this [post](https://www.felixvemmer.com/tech-stack/).
-
+</ProtectedContent>

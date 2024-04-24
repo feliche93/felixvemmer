@@ -1,4 +1,4 @@
-import { authMiddleware } from '@clerk/nextjs'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import createMiddleware from 'next-intl/middleware'
 import { locales } from '../i18n'
 import { localePrefix, pathnames } from './app/navigation'
@@ -10,31 +10,14 @@ const intlMiddleware = createMiddleware({
   defaultLocale: 'en',
 })
 
-export default authMiddleware({
-  beforeAuth(request) {
-    return intlMiddleware(request)
-  },
+const isProtectedRoute = createRouteMatcher([])
 
-  // Ensure that locale-specific sign in pages are public
-  publicRoutes: [
-    '/:locale',
-    '/:locale/sign-in',
-    '/:locale/sign-up',
-    // blog
-    '/:locale/blog/:path*',
-    '/:locale/about',
-    '/:locale/tech-stack',
-    '/:locale/hardware',
-    '/:locale/consulting-services',
-    '/:locale/playground',
-    // posthog
-    '/ingest/:path*',
-    '/api/revalidate-tag',
-    '/api/revalidate-path',
-  ],
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) auth().protect()
+
+  return intlMiddleware(req)
 })
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ['/', '/(de|en)/:path*']
-};
+  matcher: ['/((?!.+\\.[\\w]+$|_next|ingest).*)', '/', '/(api|trpc)(.*)'],
+}

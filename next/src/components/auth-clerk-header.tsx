@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/app/navigation'
-import { OrganizationSwitcher, UserButton, useAuth } from '@clerk/nextjs'
+import { UserButton, useAuth } from '@clerk/nextjs'
 import { FC } from 'react'
 import { buttonVariants } from './ui/button'
 
@@ -24,14 +24,14 @@ export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
   return (
     <>
       <div className="flex flex-row gap-4 ml-2">
-        <OrganizationSwitcher
+        {/* <OrganizationSwitcher
           afterSelectOrganizationUrl={(organization) => {
             if (organization) {
               return `/${organization.slug}/profile`
             }
             return '/'
           }}
-        />
+        /> */}
         <UserButton afterSignOutUrl="/sign-in" />
       </div>
     </>
