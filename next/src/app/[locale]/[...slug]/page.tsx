@@ -12,13 +12,6 @@ interface PostPageProps {
   }
 }
 
-export async function generateStaticParams() {
-  return allPages.map((page) => ({
-    slug: page.slugAsParams.split('/'),
-    locale: page.locale,
-  }))
-}
-
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
 

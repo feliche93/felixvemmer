@@ -28,13 +28,6 @@ export interface PostPageProps {
   }
 }
 
-export async function generateStaticParams() {
-  return allPosts.map((post) => ({
-    slug: post.slugAsParams.split('/'),
-    locale: post.locale,
-  }))
-}
-
 export async function getPostFromParams(params: PostPageProps['params']) {
   const slug = params?.slug
   // console.log({
@@ -74,13 +67,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     keywords: post?.keywords,
   })
 }
-
-// export async function generateStaticParams(): Promise<PostPageProps['params'][]> {
-//   return allPosts.map((post) => ({
-//     slug: post.slugAsParams.split('/'),
-//     locale: post.locale,
-//   }))
-// }
 
 export default async function PostPage({ params }: PostPageProps) {
   const { isBot } = userAgent({
