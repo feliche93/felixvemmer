@@ -12,16 +12,16 @@ interface PostPageProps {
   }
 }
 
-export async function generateStaticParams() {
-  const params = allPages.map((page) => ({
-    slug: page._raw.sourceFileName.replace('.mdx', '') ?? null,
-    locale: page.locale ?? null,
-  }))
+// export async function generateStaticParams() {
+//   const params = allPages.map((page) => ({
+//     slug: page._raw.sourceFileName.replace('.mdx', '') ?? null,
+//     locale: page.locale ?? null,
+//   }))
 
-  // console.log({ params })
+//   // console.log({ params })
 
-  return params
-}
+//   return params
+// }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
