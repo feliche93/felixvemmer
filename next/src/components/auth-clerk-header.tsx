@@ -14,6 +14,18 @@ export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
   return (
     <>
       {userId ? (
+        <div className="flex flex-row gap-4 ml-2">
+          {/* <OrganizationSwitcher
+afterSelectOrganizationUrl={(organization) => {
+  if (organization) {
+    return `/${organization.slug}/profile`
+  }
+  return '/'
+}}
+/> */}
+          <UserButton afterSignOutUrl="/sign-in" />
+        </div>
+      ) : (
         <Link
           href="/sign-in"
           className={buttonVariants({
@@ -23,18 +35,6 @@ export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
         >
           Sign In
         </Link>
-      ) : (
-        <div className="flex flex-row gap-4 ml-2">
-          {/* <OrganizationSwitcher
-          afterSelectOrganizationUrl={(organization) => {
-            if (organization) {
-              return `/${organization.slug}/profile`
-            }
-            return '/'
-          }}
-        /> */}
-          <UserButton afterSignOutUrl="/sign-in" />
-        </div>
       )}
     </>
   )
