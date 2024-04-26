@@ -42,16 +42,16 @@ export async function getPostFromParams(params: PostPageProps['params']) {
   return post
 }
 
-export async function generateStaticParams() {
-  const params = allPosts.map((post) => ({
-    slug: post.slugAsParams.split('/')[1],
-    locale: post.locale,
-  }))
+// export async function generateStaticParams() {
+//   const params = allPosts.map((post) => ({
+//     slug: post.slugAsParams.split('/')[1],
+//     locale: post.locale,
+//   }))
 
-  console.log({ params })
+//   console.log({ params })
 
-  return params
-}
+//   return params
+// }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const post = await getPostFromParams(params)
