@@ -126,10 +126,10 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
         <PageIntro centered title={t('testimonials.title')} eyebrow={t('testimonials.section')} />
       </Testimonials>
 
-      <div>
+      {/* <div>
         <PageIntro centered title={t('bookAMeeeting.title')} eyebrow={t('bookAMeeeting.section')} />
         <CalCom />
-      </div>
+      </div> */}
     </>
   )
 }

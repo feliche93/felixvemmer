@@ -2,9 +2,11 @@
 
 import Cal, { getCalApi } from '@calcom/embed-react'
 import { useTheme } from 'next-themes'
+import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 export function CalCom() {
+  const searchParams = useSearchParams()
   const { resolvedTheme } = useTheme()
 
   console.log(resolvedTheme)
