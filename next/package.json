@@ -84,7 +84,7 @@
     "input-otp": "^1.2.4",
     "jotai": "^2.8.0",
     "lucide-react": "^0.374.0",
-    "next": "^14.2.3",
+    "next": "^14.3.0-canary.26",
     "next-contentlayer": "^0.3.4",
     "next-intl": "3.12.0",
     "next-themes": "^0.3.0",
