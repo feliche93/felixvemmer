@@ -1,5 +1,4 @@
 import { BlogPostGrid } from '@/components/blog-post-grid'
-import { CalCom } from '@/components/cal-com'
 import { Kpis } from '@/components/kpis'
 import { KpisFallback } from '@/components/kpis-fallback'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
@@ -13,9 +12,14 @@ import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { Link } from '../navigation'
+
+const CalCom = dynamic(() => import('../../components/cal-com').then((mod) => mod.CalCom), {
+  ssr: false,
+})
 
 export async function generateMetadata({
   params: { locale },
