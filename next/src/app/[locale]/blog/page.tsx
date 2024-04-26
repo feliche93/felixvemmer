@@ -4,6 +4,7 @@ import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { locales } from '../../../../i18n'
 
 export async function generateMetadata({
   params: { locale },
@@ -18,6 +19,17 @@ export async function generateMetadata({
       canonical: absoluteUrl(`/${locale}/blog`),
     },
   }
+}
+
+export async function generateStaticParams() {
+  const params = locales.map((locale) => ({
+    slug: 'blog',
+    locale,
+  }))
+
+  // console.log({ params })
+
+  return params
 }
 
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
