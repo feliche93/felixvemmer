@@ -20,6 +20,12 @@ export async function generateMetadata({
   }
 }
 
+export async function generateStaticParams() {
+  return allPosts.map((post) => ({
+    locale: post.locale,
+  }))
+}
+
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale || 'en')
 

@@ -28,6 +28,13 @@ export interface PostPageProps {
   }
 }
 
+export async function generateStaticParams() {
+  return allPosts.map((post) => ({
+    slug: post.slugAsParams.split('/'),
+    locale: post.locale,
+  }))
+}
+
 export async function getPostFromParams(params: PostPageProps['params']) {
   const slug = params?.slug
   // console.log({
