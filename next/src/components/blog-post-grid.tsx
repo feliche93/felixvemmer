@@ -83,7 +83,7 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
                     </div>
                   </div>
                   {/* Page Views */}
-                  <Suspense fallback={null}>
+                  <Suspense fallback={<></>}>
                     <PageViews className="mt-3 mr-2" slug={post.slug} />
                   </Suspense>
                 </div>
