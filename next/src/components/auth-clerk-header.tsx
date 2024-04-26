@@ -1,13 +1,16 @@
 import { Link } from '@/app/navigation'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { UserButton } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs/server'
 import { FC } from 'react'
 import { buttonVariants } from './ui/button'
 
 export interface AuthClerkHeaderProps {}
 export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
+  const { userId } = auth()
+
   return (
     <>
-      <SignedOut>
+      {userId ? (
         <Link
           href="/sign-in"
           className={buttonVariants({
@@ -17,8 +20,7 @@ export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
         >
           Sign In
         </Link>
-      </SignedOut>
-      <SignedIn>
+      ) : (
         <div className="flex flex-row gap-4 ml-2">
           {/* <OrganizationSwitcher
           afterSelectOrganizationUrl={(organization) => {
@@ -30,7 +32,7 @@ export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
         /> */}
           <UserButton afterSignOutUrl="/sign-in" />
         </div>
-      </SignedIn>
+      )}
     </>
   )
 }
