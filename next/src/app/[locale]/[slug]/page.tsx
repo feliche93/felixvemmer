@@ -7,18 +7,18 @@ import { notFound } from 'next/navigation'
 
 interface PostPageProps {
   params: {
-    slug: string[]
+    slug: string
     locale: string
   }
 }
 
 // export async function generateStaticParams() {
 //   const params = allPages.map((page) => ({
-//     slug: page.slug.split('/')[3],
-//     locale: page.locale,
+//     slug: page._raw.sourceFileName.replace('.mdx', '') ?? null,
+//     locale: page.locale ?? null,
 //   }))
 
-//   console.log({ params })
+//   // console.log({ params })
 
 //   return params
 // }
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 async function getPageFromParams(params: PostPageProps['params']) {
-  const slug = params.slug.join('/')
+  const slug = params.slug
   const locale = params?.locale
 
   if (!slug) {

@@ -42,7 +42,7 @@ export const getTotalPageViewsByPath = unstable_cache(
         format: 'json',
       })
 
-      console.log({ insight })
+      // console.log({ insight })
 
       let toalPageViews: number | undefined = undefined
 

@@ -1,9 +1,7 @@
-import { PHProvider } from '@/components/posthog-provider'
-import { ThemeProvider } from '@/components/providers'
+import { Providers } from '@/components/providers'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
-import { WrappedClerkProvider } from '@/components/wrapped-clerk-provider'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { generatePageMeta } from '@/lib/seo'
@@ -14,6 +12,7 @@ import { Metadata, Viewport } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import { Toaster } from 'sonner'
 import { locales } from '../../../i18n'
 
@@ -61,26 +60,24 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
       <html lang={locale} suppressHydrationWarning>
         <head />
         <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <WrappedClerkProvider>
+          <Suspense>
+            <Providers
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
               <StructuredData />
-              <PHProvider>
-                <div className="relative flex min-h-screen flex-col">
-                  <PostHogPageView />
-                  <SiteHeader />
-                  <div className="flex-1">{children}</div>
-                  <SiteFooter />
-                </div>
-                <TailwindIndicator />
-              </PHProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <PostHogPageView />
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+                <SiteFooter />
+              </div>
+              <TailwindIndicator />
               <Toaster />
-            </WrappedClerkProvider>
-          </ThemeProvider>
+            </Providers>
+          </Suspense>
         </body>
       </html>
     </>
