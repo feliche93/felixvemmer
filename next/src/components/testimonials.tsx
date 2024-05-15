@@ -65,6 +65,15 @@ const testimonialsData = [
           imageUrl: '/testimonials/pierre-rognion.jpeg',
         },
       },
+      {
+        body: "Used it today, and I agree, it's fast as hell. Fun fact, I started using @cursor_ai because of your blog post months ago, and I can't ever go back, so thank you so much!",
+        author: {
+          name: 'Vivian Guillen',
+          socialUrl: 'https://twitter.com/vivgui/status/1790542951191302344',
+          position: '',
+          imageUrl: '/testimonials/vivian_guillen.jpg',
+        },
+      },
     ],
     [
       {
