@@ -4,11 +4,10 @@ import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { WrappedClerkProvider } from '@/components/wrapped-clerk-provider'
-import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { generatePageMeta } from '@/lib/seo'
 import { StructuredData } from '@/lib/structured'
-import { cn } from '@/lib/utils'
+import { absoluteUrl, cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
@@ -46,7 +45,7 @@ export async function generateMetadata({
 
   return generatePageMeta({
     locale: locale,
-    url: `${siteConfig.url}/${locale}`,
+    url: absoluteUrl(`/${locale}`),
   })
 }
 

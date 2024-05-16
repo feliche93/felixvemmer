@@ -4,8 +4,8 @@ import { type OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import { type Twitter } from 'next/dist/lib/metadata/types/twitter-types'
 import { type StaticImageData } from 'next/image'
 
-const title = 'Freelance Full-Stack Developer and Indiepreneur based in Berlin'
-const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
+export const title = 'Freelance Full-Stack Developer and Indiepreneur based in Berlin'
+export const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
 
 export const rootOpenGraph: OpenGraph = {
   locale: 'en',

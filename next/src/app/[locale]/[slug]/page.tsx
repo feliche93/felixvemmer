@@ -1,4 +1,5 @@
 import { Mdx } from '@/components/mdx-components'
+import { generatePageMeta } from '@/lib/seo'
 import { absoluteUrl } from '@/lib/utils'
 import '@/styles/mdx.css'
 import { allPages } from 'contentlayer/generated'
@@ -26,13 +27,14 @@ interface PostPageProps {
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
 
-  return {
-    title: page?.title,
-    description: page?.description,
-    alternates: {
-      canonical: page?.slug ? absoluteUrl(page.slug.replace('pages/', '')) : null,
-    },
-  }
+  if (!page) return notFound()
+
+  return generatePageMeta({
+    locale: params.locale,
+    title: page.title,
+    description: page.description,
+    url: absoluteUrl(page.slug.replace('pages/', '')),
+  })
 }
 
 async function getPageFromParams(params: PostPageProps['params']) {

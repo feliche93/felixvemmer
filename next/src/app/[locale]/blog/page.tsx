@@ -1,4 +1,5 @@
 import { BlogPostGrid } from '@/components/blog-post-grid'
+import { generatePageMeta } from '@/lib/seo'
 import { absoluteUrl } from '@/lib/utils'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
@@ -12,12 +13,11 @@ export async function generateMetadata({
     locale: string
   }
 }): Promise<Metadata> {
-  return {
+  return generatePageMeta({
+    locale,
     title: 'Blog',
-    alternates: {
-      canonical: absoluteUrl(`/${locale}/blog`),
-    },
-  }
+    url: absoluteUrl(`/${locale}/blog`),
+  })
 }
 
 // export async function generateStaticParams() {
