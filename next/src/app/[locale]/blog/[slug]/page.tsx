@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { generatePageMeta } from '@/lib/seo'
-import { NewsArticleStructuredData } from '@/lib/structured'
+import { BreadCrumbStructuredData, NewsArticleStructuredData } from '@/lib/structured'
 import { getTableOfContents } from '@/lib/toc'
 import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import '@/styles/mdx.css'
@@ -120,6 +120,18 @@ export default async function PostPage({ params }: PostPageProps) {
         imageUrl={absoluteUrl(post.image)}
         keywords={post?.keywords ?? []}
         articleSection={post.categories}
+      />
+      <BreadCrumbStructuredData
+        itemListElement={[
+          {
+            name: 'Blog',
+            href: absoluteUrl(`/${params.locale}/blog`),
+          },
+          {
+            name: post.title,
+            href: absoluteUrl(post.slug),
+          },
+        ]}
       />
       <main className="px-4 md:px-8 mx-auto max-w-6xl relative py-6 lg:grid lg:grid-cols-[1fr_300px] md:gap-5 lg:gap-10 lg:py-10 xl:gap-20">
         <div className="prose prose-p:text-base sm:prose-p:text-lg mx-auto sm:max-w-2xl md:max-w-2xl">

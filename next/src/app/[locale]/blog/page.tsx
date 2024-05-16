@@ -1,5 +1,6 @@
 import { BlogPostGrid } from '@/components/blog-post-grid'
 import { generatePageMeta } from '@/lib/seo'
+import { BreadCrumbStructuredData } from '@/lib/structured'
 import { absoluteUrl } from '@/lib/utils'
 import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
@@ -45,6 +46,14 @@ export default async function BlogPage({ params: { locale } }: { params: { local
 
   return (
     <>
+      <BreadCrumbStructuredData
+        itemListElement={[
+          {
+            name: 'Blog',
+            href: absoluteUrl(`/${locale}/blog`),
+          },
+        ]}
+      />
       {/* <pre>{JSON.stringify(blogPostsData, null, 2)}</pre> */}
       <div className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
