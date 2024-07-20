@@ -5,6 +5,7 @@ description: 'In this article, we will build a subscription wall for your MDX bl
 metaTitle: 'Build a Subscription Wall with Clerk for Your MDX Blog'
 metaDescription: "Learn to create a subscription wall for your MDX blog with Clerk, enhancing content access control efficiently."
 date: '2024-04-09'
+published: true
 categories:
   - 'Resources'
 authors:
@@ -36,7 +37,7 @@ I began this blog on [Ghost](https://ghost.org), a popular blogging platform. A 
 After moving to my custom blog using Next.js and MDX through ContentLayer, I aimed to include a subscription wall to begin growing my audience.
 
 <RelatedPostCard
-  slug="/en/blog/why-next-js"
+  absoluteUrl="/en/blog/why-next-js"
 />
 
 After announcing the launch in a tweet, here is the complete guide on creating a subscription wall for your MDX blog using [Clerk](https://clerk.com).
@@ -48,7 +49,7 @@ After announcing the launch in a tweet, here is the complete guide on creating a
 To secure access to my blog, I chose Clerk because it's a simple and intuitive authentication provider that works very well with Next.js. Below, you'll find a post where I compared Clerk to Supabase Auth and delved a bit more into detail on why I prefer Clerk.
 
 <RelatedPostCard
-  slug="/en/blog/supabase-vs-clerk-dev-user-authentication-comparison"
+  absoluteUrl="/en/blog/supabase-vs-clerk-dev-user-authentication-comparison"
 />
 
 The easiest way to get started with Clerk is to use their [Next.js integration](https://clerk.com/docs/quickstarts/nextjs).
@@ -457,7 +458,7 @@ export function Mdx({ code, isBot }: MdxProps) {
 
 Now that we have the `ProtectedContent` component ready, we can use it to protect our content in any MDX file by simply wrapping the content in the `ProtectedContent` component.
 
-```mdx
+```markdown
 # Protected Content Dummy Example
 
 Public Content

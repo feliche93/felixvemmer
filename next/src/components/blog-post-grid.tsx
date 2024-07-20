@@ -1,7 +1,7 @@
-import { formatDate } from '@/lib/utils'
-import { Post, allAuthors } from 'contentlayer/generated'
+import { Post, allAuthors } from 'content-collections'
 import Image from 'next/image'
 // Do Not use <Link/> from next-intl here, as locale is in url already
+import { formatDate } from '@/lib/utils'
 import Link from 'next/link'
 import { FC, Suspense } from 'react'
 import { PageViews } from './page-views'
@@ -12,6 +12,8 @@ export interface BlogPostGridProps {
 }
 
 export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
+  // return <pre>{JSON.stringify(posts, null, 2)}</pre>
+
   return (
     <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
       {posts.map((post) => {
@@ -20,9 +22,9 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
         )
 
         return (
-          <div key={post._id}>
+          <div key={post.slug}>
             <article className="flex flex-col items-start justify-between">
-              <Link href={post.slug}>
+              <Link href={`/blog/${post.slug}`}>
                 <div className="relative w-full">
                   <Image
                     className="aspect-[16/9] w-full rounded-2xl bg-base-200 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
@@ -39,8 +41,11 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
               <div className="max-w-xl">
                 <div className="mt-8 flex flex-wrap items-center gap-2">
                   {post.date && (
-                    <time dateTime={post.date} className="text-xs text-muted-foreground">
-                      {formatDate(post.date)}
+                    <time
+                      dateTime={new Date(post.date).toISOString()}
+                      className="text-xs text-muted-foreground"
+                    >
+                      {formatDate(new Date(post.date))}
                     </time>
                   )}
                   {post.categories &&
@@ -50,7 +55,7 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
                 </div>
                 <div className="group relative">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-base-content group-hover:text-primary">
-                    <Link href={post.slug}>
+                    <Link href={`/blog/${post.slug}`}>
                       <span className="absolute inset-0" />
                       {post.title}
                     </Link>

@@ -17,8 +17,8 @@ import type {
 interface NewsArticleProps {
   id: string
   headline: string
-  datePublished: string
-  dateModified: string
+  datePublished: Date
+  dateModified: Date
   commentCount?: number
   imageUrl: string
   articleSection: string[]

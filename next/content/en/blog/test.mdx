@@ -1,0 +1,105 @@
+---
+title: "Lorem Ipsum: A Classic Placeholder Text"
+description: "Exploring the origins and uses of Lorem Ipsum in web design and typography"
+metaTitle: "Lorem Ipsum: Understanding the Famous Placeholder Text"
+metaDescription: "Dive into the history and applications of Lorem Ipsum, the go-to filler text for designers and developers worldwide"
+keywords: ["lorem ipsum", "placeholder text", "web design", "typography"]
+date: 2023-07-15
+published: true
+featured: false
+image: "/images/blog/lorem-ipsum-cover.jpg"
+authors: ["felix-vemmer"]
+categories: ["Web Design", "Typography"]
+postAccess: "public"
+---
+
+
+Inspired by a few of my favorite tech YouTubers, namely [Theo](https://www.youtube.com/@t3dotgg?ref=felixvemmer.com) and [Josh](https://www.youtube.com/@joshtriedcoding?ref=felixvemmer.com), I was intrigued to try out Drizzle ORM after hearing their rave reviews. Having since incorporated [Drizzle](https://orm.drizzle.team/?ref=felixvemmer.com) into several projects, I've discovered numerous features that have not only enhanced my productivity but have also made the development process more enjoyable. Want to know why Drizzle has made such a difference? Stay with me as I dive into its game-changing features.
+
+## 1. Great Structured Documentation with a lot of examples
+
+Beyond the very funny marketing landing page (see blogpost cover), Drizzle also finally launched a highly anticipated [documentation](https://orm.drizzle.team/docs/quick-start?ref=felixvemmer.com). What I particularly like is that the documentation is well structured and broken down logically.
+
+First there is `Drizzle ORM`:
+
+> **Drizzle ORM** is a TypeScript ORM for SQL databases designed with maximum type safety in mind.
+
+And then there is `Drizzle Kit` :
+
+> **Drizzle Kit** - is a CLI companion for automatic SQL migrations generation and rapid prototyping
+
+For each of these they have the most important topics displayed nicely in a sidebar on the left, and then a table of contents for this particular page on the right sidebar.
+
+<Image
+  className="my-4 rounded-lg"
+  src="/posts/drizzle-orm-boosting-developer-productivity/CleanShot-2023-06-28-at-20.55.11@2x.png"
+  alt="Drizzle Documentation Screenshot"
+  width={800}
+  height={600}
+/>
+
+## 2. Easy to remember SQL Query Syntax
+
+When adopting a relatively new library, it can be a struggle to remember the specific API syntax. If you know SQL though, you already know Drizzle.
+
+> The ORM's main philosophy is "If you know SQL, you know Drizzle ORM". We follow the SQL-like syntax whenever possible, are strongly typed ground up, and fail at compile time, not in runtime.
+
+Check out some of these examples:
+
+### Simple Select
+
+Drizzle Syntax:
+
+`const result = await db.select().from(users);`
+
+SQL Syntax:
+
+`select * from 'users';`
+
+### Simple Select with Filters
+
+Drizzle Syntax:
+
+`await db.select().from(users).where(eq(users.id, 42));`
+
+SQL Syntax:
+
+`select * from 'users' where 'id' = 42;`
+
+### Select Distinct
+
+Drizzle Syntax:
+
+`await db.selectDistinct().from(users).orderBy(usersTable.id, usersTable.name);`
+
+SQL Syntax:
+
+`select distinct "id", "name" from "users" order by "users"."id", "users"."name";`
+
+## 3. Support for Complex SQL Queries
+
+"While most ORMs manage to handle the simpler examples adequately, Drizzle takes it a step further. It truly excels in dealing with complex TypeScript [joins](https://orm.drizzle.team/docs/joins?ref=felixvemmer.com), navigating terrain where many others struggle. Moreover, Drizzle shines by offering advanced database features, such as [transactions](https://orm.drizzle.team/docs/transactions?ref=felixvemmer.com), thereby enhancing its functionality and flexibility
+
+### Smart Type Inference on Joins
+
+In the following there's a real life query from one of my projects, that has a lot of conditions, filters and all sort of things going on that I use for server side filtered table:
+
+<Files>
+  <Folder name="app" defaultOpen>
+    <File name="layout.tsx" />
+    <File name="page.tsx" />
+    <File name="global.css" />
+  </Folder>
+  <Folder name="components">
+    <File name="button.tsx" />
+    <File name="tabs.tsx" />
+    <File name="dialog.tsx" />
+  </Folder>
+  <File name="package.json" />
+</Files>
+
+ 
+<Tabs items={['Javascript', 'Rust']}>
+  <Tab value="Javascript">Javascript is weird</Tab>
+  <Tab value="Rust">Rust is fast</Tab>
+</Tabs>

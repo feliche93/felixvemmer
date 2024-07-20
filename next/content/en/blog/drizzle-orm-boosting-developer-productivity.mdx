@@ -5,6 +5,7 @@ description: 'Want to supercharge your dev productivity? Get a glimpse into how 
 metaTitle: 'Boost Your Dev Productivity with Drizzle ORM'
 metaDescription: 'Explore Drizzle ORM: boosting dev productivity with easy SQL syntax, robust transactions, and top-notch documentation.'
 date: '2023-06-28'
+published: true
 categories:
   - 'Reviews'
   - 'Guides'
@@ -112,7 +113,7 @@ SQL Syntax:
 
 In the following there's a real life query from one of my projects, that has a lot of conditions, filters and all sort of things going on that I use for server side filtered table:
 
-```ts
+```typescript
 export async function getTournaments({
     userId,
     timeframe = undefined,
@@ -305,7 +306,7 @@ Unfortunately, as of now you can only do this with Supabase by calling a supabas
 
 Luckily, Drizzle ORM supports transactions, and it was quite easy to implement with their [excellent docs](https://orm.drizzle.team/docs/transactions?ref=felixvemmer.com):
 
-```javascript
+```typescript
 const { backlinkProspectId, campaignBacklinkProspectId } = await db.transaction(async (tx) => {
   const website = await tx
     .insert(websites)
@@ -445,7 +446,7 @@ Here's an example that I used at BacklinkGPT:
 
 1. First I create my schema:
 
-```javascript
+```typescript
 export const onboardingSurveys = pgTable(
   'onboarding_surveys',
   {
@@ -477,7 +478,7 @@ Drizzle Schema Creation
 
 2. Then I can easily create an insert schema and types based on the table, which I can feed into `react-hook-forms` :
 
-```javascript
+```typescript
 const SForm = createInsertSchema(onboardingSurveys, {
   id: (schema) => schema.id.optional(),
   userId: (schema) => schema.userId.optional(),
@@ -498,7 +499,7 @@ const form = useForm<TForm>({
 
 3. I can then create my server action function and easily pass in all the data, while getting reminded from the `onboardingSurveys` types to provide still my `id` , `userId` and `createdAt` :
 
-```Javascript
+```typescript
 export async function saveOnboardingSurvey({
   data,
 }: {
@@ -543,7 +544,7 @@ Though it's still in beta and undergoing continuous development, I am thoroughly
 
 As you can gather from my journey, I've become a major fan of Drizzle and it's now my go-to ORM for all new projects.
 
-<RelatedPostCard slug="/en/blog/drizzle-orm-directus-typescript-sdk" />
+<RelatedPostCard absoluteUrl="/en/blog/drizzle-orm-directus-typescript-sdk" />
 
 But, in the interest of giving you the full picture, I'll also share a few areas where Drizzle might not be perfect yet and where I stumbled upon some challenges.
 
@@ -564,7 +565,7 @@ The drizzle team recently released the `drizzle-kit push:pg` command. Here's t
 If you wanna see first the migrations and then push them to the DB without having to copy and manually
 execute all the statements, I came up with these scripts:
 
-```javascript
+```typescript
 require('dotenv').config({ path: __dirname + '/../.env.local' })
 
 const { drizzle } = require('drizzle-orm/postgres-js')

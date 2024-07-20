@@ -1,4 +1,4 @@
-const { withContentlayer } = require('next-contentlayer')
+const { withContentCollections } = require('@content-collections/next')
 const withNextIntl = require('next-intl/plugin')(
   // This is the default (also the `src` folder is supported out of the box)
   './i18n.ts',
@@ -55,4 +55,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withNextIntl(withContentlayer(nextConfig))
+module.exports = withContentCollections(withNextIntl(nextConfig))

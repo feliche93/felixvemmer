@@ -2,7 +2,7 @@ import { Mdx } from '@/components/mdx-components'
 import { generatePageMeta } from '@/lib/seo'
 import { absoluteUrl } from '@/lib/utils'
 import '@/styles/mdx.css'
-import { allPages } from 'contentlayer/generated'
+import { allPages } from 'content-collections'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -72,7 +72,7 @@ export default async function PostPage({ params }: PostPageProps) {
       {/* <pre>{JSON.stringify(allPages, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(allPosts, null, 2)}</pre> */}
       <div className="container py-20 prose prose-p:text-base sm:prose-p:text-lg mx-auto sm:max-w-2xl md:max-w-2xl">
-        <Mdx code={page.body.code} />
+        <Mdx code={page.body} />
       </div>
     </>
   )

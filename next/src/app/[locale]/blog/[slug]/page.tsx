@@ -2,41 +2,41 @@ import { Link } from '@/app/navigation'
 import { Icons } from '@/components/icons'
 import { Mdx } from '@/components/mdx-components'
 import { PageViews } from '@/components/page-views'
-import { DashboardTableOfContents } from '@/components/toc'
+import { TOC } from '@/components/toc'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { generatePageMeta } from '@/lib/seo'
 import { BreadCrumbStructuredData, NewsArticleStructuredData } from '@/lib/structured'
-import { getTableOfContents } from '@/lib/toc'
 import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import '@/styles/mdx.css'
 import { FireIcon } from '@heroicons/react/24/outline'
-import { allAuthors, allPosts } from 'contentlayer/generated'
+import { allAuthors, allPosts } from 'content-collections'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
-import { headers } from 'next/headers'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { userAgent } from 'next/server'
 import { Suspense } from 'react'
 
 export interface PostPageProps {
   params: {
-    slug: string[]
+    slug: string
     locale: string
   }
 }
 
 export async function getPostFromParams(params: PostPageProps['params']) {
-  const slug = params?.slug
-  // console.log({
-  //   test: `blog/${slug}`,
-  // })
-  const post = allPosts.find((post) => post.slugAsParams === `blog/${slug}`)
+  const post = allPosts.find(
+    (p) => p.slug === params.slug && p.locale === params.locale && p.published === true,
+  )
+
+  // return allPosts
+
+  // console.log({ params, allPosts })
 
   if (!post) {
-    null
+    throw new Error('Post not found')
+    // notFound()
   }
 
   return post
@@ -55,8 +55,6 @@ export async function getPostFromParams(params: PostPageProps['params']) {
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const post = await getPostFromParams(params)
-
-  if (!post) return notFound()
 
   const searchParams = new URLSearchParams()
 
@@ -80,10 +78,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const { isBot } = userAgent({
-    headers: headers(),
-  })
-
   const post = await getPostFromParams(params)
 
   unstable_setRequestLocale(params.locale || 'en')
@@ -92,9 +86,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   if (post === undefined) notFound()
 
-  const authors = post.authors.map((author) =>
-    allAuthors.find(({ slug }) => slug === `/authors/${author}`),
-  )
+  const authors = post.authors.map((author) => allAuthors.find(({ slug }) => slug === author))
 
   if (authors === undefined || authors.length === 0 || authors[0] === undefined) {
     notFound()
@@ -108,7 +100,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const ogUrl = createUrl('/api/og', searchParams)
 
-  const toc = await getTableOfContents(post.body.raw)
+  // return <pre>{JSON.stringify({ post }, null, 2)}</pre>
 
   return (
     <>
@@ -188,7 +180,7 @@ export default async function PostPage({ params }: PostPageProps) {
               src={post.image}
             />
             {/* Content */}
-            <Mdx isBot={isBot} code={post.body.code} />
+            <Mdx code={post.body} />
           </article>
           <hr className="my-8" />
           <div className="flex justify-center py-6 lg:py-10">
@@ -200,7 +192,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
         <div className="hidden text-sm lg:block">
           <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
-            <DashboardTableOfContents title={t('tocHeading')} toc={toc} />
+            <TOC toc={post.toc} title={t('tocHeading')} />
           </div>
         </div>
       </main>

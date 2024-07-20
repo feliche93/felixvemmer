@@ -1,5 +1,5 @@
 import { absoluteUrl } from '@/lib/utils'
-import { allPages, allPosts } from 'contentlayer/generated'
+import { allPages, allPosts } from 'content-collections'
 import { MetadataRoute } from 'next'
 
 export function generatePostsSitemaps() {
