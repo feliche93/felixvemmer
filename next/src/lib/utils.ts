@@ -1,3 +1,4 @@
+import { env } from '@/client'
 import { clsx, type ClassValue } from 'clsx'
 import { ReadonlyURLSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
@@ -15,9 +16,7 @@ export function formatDate(input: Date): string {
 }
 
 export function absoluteUrl(path: string) {
-  if (!process.env.NEXT_PUBLIC_URL) throw new Error('NEXT_PUBLIC_URL is not defined')
-
-  return `${process.env.NEXT_PUBLIC_URL}${path}`
+  return `${env.NEXT_PUBLIC_URL}${path}`
 }
 
 export function assertFulfilled<T>(

@@ -1,6 +1,5 @@
 'use client'
 
-import { DialogProps } from '@radix-ui/react-alert-dialog'
 import { CircleIcon, FileIcon, LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
 import { useParams, useRouter } from 'next/navigation'
@@ -18,6 +17,7 @@ import {
 } from '@/components/ui/command'
 import { navigationConfig } from '@/config/navigation'
 import { cn } from '@/lib/utils'
+import { DialogProps } from '@radix-ui/react-dialog'
 import { NavItem } from '../types/nav'
 
 export function CommandMenu({ ...props }: DialogProps) {

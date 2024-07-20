@@ -1,8 +1,7 @@
+import { env } from '@/client'
 import { absoluteUrl } from '@/lib/utils'
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-
-if (!baseUrl) throw new Error('NEXT_PUBLIC_BASE_URL is not defined')
+const baseUrl = env.NEXT_PUBLIC_BASE_URL
 
 export const siteConfig = {
   name: 'Felix Vemmer',

@@ -1,3 +1,4 @@
+import { env } from '@/server'
 import { unstable_cache } from 'next/cache'
 import { z } from 'zod'
 import { client } from './papierkram-typescript-sdk'
@@ -52,11 +53,7 @@ const SResult = z.object({
   entries: z.array(SEntry),
 })
 
-const token = process.env.PAPIERKRAM_TOKEN
-
-if (!token) {
-  throw new Error('PAPIERKRAM_TOKEN is not set')
-}
+const token = env.PAPIERKRAM_TOKEN
 
 const papierkramApi = new client({
   TOKEN: token,

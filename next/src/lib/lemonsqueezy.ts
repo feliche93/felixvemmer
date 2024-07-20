@@ -1,11 +1,8 @@
+import { env } from '@/server'
 import { getStore, lemonSqueezySetup } from '@lemonsqueezy/lemonsqueezy.js'
 import { unstable_cache } from 'next/cache'
 
-const apiKey = process.env.LEMON_SQUEEZY_BACKLINKGPT_API_KEY
-
-if (!apiKey) {
-  throw new Error('Missing LEMON_SQUEEZY_BACKLINKGPT_API_KEY')
-}
+const apiKey = env.LEMON_SQUEEZY_BACKLINKGPT_API_KEY
 
 lemonSqueezySetup({ apiKey })
 

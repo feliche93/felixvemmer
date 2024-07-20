@@ -1,17 +1,9 @@
+import { env } from '@/server'
 import { unstable_cache } from 'next/cache'
 import { client } from './posthog-typescript-sdk'
 
-const token = process.env.POSTHOG_PERSONAL_API_KEY
-
-if (!token) {
-  throw new Error('POSTHOG_PERSONAL_API_KEY is not set')
-}
-
-const projectId = process.env.POSTHOG_PROJECT_ID
-
-if (!projectId) {
-  throw new Error('POSTHOG_PROJECT_ID is not set')
-}
+const token = env.POSTHOG_PERSONAL_API_KEY
+const projectId = env.POSTHOG_PROJECT_ID
 
 const posthogApi = new client({
   TOKEN: token,

@@ -1,14 +1,11 @@
-// app/providers.tsx
 'use client'
+import { env } from '@/client'
 // @ts-expect-error
 import cookieCutter from 'cookie-cutter'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 
-const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
-
-if (!posthogKey) throw new Error('NEXT_PUBLIC_POSTHOG_KEY is not set')
-
+const posthogKey = env.NEXT_PUBLIC_POSTHOG_KEY
 if (typeof window !== 'undefined') {
   const flags = cookieCutter.get('bootstrapData')
   let bootstrapData = {}

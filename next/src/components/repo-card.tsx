@@ -1,4 +1,5 @@
 import { nFormatter } from '@/lib/utils'
+import { env } from '@/server'
 import { GitFork, Star } from 'lucide-react'
 import { Icons } from './icons'
 import { Card } from './ui/card'
@@ -12,7 +13,7 @@ export default async function RepoCard({ url }: GithubRepoProps) {
 
   const response = await fetch(`https://api.github.com/repos/${orgName}/${repoName}`, {
     headers: {
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
     },
   })
 
