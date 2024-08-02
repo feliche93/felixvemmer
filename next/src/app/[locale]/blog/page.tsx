@@ -2,8 +2,6 @@ import { BlogPostGrid } from '@/components/blog-post-grid'
 import { generatePageMeta } from '@/lib/seo'
 import { BreadCrumbStructuredData } from '@/lib/structured'
 import { absoluteUrl } from '@/lib/utils'
-import { allPosts } from 'content-collections'
-import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import { locales } from '../../../../i18n'
@@ -36,13 +34,6 @@ export default async function BlogPage({ params: { locale } }: { params: { local
 
   const t = await getTranslations('blog')
 
-  const posts = allPosts
-    .filter((post) => post.published)
-    .filter((post) => post.locale === locale)
-    .sort((a, b) => {
-      return compareDesc(new Date(a.date), new Date(b.date))
-    })
-
   return (
     <>
       <BreadCrumbStructuredData
@@ -62,7 +53,7 @@ export default async function BlogPage({ params: { locale } }: { params: { local
             </h2>
             <p className="mt-2 text-lg leading-8 text-base-content">{t('subtitle')}</p>
           </div>
-          <BlogPostGrid posts={posts} />
+          <BlogPostGrid locale={locale} />
         </div>
       </div>
     </>

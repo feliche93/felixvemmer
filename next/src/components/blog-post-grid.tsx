@@ -1,18 +1,26 @@
-import { Post, allAuthors } from 'content-collections'
+import { allAuthors, allPosts } from 'content-collections'
 import Image from 'next/image'
 // Do Not use <Link/> from next-intl here, as locale is in url already
 import { formatDate } from '@/lib/utils'
+import { compareDesc } from 'date-fns'
 import Link from 'next/link'
 import { FC, Suspense } from 'react'
 import { PageViews } from './page-views'
 import { Badge } from './ui/badge'
 
 export interface BlogPostGridProps {
-  posts: Post[] // replace with your actual Post type
+  locale: string
+  limit?: number
 }
 
-export const BlogPostGrid: FC<BlogPostGridProps> = ({ posts }) => {
-  // return <pre>{JSON.stringify(posts, null, 2)}</pre>
+export const BlogPostGrid: FC<BlogPostGridProps> = ({ locale, limit }) => {
+  const posts = allPosts
+    .filter((post) => post.published)
+    .filter((post) => post.locale === locale)
+    .sort((a, b) => {
+      return compareDesc(new Date(a.date), new Date(b.date))
+    })
+    .slice(0, limit ?? allPosts.length)
 
   return (
     <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">

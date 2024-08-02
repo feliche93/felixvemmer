@@ -9,8 +9,6 @@ import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
 import { generatePageMeta } from '@/lib/seo'
 import { cn } from '@/lib/utils'
-import { allPosts } from 'content-collections'
-import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import { unstable_setRequestLocale } from 'next-intl/server'
@@ -34,12 +32,6 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
   unstable_setRequestLocale(locale)
 
   const t = useTranslations('index')
-
-  let posts = allPosts
-    .filter((post) => post.published)
-    .filter((post) => post.locale === locale)
-    .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
-    .slice(0, 6)
 
   // TODO: Sort by Views
   // let postsWithView = await Promise.all(posts.map(async (post) => {
@@ -118,7 +110,7 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
       {/* Latest from blog */}
       <div className="py-12 sm:py-16 mx-auto max-w-7xl px-6 lg:px-8">
         <PageIntro centered title={t('blog.title')} eyebrow={t('blog.section')} />
-        <BlogPostGrid posts={posts} />
+        <BlogPostGrid locale={locale} limit={6} />
       </div>
       {/* <FeatureGrid /> */}
       <Testimonials>

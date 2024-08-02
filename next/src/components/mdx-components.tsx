@@ -26,6 +26,7 @@ import defaultMdxComponents from 'fumadocs-ui/mdx'
 import NextImage, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
+import { Suspense } from 'react'
 import { Tweet } from 'react-tweet'
 import { ProtectedContent } from './protected-content'
 
@@ -127,7 +128,9 @@ const components = {
     />
   ),
   ProtectedContent: ({ ...props }: React.ComponentProps<typeof ProtectedContent>) => (
-    <ProtectedContent {...props} />
+    <Suspense fallback={null}>
+      <ProtectedContent {...props} />
+    </Suspense>
   ),
 }
 
