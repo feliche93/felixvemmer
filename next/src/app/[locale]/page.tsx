@@ -12,6 +12,7 @@ import { allPosts } from 'content-collections'
 import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
+import { unstable_setRequestLocale } from 'next-intl/server'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense } from 'react'
@@ -34,6 +35,8 @@ export async function generateMetadata({
 }
 
 export default function IndexPage({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale)
+
   const t = useTranslations('index')
 
   let posts = allPosts

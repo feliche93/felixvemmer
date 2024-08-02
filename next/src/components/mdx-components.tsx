@@ -19,7 +19,6 @@ import { MDXContent } from '@content-collections/mdx/react'
 import { Banner } from 'fumadocs-ui/components/banner'
 import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock'
 import { File, Files, Folder } from 'fumadocs-ui/components/files'
-import { Heading } from 'fumadocs-ui/components/heading'
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom'
 import { Step, Steps } from 'fumadocs-ui/components/steps'
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
@@ -57,54 +56,6 @@ const components = {
   AlertTitle,
   AlertDescription,
   Banner,
-  // h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-  //   <h1 className={cn('font-heading mt-8 scroll-m-20 text-4xl font-bold', className)} {...props} />
-  // ),
-  // h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-  //   <h2
-  //     className={cn(
-  //       'font-heading mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0',
-  //       className,
-  //     )}
-  //     {...props}
-  //   />
-  // ),
-  // h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-  //   <h3
-  //     className={cn(
-  //       'font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight',
-  //       className,
-  //     )}
-  //     {...props}
-  //   />
-  // ),
-  // h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-  //   <h4
-  //     className={cn(
-  //       'font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight',
-  //       className,
-  //     )}
-  //     {...props}
-  //   />
-  // ),
-  // h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-  //   <h5
-  //     className={cn('mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)}
-  //     {...props}
-  //   />
-  // ),
-  // h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-  //   <h6
-  //     className={cn('mt-8 scroll-m-20 text-base font-semibold tracking-tight', className)}
-  //     {...props}
-  //   />
-  // ),
-  h1: (props: React.ComponentProps<typeof Heading>) => <Heading as="h1" {...props} />,
-  h2: (props: React.ComponentProps<typeof Heading>) => <Heading as="h2" {...props} />,
-  h3: (props: React.ComponentProps<typeof Heading>) => <Heading as="h3" {...props} />,
-  h4: (props: React.ComponentProps<typeof Heading>) => <Heading as="h4" {...props} />,
-  h5: (props: React.ComponentProps<typeof Heading>) => <Heading as="h5" {...props} />,
-  h6: (props: React.ComponentProps<typeof Heading>) => <Heading as="h6" {...props} />,
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
     <a className={cn('font-medium underline underline-offset-4', className)} {...props} />
   ),

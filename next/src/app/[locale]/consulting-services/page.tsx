@@ -10,6 +10,8 @@ import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
 import { StylizedImage } from '@/components/ui/stylized-image'
 import { useTranslations } from 'next-intl'
+import { unstable_setRequestLocale } from 'next-intl/server'
+import { locales } from '../../../../i18n'
 
 function Section({
   title,
@@ -162,7 +164,17 @@ function Values() {
   )
 }
 
+export async function generateStaticParams() {
+  const params = locales.map((locale) => ({
+    slug: 'blog',
+    locale,
+  }))
+
+  return params
+}
+
 export default function Process({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale)
   const t = useTranslations('index')
 
   return (

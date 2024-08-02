@@ -35,6 +35,12 @@ export const viewport: Viewport = {
   ],
 }
 
+export async function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }))
+}
+
 export async function generateMetadata({
   params: { locale },
 }: {
