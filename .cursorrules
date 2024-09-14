@@ -1,0 +1,91 @@
+You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Drizzle, and Tailwind.
+
+## Code Style and Structure
+
+- Write concise, technical TypeScript code with accurate examples.
+- Use functional and declarative programming patterns; avoid classes.
+- Prefer iteration and modularization over code duplication.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+- Structure files: exported component, subcomponents, helpers, static content, types.
+- Use the Receive an Object, Return an Object (RORO) pattern.
+- Server actions code should be placed in the '@/actions/\*' directory.
+- Zod schemas should be placed in the '@/models/\*' directory.
+- Data fetching code should be placed in the '@/data/\*' directory.
+
+## Naming Conventions
+
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for components.
+
+## JavaScript/TypeScript
+
+- Use TypeScript for all code; prefer interfaces over types.
+- Avoid enums; use maps instead.
+- Use the "function" keyword for pure functions. Omit semicolons.
+- Avoid unnecessary curly braces in conditional statements.
+- For single-line statements in conditionals, omit curly braces.
+- Use concise, one-line syntax for simple conditional statements (e.g., if (condition) doSomething()).
+- Use functional components with TypeScript interfaces.
+- Use declarative JSX.
+- Place static content and interfaces at file end.
+- Use content variables for static content outside render functions.
+
+## UI and Styling
+
+- Use Shadcn UI, Radix, and Tailwind for components and styling.
+- Implement responsive design with Tailwind CSS; use a mobile-first approach.
+
+## Performance and Optimization
+
+- Minimize 'use client', 'useEffect', and 'setState'. Favor React Server Components (RSC).
+- Wrap client components and components that use searchParams in Suspense with fallback.
+- Use dynamic loading for non-critical components.
+- Optimize images: WebP format, size data, lazy loading.
+
+## Server Actions and API
+
+- Use next-safe-action for all server actions:
+  - Implement type-safe server actions with proper validation using the authActionClient (authenticated) or actionClient, e.g. `import { authActionClient } from '@/lib/safe-action'`.
+  - Place action code in the '@/actions/\*' directory.
+  - Place Zod schemas in the '@/models/\*' directory.
+  - Utilize the `useAction` hook from next-safe-action for client-side components, e.g. `import { useAction } from 'next-safe-action/hooks'`.
+  - Implement consistent error handling and success responses using ActionResponse.
+  - Use the `import { renderSafeActionErrorToast } from '@components/render-safe-action-error-toast'`and the `onError` callback function from the useAction hook to render error toasts.
+
+## Error Handling and Validation
+
+- Prioritize error handling and edge cases:
+  - Handle errors and edge cases at the beginning of functions.
+  - Use early returns for error conditions to avoid deeply nested if statements.
+  - Place the happy path last in the function for improved readability.
+  - Avoid unnecessary else statements; use if-return pattern instead.
+  - Use guard clauses to handle preconditions and invalid states early.
+  - Implement proper error logging and user-friendly error messages.
+  - Consider using custom error types or error factories for consistent error handling.
+  - Model expected errors as return values; avoid using try/catch for expected errors in Server Actions.
+  - Use error boundaries (error.tsx and global-error.tsx) for unexpected errors to provide a fallback UI.
+  - Use Zod for form validation.
+
+## Database
+
+- Use Drizzle ORM for all database interactions to ensure type safety and consistency.
+- Define database schemas using Drizzle ORM's schema definitions in TypeScript.
+- Almost every table should have timestamps (createdAt, updatedAt) and auth related fields (userId, orgId).
+- Avoid raw SQL queries; utilize Drizzle ORM's query builder for constructing queries.
+- Leverage TypeScript inference provided by Drizzle ORM to ensure strict typing in database operations.
+- Implement relations using Drizzle ORM's relation APIs for one-to-one, one-to-many, and many-to-many associations.
+- Optimize database performance by defining indexes and constraints within your Drizzle ORM schema definitions.
+- Use transactions (db.transaction) provided by Drizzle ORM for atomic and consistent database operations.
+- Prefer built-in operators and functions of Drizzle ORM; use the sql tagged template only for advanced queries when necessary.
+
+## Key Conventions
+
+1. Rely on Next.js App Router for state changes.
+2. Prioritize Web Vitals (LCP, CLS, FID).
+3. Minimize 'use client' usage:
+   - Prefer server components and Next.js SSR features.
+   - Use 'use client' only for Web API access in small components.
+   - Avoid using 'use client' for data fetching or state management.
+4. Use 'nuqs' for URL search parameter state management.
+
+Refer to Next.js documentation for Data Fetching, Rendering, and Routing best practices.
