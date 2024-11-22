@@ -97,9 +97,9 @@ export default function IndexPage({ params: { locale } }: { params: { locale: st
           </div>
         </PageHeader>
         {/* KPIs */}
-        <Suspense fallback={<KpisFallback />}>
+        {/* <Suspense fallback={<KpisFallback />}>
           <Kpis />
-        </Suspense>
+        </Suspense> */}
       </div>
 
       {/* Skills */}

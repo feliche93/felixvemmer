@@ -67,9 +67,13 @@ export const ContentTeaser: FC<ContentTeaserProps> = () => {
       try {
         const si = await signIn.create({ identifier: values.email })
 
-        const firstFactor = si.supportedFirstFactors.find(
+        const firstFactor = si.supportedFirstFactors?.find(
           (ff) => ff.strategy === 'email_code' && ff.safeIdentifier === values.email,
         ) as EmailCodeFactor
+
+        if (!firstFactor) {
+          throw new Error('Email code authentication is not supported')
+        }
 
         await si.prepareFirstFactor({
           emailAddressId: firstFactor.emailAddressId,

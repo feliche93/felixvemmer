@@ -9,7 +9,7 @@ import { buttonVariants } from './ui/button'
 import { Card } from './ui/card'
 
 export const Kpis: FC = async () => {
-  const { userId } = auth()
+  const { userId } = await auth()
   const freelancingRevenuePromise = getFreelancingRevenue()
 
   const pageViewsInsightPromise = getPostHogInsightById({

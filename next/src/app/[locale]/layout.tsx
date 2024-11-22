@@ -1,3 +1,4 @@
+import PostHogPageView from '@/components/posthog-page-view'
 import { PHProvider } from '@/components/posthog-provider'
 import { Providers } from '@/components/providers'
 import { SiteFooter } from '@/components/site-footer'
@@ -12,14 +13,10 @@ import '@/styles/globals.css'
 import 'fumadocs-ui/style.css'
 import { Metadata, Viewport } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
-import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import { Toaster } from 'sonner'
 import { locales } from '../../../i18n'
-
-const PostHogPageView = dynamic(() => import('../../components/posthog-page-view'), {
-  ssr: false,
-})
 
 interface LocaleRootLayoutProps {
   children: React.ReactNode
@@ -72,7 +69,9 @@ export default function LocaleRootLayout({ children, params: { locale } }: Local
               <PHProvider>
                 <StructuredData />
                 <div className="relative flex min-h-screen flex-col">
-                  <PostHogPageView />
+                  <Suspense>
+                    <PostHogPageView />
+                  </Suspense>
                   <SiteHeader />
                   <div className="flex-1">{children}</div>
                   <SiteFooter />

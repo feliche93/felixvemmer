@@ -7,14 +7,15 @@ import ContentTeaser from './content-teaser'
 export interface ProtectedContentProps {
   children: React.ReactNode
 }
-export const ProtectedContent: FC<ProtectedContentProps> = ({ children }) => {
+export const ProtectedContent: FC<ProtectedContentProps> = async ({ children }) => {
+  const headersList = await headers()
   const { isBot } = userAgent({
-    headers: headers(),
+    headers: headersList,
   })
 
   if (isBot) return <div>{children}</div>
 
-  const { userId } = auth()
+  const { userId } = await auth()
 
   if (!!userId) return <div>{children}</div>
 

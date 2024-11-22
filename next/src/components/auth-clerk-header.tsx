@@ -6,10 +6,10 @@ import { FC } from 'react'
 import { buttonVariants } from './ui/button'
 
 export interface AuthClerkHeaderProps {}
-export const AuthClerkHeader: FC<AuthClerkHeaderProps> = () => {
+export const AuthClerkHeader: FC<AuthClerkHeaderProps> = async () => {
   unstable_noStore() // opt out before we even get to the try/catch
 
-  const { userId } = auth()
+  const { userId } = await auth()
 
   return (
     <>

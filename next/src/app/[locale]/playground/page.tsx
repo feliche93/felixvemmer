@@ -2,9 +2,10 @@ import ContentTeaser from '@/components/content-teaser'
 import { headers } from 'next/headers'
 import { userAgent } from 'next/server'
 
-export default function PlaygroundPage() {
+export default async function PlaygroundPage() {
+  const headersList = await headers()
   const { isBot } = userAgent({
-    headers: headers(),
+    headers: headersList,
   })
   return (
     <div className="max-w-lg mx-auto">
