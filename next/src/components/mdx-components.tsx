@@ -48,7 +48,6 @@ const components = {
   Tweet,
   YouTubeEmbed,
   Iframe,
-  Icons,
   Accordion,
   AccordionContent,
   AccordionItem,
