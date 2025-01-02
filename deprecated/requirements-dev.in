@@ -1,6 +1,0 @@
--c requirements.txt
-
-ruff
-ipykernel
-pre-commit
-pyright
