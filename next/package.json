@@ -11,7 +11,7 @@
     "lint:fix": "prettier . --write && eslint --fix",
     "lint:format": "prettier . --write",
     "typecheck": "tsc --pretty --noEmit",
-    "generate": "drizzle-kit generate:pg --config=drizzle.config.ts",
+    "generate": "drizzle-kit generate --config=drizzle.config.ts",
     "generate-custom": "drizzle-kit generate --custom --config=drizzle.config.ts",
     "migrate": "drizzle-kit migrate --config=drizzle.config.ts",
     "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",

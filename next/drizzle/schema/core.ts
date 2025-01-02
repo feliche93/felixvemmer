@@ -1,7 +1,8 @@
+import { sql } from 'drizzle-orm'
 import { pgTable, serial, text, integer, boolean, timestamp, numeric } from 'drizzle-orm/pg-core'
 
 export const npmPackages = pgTable('npm_packages', {
-  id: serial('id').primaryKey(),
+  id: text("id").primaryKey().default(sql`'npmpkg_' || nanoid()`),
   name: text('name').notNull().unique(),
   description: text('description'),
   license: text('license'),
