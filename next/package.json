@@ -20,7 +20,8 @@
     "generate-content": "pnpm content-collections build",
     "generate-posthog-sdk": "pnpm openapi-typescript-codegen --input ./openapi-specs/posthog.yaml --output ./src/lib/posthog-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
     "generate-papierkram-sdk": "pnpm openapi-typescript-codegen --input https://felixvemmer.papierkram.de/api/v1/api-docs/api/v1/swagger.json --output ./src/lib/papierkram-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
-    "clean": "rm -rf pnpm-lock.yaml node_modules .next"
+    "clean": "rm -rf pnpm-lock.yaml node_modules .next",
+    "prepare": "husky"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.2",
@@ -112,6 +113,7 @@
     "drizzle-kit": "^0.30.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-mdx": "^3.1.5",
+    "husky": "^9.1.7",
     "openapi-typescript-codegen": "^0.29.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
