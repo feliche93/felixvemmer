@@ -27,6 +27,9 @@
       "@/*": [
         "./src/*"
       ],
+      "@/drizzle/*": [
+        "./drizzle/*"
+      ],
       "content-collections": [
         "./.content-collections/generated"
       ]
