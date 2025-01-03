@@ -41,11 +41,16 @@
         "description": "Ich verwandle deine individuellen Ideen in moderne Web-Anwendungen."
       },
       "dataAndAI": {
-        "description": "Ich biete dir Einblicke und helfe dir dabei, skalierbare Datenprodukte und AI Services zu erstellen.        "
+        "description": "Ich biete dir Einblicke und helfe dir dabei, skalierbare Datenprodukte und AI Services zu erstellen."
       },
       "businessAndMarketing": {
         "description": "Lerne wie du dein aktuelles Geschäft optimieren kannst oder erhalte Feedback zu einer völlig neuen Geschäftsidee."
       }
     }
+  },
+  "consultingServices": {
+    "discover": "Entdecken",
+    "offer": "Angebot",
+    "deliver": "Umsetzung"
   }
 }
