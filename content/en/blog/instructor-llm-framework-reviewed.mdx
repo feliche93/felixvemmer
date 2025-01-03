@@ -1,0 +1,366 @@
+---
+image: '/posts/instruct-llm-framework-reviewed/cover-image.webp'
+title: 'Instructor is All You Need: My Review of the Instructor LLM Library by Jason Liu'
+description: 'With numerous LLM libraries available, such as Langchain, CrewAI, Haystack, and Marvin AI, the question arises: what makes Instructor stand out as an llm library? Find out in this blog post.'
+metaTitle: 'Instructor is All You Need: My Review of the Instructor LLM Library by Jason Liu'
+metaDescription: "Instructor is a new LLM library by Jason Liu that I've been using for a while now and I like it so much. It's a great tool for developers that want to get up and running with LLM in no time."
+date: '2024-04-10'
+published: true
+categories:
+  - 'Reviews'
+  - 'Typescript'
+  - 'Python'
+  - 'LLMs'
+authors:
+  - 'felix-vemmer'
+featured: true
+keywords:
+  - 'Instructor'
+  - 'LLM'
+  - 'Python'
+  - 'Typescript'
+---
+
+Following the latest [AI Tinkeres Berlin Meetup](https://berlin.aitinkerers.org/p/ai-tinkerers-berlin-march-21), where I witnessed a speedrun of very cool AI demos, I couldn't help but dive back into the **chaotic world of LLM libraries**. It's a realm where developers like me are on a never-ending quest to find the best library to help them build the first 1 billion dollar company.
+
+<Tweet id="1752753792058294725" />
+
+After trying [`Langchain`](https://www.langchain.com/), [`CrewAi`](https://www.crewai.com/) and [`Marvin AI`](https://www.askmarvin.ai/), I started to like [`Instructor`](https://github.com/jxnl) so much that I wanted to share my thoughts on why I personally started using it more and more for all my personal projects like [BacklinkGPT](https://backlinkgpt.com).
+
+## What is Instructor?
+
+Let's start by understanding **what the instructor library is**, by checking out the "H1" of the [docs](https://python.useinstructor.com/).
+
+> Instructor makes it easy to reliably get structured data like JSON from Large Language Models (LLMs) like GPT-3.5, GPT-4, GPT-4-Vision, including open source models like Mistral/Mixtral from Together, Anyscale, Ollama, and llama-cpp-python.
+
+By leveraging [Pydantic](https://pydantic-docs.helpmanual.io/), Instructor provides **a simple, transparent, and user-friendly API** to manage validation, retries, and streaming responses.
+
+Let's see this in action.
+
+### Hello World Instructor
+
+A simple `hello_world` example would look something like this:
+
+1. Install Instructor
+
+```bash
+pip install instructor
+```
+
+2. Import Instructor and instantiate the client.
+
+```python
+from typing import Literal
+import instructor
+from openai import OpenAI
+from pydantic import BaseModel, Field
+
+client = instructor.from_openai(OpenAI())
+```
+
+3. Define a Pydantic model for the output and call the `completions` endpoint.
+
+```python
+class Sentiment(BaseModel):
+    sentiment: Literal["positive", "negative", "neutral"] = Field(
+        ..., description="Sentiment of the text"
+    )
+```
+
+4. Call the `completions` endpoint and simply pass in the `Sentiment` model:
+
+```python
+sentiment = client.chat.completions.create(
+    model="gpt-4-turbo-preview",
+    response_model=Sentiment,
+    messages=[
+        {"role": "system", "content": "What is the sentiment of the given text?"},
+        {"role": "user", "content": "The instructor llm library is awesome!"},
+    ],
+)
+
+print(sentiment)
+
+# sentiment='positive'
+```
+
+### Programming Language Ports
+
+To further enhance its accessibility, Instructor extends its support beyond Python, **embracing a variety of programming language ports**:
+
+- Typescript: [`Instructor.js`](https://instructor-ai.github.io/instructor-js/)
+- Elixir: [`instructor_ex`](https://github.com/thmsmlr/instructor_ex)
+- PHP: [`instructor-php`](https://github.com/cognesy/instructor-php)
+
+So, if you believe like Guillermo Rauch that the upcoming AI applications will be frontend-first and built by AI Typescript Engineers, Instructor has you covered:
+
+<Image
+  width={1000}
+  height={500}
+  className="my-4 rounded-lg"
+  src="/posts/instruct-llm-framework-reviewed/agi-house-rauchg.png"
+  alt="GitHub Stars History for Instructor compared to Langchain, Marvin AI and CrewAi"
+/>
+
+1. Install Instructor and its dependencies
+
+```bash
+pnpm add @instructor-ai/instructor zod openai
+```
+
+2. Import all dependencies and define the client
+
+```typescript
+import Instructor from '@instructor-ai/instructor'
+import OpenAI from 'openai'
+import { z } from 'zod'
+
+const oai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY ?? undefined,
+  organization: process.env.OPENAI_ORG_ID ?? undefined,
+})
+
+const client = Instructor({
+  client: oai,
+  mode: 'FUNCTIONS',
+})
+```
+
+3. Define the `SentimentSchema` this time using [`zod`](https://zod.dev/).
+
+```typescript
+const SentimentSchema = z.object({
+  // Description will be used in the prompt
+  sentiment: z
+    .literal('positive')
+    .or(z.literal('negative').or(z.literal('neutral')))
+    .describe('The sentiment of the text'),
+})
+```
+
+4. Again call the `completions` endpoint with the `SentimentSchema`:
+
+```typescript
+async function main() {
+  const sentiment = await client.chat.completions.create({
+    messages: [
+      { role: 'system', content: 'What is the sentiment of the given text?' },
+      { role: 'user', content: 'The instructor llm library is awesome!' },
+    ],
+    model: 'gpt-3.5-turbo',
+    response_model: {
+      schema: SentimentSchema,
+      name: 'Sentiment',
+    },
+  })
+
+  console.log({ sentiment })
+}
+
+main()
+
+//  { sentiment: { sentiment: 'positive' } }
+```
+
+I'm not totally sold on the idea that future AI engineers will be TypeScript engineers, but I have to say **Instructor.js worked like a charm with Next.js**. If you're wondering why I went with Next.js in the first place, I've got a whole post about it:
+
+<RelatedPostCard absoluteUrl="/en/blog/why-next-js" />
+
+## Why Use Instructor
+
+If you look at the vanity metric of popularity via GitHub Stars, you'll see that [`Instructor`](https://github.com/jxnl/instructor-py) has around 4.4k stars, **making it a hidden champion** compared to more popular libraries like [`Langchain`](https://www.langchain.com/) or [`CrewAi`](https://www.crewai.com/).
+
+<Image
+  width={1000}
+  height={500}
+  className="my-4 rounded-lg"
+  src="/posts/instruct-llm-framework-reviewed/star-history-2024410.png"
+  alt="GitHub Stars History for Instructor compared to Langchain, Marvin AI and CrewAi"
+/>
+
+While Instructor may not be the most popular library at the moment, its **simplicity, data validation capabilities, and growing community** make it a compelling choice for developers looking to integrate LLMs into their projects. Let's dive deeper into the reasons why Instructor is a promising tool and why you might want to consider using it.
+
+### Simplicity
+
+Simplicity is one of Instructor's key advantages. Although libraries such as [`Langchain`](https://www.langchain.com/) and [`CrewAi`](https://www.crewai.com/) offer quick starts with pre-built prompts and abstractions, they can **become harder to customize as your needs evolve**.
+
+Instructor takes a different approach by **patching the core OpenAI API**. This makes it **intuitive for developers** already familiar with the OpenAI SDK, while **providing flexibility and control as projects scale**.
+
+Instructor is to the OpenAI API what Drizzle ORM is to SQL. It enhances the standard OpenAI API to be more developer-friendly and adaptable. By building on existing standards, Instructor flattens the learning curve, letting developers focus on creating powerful LLM applications.
+
+<RelatedPostCard absoluteUrl="/en/blog/drizzle-orm-boosting-developer-productivity" />
+
+Just as reference implementing the Sentiment classifyer in Langchain just feels more verbose:
+
+```python
+from langchain.output_parsers import PydanticOutputParser
+from langchain.prompts import PromptTemplate
+from langchain_core.pydantic_v1 import BaseModel, Field, validator
+from langchain_openai import OpenAI
+
+model = OpenAI(temperature=0.0)
+
+
+class Sentiment(BaseModel):
+    sentiment: Literal["positive", "negative", "neutral"] = Field(
+        ..., description="Sentiment of the text"
+    )
+
+
+parser = PydanticOutputParser(pydantic_object=Sentiment)
+
+prompt = PromptTemplate(
+    template="What is the sentiment of the given text?\n{format_instructions}\n{query}\n",
+    input_variables=["query"],
+    partial_variables={"format_instructions": parser.get_format_instructions()},
+)
+
+# And a query intended to prompt a language model to populate the data structure.
+chain = prompt | model | parser
+output = chain.invoke({"query": "The instructor llm library is awesome!"})
+sentiment = parser.parse(output)
+
+print(sentiment)
+```
+
+### Data Validation = Production Readiness
+
+Data validation is crucial for production-ready LLM applications. Instructor leverages powerful libraries like Pydantic and Zod to ensure that the **outputs from language models conform to predefined schemas**. This guarantees a level of reliability that is essential when deploying LLMs in real-world scenarios.
+
+By validating the structure and content of LLM responses, developers can have **confidence that the results are not hallucinated or inconsistent**. Instructor's validation capabilities help catch potential issues early in the development process, reducing the risk of unexpected behavior in production.
+
+As highlighted in the article ["Good LLM Validation is Just Good Validation"](https://python.useinstructor.com/blog/2023/10/23/good-llm-validation-is-just-good-validation/#putting-it-all-together-with-client-instructorfrom_openaiopenai), Instructor's `client.instructor.from_openai(OpenAI())` method provides a convenient way to integrate validation into your LLM pipeline. This approach ensures that your application can **handle the dynamic nature of LLM outputs while maintaining the necessary safeguards** for reliable operation.
+
+#### Showcase SEO Meta Descriptions
+
+One practical example where I used this is for creating SEO Meta Descriptions.
+
+As a reference, here are the optimal length requirements:
+
+- Meta Title: 50-60 characters
+- Meta Description: 150-160 characters
+
+With these requirements in mind I can use Pydantic to generate a meta description schemafor a blog post:
+
+```python
+class Metadata(BaseModel):
+    meta_title: str = Field(
+        ...,
+        min_length=50,
+        max_length=60,
+        description="Meta Title between 50-60 characters. Should be concise, descriptive and include primary keyword.",
+    )
+    meta_description: str = Field(
+        ...,
+        min_length=150,
+        max_length=160,
+        description="Meta Description between 150-160 characters. Should be compelling, summarize the page content and include relevant keywords naturally.",
+    )
+
+
+meta_descrioption = client.chat.completions.create(
+    model="gpt-4",
+    max_retries=3, # Retry the request 3 times
+    response_model=Metadata,
+    messages=[
+        {"role": "system", "content": content},
+    ],
+)
+```
+
+Calling this code without the ﻿max_retries=3 parameter resulted in the following error, showing that the LLM did not exactly follow the given requirements after validating the output with Pydantic.
+
+```bash
+ValidationError: 1 validation error for Metadata
+meta_description
+  String should have at most 160 characters [type=string_too_long, input_value='Discover what sets Instr... features and benefits.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.7/v/string_too_long
+```
+
+After adding the `max_retries=3` parameter, the LLM was able to meet the requirements with automatic retries and produced the following output:
+
+```json
+{
+  "meta_title": "Review: Why Instructor Stands Out Among LLM Libraries",
+  "meta_description": "Explore the unique features of Instructor LLM library and what differentiates it from other libraries like Langchain, CrewAI, Haystack, and Marvin AI."
+}
+```
+
+For another practical use case, check out [this example](https://python.useinstructor.com/examples/exact_citations/) that shows you how to ensure LLMs don't hallucinate by citing resources.
+
+### Code/Prompt Organization
+
+One of the key benefits of using Pydantic with Instructor is the ability to create **modular, reusable output schemas**. By encapsulating prompts and their expected outputs into Pydantic models, you can easily organize and reuse them across your codebase. This makes managing and sharing prompts a lot easier and more organized than having to copy and paste them around.
+
+Let's look at the famous chain-of-thought prompting technique, a powerful technique that allows LLMs to break down complex problems into smaller, more manageable steps. Here's an example of how you can leverage chain-of-thought prompting with Instructor:
+
+```python
+from pydantic import BaseModel, Field
+
+
+class Role(BaseModel):
+    chain_of_thought: str = Field(
+        ..., description="Think step by step to determine the correct title"
+    )
+    title: str
+
+
+class UserDetail(BaseModel):
+    age: int
+    name: str
+    role: Role
+```
+
+For more tips on prompt engineering checkout their docs [here](https://python.useinstructor.com/concepts/prompting/).
+
+### Documentaiton & Cookbok with Real World Examples
+
+Talking about docs, **Instructor just excels at documentation**, which is crucial for developer adoption. It provides comprehensive, well-structured API documentation and an extensive [`cookbook`](https://python.useinstructor.com/cookbook/). The cookbook is a valuable resource with recipes for common use cases, serving as a practical reference for developers.
+
+{/* <Tweet id={'1771218872374272350'} /> */}
+
+While other frameworks have great examples, Instructor's [`cookbook`](https://python.useinstructor.com/cookbook/) **stands out by showcasing "real world" examples** of how it solves certain problems. I think quite a lot of this is probably due to the fact that the creator, Jason Liu, also works as a freelancer where he's using Instructor himself to solve actual business problems. Here's the list of examples:
+
+1. [How are single and multi-label classifications done using enums?](https://python.useinstructor.com/examples/classification_with_enums/)
+2. [How is AI self-assessment implemented with llm_validator?](https://python.useinstructor.com/examples/llm_validator/)
+3. [How to do classification in batch from user provided classes.](https://python.useinstructor.com/examples/classification_in_batch/)
+4. [How are exact citations retrieved using regular expressions and smart prompting?](https://python.useinstructor.com/examples/exact_citations/)
+5. [How are search queries segmented through function calling and multi-task definitions?](https://python.useinstructor.com/examples/search_query_segmentation/)
+6. [How are knowledge graphs generated from questions?](https://python.useinstructor.com/examples/knowledge_graph_generation/)
+7. [How are complex queries decomposed into subqueries in a single request?](https://python.useinstructor.com/examples/complex_query_decomposition/)
+8. [How are entities extracted and resolved from documents?](https://python.useinstructor.com/examples/entity_extraction_and_resolution/)
+9. [How is Personally Identifiable Information sanitized from documents?](https://python.useinstructor.com/examples/pii_sanitization/)
+10. [How are action items and dependencies generated from transcripts?](https://python.useinstructor.com/examples/action_items_and_dependencies/)
+11. [How to enable OpenAI's moderation](https://python.useinstructor.com/examples/openai_moderation/)
+12. [How to extract tables using GPT-Vision?](https://python.useinstructor.com/examples/gpt_vision_table_extraction/)
+13. [How to generate advertising copy from image inputs](https://python.useinstructor.com/examples/image_to_ad_copy/)
+14. [How to use local models from Ollama](https://python.useinstructor.com/examples/ollama/)
+15. [How to store responses in a database with SQLModel](https://python.useinstructor.com/examples/sqlmodel/)
+16. [How to use groqcloud api](https://python.useinstructor.com/examples/groqcloud/)
+
+### Retries and Open Source Models
+
+Instructor's retry functionality is a game-changer when it comes to using open-source models for extraction tasks. Without Instructor, these models may not be reliable enough to trust their output directly. However, by leveraging Instructor's retry capabilities, you can essentially **brute-force these models to provide the correct answer**, making them viable options for extraction while still respecting privacy.
+
+The retry mechanism works by **automatically re-prompting the model if the output fails** to meet the specified validation criteria. This process continues until a valid output is obtained or the maximum number of retries is reached. By incorporating this functionality, Instructor enables developers to utilize open source models that may not be as powerful as their commercial counterparts, but can still produce accurate results through the power of retries.
+
+### Reliable Agentic Workflows?
+
+Finally, all the latest rage is about building agentic workflows, as discussed by Andrew Ng in this video:
+
+<YouTubeEmbed
+  id="sal78ACtGTc"
+  title="What's next for AI agentic workflows ft. Andrew Ng of AI Fund"
+/>
+
+[Crew.ai](https://www.crewai.com/) is an exciting new library for building AI agents designed for real-world use cases. One of the main challenges I had though is that **I just couldn't get the agents to produce consistent output** without going off the rails.
+
+Crew.ai provides a great abstraction with an easy-to-use API, but it can still be challenging to reliably steer agents and handle failures gracefully. If a task in a crew fails, there's no straightforward way to pause execution and restart debugging from the latest task.
+
+In contrast, Instructor requires more manual effort to define the desired logic and flow, but it offers greater control and flexibility to build reliable agentic workflows. By carefully designing the task flow and error handling, you can create more predictable and robust agents.
+
+It will be interesting to see how Crew.ai evolves in the future, potentially adopting techniques like memory and other enhancements to improve agent predictability.
+
+I'm excited to **explore building more agent-like flows with Instructor** in the future to see if it can be used in a similar way to Crew.ai and to understand the level of effort required to emulate Crew.ai's functionality. This exploration will provide valuable insights into the capabilities and limitations of Instructor for creating agentic workflows and help determine its suitability for such use cases.
+
+If you enjoyed this post make sure to check the rest of my blog and follow me on [Twitter](https://twitter.com/felixvemmer) for more posts like this.
