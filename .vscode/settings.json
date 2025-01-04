@@ -2,24 +2,37 @@
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
-  "[javascript]": {
+  "[javascriptreact][typescriptreact][javascript][typescript][json][jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
+
+  "[markdown][mdx]": {
+    "editor.wordWrap": "on"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+  "search.useIgnoreFiles": true,
+  "search.useParentIgnoreFiles": true,
+  "biome.enabled": true,
+  "eslint.enable": false,
+  "prettier.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "never",
+    "source.organizeImports": "explicit",
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
   },
-  "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "python.createEnvironment.trigger": "prompt",
   "python.formatting.provider": "none",
   "python.linting.enabled": true
 }

@@ -3,7 +3,7 @@ import { generatePageMeta } from '@/lib/seo'
 import { BreadCrumbStructuredData } from '@/lib/structured'
 import { absoluteUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { locales } from '../../../../i18n'
 
 export async function generateMetadata({
@@ -30,7 +30,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
-  unstable_setRequestLocale(locale || 'en')
+  setRequestLocale(locale || 'en')
 
   const t = await getTranslations('blog')
 

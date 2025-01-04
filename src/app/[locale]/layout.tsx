@@ -12,7 +12,7 @@ import { absoluteUrl, cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import 'fumadocs-ui/style.css'
 import type { Metadata, Viewport } from 'next'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { Toaster } from 'sonner'
@@ -20,9 +20,9 @@ import { locales } from '../../../i18n'
 
 interface LocaleRootLayoutProps {
   children: React.ReactNode
-  params: {
+  params: Promise<{
     locale: string | undefined
-  }
+  }>
 }
 
 export const viewport: Viewport = {
@@ -38,14 +38,10 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: LocaleRootLayoutProps['params']
-}): Promise<Metadata> {
-  unstable_setRequestLocale(locale || 'en')
+export async function generateMetadata(props: LocaleRootLayoutProps): Promise<Metadata> {
+  const { locale } = await props.params
 
-  const t = await getTranslations('site')
+  setRequestLocale(locale || 'en')
 
   return generatePageMeta({
     locale: locale,
@@ -53,11 +49,13 @@ export async function generateMetadata({
   })
 }
 
-export default function LocaleRootLayout({ children, params: { locale } }: LocaleRootLayoutProps) {
+export default async function LocaleRootLayout(props: LocaleRootLayoutProps) {
+  const { locale } = await props.params
+  const children = props.children
   const isValidLocale = locales.some((cur) => cur === locale)
   if (!isValidLocale) notFound()
 
-  unstable_setRequestLocale(locale || 'en')
+  setRequestLocale(locale || 'en')
 
   return (
     <>

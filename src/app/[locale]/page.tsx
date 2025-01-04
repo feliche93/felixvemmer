@@ -8,16 +8,16 @@ import { Skills } from '@/components/ui/skills'
 import { generatePageMeta } from '@/lib/seo'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '../navigation'
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
+  const { locale } = await params
   return generatePageMeta({
     locale,
     url: `/${locale}`,
@@ -25,10 +25,13 @@ export async function generateMetadata({
   })
 }
 
-export default function IndexPage({ params: { locale } }: { params: { locale: string } }) {
-  unstable_setRequestLocale(locale)
+export default async function IndexPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
 
-  const t = useTranslations('index')
+  const t = await getTranslations('index')
+
+  setRequestLocale(locale)
+
 
   // TODO: Sort by Views
   // let postsWithView = await Promise.all(posts.map(async (post) => {
