@@ -31,7 +31,6 @@ export async function generateStaticParams() {
 
 export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
   setRequestLocale(locale || 'en')
-
   const t = await getTranslations('blog')
 
   return (

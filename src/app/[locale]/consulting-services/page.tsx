@@ -9,8 +9,7 @@ import { List, ListItem } from '@/components/ui/list'
 import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
 import { StylizedImage } from '@/components/ui/stylized-image'
-import { useTranslations } from 'next-intl'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { locales } from '../../../../i18n'
 
 function Section({
@@ -51,8 +50,8 @@ function Section({
   )
 }
 
-function Discover() {
-  const t = useTranslations('consultingServices.discover')
+async function Discover() {
+  const t = await getTranslations('consultingServices.discover')
   return (
     <Section title={t('title')} image={{ src: discoverImage }}>
       <div className="space-y-6 text-base text-muted-foreground">
@@ -71,8 +70,8 @@ function Discover() {
   )
 }
 
-function Offer() {
-  const t = useTranslations('consultingServices.offer')
+async function Offer() {
+  const t = await getTranslations('consultingServices.offer')
   return (
     <Section title={t('title')} image={{ src: offerImage }}>
       <div className="space-y-6 text-base text-muted-foreground">
@@ -85,8 +84,8 @@ function Offer() {
   )
 }
 
-function Deliver() {
-  const t = useTranslations('consultingServices.deliver')
+async function Deliver() {
+  const t = await getTranslations('consultingServices.deliver')
 
   return (
     <Section title="Deliver" image={{ src: deliverImage, shape: 2 }}>
@@ -173,9 +172,10 @@ export async function generateStaticParams() {
   return params
 }
 
-export default function Process({ params: { locale } }: { params: { locale: string } }) {
-  unstable_setRequestLocale(locale)
-  const t = useTranslations('index')
+export default async function Process({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const t = await getTranslations('index')
 
   return (
     <>
@@ -188,7 +188,7 @@ export default function Process({ params: { locale } }: { params: { locale: stri
         {t('skills.description')}
       </PageIntro>
 
-      <Skills locale={locale} />
+      <Skills />
 
       <PageIntro
         centered

@@ -41,8 +41,6 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: LocaleRootLayoutProps): Promise<Metadata> {
   const { locale } = await props.params
 
-  setRequestLocale(locale || 'en')
-
   return generatePageMeta({
     locale: locale,
     url: absoluteUrl(`/${locale}`),
@@ -51,11 +49,11 @@ export async function generateMetadata(props: LocaleRootLayoutProps): Promise<Me
 
 export default async function LocaleRootLayout(props: LocaleRootLayoutProps) {
   const { locale } = await props.params
+  setRequestLocale(locale || 'en')
   const children = props.children
+
   const isValidLocale = locales.some((cur) => cur === locale)
   if (!isValidLocale) notFound()
-
-  setRequestLocale(locale || 'en')
 
   return (
     <>

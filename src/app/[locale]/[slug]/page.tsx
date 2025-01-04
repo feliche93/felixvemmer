@@ -7,10 +7,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string
     locale: string
-  }
+  }>
 }
 
 // export async function generateStaticParams() {
@@ -26,11 +26,12 @@ interface PostPageProps {
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
+  const { locale } = await params
 
   if (!page) return notFound()
 
   return generatePageMeta({
-    locale: params.locale,
+    locale,
     title: page.title,
     description: page.description,
     url: absoluteUrl(page.slug.replace('pages/', '')),
@@ -38,8 +39,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 async function getPageFromParams(params: PostPageProps['params']) {
-  const slug = params.slug
-  const locale = params?.locale
+  const { slug, locale } = await params
 
   if (!slug) {
     null

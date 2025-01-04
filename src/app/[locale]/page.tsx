@@ -27,11 +27,9 @@ export async function generateMetadata({
 
 export default async function IndexPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-
-  const t = await getTranslations('index')
-
   setRequestLocale(locale)
 
+  const t = await getTranslations('index')
 
   // TODO: Sort by Views
   // let postsWithView = await Promise.all(posts.map(async (post) => {
@@ -106,7 +104,7 @@ export default async function IndexPage({ params }: { params: Promise<{ locale: 
       <PageIntro centered title={t('skills.title')} eyebrow={t('skills.section')}>
         {t('skills.description')}
       </PageIntro>
-      <Skills locale={locale} />
+      <Skills />
       {/* Latest from blog */}
       <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16 lg:px-8">
         <PageIntro centered title={t('blog.title')} eyebrow={t('blog.section')} />
