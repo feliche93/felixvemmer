@@ -7,10 +7,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 interface PostPageProps {
-  params: Promise<{
+  params: {
     slug: string
     locale: string
-  }>
+  }
 }
 
 // export async function generateStaticParams() {
@@ -26,7 +26,7 @@ interface PostPageProps {
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
-  const { locale } = await params
+  const { locale } = params
 
   if (!page) return notFound()
 

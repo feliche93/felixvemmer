@@ -1,8 +1,8 @@
 interface LocaleRootLayoutProps {
   children: React.ReactNode
-  params: Promise<{
+  params: {
     locale: string | undefined
-  }>
+  }
 }
 
 export default function RootLayout({ children }: LocaleRootLayoutProps) {
