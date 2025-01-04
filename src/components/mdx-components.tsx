@@ -1,6 +1,7 @@
 import { ProductCard } from '@/components/amazon-product-card'
 import { CalCom } from '@/components/cal-com'
 import { Callout } from '@/components/callout'
+import { Icons } from '@/components/icons'
 import { Iframe } from '@/components/iframe'
 import { LinkButton } from '@/components/link-button'
 import { MdxCard } from '@/components/mdx-card'
@@ -55,6 +56,7 @@ const components = {
   AlertTitle,
   AlertDescription,
   Banner,
+  Icons,
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
     <a className={cn('font-medium underline underline-offset-4', className)} {...props} />
   ),
@@ -140,6 +142,8 @@ export function Mdx({ code }: MdxProps) {
   return (
     <>
       <div className="mdx">
+        {/* TODO: Fix TS error with Icons */}
+        {/* @ts-ignore */}
         <MDXContent code={code} components={components} />
       </div>
     </>

@@ -49,8 +49,31 @@
     }
   },
   "consultingServices": {
-    "discover": "Entdecken",
-    "offer": "Angebot",
-    "deliver": "Umsetzung"
+    "title": "Beratungsdienstleistungen",
+    "description": "Ich biete Beratungsdienstleistungen für Startups und kleine Unternehmen an. Meine Dienstleistungen umfassen:",
+    "discover": {
+      "title": "Erstgespräch",
+      "description": "<p>Die Umwandlung Ihrer Geschäftsideen in digitalen Erfolg ist meine Spezialität. Mein <strong>CEMS Master in International Management</strong> und mein <strong>tiefes technisches Wissen</strong> ermöglichen es mir, komplexe Herausforderungen in <strong>effektive technische Lösungen</strong> umzuwandeln. Ich setze auf <strong>klare Kommunikation</strong> und stelle sicher, dass Ihre Ziele mit maßgeschneiderten Lösungen für Ihr Unternehmen erreicht werden.</p><p>Unser Erstgespräch wird eine Sitzung mit <strong>ehrlichem Feedback</strong> und <strong>umsetzbaren Erkenntnissen</strong> sein. Mit einem schlanken MVP-Ansatz priorisiere ich einen schnellen und fokussierten Launch, der auf die Bedürfnisse Ihrer Kunden und die spezifischen Anforderungen Ihres Projekts abgestimmt ist.</p><p>Transparenz ist bei mir selbstverständlich. Wenn ein Projekt über meine Expertise hinausgeht, werde ich das offen kommunizieren. Aber mit meinem fundierten Wissen über die <strong>React- und Python-Ökosysteme</strong> bin ich bereit, eine <strong>umfassende Full-Stack-Strategie</strong> für den Erfolg Ihres Projekts zu entwickeln.</p>",
+      "quote": "Ich habe mit Felix an einem Projekt für DezentralizedFinance.com zusammengearbeitet, um ein skalierbares Logo-Map-SaaS-Tool zu erstellen. Felix war professionell, pünktlich und effizient. Er überzeugte durch seine Kommunikation und passte sich meiner Vision an, einen Prototyp mit Google Sheets zu integrieren. Besonders beeindruckend war Felix' Verständnis für meinen Workflow und meine Bedürfnisse."
+    },
+    "offer": {
+      "title": "Angebot",
+      "description": "<p>Nach dem Erstgespräch erhalten Sie ein <strong>maßgeschneidertes Angebot</strong> mit <strong>minimalen und maximalen Preisrahmen</strong>. Dies gibt Ihnen einen <strong>transparenten Überblick über mögliche Kosten</strong> und vermeidet unerwartete Überraschungen.</p><p>Da jedes Projekt einzigartig ist, biete ich die <strong>Flexibilität, den Umfang anzupassen</strong>, um Ihren finanziellen und projektbezogenen Anforderungen gerecht zu werden. Wir können gemeinsam daran arbeiten, die Projektanforderungen mit Ihrem Budget in Einklang zu bringen und eine Lösung zu entwickeln, die <strong>genau richtig für Sie</strong> ist.</p><p>Mein Ziel ist es, <strong>außergewöhnlichen Mehrwert</strong> zu liefern und dabei Qualität und Kosten in Balance zu halten. Durch die <strong>Verfeinerung des Projektumfangs</strong> können wir einen Sweet Spot finden, der <strong>Ihre Investition maximiert</strong> und Ihre Vision ohne Kompromisse zum Leben erweckt.</p>"
+    },
+    "deliver": {
+      "title": "Umsetzung",
+      "description": "<p>Ich stelle sicher, dass die Lösung dem vereinbarten Vorschlag entspricht und konzentriere mich auf wesentliche Funktionen, um <strong>Feature-Überladung</strong> zu vermeiden. Dennoch bleibe ich flexibel, um den Projektumfang an Ihre sich entwickelnden Bedürfnisse anzupassen und dabei alles <strong>einfach und effizient</strong> zu halten.</p><p>Die Liefergeschwindigkeit wird durch moderne Cloud-Anbieter wie Vercel und Modal.com unterstützt, die eine <strong>schnelle Skalierung und robuste Bereitstellung</strong> von Webanwendungen ermöglichen.</p><p>Durch den Einsatz von Full-Stack-Frameworks wie Next.js, kombiniert mit sauberem, gut dokumentiertem Code und robustem Testing, liefere ich Produkte, die nicht nur schnell auf den Markt gebracht werden, sondern auch <strong>wartbar und skalierbar</strong> sind. Mein Engagement für Codequalität beinhaltet die Verwendung von TypeScript/Python Type Hints, was die Lesbarkeit verbessert und Ihre Anwendung zukunftssicher macht, sodass sie für alle kommenden Änderungen bereit ist.</p>",
+      "list": {
+        "title": "In dieser Phase enthalten",
+        "documentation": {
+          "title": "Dokumentation",
+          "description": "Eine umfassende Dokumentation wird bereitgestellt, um ein einfaches Verständnis, zukünftige Wartung der Anwendung und einfaches Onboarding anderer Entwickler oder Teammitglieder zu gewährleisten."
+        },
+        "support": {
+          "title": "Support",
+          "description": "Ich verpflichte mich, laufenden Support zu leisten, um den reibungslosen Betrieb Ihrer Anwendung sicherzustellen."
+        }
+      }
+    }
   }
 }
