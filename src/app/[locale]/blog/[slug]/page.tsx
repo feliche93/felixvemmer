@@ -12,48 +12,45 @@ import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { allAuthors, allPosts } from 'content-collections'
 import type { Metadata } from 'next'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 export interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string
     locale: string
-  }
+  }>
 }
 
 export async function getPostFromParams(params: PostPageProps['params']) {
-  const post = allPosts.find(
-    (p) => p.slug === params.slug && p.locale === params.locale && p.published === true,
-  )
-
-  // return allPosts
-
-  // console.log({ params, allPosts })
+  const { slug, locale } = await params
+  const post = allPosts.find((p) => p.slug === slug && p.locale === locale && p.published === true)
 
   if (!post) {
-    throw new Error('Post not found')
-    // notFound()
+    notFound()
   }
 
   return post
 }
 
 // export async function generateStaticParams() {
-//   const params = allPosts.map((post) => ({
-//     slug: post.slugAsParams.split('/')[1],
-//     locale: post.locale,
-//   }))
-
-//   console.log({ params })
-
-//   return params
+//   return allPosts
+//     .filter((post) => post.published === true)
+//     .map((post) => ({
+//       slug: post.slugAsParams.split('/')[1],
+//       locale: post.locale,
+//     }))
 // }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-  const post = await getPostFromParams(params)
+  const { slug, locale } = await params
+  const post = allPosts.find((p) => p.slug === slug && p.locale === locale && p.published === true)
+
+  if (!post) {
+    notFound()
+  }
 
   const searchParams = new URLSearchParams()
 
@@ -62,8 +59,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   searchParams.set('mode', 'dark')
 
   const ogUrl = createUrl('/api/og', searchParams)
-
-  const { locale } = params
 
   return generatePageMeta({
     locale: locale,
@@ -77,10 +72,10 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 export default async function PostPage({ params }: PostPageProps) {
+  const { slug, locale } = await params
+  setRequestLocale(locale || 'en')
+
   const post = await getPostFromParams(params)
-
-  unstable_setRequestLocale(params.locale || 'en')
-
   const t = await getTranslations('blog')
 
   if (post === undefined) notFound()
@@ -92,17 +87,14 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const searchParams = new URLSearchParams()
-
   searchParams.set('heading', post.title)
   searchParams.set('type', 'Blog Post')
   searchParams.set('mode', 'dark')
 
   const ogUrl = createUrl('/api/og', searchParams)
 
-  // return <pre>{JSON.stringify({ post }, null, 2)}</pre>
-
   return (
-    <>
+    <Suspense>
       <NewsArticleStructuredData
         id={absoluteUrl(post.slug)}
         headline={post.metaTitle ?? post.title}
@@ -116,7 +108,7 @@ export default async function PostPage({ params }: PostPageProps) {
         itemListElement={[
           {
             name: 'Blog',
-            href: absoluteUrl(`/${params.locale}/blog`),
+            href: absoluteUrl(`/${locale}/blog`),
           },
           {
             name: post.title,
@@ -178,7 +170,9 @@ export default async function PostPage({ params }: PostPageProps) {
               src={post.image}
             />
             {/* Content */}
-            <Mdx code={post.body} />
+            <Suspense fallback={<div>Loading content...</div>}>
+              <Mdx code={post.body} />
+            </Suspense>
           </article>
           <hr className="my-8" />
           <div className="flex justify-center py-6 lg:py-10">
@@ -194,6 +188,6 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </div>
       </main>
-    </>
+    </Suspense>
   )
 }
