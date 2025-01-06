@@ -84,7 +84,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const ogUrl = createUrl('/api/og', searchParams)
 
   return (
-    <Suspense>
+    <>
       <NewsArticleStructuredData
         id={absoluteUrl(post.slug)}
         headline={post.metaTitle ?? post.title}
@@ -178,6 +178,6 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </div>
       </main>
-    </Suspense>
+    </>
   )
 }
