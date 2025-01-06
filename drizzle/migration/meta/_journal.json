@@ -50,6 +50,13 @@
       "when": 1736198040666,
       "tag": "0006_mushy_squirrel_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1736198204396,
+      "tag": "0007_neat_christian_walker",
+      "breakpoints": true
     }
   ]
 }

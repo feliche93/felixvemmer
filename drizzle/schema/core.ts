@@ -33,6 +33,7 @@ export const npmPackages = pgTable('npm_packages', {
 export const nodeCategories = pgTable('node_categories', {
   id: text('id').primaryKey().default(sql`'ncat_' || nanoid()`).notNull(),
   name: text('name').notNull().unique().notNull(),
+  slug: text('slug').notNull().unique().notNull(),
   description: text('description').notNull(),
 
   // Timestamps
@@ -43,6 +44,7 @@ export const nodeCategories = pgTable('node_categories', {
 export const nodeSubcategories = pgTable('node_subcategories', {
   id: text('id').primaryKey().default(sql`'nsubcat_' || nanoid()`).notNull(),
   name: text('name').notNull().unique().notNull(),
+  slug: text('slug').notNull().unique().notNull(),
   description: text('description').notNull(),
   categoryId: text('category_id')
     .references(() => nodeCategories.id)
