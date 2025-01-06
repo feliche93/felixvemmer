@@ -12,7 +12,7 @@ import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
 import { FireIcon } from '@heroicons/react/24/outline'
 import { allAuthors, allPosts } from 'content-collections'
 import type { Metadata } from 'next'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -33,15 +33,6 @@ export async function getPostFromParams(params: PostPageProps['params']) {
   }
 
   return post
-}
-
-export async function generateStaticParams() {
-  return allPosts
-    .filter((post) => post.published === true)
-    .map((post) => ({
-      slug: post.slugAsParams.split('/')[1],
-      locale: post.locale,
-    }))
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
@@ -73,7 +64,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug, locale } = await params
-  setRequestLocale(locale || 'en')
 
   const post = await getPostFromParams(params)
   const t = await getTranslations('blog')
