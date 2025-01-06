@@ -12,7 +12,8 @@ import { absoluteUrl, cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import 'fumadocs-ui/style.css'
 import type { Metadata, Viewport } from 'next'
-import { setRequestLocale } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { Toaster } from 'sonner'
@@ -51,6 +52,7 @@ export default async function LocaleRootLayout(props: LocaleRootLayoutProps) {
   const { locale } = await props.params
   setRequestLocale(locale || 'en')
   const children = props.children
+  const messages = await getMessages()
 
   const isValidLocale = locales.some((cur) => cur === locale)
   if (!isValidLocale) notFound()
@@ -61,19 +63,21 @@ export default async function LocaleRootLayout(props: LocaleRootLayoutProps) {
         <head />
         <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
           <Providers attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <WrappedClerkProvider>
-              <PHProvider>
-                <StructuredData />
-                <div className="relative flex min-h-screen flex-col">
-                  <Suspense>
-                    <PostHogPageView />
-                  </Suspense>
-                  <SiteHeader />
-                  <div className="flex-1">{children}</div>
-                  <SiteFooter />
-                </div>
-              </PHProvider>
-            </WrappedClerkProvider>
+            <NextIntlClientProvider messages={messages} locale={locale}>
+              <WrappedClerkProvider>
+                <PHProvider>
+                  <StructuredData />
+                  <div className="relative flex min-h-screen flex-col">
+                    <Suspense>
+                      <PostHogPageView />
+                    </Suspense>
+                    <SiteHeader />
+                    <div className="flex-1">{children}</div>
+                    <SiteFooter />
+                  </div>
+                </PHProvider>
+              </WrappedClerkProvider>
+            </NextIntlClientProvider>
             <TailwindIndicator />
             <Toaster />
           </Providers>
