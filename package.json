@@ -14,6 +14,7 @@
     "generate": "drizzle-kit generate --config=drizzle.config.ts",
     "generate-custom": "drizzle-kit generate --custom --config=drizzle.config.ts",
     "migrate": "drizzle-kit migrate --config=drizzle.config.ts",
+    "studio": "drizzle-kit studio --config=drizzle.config.ts",
     "update-pg": "drizzle-kit up:pg --config=drizzle.config.ts",
     "check": "drizzle-kit check:pg --config=drizzle.config.ts",
     "drop": "drizzle-kit drop --config=drizzle.config.ts",

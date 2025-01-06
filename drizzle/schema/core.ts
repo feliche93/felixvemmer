@@ -29,3 +29,24 @@ export const npmPackages = pgTable('npm_packages', {
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 })
+
+export const nodeCategories = pgTable('node_categories', {
+  id: text('id').primaryKey().default(sql`'ncat_' || nanoid()`),
+  name: text('name').notNull().unique(),
+  description: text('description'),
+
+  // Timestamps
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+})
+
+export const nodeSubcategories = pgTable('node_subcategories', {
+  id: text('id').primaryKey().default(sql`'nsubcat_' || nanoid()`),
+  name: text('name').notNull().unique(),
+  description: text('description'),
+  categoryId: text('category_id').references(() => nodeCategories.id),
+
+  // Timestamps
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+})

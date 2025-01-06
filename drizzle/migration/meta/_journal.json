@@ -15,6 +15,20 @@
       "when": 1735859923741,
       "tag": "0001_sour_paibok",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1736197207764,
+      "tag": "0002_tense_tarot",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1736197244059,
+      "tag": "0003_busy_chameleon",
+      "breakpoints": true
     }
   ]
 }
