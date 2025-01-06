@@ -49,9 +49,7 @@
         "node_categories_name_unique": {
           "name": "node_categories_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       },
       "policies": {},
@@ -108,12 +106,8 @@
           "name": "node_subcategories_category_id_node_categories_id_fk",
           "tableFrom": "node_subcategories",
           "tableTo": "node_categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -123,9 +117,7 @@
         "node_subcategories_name_unique": {
           "name": "node_subcategories_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       },
       "policies": {},
@@ -256,9 +248,7 @@
         "npm_packages_name_unique": {
           "name": "npm_packages_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       },
       "policies": {},

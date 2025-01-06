@@ -48,9 +48,7 @@
       "uniqueConstraints": {
         "node_categories_name_unique": {
           "name": "node_categories_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "nullsNotDistinct": false
         }
       },
@@ -107,13 +105,9 @@
         "node_subcategories_category_id_node_categories_id_fk": {
           "name": "node_subcategories_category_id_node_categories_id_fk",
           "tableFrom": "node_subcategories",
-          "columnsFrom": [
-            "category_id"
-          ],
+          "columnsFrom": ["category_id"],
           "tableTo": "node_categories",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "no action"
         }
@@ -122,9 +116,7 @@
       "uniqueConstraints": {
         "node_subcategories_name_unique": {
           "name": "node_subcategories_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "nullsNotDistinct": false
         }
       },
@@ -255,9 +247,7 @@
       "uniqueConstraints": {
         "npm_packages_name_unique": {
           "name": "npm_packages_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "nullsNotDistinct": false
         }
       },
