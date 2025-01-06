@@ -44,7 +44,9 @@ export const nodeSubcategories = pgTable('node_subcategories', {
   id: text('id').primaryKey().default(sql`'nsubcat_' || nanoid()`).notNull(),
   name: text('name').notNull().unique().notNull(),
   description: text('description').notNull(),
-  categoryId: text('category_id').references(() => nodeCategories.id).notNull(),
+  categoryId: text('category_id')
+    .references(() => nodeCategories.id)
+    .notNull(),
 
   // Timestamps
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
