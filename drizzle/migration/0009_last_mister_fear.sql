@@ -1,0 +1,2 @@
+ALTER TABLE "npm_package_node_subcategory" ADD COLUMN "created_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
+ALTER TABLE "npm_package_node_subcategory" ADD COLUMN "updated_at" timestamp with time zone DEFAULT now() NOT NULL;

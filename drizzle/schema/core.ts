@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm'
-import { boolean, integer, numeric, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import { boolean, integer, numeric, pgTable, text, timestamp, unique } from 'drizzle-orm/pg-core'
 
 export const npmPackages = pgTable('npm_packages', {
   id: text('id').primaryKey().default(sql`'npmpkg_' || nanoid()`),
@@ -54,3 +54,21 @@ export const nodeSubcategories = pgTable('node_subcategories', {
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 })
+
+export const npmPackageNodeSubcategory = pgTable(
+  'npm_package_node_subcategory',
+  {
+    npmPackageId: text('npm_package_id')
+      .references(() => npmPackages.id)
+      .notNull()
+      .unique(),
+    nodeSubcategoryId: text('node_subcategory_id')
+      .references(() => nodeSubcategories.id)
+      .notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => ({
+    uniq: unique().on(table.npmPackageId, table.nodeSubcategoryId),
+  }),
+)
