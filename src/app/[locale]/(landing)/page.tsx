@@ -1,3 +1,4 @@
+import { Link } from '@/app/navigation'
 import { BlogPostGrid } from '@/components/blog-post-grid'
 import { CalCom } from '@/components/cal-com'
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
@@ -10,7 +11,6 @@ import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
-import { Link } from '../navigation'
 
 export async function generateMetadata({
   params,

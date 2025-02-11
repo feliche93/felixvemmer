@@ -1,5 +1,22 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+  "files": {
+    "ignoreUnknown": false,
+    "maxSize": 2000000,
+    "ignore": [
+      ".wrangler",
+      "node_modules",
+      ".next/*",
+      ".trigger/*",
+      "*/attio/index.ts",
+      "*/hono/index.ts",
+      ".content-collections",
+      "dist",
+      ".gitignore",
+      "./src/lib/posthog-typescript-sdk/**/*",
+      "./src/lib/papierkram-typescript-sdk/**/*"
+    ]
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -23,22 +40,13 @@
     "enabled": true
   },
   "linter": {
-    "ignore": [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/build/**",
-      "**/public/**",
-      "**/src/lib/posthog-typescript-sdk/**",
-      "**/src/lib/papierkram-typescript-sdk/**"
-    ],
     "enabled": true,
     "rules": {
       "suspicious": {
         "noArrayIndexKey": "off",
         "noExplicitAny": "off",
         "noAssignInExpressions": "off",
-        "noImplicitAnyLet": "off",
-        "noPrototypeBuiltins": "off"
+        "noImplicitAnyLet": "off"
       },
       "recommended": true,
       "a11y": {
@@ -79,8 +87,7 @@
       },
       "style": {
         "noUnusedTemplateLiteral": "off",
-        "useImportType": "warn",
-        "noNonNullAssertion": "off"
+        "useImportType": "warn"
       }
     }
   }

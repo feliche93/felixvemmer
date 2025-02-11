@@ -4,7 +4,7 @@ import { BreadCrumbStructuredData } from '@/lib/structured'
 import { absoluteUrl } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { locales } from '../../../../i18n'
+import { locales } from '../../../../../i18n'
 
 export async function generateMetadata({
   params: { locale },

@@ -10,7 +10,7 @@ import { PageIntro } from '@/components/ui/page-intro'
 import { Skills } from '@/components/ui/skills'
 import { StylizedImage } from '@/components/ui/stylized-image'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { locales } from '../../../../i18n'
+import { locales } from '../../../../../i18n'
 
 function Section({
   title,

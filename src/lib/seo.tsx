@@ -134,18 +134,25 @@ export function generatePageMeta({
     alt: title,
     type: 'image/jpeg',
   }
+
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   metadata.openGraph!.images = img ? [img] : [screenshot]
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   metadata.twitter!.images = img ? [img] : [screenshot]
 
   if (siteName) {
     metadata.applicationName = siteName
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     metadata.openGraph!.siteName = siteName
   }
 
   if (feed) {
     if (!metadata.alternates?.types) {
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       metadata.alternates!.types = {}
     }
+
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     metadata.alternates!.types['application/rss+xml'] = feed
   }
 

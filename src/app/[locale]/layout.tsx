@@ -1,8 +1,6 @@
 import PostHogPageView from '@/components/posthog-page-view'
 import { PHProvider } from '@/components/posthog-provider'
 import { Providers } from '@/components/providers'
-import { SiteFooter } from '@/components/site-footer'
-import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { WrappedClerkProvider } from '@/components/wrapped-clerk-provider'
 import { fontSans } from '@/lib/fonts'
@@ -15,6 +13,7 @@ import type { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
 import { Toaster } from 'sonner'
 import { locales } from '../../../i18n'
@@ -66,15 +65,11 @@ export default async function LocaleRootLayout(props: LocaleRootLayoutProps) {
             <NextIntlClientProvider messages={messages} locale={locale}>
               <WrappedClerkProvider>
                 <PHProvider>
+                  <Suspense>
+                    <PostHogPageView />
+                  </Suspense>
                   <StructuredData />
-                  <div className="relative flex min-h-screen flex-col">
-                    <Suspense>
-                      <PostHogPageView />
-                    </Suspense>
-                    <SiteHeader />
-                    <div className="flex-1">{children}</div>
-                    <SiteFooter />
-                  </div>
+                  <NuqsAdapter>{children}</NuqsAdapter>
                 </PHProvider>
               </WrappedClerkProvider>
             </NextIntlClientProvider>
