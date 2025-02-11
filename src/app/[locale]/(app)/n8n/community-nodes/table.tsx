@@ -41,6 +41,7 @@ export function Table({ promise, children }: TableProps) {
     finalScore: Number(row.finalScore),
     createdAt: row.createdAt.toISOString(),
     updatedAt: row.updatedAt.toISOString(),
+    nodeSubcategory: row.nodeSubcategory,
   }))
 
   const { table } = useDataTable({

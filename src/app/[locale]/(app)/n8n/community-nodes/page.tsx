@@ -18,13 +18,13 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Table } from './table'
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: {
+export async function generateMetadata(props: {
+  params: Promise<{
     locale: string
-  }
+  }>
 }): Promise<Metadata> {
+  const { locale } = await props.params
+
   return generatePageMeta({
     locale,
     title: 'n8n Community Nodes Directory | Browse & Filter Custom Workflow Nodes',
@@ -39,6 +39,8 @@ export default async function N8nCommunityNodesPage(props: {
 }) {
   const tableQuery = await tableSearchParamsCache.parse(props.searchParams)
   const searchParams = await props.searchParams
+
+  console.log({ searchParams })
 
   const promise = getCommunityNodes({
     page: tableQuery.page,
@@ -57,7 +59,7 @@ export default async function N8nCommunityNodesPage(props: {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Community Nodes</BreadcrumbLink>
+                <BreadcrumbLink href="/en/n8n/community-nodes">Community Nodes</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>

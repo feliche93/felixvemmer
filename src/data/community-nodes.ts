@@ -1,6 +1,6 @@
-import { npmPackages } from '@/drizzle/schema'
+import { nodeSubcategories, npmPackageNodeSubcategory, npmPackages } from '@/drizzle/schema'
 import { db, withTableFeatures } from '@/lib/db'
-import { and, sql } from 'drizzle-orm'
+import { and, eq, getTableColumns, sql } from 'drizzle-orm'
 
 export async function getCommunityNodes({
   page,
@@ -15,12 +15,22 @@ export async function getCommunityNodes({
   sortDir: 'asc' | 'desc' | null
   name?: string
 }) {
-  const query = db
-    .select()
-    .from(npmPackages)
-    .where(and(name ? sql`${npmPackages.name} ILIKE ${`%${name}%`}` : undefined))
+  const npmPackagesColumns = getTableColumns(npmPackages)
 
-  const result = withTableFeatures(db, query.$dynamic(), {
+  const query = db
+    .select({
+      ...npmPackagesColumns,
+      nodeSubcategory: nodeSubcategories.name,
+    })
+    .from(npmPackages)
+    .where(and(name ? sql`LOWER(${npmPackages.name}) LIKE LOWER(${`%${name}%`})` : undefined))
+    .leftJoin(npmPackageNodeSubcategory, eq(npmPackages.id, npmPackageNodeSubcategory.npmPackageId))
+    .leftJoin(
+      nodeSubcategories,
+      eq(npmPackageNodeSubcategory.nodeSubcategoryId, nodeSubcategories.id),
+    )
+
+  const result = await withTableFeatures(db, query.$dynamic(), {
     page,
     perPage,
     order: sortDir,

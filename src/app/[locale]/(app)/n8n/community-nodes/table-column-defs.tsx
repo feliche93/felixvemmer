@@ -2,7 +2,6 @@
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 import { Icons } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
 import type { ColumnDef } from '@tanstack/react-table'
 import { formatDistanceToNow } from 'date-fns'
 import { Globe } from 'lucide-react'
@@ -27,35 +26,36 @@ export type TRow = {
   finalScore: number
   createdAt: string
   updatedAt: string
+  nodeSubcategory: string | null
 }
 
 export function fetchNodesTableColumnDef(): ColumnDef<TRow, unknown>[] {
   return [
-    {
-      id: 'select',
-      header: ({ table }) => (
-        <Checkbox
-          checked={table.getIsAllPageRowsSelected()}
-          onCheckedChange={(value) => {
-            table.toggleAllPageRowsSelected(!!value)
-          }}
-          aria-label="Select all"
-          className="translate-y-[2px]"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => {
-            row.toggleSelected(!!value)
-          }}
-          aria-label="Select row"
-          className="translate-y-[2px]"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
+    // {
+    //   id: 'select',
+    //   header: ({ table }) => (
+    //     <Checkbox
+    //       checked={table.getIsAllPageRowsSelected()}
+    //       onCheckedChange={(value) => {
+    //         table.toggleAllPageRowsSelected(!!value)
+    //       }}
+    //       aria-label="Select all"
+    //       className="translate-y-[2px]"
+    //     />
+    //   ),
+    //   cell: ({ row }) => (
+    //     <Checkbox
+    //       checked={row.getIsSelected()}
+    //       onCheckedChange={(value) => {
+    //         row.toggleSelected(!!value)
+    //       }}
+    //       aria-label="Select row"
+    //       className="translate-y-[2px]"
+    //     />
+    //   ),
+    //   enableSorting: false,
+    //   enableHiding: false,
+    // },
     {
       accessorKey: 'name',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
@@ -74,6 +74,11 @@ export function fetchNodesTableColumnDef(): ColumnDef<TRow, unknown>[] {
       accessorKey: 'description',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Description" />,
       cell: ({ row }) => <div className="max-w-[250px] truncate">{row.original.description}</div>,
+    },
+    {
+      accessorKey: 'nodeSubcategory',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Node Subcategory" />,
+      cell: ({ row }) => <div>{row.original.nodeSubcategory}</div>,
     },
     {
       accessorKey: 'license',
