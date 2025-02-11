@@ -10,10 +10,29 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { getCommunityNodes } from '@/data/community-nodes'
+import { generatePageMeta } from '@/lib/seo'
+import { absoluteUrl } from '@/lib/utils'
 import { tableSearchParamsCache } from '@/search-params/table'
 import type { TSearchParams } from '@/types/search-params'
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Table } from './table'
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: {
+    locale: string
+  }
+}): Promise<Metadata> {
+  return generatePageMeta({
+    locale,
+    title: 'n8n Community Nodes Directory | Browse & Filter Custom Workflow Nodes',
+    description:
+      'Explore the comprehensive directory of n8n community nodes. Search, filter and discover custom workflow nodes created by the n8n community to extend your automation capabilities.',
+    url: absoluteUrl(`/${locale}/n8n/community-nodes`),
+  })
+}
 
 export default async function N8nCommunityNodesPage(props: {
   searchParams: TSearchParams
