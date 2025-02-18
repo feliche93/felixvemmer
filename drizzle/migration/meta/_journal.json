@@ -71,6 +71,13 @@
       "when": 1736199713887,
       "tag": "0009_last_mister_fear",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1739902790367,
+      "tag": "0010_parched_newton_destine",
+      "breakpoints": true
     }
   ]
 }
