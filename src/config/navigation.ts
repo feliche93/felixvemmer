@@ -27,10 +27,6 @@ export const navigationConfig: NavigationConfig = {
         title: 'Hardware',
         href: '/hardware',
       },
-      {
-        title: 'n8n',
-        href: '/n8n',
-      },
       // {
       //   title: 'Stats',
       //   href: '/stats',
@@ -71,10 +67,6 @@ export const navigationConfig: NavigationConfig = {
       {
         title: 'Hardware',
         href: '/hardware',
-      },
-      {
-        title: 'n8n',
-        href: '/n8n',
       },
       // {
       //   title: 'Stats',

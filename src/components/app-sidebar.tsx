@@ -38,14 +38,14 @@ const data = {
   ],
   navMain: [
     {
-      title: 'Community Nodes',
-      url: '/n8n/community-nodes',
+      title: 'TBD',
+      url: '/',
       icon: Package,
       isActive: true,
       items: [
         {
-          title: 'All Nodes',
-          url: '/n8n/community-nodes',
+          title: 'TBD',
+          url: '/',
         },
         // {
         //   title: 'Starred',
