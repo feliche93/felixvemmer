@@ -36,6 +36,10 @@ export const navigationConfig: NavigationConfig = {
         href: '/consulting-services',
       },
       {
+        title: 'n8engine',
+        href: 'https://n8engine.com',
+      },
+      {
         title: 'GitHub',
         href: siteConfig.links.github,
         external: true,
