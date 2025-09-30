@@ -7,12 +7,13 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { locales } from '../../../../../i18n'
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
   params: {
     locale: string
   }
 }): Promise<Metadata> {
+  const { locale } = await params
   return generatePageMeta({
     locale,
     title: 'Blog',
@@ -29,7 +30,8 @@ export async function generateStaticParams() {
   return params
 }
 
-export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function BlogPage({ params }: { params: { locale: string } }) {
+  const { locale } = await params
   setRequestLocale(locale || 'en')
   const t = await getTranslations('blog')
 

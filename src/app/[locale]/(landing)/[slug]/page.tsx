@@ -26,7 +26,7 @@ interface PostPageProps {
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
-  const { locale } = params
+  const { locale } = await params
 
   if (!page) return notFound()
 
