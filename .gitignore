@@ -75,6 +75,7 @@ web_modules/
 # dotenv environment variable files
 .env
 .env*.local
+.dev.vars
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -86,6 +87,7 @@ web_modules/
 next-env.d.ts
 out
 cache
+.open-next
 
 # Nuxt.js build / generate output
 .nuxt
@@ -157,3 +159,6 @@ pip-delete-this-directory.txt
 
 # Broken Link Checker Output
 *.csv
+.env.prod
+.gitignore
+.env.preview
