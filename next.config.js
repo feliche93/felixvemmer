@@ -3,12 +3,10 @@ const withNextIntl = require('next-intl/plugin')(
   // This is the default (also the `src` folder is supported out of the box)
   './i18n.ts',
 )
-const { initOpenNextCloudflareForDev } = require('@opennextjs/cloudflare')
-
-initOpenNextCloudflareForDev()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   experimental: {
     ppr: false,
   },

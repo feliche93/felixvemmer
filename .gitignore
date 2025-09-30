@@ -87,7 +87,6 @@ web_modules/
 next-env.d.ts
 out
 cache
-.open-next
 
 # Nuxt.js build / generate output
 .nuxt
@@ -160,5 +159,4 @@ pip-delete-this-directory.txt
 # Broken Link Checker Output
 *.csv
 .env.prod
-.gitignore
 .env.preview

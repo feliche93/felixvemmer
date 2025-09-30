@@ -5,13 +5,7 @@
   "scripts": {
     "dev": "pnpm concurrently \"content-collections watch\" \"next dev\"",
     "build": "pnpm content-collections build && next build",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "bash scripts/deploy-cloudflare.sh prod",
-    "deploy:preview": "bash scripts/deploy-cloudflare.sh preview",
-    "secrets:prod": "bash scripts/set-cloudflare-secrets.sh prod",
-    "secrets:preview": "bash scripts/set-cloudflare-secrets.sh preview",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "start": "pnpm next start",
+    "start": "next start",
     "lint": "biome check .",
     "lint:fix": "biome check . --fix --unsafe",
     "format": "biome format . --write",
@@ -43,7 +37,6 @@
     "@instructor-ai/instructor": "^1.7.0",
     "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
     "@neondatabase/serverless": "^0.10.4",
-    "@opennextjs/cloudflare": "^1.9.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-aspect-ratio": "^1.1.2",
@@ -132,7 +125,6 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "schema-dts": "^1.1.2",
-    "tsx": "^4.19.2",
-    "wrangler": "^4.40.3"
+    "tsx": "^4.19.2"
   }
 }
