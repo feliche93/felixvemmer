@@ -138,6 +138,13 @@
   }
 }
 
+@layer utilities {
+  /* Keep anchor-based buttons legible when link text-fill wins over color. */
+  a.text-primary-foreground {
+    -webkit-text-fill-color: hsl(var(--primary-foreground)) !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border ring-ring ring-offset-background outline-ring/50;
