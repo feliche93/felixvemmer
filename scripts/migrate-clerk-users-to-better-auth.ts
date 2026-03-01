@@ -2,15 +2,10 @@ import fs from "node:fs/promises"
 import path from "node:path"
 import process from "node:process"
 import { neon } from "@neondatabase/serverless"
-import * as dotenv from "dotenv"
 import { eq } from "drizzle-orm"
 import { drizzle as drizzleHttp } from "drizzle-orm/neon-http"
 import { users } from "../drizzle/schema/auth/schema"
 import { newId } from "../src/lib/auth/ids"
-
-if (!process.env.CLERK_SECRET_KEY || !process.env.DATABASE_URL) {
-  dotenv.config({ path: ".env.local" })
-}
 
 type ClerkEmailAddress = {
   id: string

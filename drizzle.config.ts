@@ -1,19 +1,19 @@
-import * as dotenv from 'dotenv'
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from "drizzle-kit"
 
-dotenv.config({ path: '.env.local' })
 const connectionString = process.env.DATABASE_URL
 
 if (!connectionString) {
-  throw new Error('DATABASE_URL environment variable not set')
+  throw new Error(
+    "DATABASE_URL environment variable not set. Run drizzle commands via scripts/with-infisical.sh.",
+  )
 }
 
 export default defineConfig({
-  schema: './drizzle/schema',
-  out: './drizzle/migration',
+  schema: "./drizzle/schema",
+  out: "./drizzle/migration",
   dbCredentials: {
     url: connectionString,
   },
-  dialect: 'postgresql',
-  casing: 'snake_case',
+  dialect: "postgresql",
+  casing: "snake_case",
 })
