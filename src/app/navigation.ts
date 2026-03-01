@@ -1,23 +1,24 @@
-import { type Pathnames, createLocalizedPathnamesNavigation } from 'next-intl/navigation'
-import { locales } from '../../i18n'
+import { createNavigation } from "next-intl/navigation"
+import { defineRouting } from "next-intl/routing"
+import { locales } from "../../i18n"
 
-export const localePrefix = 'always' // Default
+export const localePrefix = "always" // Default
 
 // The `pathnames` object holds pairs of internal
 // and external paths, separated by locale.
 export const pathnames = {
   // If all locales use the same pathname, a
   // single external path can be provided.
-  '/': '/',
-  '/blog': '/blog',
-  '/sign-in': '/sign-in',
-  '/sign-up': '/sign-up',
-  '/consulting-services': '/consulting-services',
+  "/": "/",
+  "/blog": "/blog",
+  "/sign-in": "/sign-in",
+  "/sign-up": "/sign-up",
+  "/consulting-services": "/consulting-services",
   // If locales use different paths, you can
   // specify each external path per locale.
-  '/about': {
-    en: '/about',
-    de: '/ueber-uns',
+  "/about": {
+    en: "/about",
+    de: "/ueber-uns",
   },
 
   // // Dynamic params are supported via square brackets
@@ -31,7 +32,13 @@ export const pathnames = {
   //   en: '/categories/[...slug]',
   //   de: '/kategorien/[...slug]',
   // },
-} satisfies Pathnames<typeof locales>
+} as const
 
-export const { Link, redirect, usePathname, useRouter, getPathname } =
-  createLocalizedPathnamesNavigation({ locales, localePrefix, pathnames })
+export const routing = defineRouting({
+  locales,
+  defaultLocale: "en",
+  localePrefix,
+  pathnames,
+})
+
+export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing)
