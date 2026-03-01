@@ -4,223 +4,149 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card-foreground: 240 10% 3.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --popover-foreground: 240 10% 3.9%;
 
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    --muted: 240 4.8% 92%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 85.28% 45.29%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71.4% 4.1%;
+    --warning: 34 95% 45%;
+    --warning-foreground: 0 0% 98%;
+    --success: 142 70% 45.7%;
+    --success-foreground: 143 61.5% 10.4%;
 
-    --radius: 0.5rem;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 3.8% 46.1%;
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
+    --sidebar-primary: 270 100% 86%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
+    --sidebar-accent: 240 4.8% 95%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 240 3.8% 46.1%;
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    --muted: 240 3.7% 17%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 80% 50%; /* Brighter red */
-    --destructive-foreground: 0 80% 70%; /* Brighter red */
+    --destructive: 4 92% 54%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
+    --warning: 37.8 94% 55%;
+    --warning-foreground: 21.7 77.8% 10%;
+    --success: 142 69% 58.2%;
+    --success-foreground: 143 61.5% 10.4%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 5% 64.9%;
+
+    --sidebar-background: 240 5.9% 11%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-primary: 270 100% 86%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
+    --sidebar-accent: 240 3.7% 17%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 240 5% 64.9%;
+  }
+}
+
+@layer components {
+  .btn-default {
+    background-color: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+  }
+  .btn-default:hover {
+    background-color: hsl(var(--primary) / 0.9) !important;
+  }
+
+  .btn-destructive {
+    background-color: hsl(var(--destructive)) !important;
+    color: hsl(var(--destructive-foreground)) !important;
+  }
+  .btn-destructive:hover {
+    background-color: hsl(var(--destructive) / 0.9) !important;
+  }
+
+  .btn-outline {
+    border: 1px solid hsl(var(--input)) !important;
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+  .btn-outline:hover {
+    background-color: hsl(var(--accent)) !important;
+    color: hsl(var(--accent-foreground)) !important;
+  }
+
+  .btn-secondary {
+    background-color: hsl(var(--secondary)) !important;
+    color: hsl(var(--secondary-foreground)) !important;
+  }
+  .btn-secondary:hover {
+    background-color: hsl(var(--secondary) / 0.8) !important;
+  }
+
+  .btn-ghost:hover {
+    background-color: hsl(var(--accent)) !important;
+    color: hsl(var(--accent-foreground)) !important;
+  }
+
+  .btn-link {
+    color: hsl(var(--primary)) !important;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border ring-ring ring-offset-background outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    @apply [&_*_::selection]:bg-foreground [&_*_::selection]:text-background;
+    font-synthesis: none !important;
+    text-rendering: optimizeLegibility;
   }
-}
-
-.cl-formButtonPrimary {
-  @apply inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-3 text-xs font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-}
-
-.cl-organizationSwitcherTrigger {
-  @apply dark:text-foreground;
-}
-
-.cl-organizationPreviewMainIdentifier {
-  @apply dark:text-foreground;
-}
-
-.cl-organizationPreviewSecondaryIdentifier {
-  @apply dark:text-foreground;
-}
-
-.cl-organizationPreviewTextContainer {
-  @apply dark:text-foreground;
-}
-
-.cl-open {
-  @apply dark:bg-gray-700;
-}
-
-.cl-organizationSwitcherPopoverActionButtonText {
-  @apply dark:text-muted-foreground;
-}
-
-.cl-organizationSwitcherPopoverActionButtonIcon {
-  @apply dark:text-muted-foreground;
-}
-
-.cl-card,
-.cl-socialButtonsBlockButton,
-.cl-alert,
-.cl-identityPreview,
-.cl-phoneInputBox {
-  @apply border border-input bg-background;
-}
-
-.cl-headerTitle,
-.cl-socialButtonsBlockButtonText,
-.cl-loading,
-.cl-formFieldLabel,
-.cl-formHeaderTitle,
-.cl-selectButton__countryCode,
-.cl-selectButton__countryCode p,
-.cl-selectOption p,
-.cl-selectOption div {
-  @apply dark:text-foreground;
-}
-
-.cl-headerSubtitle,
-.cl-dividerText,
-.cl-footerActionText,
-.cl-alertText,
-.cl-formFieldInfoText,
-.cl-formFieldSuccessText,
-.cl-identityPreviewText,
-.cl-formHeaderSubtitle {
-  @apply text-muted-foreground;
-}
-
-.cl-dividerLine {
-  @apply bg-border;
-}
-
-.cl-formFieldInput {
-  @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-foreground ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
-}
-
-.cl-footerActionLink {
-  @apply text-accent-foreground underline hover:text-accent-foreground/90;
-}
-
-.cl-otpCodeFieldInput {
-  @apply border border-b-input text-foreground;
-}
-
-.cl-formResendCodeLink {
-  @apply text-primary disabled:opacity-90;
-}
-
-.cl-selectSearchInput__countryCode {
-  @apply flex h-10 w-full rounded-md border border-b border-input bg-background text-foreground ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
-}
-
-.cl-selectOptionsContainer__countryCode {
-  @apply border border-input bg-background;
-}
-
-.cl-internal-icon {
-  @apply text-foreground;
-}
-
-.cl-userButtonPopoverActionButtonText {
-  @apply text-muted-foreground;
-}
-
-.cl-internal-1ho4xv {
-  @apply text-foreground;
-}
-
-.cl-userButtonPopoverActionButtonIcon {
-  @apply text-muted-foreground;
-}
-
-.cl-userButtonPopoverCard {
-  @apply border border-input bg-background;
-}
-
-.cl-userButtonPopoverFooter {
-  @apply text-muted-foreground;
-}
-
-.cl-profileSectionTitleText {
-  @apply text-foreground;
-}
-
-.cl-accordionTriggerButton {
-  @apply text-foreground;
-}
-
-.cl-profileSectionContent {
-  @apply text-muted-foreground;
 }

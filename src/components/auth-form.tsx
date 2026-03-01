@@ -157,7 +157,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           {isGoogleLoading ? (
             <Loader2Icon className="mr-2 size-4 animate-spin" />
           ) : (
-            <Icons.google />
+            <Icons.google className="mr-2 size-4" />
           )}
           Continue with Google
         </Button>
