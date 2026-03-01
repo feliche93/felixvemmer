@@ -1,12 +1,10 @@
-import type { DataTableFilterOption } from '@/types'
-import { TrashIcon } from '@radix-ui/react-icons'
-import type { Table } from '@tanstack/react-table'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import * as React from 'react'
-
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { TrashIcon } from "@radix-ui/react-icons"
+import type { Table } from "@tanstack/react-table"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import * as React from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
   Select,
   SelectContent,
@@ -14,12 +12,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { dataTableConfig } from '@/config/data-table'
-import { useDebounce } from '@/hooks/use-debounce'
-import { cn } from '@/lib/utils'
+} from "@/components/ui/select"
+import { dataTableConfig } from "@/config/data-table"
+import { useDebounce } from "@/hooks/use-debounce"
+import { cn } from "@/lib/utils"
+import type { DataTableFilterOption } from "@/types"
 
-import { DataTableAdvancedFacetedFilter } from './data-table-advanced-faceted-filter'
+import { DataTableAdvancedFacetedFilter } from "./data-table-advanced-faceted-filter"
 
 interface DataTableFilterItemProps<TData> {
   table: Table<TData>
@@ -40,7 +39,7 @@ export function DataTableFilterItem<TData>({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const column = table.getColumn(selectedOption.value ? String(selectedOption.value) : '')
+  const column = table.getColumn(selectedOption.value ? String(selectedOption.value) : "")
 
   const selectedValues = new Set(
     selectedOptions.find((item) => item.value === column?.id)?.filterValues,
@@ -54,7 +53,7 @@ export function DataTableFilterItem<TData>({
       ? dataTableConfig.selectableOperators
       : dataTableConfig.comparisonOperators
 
-  const [value, setValue] = React.useState(filterValues[0] ?? '')
+  const [value, setValue] = React.useState(filterValues[0] ?? "")
   const debounceValue = useDebounce(value, 500)
   const [open, setOpen] = React.useState(defaultOpen)
   const [selectedOperator, setSelectedOperator] = React.useState(
@@ -85,7 +84,7 @@ export function DataTableFilterItem<TData>({
       // key=value1.value2.value3~operator
       const newSearchParams = createQueryString({
         [String(selectedOption.value)]:
-          filterValues.length > 0 ? `${filterValues.join('.')}~${selectedOperator?.value}` : null,
+          filterValues.length > 0 ? `${filterValues.join(".")}~${selectedOperator?.value}` : null,
       })
       router.push(`${pathname}?${newSearchParams}`)
     } else {
@@ -96,8 +95,6 @@ export function DataTableFilterItem<TData>({
       })
       router.push(`${pathname}?${newSearchParams}`)
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption, debounceValue, selectedOperator])
 
   return (
@@ -107,8 +104,8 @@ export function DataTableFilterItem<TData>({
           variant="outline"
           size="sm"
           className={cn(
-            'h-7 gap-0 truncate rounded-full',
-            (selectedValues.size > 0 || value.length > 0) && 'bg-muted/50',
+            "h-7 gap-0 truncate rounded-full",
+            (selectedValues.size > 0 || value.length > 0) && "bg-muted/50",
           )}
         >
           <span className="font-medium capitalize">{selectedOption.label}</span>
@@ -121,7 +118,7 @@ export function DataTableFilterItem<TData>({
                     : selectedOption.options
                         .filter((item) => selectedValues.has(item.value))
                         .map((item) => item.label)
-                        .join(', ')}
+                        .join(", ")}
                 </span>
               )
             : value.length > 0 && (

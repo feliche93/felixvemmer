@@ -1,19 +1,17 @@
-import type { DataTableFilterOption } from '@/types'
-import { CopyIcon, DotsHorizontalIcon, TextAlignCenterIcon, TrashIcon } from '@radix-ui/react-icons'
-import type { Table } from '@tanstack/react-table'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import * as React from 'react'
-
-import { DataTableFacetedFilter } from '@/components/data-table/data-table-faceted-filter'
-import { Button } from '@/components/ui/button'
+import { CopyIcon, DotsHorizontalIcon, TextAlignCenterIcon, TrashIcon } from "@radix-ui/react-icons"
+import type { Table } from "@tanstack/react-table"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import * as React from "react"
+import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
   Select,
   SelectContent,
@@ -21,10 +19,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Separator } from '@/components/ui/separator'
-import { type DataTableConfig, dataTableConfig } from '@/config/data-table'
-import { useDebounce } from '@/hooks/use-debounce'
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
+import { type DataTableConfig, dataTableConfig } from "@/config/data-table"
+import { useDebounce } from "@/hooks/use-debounce"
+import type { DataTableFilterOption } from "@/types"
 
 interface DataTableMultiFilterProps<TData> {
   table: Table<TData>
@@ -95,9 +94,9 @@ interface MultiFilterRowProps<TData> {
   option: DataTableFilterOption<TData>
   options: DataTableFilterOption<TData>[]
   setSelectedOptions: React.Dispatch<React.SetStateAction<DataTableFilterOption<TData>[]>>
-  operator?: DataTableConfig['logicalOperators'][number]
+  operator?: DataTableConfig["logicalOperators"][number]
   setOperator: React.Dispatch<
-    React.SetStateAction<DataTableConfig['logicalOperators'][number] | undefined>
+    React.SetStateAction<DataTableConfig["logicalOperators"][number] | undefined>
   >
 }
 
@@ -114,7 +113,7 @@ export function MultiFilterRow<TData>({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = React.useState("")
   const debounceValue = useDebounce(value, 500)
 
   const [selectedOption, setSelectedOption] = React.useState<
@@ -122,15 +121,15 @@ export function MultiFilterRow<TData>({
   >(options[0])
 
   const filterVarieties = selectedOption?.options.length
-    ? ['is', 'is not']
-    : ['contains', 'does not contain', 'is', 'is not']
+    ? ["is", "is not"]
+    : ["contains", "does not contain", "is", "is not"]
 
   const [filterVariety, setFilterVariety] = React.useState(filterVarieties[0])
 
   // Update filter variety
   React.useEffect(() => {
     if (selectedOption?.options.length) {
-      setFilterVariety('is')
+      setFilterVariety("is")
     }
   }, [selectedOption?.options.length])
 
@@ -157,8 +156,8 @@ export function MultiFilterRow<TData>({
     if (debounceValue.length > 0) {
       router.push(
         `${pathname}?${createQueryString({
-          [selectedOption?.value ?? '']: `${debounceValue}${
-            debounceValue.length > 0 ? `.${filterVariety}` : ''
+          [selectedOption?.value ?? ""]: `${debounceValue}${
+            debounceValue.length > 0 ? `.${filterVariety}` : ""
           }`,
         })}`,
         {
@@ -170,14 +169,13 @@ export function MultiFilterRow<TData>({
     if (debounceValue.length === 0) {
       router.push(
         `${pathname}?${createQueryString({
-          [selectedOption?.value ?? '']: null,
+          [selectedOption?.value ?? ""]: null,
         })}`,
         {
           scroll: false,
         },
       )
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceValue, filterVariety, selectedOption?.value])
 
   // Update operator query string
@@ -192,7 +190,6 @@ export function MultiFilterRow<TData>({
         },
       )
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [operator?.value])
 
   return (
@@ -271,10 +268,10 @@ export function MultiFilterRow<TData>({
         </SelectContent>
       </Select>
       {selectedOption?.options.length ? (
-        table.getColumn(selectedOption.value ? String(option.value) : '') && (
+        table.getColumn(selectedOption.value ? String(option.value) : "") && (
           <DataTableFacetedFilter
             key={selectedOption.id}
-            column={table.getColumn(selectedOption.value ? String(selectedOption.value) : '')}
+            column={table.getColumn(selectedOption.value ? String(selectedOption.value) : "")}
             title={selectedOption.label}
             options={selectedOption.options}
           />

@@ -1,9 +1,10 @@
-'use client'
+"use client"
 
-import { ChevronRight, type LucideIcon } from 'lucide-react'
+import { ChevronRight, type LucideIcon } from "lucide-react"
+import type { ComponentProps } from "react"
 
-import { Link } from '@/app/navigation'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { Link } from "@/app/navigation"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -13,7 +14,9 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from '@/components/ui/sidebar'
+} from "@/components/ui/sidebar"
+
+type AppHref = ComponentProps<typeof Link>["href"]
 
 export function NavMain({
   items,
@@ -53,8 +56,7 @@ export function NavMain({
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        {/* @ts-expect-error */}
-                        <Link href={subItem.url}>
+                        <Link href={subItem.url as AppHref}>
                           <span>{subItem.title}</span>
                         </Link>
                       </SidebarMenuSubButton>

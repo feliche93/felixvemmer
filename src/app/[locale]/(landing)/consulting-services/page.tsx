@@ -1,16 +1,17 @@
-import deliverImage from '@/../public/pages/consulting-services/deliver.avif'
-import discoverImage from '@/../public/pages/consulting-services/discover.jpeg'
-import offerImage from '@/../public/pages/consulting-services/offer.avif'
-import { Blockquote } from '@/components/ui/blockquote'
-import { Container } from '@/components/ui/container'
-import { FadeIn } from '@/components/ui/fade-in'
-import { GridPattern } from '@/components/ui/grid-pattern'
-import { List, ListItem } from '@/components/ui/list'
-import { PageIntro } from '@/components/ui/page-intro'
-import { Skills } from '@/components/ui/skills'
-import { StylizedImage } from '@/components/ui/stylized-image'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { locales } from '../../../../../i18n'
+const deliverImage = "/pages/consulting-services/deliver.avif"
+const discoverImage = "/pages/consulting-services/discover.jpeg"
+const offerImage = "/pages/consulting-services/offer.avif"
+
+import { getTranslations, setRequestLocale } from "next-intl/server"
+import { Blockquote } from "@/components/ui/blockquote"
+import { Container } from "@/components/ui/container"
+import { FadeIn } from "@/components/ui/fade-in"
+import { GridPattern } from "@/components/ui/grid-pattern"
+import { List, ListItem } from "@/components/ui/list"
+import { PageIntro } from "@/components/ui/page-intro"
+import { Skills } from "@/components/ui/skills"
+import { StylizedImage } from "@/components/ui/stylized-image"
+import { locales } from "../../../../../i18n"
 
 function Section({
   title,
@@ -51,31 +52,31 @@ function Section({
 }
 
 async function Discover() {
-  const t = await getTranslations('consultingServices.discover')
+  const t = await getTranslations("consultingServices.discover")
   return (
-    <Section title={t('title')} image={{ src: discoverImage }}>
+    <Section title={t("title")} image={{ src: discoverImage }}>
       <div className="space-y-6 text-base text-muted-foreground">
-        {t.rich('description', {
+        {t.rich("description", {
           strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
           p: (chunks) => <p>{chunks}</p>,
         })}
       </div>
       <Blockquote
-        author={{ name: 'Julian Richter', role: 'Founder at DecentralizedFinance.com' }}
+        author={{ name: "Julian Richter", role: "Founder at DecentralizedFinance.com" }}
         className="mt-12"
       >
-        {t('quote')}
+        {t("quote")}
       </Blockquote>
     </Section>
   )
 }
 
 async function Offer() {
-  const t = await getTranslations('consultingServices.offer')
+  const t = await getTranslations("consultingServices.offer")
   return (
-    <Section title={t('title')} image={{ src: offerImage }}>
+    <Section title={t("title")} image={{ src: offerImage }}>
       <div className="space-y-6 text-base text-muted-foreground">
-        {t.rich('description', {
+        {t.rich("description", {
           strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
           p: (chunks) => <p>{chunks}</p>,
         })}
@@ -85,12 +86,12 @@ async function Offer() {
 }
 
 async function Deliver() {
-  const t = await getTranslations('consultingServices.deliver')
+  const t = await getTranslations("consultingServices.deliver")
 
   return (
     <Section title="Deliver" image={{ src: deliverImage, shape: 2 }}>
       <div className="space-y-6 text-base text-muted-foreground">
-        {t.rich('description', {
+        {t.rich("description", {
           strong: (chunks) => <strong className="font-semibold text-foreground">{chunks}</strong>,
           p: (chunks) => <p>{chunks}</p>,
         })}
@@ -116,7 +117,7 @@ async function Deliver() {
 function Values() {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
-      <div className="-z-10 absolute inset-x-0 top-0 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
+      <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
         <GridPattern
           className="absolute inset-0 h-full w-full fill-neutral-100 stroke-foreground/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
           yOffset={-270}
@@ -165,7 +166,7 @@ function Values() {
 
 export async function generateStaticParams() {
   const params = locales.map((locale) => ({
-    slug: 'blog',
+    slug: "blog",
     locale,
   }))
 
@@ -175,17 +176,17 @@ export async function generateStaticParams() {
 export default async function Process({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const t = await getTranslations('index')
+  const t = await getTranslations("index")
 
   return (
     <>
       <PageIntro
         className="mt-24 sm:mt-32 lg:mt-40"
         centered
-        title={t('skills.title')}
-        eyebrow={t('skills.section')}
+        title={t("skills.title")}
+        eyebrow={t("skills.section")}
       >
-        {t('skills.description')}
+        {t("skills.description")}
       </PageIntro>
 
       <Skills />

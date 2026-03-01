@@ -1,23 +1,26 @@
-'use client'
+"use client"
 
-import { Link } from '@/app/navigation'
-import { navigationConfig } from '@/config/navigation'
-import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import { useParams, usePathname } from 'next/navigation'
+import Image from "next/image"
+import { useParams, usePathname } from "next/navigation"
+import type { ComponentProps } from "react"
+import { Link } from "@/app/navigation"
+import { navigationConfig } from "@/config/navigation"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+
+type AppHref = ComponentProps<typeof Link>["href"]
 
 export function MainNav() {
   const pathname = usePathname()
   const params = useParams()
 
-  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
+  const locale = typeof params?.locale === "string" ? params?.locale : "en"
 
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
         <Image
-          src={'/logos/felix-vemmer.png'}
+          src={"/logos/felix-vemmer.png"}
           priority={true}
           width={40}
           height={40}
@@ -32,11 +35,10 @@ export function MainNav() {
           return (
             <Link
               key={item.title}
-              // @ts-expect-error
-              href={item.href}
+              href={item.href as AppHref}
               className={cn(
-                'transition-colors hover:text-foreground/80',
-                pathname === item.href ? 'text-foreground' : 'text-foreground/60',
+                "transition-colors hover:text-foreground/80",
+                pathname === item.href ? "text-foreground" : "text-foreground/60",
               )}
             >
               {item.title}
