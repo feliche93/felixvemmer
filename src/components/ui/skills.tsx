@@ -1,58 +1,58 @@
-import { AtomIcon, BrainCircuit, Megaphone } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
-import type { FC } from 'react'
-import { Card } from './card'
+import { AtomIcon, BrainCircuit, Megaphone } from "lucide-react"
+import { getTranslations } from "next-intl/server"
+import type { FC } from "react"
+import { Card } from "./card"
 
 export type SkillsProps = {}
 export const Skills: FC<SkillsProps> = async () => {
   {
-    const t = await getTranslations('components.skills')
+    const t = await getTranslations("components.skills")
 
     const features = [
       {
-        title: 'Full-Stack Development',
-        description: t('fullstack.description'),
+        title: "Full-Stack Development",
+        description: t("fullstack.description"),
         icon: AtomIcon,
-        languages: ['Javascript', 'Typescript', 'CSS', 'HTML'],
+        languages: ["Javascript", "Typescript", "CSS", "HTML"],
         tools: [
-          'Next.js / Next14',
-          'Tailwind CSS & UI / Daisy UI / ShadcnUI',
-          'React Hook Form',
-          'Tanstack Table',
-          'Clerk Auth',
-          'Drizzle ORM',
-          'Directus & Strapi CMS',
+          "Next.js / Next14",
+          "Tailwind CSS & UI / Daisy UI / ShadcnUI",
+          "React Hook Form",
+          "Tanstack Table",
+          "better-auth",
+          "Drizzle ORM",
+          "Directus & Strapi CMS",
         ],
       },
       {
-        title: 'Data & AI Services',
-        description: t('dataAndAI.description'),
+        title: "Data & AI Services",
+        description: t("dataAndAI.description"),
         icon: BrainCircuit,
-        languages: ['Python', 'SQL'],
+        languages: ["Python", "SQL"],
         tools: [
-          'Langchain, Instructor, CrewAI',
-          'Postgres: Neon / Supabase',
-          'DBT',
-          'Pandas',
-          'Modal',
-          'Superset',
-          'Airbyte',
-          'Great Expectations',
-          'FastAPI',
+          "Langchain, Instructor, CrewAI",
+          "Postgres: Neon / Supabase",
+          "DBT",
+          "Pandas",
+          "Modal",
+          "Superset",
+          "Airbyte",
+          "Great Expectations",
+          "FastAPI",
         ],
       },
       {
-        title: 'Business & Marketing',
-        description: t('businessAndMarketing.description'),
+        title: "Business & Marketing",
+        description: t("businessAndMarketing.description"),
         icon: Megaphone,
-        languages: ['SEO & SEA', 'Agile Sprints', 'BizDev'],
+        languages: ["SEO & SEA", "Agile Sprints", "BizDev"],
         tools: [
-          'Ahrefs',
-          'Google Search Console',
-          'Google Tag Manager',
-          'Posthog',
-          'Linear',
-          'Pipedream',
+          "Ahrefs",
+          "Google Search Console",
+          "Google Tag Manager",
+          "Posthog",
+          "Linear",
+          "Pipedream",
         ],
       },
     ]
@@ -78,11 +78,11 @@ export const Skills: FC<SkillsProps> = async () => {
                       {feature.description}
                     </div>
                     <div className="pt-6">
-                      <p className="text-muted-foreground text-sm">{t('languages')}</p>
-                      <p className="mt-4">{feature?.languages.join(', ')}</p>
+                      <p className="text-muted-foreground text-sm">{t("languages")}</p>
+                      <p className="mt-4">{feature?.languages.join(", ")}</p>
                     </div>
                     <div className="pt-8">
-                      <p className="text-muted-foreground text-sm">{t('tools')}</p>
+                      <p className="text-muted-foreground text-sm">{t("tools")}</p>
                       <ul className="mt-4 space-y-2">
                         {feature?.tools.map((tool, index) => (
                           <li key={index}>{tool}</li>

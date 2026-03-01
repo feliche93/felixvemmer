@@ -1,42 +1,38 @@
 // app/PostHogPageView.tsx
-'use client'
+"use client"
 
-import { useUser } from '@clerk/nextjs'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { usePostHog } from 'posthog-js/react'
-import { useEffect } from 'react'
+import { usePathname, useSearchParams } from "next/navigation"
+import { usePostHog } from "posthog-js/react"
+import { useEffect } from "react"
+import { useSession } from "@/lib/auth/client"
 
 export default function PostHogPageView(): null {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const posthog = usePostHog()
-  const { user, isSignedIn, isLoaded } = useUser()
+  const { data } = useSession()
+  const user = data?.user
 
   //   Identify user
   useEffect(() => {
     if (!user) return
-    if (user) {
-      posthog.identify(user.id, {
-        email: user.primaryEmailAddress?.emailAddress,
-        first_name: user.firstName,
-        last_name: user.lastName,
-        full_name: user.fullName,
-        image_url: user.imageUrl,
-        password_enabled: user.passwordEnabled,
-        created_at: user.createdAt,
-      })
-    }
+    posthog.identify(user.id, {
+      email: user.email,
+      full_name: user.name,
+      image_url: user.image,
+      created_at: user.createdAt,
+    })
   }, [user, posthog])
 
   // Track pageviews
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === "undefined") return
     if (pathname && posthog) {
       let url = window.origin + pathname
       if (searchParams.toString()) {
         url = `${url}?${searchParams.toString()}`
       }
-      posthog.capture('$pageview', {
+      posthog.capture("$pageview", {
         $current_url: url,
       })
     }

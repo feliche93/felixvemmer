@@ -1,14 +1,14 @@
-import Link from 'next/link'
+import Link from "next/link"
 
-import { Icons } from '@/components/icons'
-import { ModeToggle } from '@/components/mode-toggle'
-import { buttonVariants } from '@/components/ui/button'
-import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
-import { AuthClerkHeader } from './auth-clerk-header'
-import { LanguageToggle } from './language-toggle'
-import { MainNav } from './main-nav'
-import { MobileNav } from './mobile-nav'
+import { Icons } from "@/components/icons"
+import { ModeToggle } from "@/components/mode-toggle"
+import { buttonVariants } from "@/components/ui/button"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { AuthHeader } from "./auth-header"
+import { LanguageToggle } from "./language-toggle"
+import { MainNav } from "./main-nav"
+import { MobileNav } from "./mobile-nav"
 
 export async function SiteHeader() {
   return (
@@ -26,9 +26,9 @@ export async function SiteHeader() {
               <div
                 className={cn(
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'w-9 px-0',
+                  "w-9 px-0",
                 )}
               >
                 <Icons.linkedin className="h-4 w-4" />
@@ -39,9 +39,9 @@ export async function SiteHeader() {
               <div
                 className={cn(
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'w-9 px-0',
+                  "w-9 px-0",
                 )}
               >
                 <Icons.gitHub className="h-4 w-4" />
@@ -52,9 +52,9 @@ export async function SiteHeader() {
               <div
                 className={cn(
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'w-9 px-0',
+                  "w-9 px-0",
                 )}
               >
                 <Icons.twitter className="h-4 w-4 fill-current" />
@@ -63,7 +63,7 @@ export async function SiteHeader() {
             </Link>
             <ModeToggle />
             <LanguageToggle />
-            <AuthClerkHeader />
+            <AuthHeader />
           </nav>
         </div>
       </div>

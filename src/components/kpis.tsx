@@ -1,15 +1,16 @@
-import { getTotalLemonSqueezyRevenue } from '@/lib/lemonsqueezy'
-import { getFreelancingRevenue } from '@/lib/paierkram-api'
-import { getPostHogInsightById } from '@/lib/posthog-api'
-import { auth } from '@clerk/nextjs/server'
-import { Grid, Metric, Text } from '@tremor/react'
-import Link from 'next/link'
-import type { FC } from 'react'
-import { buttonVariants } from './ui/button'
-import { Card } from './ui/card'
+import { Grid, Metric, Text } from "@tremor/react"
+import Link from "next/link"
+import type { FC } from "react"
+import { getAuthSession } from "@/lib/auth/session"
+import { getTotalLemonSqueezyRevenue } from "@/lib/lemonsqueezy"
+import { getFreelancingRevenue } from "@/lib/paierkram-api"
+import { getPostHogInsightById } from "@/lib/posthog-api"
+import { buttonVariants } from "./ui/button"
+import { Card } from "./ui/card"
 
 export const Kpis: FC = async () => {
-  const { userId } = await auth()
+  const session = await getAuthSession()
+  const userId = session?.user?.id
   const freelancingRevenuePromise = getFreelancingRevenue()
 
   const pageViewsInsightPromise = getPostHogInsightById({
@@ -17,7 +18,7 @@ export const Kpis: FC = async () => {
   })
 
   const lemonSqueezyRevenuePromise = getTotalLemonSqueezyRevenue({
-    storeId: '24094',
+    storeId: "24094",
   })
 
   const [freelancingRevenue, pageViewsInsight, lemonSqueezyRevenue] = await Promise.all([
@@ -29,24 +30,24 @@ export const Kpis: FC = async () => {
   const categories = [
     {
       title: pageViewsInsight.name,
-      //   @ts-ignore
+      //   @ts-expect-error
       metric: pageViewsInsight.result[0].aggregated_value.toLocaleString() as string,
     },
     {
-      title: 'Total Freelancing Revenue',
+      title: "Total Freelancing Revenue",
       protected: true,
-      metric: new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR',
+      metric: new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "EUR",
         maximumFractionDigits: 0,
       }).format(freelancingRevenue),
     },
     {
-      title: 'Total SaaS Revenue',
+      title: "Total SaaS Revenue",
       protected: true,
-      metric: new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR',
+      metric: new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "EUR",
         maximumFractionDigits: 0,
       }).format(lemonSqueezyRevenue / 100),
     },
@@ -68,9 +69,9 @@ export const Kpis: FC = async () => {
                 <Text>{item.title}</Text>
                 <Metric>
                   <Link
-                    href={'/sign-up'}
+                    href={"/sign-up"}
                     className={buttonVariants({
-                      variant: 'outline',
+                      variant: "outline",
                     })}
                   >
                     Sign Up to Access
