@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MinimalPerson } from './MinimalPerson'
+import type { MinimalPerson } from "./MinimalPerson"
 export type SessionRecording = {
   readonly id: string
   readonly distinct_id: string | null

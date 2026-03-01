@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { EnterpriseEventDefinition } from '../models/EnterpriseEventDefinition'
-import type { PaginatedEnterpriseEventDefinitionList } from '../models/PaginatedEnterpriseEventDefinitionList'
-import type { PatchedEnterpriseEventDefinition } from '../models/PatchedEnterpriseEventDefinition'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { EnterpriseEventDefinition } from "../models/EnterpriseEventDefinition"
+import type { PaginatedEnterpriseEventDefinitionList } from "../models/PaginatedEnterpriseEventDefinitionList"
+import type { PatchedEnterpriseEventDefinition } from "../models/PatchedEnterpriseEventDefinition"
 export class EventDefinitionsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class EventDefinitionsService {
     offset?: number
   }): CancelablePromise<PaginatedEnterpriseEventDefinitionList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/event_definitions/',
+      method: "GET",
+      url: "/api/projects/{project_id}/event_definitions/",
       path: {
         project_id: projectId,
       },
@@ -58,8 +58,8 @@ export class EventDefinitionsService {
     projectId: string
   }): CancelablePromise<EnterpriseEventDefinition> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/event_definitions/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/event_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -83,14 +83,14 @@ export class EventDefinitionsService {
     requestBody?: EnterpriseEventDefinition
   }): CancelablePromise<EnterpriseEventDefinition> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/event_definitions/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/event_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -110,14 +110,14 @@ export class EventDefinitionsService {
     requestBody?: PatchedEnterpriseEventDefinition
   }): CancelablePromise<EnterpriseEventDefinition> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/event_definitions/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/event_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -135,8 +135,8 @@ export class EventDefinitionsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/event_definitions/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/event_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,

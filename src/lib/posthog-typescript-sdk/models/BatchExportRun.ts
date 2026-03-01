@@ -11,14 +11,14 @@ export type BatchExportRun = {
    * The status of this run.
    */
   status:
-    | 'Cancelled'
-    | 'Completed'
-    | 'ContinuedAsNew'
-    | 'Failed'
-    | 'Terminated'
-    | 'TimedOut'
-    | 'Running'
-    | 'Starting'
+    | "Cancelled"
+    | "Completed"
+    | "ContinuedAsNew"
+    | "Failed"
+    | "Terminated"
+    | "TimedOut"
+    | "Running"
+    | "Starting"
   /**
    * The number of records that have been exported.
    */

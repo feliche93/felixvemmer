@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { OrganizationResourceAccess } from '../models/OrganizationResourceAccess'
-import type { PaginatedOrganizationResourceAccessList } from '../models/PaginatedOrganizationResourceAccessList'
-import type { PatchedOrganizationResourceAccess } from '../models/PatchedOrganizationResourceAccess'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { OrganizationResourceAccess } from "../models/OrganizationResourceAccess"
+import type { PaginatedOrganizationResourceAccessList } from "../models/PaginatedOrganizationResourceAccessList"
+import type { PatchedOrganizationResourceAccess } from "../models/PatchedOrganizationResourceAccess"
 export class ResourceAccessService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -29,8 +29,8 @@ export class ResourceAccessService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationResourceAccessList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -52,13 +52,13 @@ export class ResourceAccessService {
     requestBody: OrganizationResourceAccess
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -76,8 +76,8 @@ export class ResourceAccessService {
     parentLookupOrganizationId: string
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -101,14 +101,14 @@ export class ResourceAccessService {
     requestBody: OrganizationResourceAccess
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -128,14 +128,14 @@ export class ResourceAccessService {
     requestBody?: PatchedOrganizationResourceAccess
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -153,8 +153,8 @@ export class ResourceAccessService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,

@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 export class UploadedMediaService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -24,8 +24,8 @@ export class UploadedMediaService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/uploaded_media/',
+      method: "POST",
+      url: "/api/projects/{project_id}/uploaded_media/",
       path: {
         project_id: projectId,
       },

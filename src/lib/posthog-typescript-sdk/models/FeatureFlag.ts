@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserBasic } from './UserBasic'
+import type { UserBasic } from "./UserBasic"
 /**
  * Serializer mixin that resolves appropriate response for tags depending on license.
  */

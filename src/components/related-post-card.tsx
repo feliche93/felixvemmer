@@ -2,11 +2,12 @@
  * v0 by Vercel.
  * @see https://v0.dev/t/SvZjaEpu0ds
  */
-import { Card } from '@/components/ui/card'
-import { formatDate } from '@/lib/utils'
-import { allPosts } from 'content-collections'
-import Image from 'next/image'
-import Link from 'next/link'
+
+import { allPosts } from "content-collections"
+import Image from "next/image"
+import Link from "next/link"
+import { Card } from "@/components/ui/card"
+import { formatDate } from "@/lib/utils"
 
 interface RelatedPostCardProps {
   absoluteUrl: string

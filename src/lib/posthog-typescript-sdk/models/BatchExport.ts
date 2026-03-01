@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BatchExportDestination } from './BatchExportDestination'
-import type { BatchExportRun } from './BatchExportRun'
+import type { BatchExportDestination } from "./BatchExportDestination"
+import type { BatchExportRun } from "./BatchExportRun"
 /**
  * Serializer for a BatchExport model.
  */
@@ -14,7 +14,7 @@ export type BatchExport = {
    */
   name: string
   destination: BatchExportDestination
-  interval: 'hour' | 'day' | 'week' | 'every 5 minutes'
+  interval: "hour" | "day" | "week" | "every 5 minutes"
   /**
    * Whether this BatchExport is paused or not.
    */

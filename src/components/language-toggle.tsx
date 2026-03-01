@@ -1,20 +1,20 @@
-'use client'
+"use client"
 
-import { Button } from '@/components/ui/button'
+import { useParams, useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { useParams, useRouter } from 'next/navigation'
-import { locales } from '../../i18n'
+} from "@/components/ui/dropdown-menu"
+import { locales } from "../../i18n"
 
 export function LanguageToggle() {
   const params = useParams()
   const router = useRouter()
 
-  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
+  const locale = typeof params?.locale === "string" ? params?.locale : "en"
 
   const changeLanguage = (lang: string) => {
     router.push(`/${lang}`, {

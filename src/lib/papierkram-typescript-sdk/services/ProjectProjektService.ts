@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class ProjectProjektService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -36,15 +36,15 @@ export class ProjectProjektService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
     /**
      * Filter by company id
      */
     companyId?: number
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/projects',
+      method: "GET",
+      url: "/projects",
       query: {
         page: page,
         page_size: pageSize,
@@ -73,11 +73,11 @@ export class ProjectProjektService {
       start_date?: string | null
       end_date?: string | null
       flagged?: boolean | null
-      budget_type?: 'money' | 'working_time' | null
+      budget_type?: "money" | "working_time" | null
       budget_money?: string | null
       budget_time?: string | null
-      budget_time_unit?: 'hour' | 'day' | null
-      color?: 'blue' | 'green' | 'lime' | 'pink' | 'purple' | 'orange' | null
+      budget_time_unit?: "hour" | "day" | null
+      color?: "blue" | "green" | "lime" | "pink" | "purple" | "orange" | null
       default_proposition?: {
         id?: number
       }
@@ -87,10 +87,10 @@ export class ProjectProjektService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/projects',
+      method: "POST",
+      url: "/projects",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Project could not be created`,
       },
@@ -112,8 +112,8 @@ export class ProjectProjektService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/projects/{id}',
+      method: "GET",
+      url: "/projects/{id}",
       path: {
         id: id,
       },
@@ -146,11 +146,11 @@ export class ProjectProjektService {
       start_date?: string | null
       end_date?: string | null
       flagged?: boolean | null
-      budget_type?: 'money' | 'working_time' | null
+      budget_type?: "money" | "working_time" | null
       budget_money?: string | null
       budget_time?: string | null
-      budget_time_unit?: 'hour' | 'day' | null
-      color?: 'blue' | 'green' | 'lime' | 'pink' | 'purple' | 'orange' | null
+      budget_time_unit?: "hour" | "day" | null
+      color?: "blue" | "green" | "lime" | "pink" | "purple" | "orange" | null
       default_proposition?: {
         id?: number
       }
@@ -160,13 +160,13 @@ export class ProjectProjektService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/projects/{id}',
+      method: "PUT",
+      url: "/projects/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified project was not found`,
       },
@@ -188,8 +188,8 @@ export class ProjectProjektService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/projects/{id}',
+      method: "DELETE",
+      url: "/projects/{id}",
       path: {
         id: id,
       },
@@ -214,8 +214,8 @@ export class ProjectProjektService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/projects/{id}/archive',
+      method: "POST",
+      url: "/projects/{id}/archive",
       path: {
         id: id,
       },
@@ -237,8 +237,8 @@ export class ProjectProjektService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/projects/{id}/unarchive',
+      method: "POST",
+      url: "/projects/{id}/unarchive",
       path: {
         id: id,
       },

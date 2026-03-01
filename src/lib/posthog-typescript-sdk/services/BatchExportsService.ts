@@ -2,14 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { BatchExport } from '../models/BatchExport'
-import type { BatchExportRun } from '../models/BatchExportRun'
-import type { PaginatedBatchExportList } from '../models/PaginatedBatchExportList'
-import type { PaginatedBatchExportLogEntryList } from '../models/PaginatedBatchExportLogEntryList'
-import type { PaginatedBatchExportRunList } from '../models/PaginatedBatchExportRunList'
-import type { PatchedBatchExport } from '../models/PatchedBatchExport'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { BatchExport } from "../models/BatchExport"
+import type { BatchExportRun } from "../models/BatchExportRun"
+import type { PaginatedBatchExportList } from "../models/PaginatedBatchExportList"
+import type { PaginatedBatchExportLogEntryList } from "../models/PaginatedBatchExportLogEntryList"
+import type { PaginatedBatchExportRunList } from "../models/PaginatedBatchExportRunList"
+import type { PatchedBatchExport } from "../models/PatchedBatchExport"
 export class BatchExportsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -35,8 +35,8 @@ export class BatchExportsService {
     offset?: number
   }): CancelablePromise<PaginatedBatchExportList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/batch_exports/',
+      method: "GET",
+      url: "/api/projects/{project_id}/batch_exports/",
       path: {
         project_id: projectId,
       },
@@ -61,13 +61,13 @@ export class BatchExportsService {
     requestBody: BatchExport
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/batch_exports/',
+      method: "POST",
+      url: "/api/projects/{project_id}/batch_exports/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -95,8 +95,8 @@ export class BatchExportsService {
     offset?: number
   }): CancelablePromise<PaginatedBatchExportLogEntryList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/logs/',
+      method: "GET",
+      url: "/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/logs/",
       path: {
         parent_lookup_batch_export_id: parentLookupBatchExportId,
         project_id: projectId,
@@ -128,8 +128,8 @@ export class BatchExportsService {
     cursor?: string
   }): CancelablePromise<PaginatedBatchExportRunList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/runs/',
+      method: "GET",
+      url: "/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/runs/",
       path: {
         parent_lookup_batch_export_id: parentLookupBatchExportId,
         project_id: projectId,
@@ -166,8 +166,8 @@ export class BatchExportsService {
     offset?: number
   }): CancelablePromise<PaginatedBatchExportLogEntryList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/runs/{parent_lookup_run_id}/logs/',
+      method: "GET",
+      url: "/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/runs/{parent_lookup_run_id}/logs/",
       path: {
         parent_lookup_batch_export_id: parentLookupBatchExportId,
         parent_lookup_run_id: parentLookupRunId,
@@ -199,8 +199,8 @@ export class BatchExportsService {
     projectId: string
   }): CancelablePromise<BatchExportRun> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/runs/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/batch_exports/{parent_lookup_batch_export_id}/runs/{id}/",
       path: {
         id: id,
         parent_lookup_batch_export_id: parentLookupBatchExportId,
@@ -226,8 +226,8 @@ export class BatchExportsService {
     projectId: string
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/batch_exports/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/batch_exports/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -254,14 +254,14 @@ export class BatchExportsService {
     requestBody: BatchExport
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/batch_exports/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/batch_exports/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -284,14 +284,14 @@ export class BatchExportsService {
     requestBody?: PatchedBatchExport
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/batch_exports/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/batch_exports/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -312,8 +312,8 @@ export class BatchExportsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/batch_exports/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/batch_exports/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -341,14 +341,14 @@ export class BatchExportsService {
     requestBody: BatchExport
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/batch_exports/{id}/backfill/',
+      method: "POST",
+      url: "/api/projects/{project_id}/batch_exports/{id}/backfill/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -372,14 +372,14 @@ export class BatchExportsService {
     requestBody: BatchExport
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/batch_exports/{id}/pause/',
+      method: "POST",
+      url: "/api/projects/{project_id}/batch_exports/{id}/pause/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -403,14 +403,14 @@ export class BatchExportsService {
     requestBody: BatchExport
   }): CancelablePromise<BatchExport> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/batch_exports/{id}/unpause/',
+      method: "POST",
+      url: "/api/projects/{project_id}/batch_exports/{id}/unpause/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

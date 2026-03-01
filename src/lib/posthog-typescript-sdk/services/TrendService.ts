@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Trend } from '../models/Trend'
-import type { TrendResults } from '../models/TrendResults'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Trend } from "../models/Trend"
+import type { TrendResults } from "../models/TrendResults"
 export class TrendService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -21,12 +21,12 @@ export class TrendService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Trend
   }): CancelablePromise<TrendResults> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/trend/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/trend/",
       path: {
         project_id: projectId,
       },
@@ -34,7 +34,7 @@ export class TrendService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

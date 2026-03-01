@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class IncomeEstimateAngebotService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -39,7 +39,7 @@ export class IncomeEstimateAngebotService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
     /**
      * Filter by company id
      */
@@ -58,8 +58,8 @@ export class IncomeEstimateAngebotService {
     documentDateRangeEnd?: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/estimates',
+      method: "GET",
+      url: "/income/estimates",
       query: {
         page: page,
         page_size: pageSize,
@@ -131,10 +131,10 @@ export class IncomeEstimateAngebotService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/estimates',
+      method: "POST",
+      url: "/income/estimates",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Estimate could not be created`,
       },
@@ -156,8 +156,8 @@ export class IncomeEstimateAngebotService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/estimates/{id}',
+      method: "GET",
+      url: "/income/estimates/{id}",
       path: {
         id: id,
       },
@@ -230,13 +230,13 @@ export class IncomeEstimateAngebotService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/income/estimates/{id}',
+      method: "PUT",
+      url: "/income/estimates/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified estimate was not found`,
         422: `The specified estimate cannot be edited anymore`,
@@ -259,8 +259,8 @@ export class IncomeEstimateAngebotService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/income/estimates/{id}',
+      method: "DELETE",
+      url: "/income/estimates/{id}",
       path: {
         id: id,
       },
@@ -285,8 +285,8 @@ export class IncomeEstimateAngebotService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/estimates/{id}/archive',
+      method: "POST",
+      url: "/income/estimates/{id}/archive",
       path: {
         id: id,
       },
@@ -308,8 +308,8 @@ export class IncomeEstimateAngebotService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/estimates/{id}/unarchive',
+      method: "POST",
+      url: "/income/estimates/{id}/unarchive",
       path: {
         id: id,
       },
@@ -331,8 +331,8 @@ export class IncomeEstimateAngebotService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/estimates/{id}/cancel',
+      method: "POST",
+      url: "/income/estimates/{id}/cancel",
       path: {
         id: id,
       },
@@ -357,7 +357,7 @@ export class IncomeEstimateAngebotService {
      */
     id: string
     requestBody?: {
-      send_via: 'email' | 'pdf' | null
+      send_via: "email" | "pdf" | null
       email?: {
         recipient: string
         subject: string
@@ -366,13 +366,13 @@ export class IncomeEstimateAngebotService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/estimates/{id}/deliver',
+      method: "POST",
+      url: "/income/estimates/{id}/deliver",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Invalid templates`,
       },
@@ -393,8 +393,8 @@ export class IncomeEstimateAngebotService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/estimates/{id}/pdf',
+      method: "GET",
+      url: "/income/estimates/{id}/pdf",
       path: {
         id: id,
       },

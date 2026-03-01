@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { ActivityLog } from '../models/ActivityLog'
-import type { PaginatedActivityLogList } from '../models/PaginatedActivityLogList'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { ActivityLog } from "../models/ActivityLog"
+import type { PaginatedActivityLogList } from "../models/PaginatedActivityLogList"
 export class ActivityLogService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -26,8 +26,8 @@ export class ActivityLogService {
     cursor?: string
   }): CancelablePromise<PaginatedActivityLogList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/activity_log/',
+      method: "GET",
+      url: "/api/projects/{project_id}/activity_log/",
       path: {
         project_id: projectId,
       },
@@ -51,13 +51,13 @@ export class ActivityLogService {
     requestBody: ActivityLog
   }): CancelablePromise<ActivityLog> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/activity_log/bookmark_activity_notification/',
+      method: "POST",
+      url: "/api/projects/{project_id}/activity_log/bookmark_activity_notification/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -73,8 +73,8 @@ export class ActivityLogService {
     projectId: string
   }): CancelablePromise<ActivityLog> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/activity_log/important_changes/',
+      method: "GET",
+      url: "/api/projects/{project_id}/activity_log/important_changes/",
       path: {
         project_id: projectId,
       },

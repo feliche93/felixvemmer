@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserBasic } from './UserBasic'
+import type { UserBasic } from "./UserBasic"
 export type RoleMembership = {
   readonly id: string
   readonly role_id: string

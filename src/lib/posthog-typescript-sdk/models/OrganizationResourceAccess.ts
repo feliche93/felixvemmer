@@ -5,13 +5,13 @@
 export type OrganizationResourceAccess = {
   readonly id: number
   resource:
-    | 'feature flags'
-    | 'experiments'
-    | 'cohorts'
-    | 'data management'
-    | 'session recordings'
-    | 'insights'
-    | 'dashboards'
+    | "feature flags"
+    | "experiments"
+    | "cohorts"
+    | "data management"
+    | "session recordings"
+    | "insights"
+    | "dashboards"
   access_level?: 21 | 37
   readonly organization: string
   readonly created_at: string

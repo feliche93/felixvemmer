@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from 'next-themes'
-import { TooltipProvider } from './ui/tooltip'
+import { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from "next-themes"
+import { TooltipProvider } from "./ui/tooltip"
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return (

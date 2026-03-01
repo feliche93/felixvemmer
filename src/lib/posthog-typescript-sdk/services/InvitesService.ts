@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { OrganizationInvite } from '../models/OrganizationInvite'
-import type { PaginatedOrganizationInviteList } from '../models/PaginatedOrganizationInviteList'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { OrganizationInvite } from "../models/OrganizationInvite"
+import type { PaginatedOrganizationInviteList } from "../models/PaginatedOrganizationInviteList"
 export class InvitesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -28,8 +28,8 @@ export class InvitesService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationInviteList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -51,13 +51,13 @@ export class InvitesService {
     requestBody: OrganizationInvite
   }): CancelablePromise<OrganizationInvite> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -75,8 +75,8 @@ export class InvitesService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -95,13 +95,13 @@ export class InvitesService {
     requestBody: OrganizationInvite
   }): CancelablePromise<OrganizationInvite> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/bulk/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/bulk/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

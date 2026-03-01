@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { OrganizationDomain } from '../models/OrganizationDomain'
-import type { PaginatedOrganizationDomainList } from '../models/PaginatedOrganizationDomainList'
-import type { PatchedOrganizationDomain } from '../models/PatchedOrganizationDomain'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { OrganizationDomain } from "../models/OrganizationDomain"
+import type { PaginatedOrganizationDomainList } from "../models/PaginatedOrganizationDomainList"
+import type { PatchedOrganizationDomain } from "../models/PatchedOrganizationDomain"
 export class DomainsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -29,8 +29,8 @@ export class DomainsService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationDomainList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -52,13 +52,13 @@ export class DomainsService {
     requestBody: OrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -76,8 +76,8 @@ export class DomainsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -101,14 +101,14 @@ export class DomainsService {
     requestBody: OrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -128,14 +128,14 @@ export class DomainsService {
     requestBody?: PatchedOrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -153,8 +153,8 @@ export class DomainsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -178,14 +178,14 @@ export class DomainsService {
     requestBody: OrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/verify/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/verify/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

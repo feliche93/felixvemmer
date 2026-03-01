@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { ExternalDataSourceSerializers } from '../models/ExternalDataSourceSerializers'
-import type { PaginatedExternalDataSourceSerializersList } from '../models/PaginatedExternalDataSourceSerializersList'
-import type { PatchedExternalDataSourceSerializers } from '../models/PatchedExternalDataSourceSerializers'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { ExternalDataSourceSerializers } from "../models/ExternalDataSourceSerializers"
+import type { PaginatedExternalDataSourceSerializersList } from "../models/PaginatedExternalDataSourceSerializersList"
+import type { PatchedExternalDataSourceSerializers } from "../models/PatchedExternalDataSourceSerializers"
 export class ExternalDataSourcesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -38,8 +38,8 @@ export class ExternalDataSourcesService {
     search?: string
   }): CancelablePromise<PaginatedExternalDataSourceSerializersList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/external_data_sources/',
+      method: "GET",
+      url: "/api/projects/{project_id}/external_data_sources/",
       path: {
         project_id: projectId,
       },
@@ -66,13 +66,13 @@ export class ExternalDataSourcesService {
     requestBody: ExternalDataSourceSerializers
   }): CancelablePromise<ExternalDataSourceSerializers> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/external_data_sources/',
+      method: "POST",
+      url: "/api/projects/{project_id}/external_data_sources/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -94,8 +94,8 @@ export class ExternalDataSourcesService {
     projectId: string
   }): CancelablePromise<ExternalDataSourceSerializers> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/external_data_sources/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/external_data_sources/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -123,14 +123,14 @@ export class ExternalDataSourcesService {
     requestBody: ExternalDataSourceSerializers
   }): CancelablePromise<ExternalDataSourceSerializers> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/external_data_sources/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/external_data_sources/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -154,14 +154,14 @@ export class ExternalDataSourcesService {
     requestBody?: PatchedExternalDataSourceSerializers
   }): CancelablePromise<ExternalDataSourceSerializers> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/external_data_sources/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/external_data_sources/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -183,8 +183,8 @@ export class ExternalDataSourcesService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/external_data_sources/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/external_data_sources/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -212,14 +212,14 @@ export class ExternalDataSourcesService {
     requestBody: ExternalDataSourceSerializers
   }): CancelablePromise<ExternalDataSourceSerializers> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/external_data_sources/{id}/reload/',
+      method: "POST",
+      url: "/api/projects/{project_id}/external_data_sources/{id}/reload/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

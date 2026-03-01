@@ -1,15 +1,15 @@
-import { Button } from '@/components/ui/button'
+import type { Table } from "@tanstack/react-table"
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { createUrl } from '@/lib/utils'
-import type { Table } from '@tanstack/react-table'
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+} from "@/components/ui/select"
+import { createUrl } from "@/lib/utils"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -43,7 +43,7 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex items-center justify-between px-2">
       <div className="flex-1 text-muted-foreground text-sm">
-        {table.getFilteredSelectedRowModel().rows.length} of{' '}
+        {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
@@ -52,7 +52,7 @@ export function DataTablePagination<TData>({
           <Select
             value={pageSize.toString()}
             onValueChange={(value) => {
-              newSearchPrams.set('pageSize', value)
+              newSearchPrams.set("pageSize", value)
               router.push(createUrl(pathname, newSearchPrams))
             }}
           >
@@ -76,7 +76,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
-              newSearchPrams.set('page', '1')
+              newSearchPrams.set("page", "1")
               router.push(createUrl(pathname, newSearchPrams))
             }}
             disabled={page === 1}
@@ -89,7 +89,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => {
               const previousPage = page - 1
-              newSearchPrams.set('page', previousPage.toString())
+              newSearchPrams.set("page", previousPage.toString())
               router.push(createUrl(pathname, newSearchPrams))
             }}
             disabled={page === 1}
@@ -102,7 +102,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => {
               const nextPage = page + 1
-              newSearchPrams.set('page', nextPage.toString())
+              newSearchPrams.set("page", nextPage.toString())
               router.push(createUrl(pathname, newSearchPrams))
             }}
             disabled={page === totalPages}
@@ -115,7 +115,7 @@ export function DataTablePagination<TData>({
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
               const lastPage = totalPages
-              newSearchPrams.set('page', lastPage.toString())
+              newSearchPrams.set("page", lastPage.toString())
               router.push(createUrl(pathname, newSearchPrams))
             }}
             disabled={!table.getCanNextPage()}

@@ -1,15 +1,21 @@
-import { nFormatter } from '@/lib/utils'
-import { env } from '@/server'
-import { GitFork, Star } from 'lucide-react'
-import { Icons } from './icons'
-import { Card } from './ui/card'
+import { GitFork, Star } from "lucide-react"
+import { nFormatter } from "@/lib/utils"
+import { env } from "@/server"
+import { Icons } from "./icons"
+import { Card } from "./ui/card"
 
 export interface GithubRepoProps {
   url: string
 }
 
+interface GithubRepoResponse {
+  description?: string | null
+  stargazers_count?: number
+  forks?: number
+}
+
 export default async function RepoCard({ url }: GithubRepoProps) {
-  const [orgName, repoName] = url.replace('https://github.com/', '').split('/')
+  const [orgName, repoName] = url.replace("https://github.com/", "").split("/")
 
   const response = await fetch(`https://api.github.com/repos/${orgName}/${repoName}`, {
     headers: {
@@ -18,13 +24,13 @@ export default async function RepoCard({ url }: GithubRepoProps) {
   })
 
   if (!response.ok) {
-    throw new Error('Failed to fetch repository data')
+    throw new Error("Failed to fetch repository data")
   }
 
-  let repoData
+  let repoData: GithubRepoResponse | null = null
 
   try {
-    repoData = await response.json()
+    repoData = (await response.json()) as GithubRepoResponse
   } catch (error) {
     console.error(error)
     return <pre>{JSON.stringify(error)}</pre>
@@ -36,7 +42,7 @@ export default async function RepoCard({ url }: GithubRepoProps) {
 
   console.log({ repoData })
 
-  const { description, stargazers_count: stars, forks } = repoData
+  const { description = "", stargazers_count: stars = 0, forks = 0 } = repoData
   return (
     <Card className="mx-auto max-w-4xl">
       <a href={url} target="_blank" rel="noreferrer noopener" className="block p-6">

@@ -1,6 +1,8 @@
-'use client'
+"use client"
 
-import { Button } from '@/components/ui/button'
+import { MixerHorizontalIcon } from "@radix-ui/react-icons"
+import type { Table } from "@tanstack/react-table"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -8,9 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { MixerHorizontalIcon } from '@radix-ui/react-icons'
-import type { Table } from '@tanstack/react-table'
+} from "@/components/ui/dropdown-menu"
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>
@@ -35,7 +35,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
-          .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
+          .filter((column) => typeof column.accessorFn !== "undefined" && column.getCanHide())
           .map((column) => {
             return (
               <DropdownMenuCheckboxItem
@@ -45,9 +45,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
                 <span className="truncate">
-                  {column.columnDef.header instanceof Function
-                    ? column.columnDef.header({ column, table } as any).props.title
-                    : column.id}
+                  {(column.columnDef.meta as { title?: string } | undefined)?.title ?? column.id}
                 </span>
               </DropdownMenuCheckboxItem>
             )

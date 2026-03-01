@@ -9,7 +9,7 @@ export type ExportedAsset = {
   readonly id: number
   dashboard?: number | null
   insight?: number | null
-  export_format: 'image/png' | 'application/pdf' | 'text/csv'
+  export_format: "image/png" | "application/pdf" | "text/csv"
   readonly created_at: string
   readonly has_content: string
   export_context?: Record<string, any> | null

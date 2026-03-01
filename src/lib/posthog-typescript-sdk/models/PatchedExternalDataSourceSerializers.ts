@@ -9,7 +9,7 @@ export type PatchedExternalDataSourceSerializers = {
   readonly status?: string
   client_secret?: string
   account_id?: string
-  readonly source_type?: 'Stripe'
+  readonly source_type?: "Stripe"
   prefix?: string | null
   readonly last_run_at?: string
   readonly schemas?: string

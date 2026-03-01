@@ -1,7 +1,7 @@
-import { env } from '@/server'
-import { unstable_cache } from 'next/cache'
-import { z } from 'zod'
-import { client } from './papierkram-typescript-sdk'
+import { unstable_cache } from "next/cache"
+import { z } from "zod"
+import { env } from "@/server"
+import { client } from "./papierkram-typescript-sdk"
 
 const SBilling = z.object({
   company: z.string(),
@@ -103,7 +103,7 @@ export const getFreelancingRevenue = unstable_cache(
     allInvoices = allInvoices.filter((invoice) => {
       const invoiceYear = new Date(invoice.document_date).getFullYear()
       return (
-        invoice.state === 'paid' && invoice.paid_at_date // &&
+        invoice.state === "paid" && invoice.paid_at_date // &&
         // invoice.document_date &&
         // invoiceYear === currentYear
       )
@@ -111,7 +111,7 @@ export const getFreelancingRevenue = unstable_cache(
     const totalGross = allInvoices.reduce((sum, invoice) => sum + invoice.total_gross, 0)
     return totalGross
   },
-  ['papierkram'],
+  ["papierkram"],
   {
     revalidate: 3600,
   },

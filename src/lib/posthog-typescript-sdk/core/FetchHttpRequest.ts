@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ApiRequestOptions } from './ApiRequestOptions'
-import { BaseHttpRequest } from './BaseHttpRequest'
-import type { CancelablePromise } from './CancelablePromise'
-import { request as __request } from './request'
+import type { ApiRequestOptions } from "./ApiRequestOptions"
+import { BaseHttpRequest } from "./BaseHttpRequest"
+import type { CancelablePromise } from "./CancelablePromise"
+import { request as __request } from "./request"
 
 export class FetchHttpRequest extends BaseHttpRequest {
   /**

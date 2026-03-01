@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EnterprisePropertyDefinition } from './EnterprisePropertyDefinition'
+import type { EnterprisePropertyDefinition } from "./EnterprisePropertyDefinition"
 export type PaginatedEnterprisePropertyDefinitionList = {
   count?: number
   next?: string | null

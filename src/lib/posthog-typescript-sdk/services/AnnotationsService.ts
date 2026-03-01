@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Annotation } from '../models/Annotation'
-import type { PaginatedAnnotationList } from '../models/PaginatedAnnotationList'
-import type { PatchedAnnotation } from '../models/PatchedAnnotation'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Annotation } from "../models/Annotation"
+import type { PaginatedAnnotationList } from "../models/PaginatedAnnotationList"
+import type { PatchedAnnotation } from "../models/PatchedAnnotation"
 export class AnnotationsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -38,8 +38,8 @@ export class AnnotationsService {
     search?: string
   }): CancelablePromise<PaginatedAnnotationList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/annotations/',
+      method: "GET",
+      url: "/api/projects/{project_id}/annotations/",
       path: {
         project_id: projectId,
       },
@@ -66,13 +66,13 @@ export class AnnotationsService {
     requestBody?: Annotation
   }): CancelablePromise<Annotation> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/annotations/',
+      method: "POST",
+      url: "/api/projects/{project_id}/annotations/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -94,8 +94,8 @@ export class AnnotationsService {
     projectId: string
   }): CancelablePromise<Annotation> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/annotations/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/annotations/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -123,14 +123,14 @@ export class AnnotationsService {
     requestBody?: Annotation
   }): CancelablePromise<Annotation> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/annotations/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/annotations/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -154,14 +154,14 @@ export class AnnotationsService {
     requestBody?: PatchedAnnotation
   }): CancelablePromise<Annotation> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/annotations/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/annotations/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -183,8 +183,8 @@ export class AnnotationsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/annotations/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/annotations/{id}/",
       path: {
         id: id,
         project_id: projectId,

@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Funnel } from '../models/Funnel'
-import type { FunnelStepsResults } from '../models/FunnelStepsResults'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Funnel } from "../models/Funnel"
+import type { FunnelStepsResults } from "../models/FunnelStepsResults"
 export class FunnelService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -21,12 +21,12 @@ export class FunnelService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Funnel
   }): CancelablePromise<FunnelStepsResults> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/funnel/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/funnel/",
       path: {
         project_id: projectId,
       },
@@ -34,7 +34,7 @@ export class FunnelService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

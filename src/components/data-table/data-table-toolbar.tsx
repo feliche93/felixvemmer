@@ -1,10 +1,9 @@
-'use client'
+"use client"
 
-import type { DataTableFilterField } from '@/types'
-import type { Table } from '@tanstack/react-table'
-import type * as React from 'react'
-
-import { cn } from '@/lib/utils'
+import type { Table } from "@tanstack/react-table"
+import type * as React from "react"
+import { cn } from "@/lib/utils"
+import type { DataTableFilterField } from "@/types"
 
 interface DataTableToolbarProps<TData> extends React.HTMLAttributes<HTMLDivElement> {
   table: Table<TData>
@@ -21,7 +20,7 @@ export function DataTableToolbar<TData>({
   return (
     <div
       className={cn(
-        'grid w-full grid-cols-1 flex-row items-start justify-between gap-4 sm:flex',
+        "grid w-full grid-cols-1 flex-row items-start justify-between gap-4 sm:flex",
         className,
       )}
     >

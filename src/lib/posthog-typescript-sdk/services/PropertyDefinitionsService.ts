@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { EnterprisePropertyDefinition } from '../models/EnterprisePropertyDefinition'
-import type { PaginatedEnterprisePropertyDefinitionList } from '../models/PaginatedEnterprisePropertyDefinitionList'
-import type { PatchedEnterprisePropertyDefinition } from '../models/PatchedEnterprisePropertyDefinition'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { EnterprisePropertyDefinition } from "../models/EnterprisePropertyDefinition"
+import type { PaginatedEnterprisePropertyDefinitionList } from "../models/PaginatedEnterprisePropertyDefinitionList"
+import type { PatchedEnterprisePropertyDefinition } from "../models/PatchedEnterprisePropertyDefinition"
 export class PropertyDefinitionsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -25,7 +25,7 @@ export class PropertyDefinitionsService {
     offset,
     properties,
     search,
-    type = 'event',
+    type = "event",
   }: {
     /**
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
@@ -74,11 +74,11 @@ export class PropertyDefinitionsService {
     /**
      * What property definitions to return
      */
-    type?: 'event' | 'person' | 'group'
+    type?: "event" | "person" | "group"
   }): CancelablePromise<PaginatedEnterprisePropertyDefinitionList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/property_definitions/',
+      method: "GET",
+      url: "/api/projects/{project_id}/property_definitions/",
       path: {
         project_id: projectId,
       },
@@ -112,8 +112,8 @@ export class PropertyDefinitionsService {
     projectId: string
   }): CancelablePromise<EnterprisePropertyDefinition> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/property_definitions/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/property_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -137,14 +137,14 @@ export class PropertyDefinitionsService {
     requestBody?: EnterprisePropertyDefinition
   }): CancelablePromise<EnterprisePropertyDefinition> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/property_definitions/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/property_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -164,14 +164,14 @@ export class PropertyDefinitionsService {
     requestBody?: PatchedEnterprisePropertyDefinition
   }): CancelablePromise<EnterprisePropertyDefinition> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/property_definitions/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/property_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -189,8 +189,8 @@ export class PropertyDefinitionsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/property_definitions/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/property_definitions/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -212,8 +212,8 @@ export class PropertyDefinitionsService {
     projectId: string
   }): CancelablePromise<EnterprisePropertyDefinition> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/property_definitions/seen_together/',
+      method: "GET",
+      url: "/api/projects/{project_id}/property_definitions/seen_together/",
       path: {
         project_id: projectId,
       },

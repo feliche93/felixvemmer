@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedPersonList } from '../models/PaginatedPersonList'
-import type { PatchedPerson } from '../models/PatchedPerson'
-import type { Person } from '../models/Person'
-import type { Property } from '../models/Property'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedPersonList } from "../models/PaginatedPersonList"
+import type { PatchedPerson } from "../models/PatchedPerson"
+import type { Person } from "../models/Person"
+import type { Property } from "../models/Property"
 export class PersonsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -37,7 +37,7 @@ export class PersonsService {
      * Filter persons by email (exact match)
      */
     email?: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     /**
      * Number of results to return per page.
      */
@@ -56,8 +56,8 @@ export class PersonsService {
     search?: string
   }): CancelablePromise<PaginatedPersonList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/",
       path: {
         project_id: projectId,
       },
@@ -90,11 +90,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -125,12 +125,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/persons/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/persons/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -139,7 +139,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -161,12 +161,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: PatchedPerson
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/persons/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/persons/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -175,7 +175,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -201,11 +201,11 @@ export class PersonsService {
      * If true, a task to delete all events associated with this person will be created and queued. The task does not run immediately and instead is batched together and at 5AM UTC every Sunday (controlled by environment variable CLEAR_CLICKHOUSE_REMOVED_DATA_SCHEDULE_CRON)
      */
     deleteEvents?: boolean
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/persons/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/persons/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -234,11 +234,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/{id}/activity/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/{id}/activity/",
       path: {
         id: id,
         project_id: projectId,
@@ -272,12 +272,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/persons/{id}/delete_property/',
+      method: "POST",
+      url: "/api/projects/{project_id}/persons/{id}/delete_property/",
       path: {
         id: id,
         project_id: projectId,
@@ -287,7 +287,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -308,11 +308,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/{id}/properties_timeline/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/{id}/properties_timeline/",
       path: {
         id: id,
         project_id: projectId,
@@ -341,12 +341,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/persons/{id}/split/',
+      method: "POST",
+      url: "/api/projects/{project_id}/persons/{id}/split/",
       path: {
         id: id,
         project_id: projectId,
@@ -355,7 +355,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -387,12 +387,12 @@ export class PersonsService {
      * Specify the property value
      */
     value: any
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/persons/{id}/update_property/',
+      method: "POST",
+      url: "/api/projects/{project_id}/persons/{id}/update_property/",
       path: {
         id: id,
         project_id: projectId,
@@ -403,7 +403,7 @@ export class PersonsService {
         value: value,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -419,11 +419,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/activity/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/activity/",
       path: {
         project_id: projectId,
       },
@@ -445,11 +445,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/cohorts/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/cohorts/",
       path: {
         project_id: projectId,
       },
@@ -471,11 +471,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/funnel/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/funnel/",
       path: {
         project_id: projectId,
       },
@@ -498,12 +498,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/persons/funnel/',
+      method: "POST",
+      url: "/api/projects/{project_id}/persons/funnel/",
       path: {
         project_id: projectId,
       },
@@ -511,7 +511,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -527,11 +527,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/funnel/correlation/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/funnel/correlation/",
       path: {
         project_id: projectId,
       },
@@ -554,12 +554,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/persons/funnel/correlation/',
+      method: "POST",
+      url: "/api/projects/{project_id}/persons/funnel/correlation/",
       path: {
         project_id: projectId,
       },
@@ -567,7 +567,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -583,11 +583,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/lifecycle/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/lifecycle/",
       path: {
         project_id: projectId,
       },
@@ -609,11 +609,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/path/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/path/",
       path: {
         project_id: projectId,
       },
@@ -636,12 +636,12 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Person
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/persons/path/',
+      method: "POST",
+      url: "/api/projects/{project_id}/persons/path/",
       path: {
         project_id: projectId,
       },
@@ -649,7 +649,7 @@ export class PersonsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -665,11 +665,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/retention/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/retention/",
       path: {
         project_id: projectId,
       },
@@ -691,11 +691,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/stickiness/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/stickiness/",
       path: {
         project_id: projectId,
       },
@@ -717,11 +717,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/trends/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/trends/",
       path: {
         project_id: projectId,
       },
@@ -743,11 +743,11 @@ export class PersonsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Person> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/persons/values/',
+      method: "GET",
+      url: "/api/projects/{project_id}/persons/values/",
       path: {
         project_id: projectId,
       },

@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class ExpenseVoucherAusgabeBelegService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -24,13 +24,13 @@ export class ExpenseVoucherAusgabeBelegService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers/{voucher_id}/documents',
+      method: "POST",
+      url: "/expense/vouchers/{voucher_id}/documents",
       path: {
         voucher_id: voucherId,
       },
       formData: formData,
-      mediaType: 'multipart/form-data',
+      mediaType: "multipart/form-data",
     })
   }
 
@@ -54,8 +54,8 @@ export class ExpenseVoucherAusgabeBelegService {
     voucherId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/expense/vouchers/{voucher_id}/documents/{id}',
+      method: "DELETE",
+      url: "/expense/vouchers/{voucher_id}/documents/{id}",
       path: {
         id: id,
         voucher_id: voucherId,
@@ -97,7 +97,7 @@ export class ExpenseVoucherAusgabeBelegService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
     /**
      * Filter by creditor (company) id
      */
@@ -116,8 +116,8 @@ export class ExpenseVoucherAusgabeBelegService {
     documentDateRangeEnd?: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/expense/vouchers',
+      method: "GET",
+      url: "/expense/vouchers",
       query: {
         page: page,
         page_size: pageSize,
@@ -157,100 +157,100 @@ export class ExpenseVoucherAusgabeBelegService {
         name?: string | null
         vat_rate: string
         category?:
-          | 'Andere Anlagen'
-          | 'Betriebsausstattung (Anlage)'
-          | 'Büroeinrichtung'
-          | 'Fahrzeuge (PKW)'
-          | 'Geschäftsausstattung'
-          | 'Grundstücke'
-          | 'GWG ab 2018: 250 bis 1000 EUR (Sammelposten)'
-          | 'GWG ab 2018: bis 800 EUR (Geringwertiges Wirtschaftsgut)'
-          | 'GWG vor 2018: 150 bis 1000 EUR (Sammelposten)'
-          | 'GWG vor 2018: bis 410 EUR (Geringwertiges Wirtschaftsgut)'
-          | 'Sofortabschreibung ab 2021: PC, Laptop und andere Computer-Hardware'
-          | 'Software (Anlage)'
-          | 'Technische Anlagen und Maschinen'
-          | 'Aufwendungen für ein häusliches Arbeitszimmer'
-          | 'Ausgangsfrachten'
-          | 'Betriebsbedarf'
-          | 'Bewirtungskosten'
-          | 'Bezugsnebenkosten'
-          | 'Buchführungskosten'
-          | 'Büroartikel'
-          | 'Bürobedarf'
-          | 'Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (abziehbarer Anteil)'
-          | 'Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (nicht abziehbarer Anteil)'
-          | 'Fahrtkostenerstatt. Whg./Arbeitsstätte'
-          | 'Fortbildung'
-          | 'Fremdleistung (Dienstleistung)'
-          | 'Garagenmieten'
-          | 'Gas, Strom, Wasser'
-          | 'Gehälter'
-          | 'Geschenke bis 35 Euro'
-          | 'Geschenke über 35 Euro'
-          | 'Geschäftsessen'
-          | 'Gesetzliche Sozialaufwendungen'
-          | 'Gewerbesteuer'
-          | 'Gewerbesteuer Nachzahlung oder Erstattung'
-          | 'Grundsteuer'
-          | 'Heizung'
-          | 'Kfz-Reparaturen'
-          | 'Kfz-Steuern'
-          | 'Kfz-Versicherungen'
-          | 'Körperschaftsteuer'
-          | 'Laufende Kfz-Betriebskosten'
-          | 'Leasing'
-          | 'Leergut'
-          | 'Löhne'
-          | 'Miete'
-          | 'Mietleasing bewegliche Wirtschaftsgüter für technische Anlagen und Maschinen'
-          | 'Nebenkosten des Geldverkehrs'
-          | 'Nicht abzugsfähige Bewirtungskosten'
-          | 'Porto'
-          | 'Rechts- und Beratungskosten'
-          | 'Reinigung'
-          | 'Reisekosten Arbeitnehmer'
-          | 'Reisekosten Arbeitnehmer Fahrtkosten'
-          | 'Reisekosten Arbeitnehmer Verpflegungsmehraufwand'
-          | 'Reisekosten Arbeitnehmer Übernachtungsaufwand'
-          | 'Reisekosten UN Verpfleg.mehraufwand'
-          | 'Reisekosten UN Übernachtungsaufwand'
-          | 'Reisekosten Unternehmer'
-          | 'Reisekosten Unternehmer Fahrtkosten'
-          | 'Reparatur/Instandh. Betriebs- u. Gesch.'
-          | 'Repräsentationskosten'
-          | 'Roh-, Hilfs- und Betriebsstoffe'
-          | 'Software/EDV (Büroartikel)'
-          | 'Sonstige betriebliche Aufwendungen'
-          | 'Sonstige Kfz-Kosten'
-          | 'Spesen (Reisekosten Unternehmer)'
-          | 'Telefon'
-          | 'Verkaufsprovisionen'
-          | 'Versicherungen'
-          | 'Wareneingang'
-          | 'Werbekosten'
-          | 'Zeitschriften, Bücher'
-          | 'Zinsabschlagsteuer'
-          | 'Zinsen und ähnliche Aufwendungen'
-          | 'Zuwendungen,Spenden steuerl. n. abziehb.'
-          | 'Erlöse Leergut'
-          | 'Private KFZ Nutzung (1% Regel)'
-          | 'Private Verwendung von Gegenständen'
-          | 'Privatentnahme Waren / Gegenstände'
-          | 'Provisionserlöse'
-          | 'Sonstige Einnahme (Erlöse)'
-          | 'Zinsen und ähnliche Erträge'
-          | 'Zuschüsse'
-          | 'Privateinlagen'
-          | 'Privatentnahmen allgemein'
-          | 'Umsatzsteuer Erstattung (nur EÜR)'
-          | 'Umsatzsteuer frühere Jahre'
-          | 'Umsatzsteuer Vorjahr'
-          | 'Umsatzsteuervorauszahlungen'
-          | 'Umsatzsteuervorauszahlungen 1/11'
-          | 'Umsatzsteuer Erstattung'
-          | 'Umsatzsteuer Erstattung frühere Jahre'
-          | 'Umsatzsteuervorauszahlung Guthaben'
+          | "Andere Anlagen"
+          | "Betriebsausstattung (Anlage)"
+          | "Büroeinrichtung"
+          | "Fahrzeuge (PKW)"
+          | "Geschäftsausstattung"
+          | "Grundstücke"
+          | "GWG ab 2018: 250 bis 1000 EUR (Sammelposten)"
+          | "GWG ab 2018: bis 800 EUR (Geringwertiges Wirtschaftsgut)"
+          | "GWG vor 2018: 150 bis 1000 EUR (Sammelposten)"
+          | "GWG vor 2018: bis 410 EUR (Geringwertiges Wirtschaftsgut)"
+          | "Sofortabschreibung ab 2021: PC, Laptop und andere Computer-Hardware"
+          | "Software (Anlage)"
+          | "Technische Anlagen und Maschinen"
+          | "Aufwendungen für ein häusliches Arbeitszimmer"
+          | "Ausgangsfrachten"
+          | "Betriebsbedarf"
+          | "Bewirtungskosten"
+          | "Bezugsnebenkosten"
+          | "Buchführungskosten"
+          | "Büroartikel"
+          | "Bürobedarf"
+          | "Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (abziehbarer Anteil)"
+          | "Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (nicht abziehbarer Anteil)"
+          | "Fahrtkostenerstatt. Whg./Arbeitsstätte"
+          | "Fortbildung"
+          | "Fremdleistung (Dienstleistung)"
+          | "Garagenmieten"
+          | "Gas, Strom, Wasser"
+          | "Gehälter"
+          | "Geschenke bis 35 Euro"
+          | "Geschenke über 35 Euro"
+          | "Geschäftsessen"
+          | "Gesetzliche Sozialaufwendungen"
+          | "Gewerbesteuer"
+          | "Gewerbesteuer Nachzahlung oder Erstattung"
+          | "Grundsteuer"
+          | "Heizung"
+          | "Kfz-Reparaturen"
+          | "Kfz-Steuern"
+          | "Kfz-Versicherungen"
+          | "Körperschaftsteuer"
+          | "Laufende Kfz-Betriebskosten"
+          | "Leasing"
+          | "Leergut"
+          | "Löhne"
+          | "Miete"
+          | "Mietleasing bewegliche Wirtschaftsgüter für technische Anlagen und Maschinen"
+          | "Nebenkosten des Geldverkehrs"
+          | "Nicht abzugsfähige Bewirtungskosten"
+          | "Porto"
+          | "Rechts- und Beratungskosten"
+          | "Reinigung"
+          | "Reisekosten Arbeitnehmer"
+          | "Reisekosten Arbeitnehmer Fahrtkosten"
+          | "Reisekosten Arbeitnehmer Verpflegungsmehraufwand"
+          | "Reisekosten Arbeitnehmer Übernachtungsaufwand"
+          | "Reisekosten UN Verpfleg.mehraufwand"
+          | "Reisekosten UN Übernachtungsaufwand"
+          | "Reisekosten Unternehmer"
+          | "Reisekosten Unternehmer Fahrtkosten"
+          | "Reparatur/Instandh. Betriebs- u. Gesch."
+          | "Repräsentationskosten"
+          | "Roh-, Hilfs- und Betriebsstoffe"
+          | "Software/EDV (Büroartikel)"
+          | "Sonstige betriebliche Aufwendungen"
+          | "Sonstige Kfz-Kosten"
+          | "Spesen (Reisekosten Unternehmer)"
+          | "Telefon"
+          | "Verkaufsprovisionen"
+          | "Versicherungen"
+          | "Wareneingang"
+          | "Werbekosten"
+          | "Zeitschriften, Bücher"
+          | "Zinsabschlagsteuer"
+          | "Zinsen und ähnliche Aufwendungen"
+          | "Zuwendungen,Spenden steuerl. n. abziehb."
+          | "Erlöse Leergut"
+          | "Private KFZ Nutzung (1% Regel)"
+          | "Private Verwendung von Gegenständen"
+          | "Privatentnahme Waren / Gegenstände"
+          | "Provisionserlöse"
+          | "Sonstige Einnahme (Erlöse)"
+          | "Zinsen und ähnliche Erträge"
+          | "Zuschüsse"
+          | "Privateinlagen"
+          | "Privatentnahmen allgemein"
+          | "Umsatzsteuer Erstattung (nur EÜR)"
+          | "Umsatzsteuer frühere Jahre"
+          | "Umsatzsteuer Vorjahr"
+          | "Umsatzsteuervorauszahlungen"
+          | "Umsatzsteuervorauszahlungen 1/11"
+          | "Umsatzsteuer Erstattung"
+          | "Umsatzsteuer Erstattung frühere Jahre"
+          | "Umsatzsteuervorauszahlung Guthaben"
           | null
         billing?: {
           amount?: number | null
@@ -272,10 +272,10 @@ export class ExpenseVoucherAusgabeBelegService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers',
+      method: "POST",
+      url: "/expense/vouchers",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Voucher could not be created`,
       },
@@ -297,8 +297,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/expense/vouchers/{id}',
+      method: "GET",
+      url: "/expense/vouchers/{id}",
       path: {
         id: id,
       },
@@ -339,100 +339,100 @@ export class ExpenseVoucherAusgabeBelegService {
         name?: string | null
         vat_rate: string
         category?:
-          | 'Andere Anlagen'
-          | 'Betriebsausstattung (Anlage)'
-          | 'Büroeinrichtung'
-          | 'Fahrzeuge (PKW)'
-          | 'Geschäftsausstattung'
-          | 'Grundstücke'
-          | 'GWG ab 2018: 250 bis 1000 EUR (Sammelposten)'
-          | 'GWG ab 2018: bis 800 EUR (Geringwertiges Wirtschaftsgut)'
-          | 'GWG vor 2018: 150 bis 1000 EUR (Sammelposten)'
-          | 'GWG vor 2018: bis 410 EUR (Geringwertiges Wirtschaftsgut)'
-          | 'Sofortabschreibung ab 2021: PC, Laptop und andere Computer-Hardware'
-          | 'Software (Anlage)'
-          | 'Technische Anlagen und Maschinen'
-          | 'Aufwendungen für ein häusliches Arbeitszimmer'
-          | 'Ausgangsfrachten'
-          | 'Betriebsbedarf'
-          | 'Bewirtungskosten'
-          | 'Bezugsnebenkosten'
-          | 'Buchführungskosten'
-          | 'Büroartikel'
-          | 'Bürobedarf'
-          | 'Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (abziehbarer Anteil)'
-          | 'Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (nicht abziehbarer Anteil)'
-          | 'Fahrtkostenerstatt. Whg./Arbeitsstätte'
-          | 'Fortbildung'
-          | 'Fremdleistung (Dienstleistung)'
-          | 'Garagenmieten'
-          | 'Gas, Strom, Wasser'
-          | 'Gehälter'
-          | 'Geschenke bis 35 Euro'
-          | 'Geschenke über 35 Euro'
-          | 'Geschäftsessen'
-          | 'Gesetzliche Sozialaufwendungen'
-          | 'Gewerbesteuer'
-          | 'Gewerbesteuer Nachzahlung oder Erstattung'
-          | 'Grundsteuer'
-          | 'Heizung'
-          | 'Kfz-Reparaturen'
-          | 'Kfz-Steuern'
-          | 'Kfz-Versicherungen'
-          | 'Körperschaftsteuer'
-          | 'Laufende Kfz-Betriebskosten'
-          | 'Leasing'
-          | 'Leergut'
-          | 'Löhne'
-          | 'Miete'
-          | 'Mietleasing bewegliche Wirtschaftsgüter für technische Anlagen und Maschinen'
-          | 'Nebenkosten des Geldverkehrs'
-          | 'Nicht abzugsfähige Bewirtungskosten'
-          | 'Porto'
-          | 'Rechts- und Beratungskosten'
-          | 'Reinigung'
-          | 'Reisekosten Arbeitnehmer'
-          | 'Reisekosten Arbeitnehmer Fahrtkosten'
-          | 'Reisekosten Arbeitnehmer Verpflegungsmehraufwand'
-          | 'Reisekosten Arbeitnehmer Übernachtungsaufwand'
-          | 'Reisekosten UN Verpfleg.mehraufwand'
-          | 'Reisekosten UN Übernachtungsaufwand'
-          | 'Reisekosten Unternehmer'
-          | 'Reisekosten Unternehmer Fahrtkosten'
-          | 'Reparatur/Instandh. Betriebs- u. Gesch.'
-          | 'Repräsentationskosten'
-          | 'Roh-, Hilfs- und Betriebsstoffe'
-          | 'Software/EDV (Büroartikel)'
-          | 'Sonstige betriebliche Aufwendungen'
-          | 'Sonstige Kfz-Kosten'
-          | 'Spesen (Reisekosten Unternehmer)'
-          | 'Telefon'
-          | 'Verkaufsprovisionen'
-          | 'Versicherungen'
-          | 'Wareneingang'
-          | 'Werbekosten'
-          | 'Zeitschriften, Bücher'
-          | 'Zinsabschlagsteuer'
-          | 'Zinsen und ähnliche Aufwendungen'
-          | 'Zuwendungen,Spenden steuerl. n. abziehb.'
-          | 'Erlöse Leergut'
-          | 'Private KFZ Nutzung (1% Regel)'
-          | 'Private Verwendung von Gegenständen'
-          | 'Privatentnahme Waren / Gegenstände'
-          | 'Provisionserlöse'
-          | 'Sonstige Einnahme (Erlöse)'
-          | 'Zinsen und ähnliche Erträge'
-          | 'Zuschüsse'
-          | 'Privateinlagen'
-          | 'Privatentnahmen allgemein'
-          | 'Umsatzsteuer Erstattung (nur EÜR)'
-          | 'Umsatzsteuer frühere Jahre'
-          | 'Umsatzsteuer Vorjahr'
-          | 'Umsatzsteuervorauszahlungen'
-          | 'Umsatzsteuervorauszahlungen 1/11'
-          | 'Umsatzsteuer Erstattung'
-          | 'Umsatzsteuer Erstattung frühere Jahre'
-          | 'Umsatzsteuervorauszahlung Guthaben'
+          | "Andere Anlagen"
+          | "Betriebsausstattung (Anlage)"
+          | "Büroeinrichtung"
+          | "Fahrzeuge (PKW)"
+          | "Geschäftsausstattung"
+          | "Grundstücke"
+          | "GWG ab 2018: 250 bis 1000 EUR (Sammelposten)"
+          | "GWG ab 2018: bis 800 EUR (Geringwertiges Wirtschaftsgut)"
+          | "GWG vor 2018: 150 bis 1000 EUR (Sammelposten)"
+          | "GWG vor 2018: bis 410 EUR (Geringwertiges Wirtschaftsgut)"
+          | "Sofortabschreibung ab 2021: PC, Laptop und andere Computer-Hardware"
+          | "Software (Anlage)"
+          | "Technische Anlagen und Maschinen"
+          | "Aufwendungen für ein häusliches Arbeitszimmer"
+          | "Ausgangsfrachten"
+          | "Betriebsbedarf"
+          | "Bewirtungskosten"
+          | "Bezugsnebenkosten"
+          | "Buchführungskosten"
+          | "Büroartikel"
+          | "Bürobedarf"
+          | "Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (abziehbarer Anteil)"
+          | "Fahrten zwischen Wohnung und Betriebsstätte und Familienheimfahrten (nicht abziehbarer Anteil)"
+          | "Fahrtkostenerstatt. Whg./Arbeitsstätte"
+          | "Fortbildung"
+          | "Fremdleistung (Dienstleistung)"
+          | "Garagenmieten"
+          | "Gas, Strom, Wasser"
+          | "Gehälter"
+          | "Geschenke bis 35 Euro"
+          | "Geschenke über 35 Euro"
+          | "Geschäftsessen"
+          | "Gesetzliche Sozialaufwendungen"
+          | "Gewerbesteuer"
+          | "Gewerbesteuer Nachzahlung oder Erstattung"
+          | "Grundsteuer"
+          | "Heizung"
+          | "Kfz-Reparaturen"
+          | "Kfz-Steuern"
+          | "Kfz-Versicherungen"
+          | "Körperschaftsteuer"
+          | "Laufende Kfz-Betriebskosten"
+          | "Leasing"
+          | "Leergut"
+          | "Löhne"
+          | "Miete"
+          | "Mietleasing bewegliche Wirtschaftsgüter für technische Anlagen und Maschinen"
+          | "Nebenkosten des Geldverkehrs"
+          | "Nicht abzugsfähige Bewirtungskosten"
+          | "Porto"
+          | "Rechts- und Beratungskosten"
+          | "Reinigung"
+          | "Reisekosten Arbeitnehmer"
+          | "Reisekosten Arbeitnehmer Fahrtkosten"
+          | "Reisekosten Arbeitnehmer Verpflegungsmehraufwand"
+          | "Reisekosten Arbeitnehmer Übernachtungsaufwand"
+          | "Reisekosten UN Verpfleg.mehraufwand"
+          | "Reisekosten UN Übernachtungsaufwand"
+          | "Reisekosten Unternehmer"
+          | "Reisekosten Unternehmer Fahrtkosten"
+          | "Reparatur/Instandh. Betriebs- u. Gesch."
+          | "Repräsentationskosten"
+          | "Roh-, Hilfs- und Betriebsstoffe"
+          | "Software/EDV (Büroartikel)"
+          | "Sonstige betriebliche Aufwendungen"
+          | "Sonstige Kfz-Kosten"
+          | "Spesen (Reisekosten Unternehmer)"
+          | "Telefon"
+          | "Verkaufsprovisionen"
+          | "Versicherungen"
+          | "Wareneingang"
+          | "Werbekosten"
+          | "Zeitschriften, Bücher"
+          | "Zinsabschlagsteuer"
+          | "Zinsen und ähnliche Aufwendungen"
+          | "Zuwendungen,Spenden steuerl. n. abziehb."
+          | "Erlöse Leergut"
+          | "Private KFZ Nutzung (1% Regel)"
+          | "Private Verwendung von Gegenständen"
+          | "Privatentnahme Waren / Gegenstände"
+          | "Provisionserlöse"
+          | "Sonstige Einnahme (Erlöse)"
+          | "Zinsen und ähnliche Erträge"
+          | "Zuschüsse"
+          | "Privateinlagen"
+          | "Privatentnahmen allgemein"
+          | "Umsatzsteuer Erstattung (nur EÜR)"
+          | "Umsatzsteuer frühere Jahre"
+          | "Umsatzsteuer Vorjahr"
+          | "Umsatzsteuervorauszahlungen"
+          | "Umsatzsteuervorauszahlungen 1/11"
+          | "Umsatzsteuer Erstattung"
+          | "Umsatzsteuer Erstattung frühere Jahre"
+          | "Umsatzsteuervorauszahlung Guthaben"
           | null
         billing?: {
           amount?: number | null
@@ -454,13 +454,13 @@ export class ExpenseVoucherAusgabeBelegService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/expense/vouchers/{id}',
+      method: "PUT",
+      url: "/expense/vouchers/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified voucher was not found`,
         422: `The specified voucher cannot be edited anymore`,
@@ -483,8 +483,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/expense/vouchers/{id}',
+      method: "DELETE",
+      url: "/expense/vouchers/{id}",
       path: {
         id: id,
       },
@@ -509,8 +509,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers/{id}/archive',
+      method: "POST",
+      url: "/expense/vouchers/{id}/archive",
       path: {
         id: id,
       },
@@ -532,8 +532,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers/{id}/unarchive',
+      method: "POST",
+      url: "/expense/vouchers/{id}/unarchive",
       path: {
         id: id,
       },
@@ -555,8 +555,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers/{id}/cancel',
+      method: "POST",
+      url: "/expense/vouchers/{id}/cancel",
       path: {
         id: id,
       },
@@ -581,8 +581,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers/{id}/cancel_with_reverse_entry',
+      method: "POST",
+      url: "/expense/vouchers/{id}/cancel_with_reverse_entry",
       path: {
         id: id,
       },
@@ -612,17 +612,17 @@ export class ExpenseVoucherAusgabeBelegService {
       banking_transaction?: {
         id?: number
       }
-      difference_reason?: 'sonstige' | 'mahnung' | 'teilzahlung' | 'skonto' | 'schmaelerung' | null
+      difference_reason?: "sonstige" | "mahnung" | "teilzahlung" | "skonto" | "schmaelerung" | null
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/expense/vouchers/{id}/pay',
+      method: "POST",
+      url: "/expense/vouchers/{id}/pay",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Voucher is in incorrect state`,
       },
@@ -643,8 +643,8 @@ export class ExpenseVoucherAusgabeBelegService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/expense/vouchers/{id}/pdf',
+      method: "GET",
+      url: "/expense/vouchers/{id}/pdf",
       path: {
         id: id,
       },

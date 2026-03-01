@@ -1,10 +1,10 @@
-import { Mdx } from '@/components/mdx-components'
-import { generatePageMeta } from '@/lib/seo'
-import { absoluteUrl } from '@/lib/utils'
-import '@/styles/mdx.css'
-import { allPages } from 'content-collections'
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { Mdx } from "@/components/mdx-components"
+import { generatePageMeta } from "@/lib/seo"
+import { absoluteUrl } from "@/lib/utils"
+import "@/styles/mdx.css"
+import { allPages } from "content-collections"
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 
 interface PostPageProps {
   params: {
@@ -34,11 +34,11 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     locale,
     title: page.title,
     description: page.description,
-    url: absoluteUrl(page.slug.replace('pages/', '')),
+    url: absoluteUrl(page.slug.replace("pages/", "")),
   })
 }
 
-async function getPageFromParams(params: PostPageProps['params']) {
+async function getPageFromParams(params: PostPageProps["params"]) {
   const { slug, locale } = await params
 
   if (!slug) {
@@ -50,7 +50,7 @@ async function getPageFromParams(params: PostPageProps['params']) {
   }
 
   const page = allPages.find(
-    (post) => post.slugAsParams.replace('pages/', '') === slug && post.locale === locale,
+    (post) => post.slugAsParams.replace("pages/", "") === slug && post.locale === locale,
   )
 
   if (!page) {

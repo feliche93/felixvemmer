@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class IncomePaymentTermZahlungsbedingungenService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -35,11 +35,11 @@ export class IncomePaymentTermZahlungsbedingungenService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/payment_terms',
+      method: "GET",
+      url: "/income/payment_terms",
       query: {
         page: page,
         page_size: pageSize,
@@ -64,8 +64,8 @@ export class IncomePaymentTermZahlungsbedingungenService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/payment_terms/{id}',
+      method: "GET",
+      url: "/income/payment_terms/{id}",
       path: {
         id: id,
       },

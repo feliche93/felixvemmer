@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { OrganizationInvite } from './OrganizationInvite'
+import type { OrganizationInvite } from "./OrganizationInvite"
 export type PaginatedOrganizationInviteList = {
   count?: number
   next?: string | null

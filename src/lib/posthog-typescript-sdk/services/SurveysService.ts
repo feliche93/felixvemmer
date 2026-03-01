@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedSurveyList } from '../models/PaginatedSurveyList'
-import type { PatchedSurveySerializerCreateUpdateOnly } from '../models/PatchedSurveySerializerCreateUpdateOnly'
-import type { Survey } from '../models/Survey'
-import type { SurveySerializerCreateUpdateOnly } from '../models/SurveySerializerCreateUpdateOnly'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedSurveyList } from "../models/PaginatedSurveyList"
+import type { PatchedSurveySerializerCreateUpdateOnly } from "../models/PatchedSurveySerializerCreateUpdateOnly"
+import type { Survey } from "../models/Survey"
+import type { SurveySerializerCreateUpdateOnly } from "../models/SurveySerializerCreateUpdateOnly"
 export class SurveysService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -33,8 +33,8 @@ export class SurveysService {
     offset?: number
   }): CancelablePromise<PaginatedSurveyList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/surveys/',
+      method: "GET",
+      url: "/api/projects/{project_id}/surveys/",
       path: {
         project_id: projectId,
       },
@@ -59,13 +59,13 @@ export class SurveysService {
     requestBody: SurveySerializerCreateUpdateOnly
   }): CancelablePromise<SurveySerializerCreateUpdateOnly> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/surveys/',
+      method: "POST",
+      url: "/api/projects/{project_id}/surveys/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -86,8 +86,8 @@ export class SurveysService {
     projectId: string
   }): CancelablePromise<Survey> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/surveys/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/surveys/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -114,14 +114,14 @@ export class SurveysService {
     requestBody: Survey
   }): CancelablePromise<Survey> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/surveys/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/surveys/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -144,14 +144,14 @@ export class SurveysService {
     requestBody?: PatchedSurveySerializerCreateUpdateOnly
   }): CancelablePromise<SurveySerializerCreateUpdateOnly> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/surveys/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/surveys/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -172,8 +172,8 @@ export class SurveysService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/surveys/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/surveys/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -193,8 +193,8 @@ export class SurveysService {
     projectId: string
   }): CancelablePromise<Survey> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/surveys/responses_count/',
+      method: "GET",
+      url: "/api/projects/{project_id}/surveys/responses_count/",
       path: {
         project_id: projectId,
       },

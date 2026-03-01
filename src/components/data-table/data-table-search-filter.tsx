@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { cn } from '@/lib/utils'
-import { parseAsString, useQueryState } from 'nuqs'
-import { Input } from '../ui/input'
-import { DataTableResetFilter } from './data-table-reset-filter'
+import { parseAsString, useQueryState } from "nuqs"
+import { cn } from "@/lib/utils"
+import { Input } from "../ui/input"
+import { DataTableResetFilter } from "./data-table-reset-filter"
 
 interface SearchFilterProps<T> {
   placeholder: string
@@ -14,7 +14,7 @@ interface SearchFilterProps<T> {
 export function SearchFilter<T>({ placeholder, className, searchParamName }: SearchFilterProps<T>) {
   const [value, setValue] = useQueryState(
     searchParamName,
-    parseAsString.withDefault('').withOptions({
+    parseAsString.withDefault("").withOptions({
       clearOnDefault: true,
       shallow: false,
       throttleMs: 500,
@@ -27,18 +27,18 @@ export function SearchFilter<T>({ placeholder, className, searchParamName }: Sea
   }
 
   function handleReset() {
-    setValue('')
+    setValue("")
   }
 
-  const isFiltered = value !== ''
+  const isFiltered = value !== ""
 
   return (
     <div className="flex items-center gap-2">
       <Input
         placeholder={placeholder}
-        value={value ?? ''}
+        value={value ?? ""}
         onChange={handleChange}
-        className={cn('w-full sm:w-40 lg:w-64', className)}
+        className={cn("w-full sm:w-40 lg:w-64", className)}
       />
       <DataTableResetFilter isFiltered={isFiltered} onClick={handleReset} />
     </div>

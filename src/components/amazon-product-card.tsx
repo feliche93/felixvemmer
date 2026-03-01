@@ -1,10 +1,10 @@
-import { cn } from '@/lib/utils'
-import { StarIcon } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import type { FC } from 'react'
-import { buttonVariants } from './ui/button'
-import { Card } from './ui/card'
+import { StarIcon } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import type { FC } from "react"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "./ui/button"
+import { Card } from "./ui/card"
 
 export interface ProductCard {
   product: {
@@ -54,8 +54,8 @@ export const ProductCard: FC<ProductCard> = ({ product }) => {
                   <StarIcon
                     key={rating}
                     className={cn(
-                      product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
-                      'h-5 w-5 flex-shrink-0',
+                      product.rating > rating ? "text-yellow-400" : "text-gray-200",
+                      "h-5 w-5 flex-shrink-0",
                     )}
                     aria-hidden="true"
                   />
@@ -88,10 +88,10 @@ export const ProductCard: FC<ProductCard> = ({ product }) => {
             href={product.href}
             target="_blank"
             className={buttonVariants({
-              className: 'w-full',
+              className: "w-full",
             })}
           >
-            {product.buttonLabel || 'View on Amazon'}
+            {product.buttonLabel || "View on Amazon"}
           </Link>
         </section>
       </div>

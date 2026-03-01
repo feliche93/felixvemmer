@@ -43,9 +43,16 @@ export const isFormData = (value: any): value is FormData => {
 export const base64 = (str: string): string => {
   try {
     return btoa(str)
-  } catch (err) {
-    // @ts-expect-error
-    return Buffer.from(str).toString("base64")
+  } catch {
+    const buffer = (
+      globalThis as {
+        Buffer?: { from: (input: string) => { toString: (encoding: string) => string } }
+      }
+    ).Buffer
+    if (!buffer) {
+      throw new Error("Base64 encoding is not supported in this environment")
+    }
+    return buffer.from(str).toString("base64")
   }
 }
 

@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 export class PromptsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -13,8 +13,8 @@ export class PromptsService {
    */
   public promptsMyPromptsPartialUpdate(): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/prompts/my_prompts/',
+      method: "PATCH",
+      url: "/api/prompts/my_prompts/",
     })
   }
 }

@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Cohort } from '../models/Cohort'
-import type { PaginatedCohortList } from '../models/PaginatedCohortList'
-import type { PatchedCohort } from '../models/PatchedCohort'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Cohort } from "../models/Cohort"
+import type { PaginatedCohortList } from "../models/PaginatedCohortList"
+import type { PatchedCohort } from "../models/PatchedCohort"
 export class CohortsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class CohortsService {
     offset?: number
   }): CancelablePromise<PaginatedCohortList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/cohorts/',
+      method: "GET",
+      url: "/api/projects/{project_id}/cohorts/",
       path: {
         project_id: projectId,
       },
@@ -58,13 +58,13 @@ export class CohortsService {
     requestBody?: Cohort
   }): CancelablePromise<Cohort> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/cohorts/',
+      method: "POST",
+      url: "/api/projects/{project_id}/cohorts/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -85,8 +85,8 @@ export class CohortsService {
     projectId: string
   }): CancelablePromise<Cohort> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/cohorts/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/cohorts/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -113,14 +113,14 @@ export class CohortsService {
     requestBody?: Cohort
   }): CancelablePromise<Cohort> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/cohorts/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/cohorts/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -143,14 +143,14 @@ export class CohortsService {
     requestBody?: PatchedCohort
   }): CancelablePromise<Cohort> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/cohorts/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/cohorts/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -172,8 +172,8 @@ export class CohortsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/cohorts/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/cohorts/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -201,8 +201,8 @@ export class CohortsService {
     projectId: string
   }): CancelablePromise<Cohort> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/cohorts/{id}/duplicate_as_static_cohort/',
+      method: "GET",
+      url: "/api/projects/{project_id}/cohorts/{id}/duplicate_as_static_cohort/",
       path: {
         id: id,
         project_id: projectId,
@@ -226,11 +226,11 @@ export class CohortsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Cohort> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/cohorts/{id}/persons/',
+      method: "GET",
+      url: "/api/projects/{project_id}/cohorts/{id}/persons/",
       path: {
         id: id,
         project_id: projectId,

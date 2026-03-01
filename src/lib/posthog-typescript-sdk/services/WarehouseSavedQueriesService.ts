@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { DataWarehouseSavedQuery } from '../models/DataWarehouseSavedQuery'
-import type { PaginatedDataWarehouseSavedQueryList } from '../models/PaginatedDataWarehouseSavedQueryList'
-import type { PatchedDataWarehouseSavedQuery } from '../models/PatchedDataWarehouseSavedQuery'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { DataWarehouseSavedQuery } from "../models/DataWarehouseSavedQuery"
+import type { PaginatedDataWarehouseSavedQueryList } from "../models/PaginatedDataWarehouseSavedQueryList"
+import type { PatchedDataWarehouseSavedQuery } from "../models/PatchedDataWarehouseSavedQuery"
 export class WarehouseSavedQueriesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -38,8 +38,8 @@ export class WarehouseSavedQueriesService {
     search?: string
   }): CancelablePromise<PaginatedDataWarehouseSavedQueryList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/warehouse_saved_queries/',
+      method: "GET",
+      url: "/api/projects/{project_id}/warehouse_saved_queries/",
       path: {
         project_id: projectId,
       },
@@ -66,13 +66,13 @@ export class WarehouseSavedQueriesService {
     requestBody: DataWarehouseSavedQuery
   }): CancelablePromise<DataWarehouseSavedQuery> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/warehouse_saved_queries/',
+      method: "POST",
+      url: "/api/projects/{project_id}/warehouse_saved_queries/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -94,8 +94,8 @@ export class WarehouseSavedQueriesService {
     projectId: string
   }): CancelablePromise<DataWarehouseSavedQuery> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/warehouse_saved_queries/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/warehouse_saved_queries/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -123,14 +123,14 @@ export class WarehouseSavedQueriesService {
     requestBody: DataWarehouseSavedQuery
   }): CancelablePromise<DataWarehouseSavedQuery> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/warehouse_saved_queries/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/warehouse_saved_queries/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -154,14 +154,14 @@ export class WarehouseSavedQueriesService {
     requestBody?: PatchedDataWarehouseSavedQuery
   }): CancelablePromise<DataWarehouseSavedQuery> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/warehouse_saved_queries/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/warehouse_saved_queries/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -183,8 +183,8 @@ export class WarehouseSavedQueriesService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/warehouse_saved_queries/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/warehouse_saved_queries/{id}/",
       path: {
         id: id,
         project_id: projectId,

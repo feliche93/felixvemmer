@@ -1,21 +1,21 @@
-import { Link } from '@/app/navigation'
-import { Icons } from '@/components/icons'
-import { Mdx } from '@/components/mdx-components'
-import { PageViews } from '@/components/page-views'
-import { TOC } from '@/components/toc'
-import { Badge } from '@/components/ui/badge'
-import { buttonVariants } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import { generatePageMeta } from '@/lib/seo'
-import { BreadCrumbStructuredData, NewsArticleStructuredData } from '@/lib/structured'
-import { absoluteUrl, cn, createUrl, formatDate } from '@/lib/utils'
-import { FireIcon } from '@heroicons/react/24/outline'
-import { allAuthors, allPosts } from 'content-collections'
-import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
-import Image from 'next/image'
-import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
+import { FireIcon } from "@heroicons/react/24/outline"
+import { allAuthors, allPosts } from "content-collections"
+import type { Metadata } from "next"
+import Image from "next/image"
+import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
+import { Suspense } from "react"
+import { Link } from "@/app/navigation"
+import { Icons } from "@/components/icons"
+import { Mdx } from "@/components/mdx-components"
+import { PageViews } from "@/components/page-views"
+import { TOC } from "@/components/toc"
+import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { generatePageMeta } from "@/lib/seo"
+import { BreadCrumbStructuredData, NewsArticleStructuredData } from "@/lib/structured"
+import { absoluteUrl, cn, createUrl, formatDate } from "@/lib/utils"
 
 export interface PostPageProps {
   params: Promise<{
@@ -24,7 +24,7 @@ export interface PostPageProps {
   }>
 }
 
-export async function getPostFromParams(params: PostPageProps['params']) {
+export async function getPostFromParams(params: PostPageProps["params"]) {
   const { slug, locale } = await params
   const post = allPosts.find((p) => p.slug === slug && p.locale === locale && p.published === true)
 
@@ -45,11 +45,11 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   const searchParams = new URLSearchParams()
 
-  searchParams.set('heading', post.title)
-  searchParams.set('type', 'Blog Post')
-  searchParams.set('mode', 'dark')
+  searchParams.set("heading", post.title)
+  searchParams.set("type", "Blog Post")
+  searchParams.set("mode", "dark")
 
-  const ogUrl = createUrl('/api/og', searchParams)
+  const ogUrl = createUrl("/api/og", searchParams)
 
   return generatePageMeta({
     locale: locale,
@@ -66,7 +66,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const { slug, locale } = await params
 
   const post = await getPostFromParams(params)
-  const t = await getTranslations('blog')
+  const t = await getTranslations("blog")
 
   if (post === undefined) notFound()
 
@@ -77,11 +77,11 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const searchParams = new URLSearchParams()
-  searchParams.set('heading', post.title)
-  searchParams.set('type', 'Blog Post')
-  searchParams.set('mode', 'dark')
+  searchParams.set("heading", post.title)
+  searchParams.set("type", "Blog Post")
+  searchParams.set("mode", "dark")
 
-  const ogUrl = createUrl('/api/og', searchParams)
+  const ogUrl = createUrl("/api/og", searchParams)
 
   return (
     <>
@@ -97,7 +97,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <BreadCrumbStructuredData
         itemListElement={[
           {
-            name: 'Blog',
+            name: "Blog",
             href: absoluteUrl(`/${locale}/blog`),
           },
           {
@@ -166,15 +166,15 @@ export default async function PostPage({ params }: PostPageProps) {
           </article>
           <hr className="my-8" />
           <div className="flex justify-center py-6 lg:py-10">
-            <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
+            <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
               <Icons.chevronLeft className="mr-2 h-4 w-4" />
               See all posts
             </Link>
           </div>
         </div>
         <div className="hidden text-sm lg:block">
-          <div className="-mt-10 sticky top-16 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
-            <TOC toc={post.toc} title={t('tocHeading')} />
+          <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
+            <TOC toc={post.toc} title={t("tocHeading")} />
           </div>
         </div>
       </main>

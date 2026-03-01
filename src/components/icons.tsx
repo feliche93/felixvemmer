@@ -4,7 +4,7 @@ import {
   ClockIcon,
   LightbulbIcon,
   PartyPopperIcon,
-} from 'lucide-react'
+} from "lucide-react"
 
 type IconProps = React.HTMLAttributes<SVGElement>
 

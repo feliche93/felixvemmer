@@ -2,66 +2,67 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from './core/BaseHttpRequest'
-import { FetchHttpRequest } from './core/FetchHttpRequest'
-import type { OpenAPIConfig } from './core/OpenAPI'
-import { ActionsService } from './services/ActionsService'
-import { ActivityLogService } from './services/ActivityLogService'
-import { AnnotationsService } from './services/AnnotationsService'
-import { AppMetricsService } from './services/AppMetricsService'
-import { BatchExportsService } from './services/BatchExportsService'
-import { CohortsService } from './services/CohortsService'
-import { DashboardTemplatesService } from './services/DashboardTemplatesService'
-import { DashboardsService } from './services/DashboardsService'
-import { DataManagementService } from './services/DataManagementService'
-import { DomainsService } from './services/DomainsService'
-import { EarlyAccessFeatureService } from './services/EarlyAccessFeatureService'
-import { EventDefinitionsService } from './services/EventDefinitionsService'
-import { EventsService } from './services/EventsService'
-import { ExperimentsService } from './services/ExperimentsService'
-import { ExplicitMembersService } from './services/ExplicitMembersService'
-import { ExportsService } from './services/ExportsService'
-import { ExternalDataSchemasService } from './services/ExternalDataSchemasService'
-import { ExternalDataSourcesService } from './services/ExternalDataSourcesService'
-import { FeatureFlagsService } from './services/FeatureFlagsService'
-import { FunnelService } from './services/FunnelService'
-import { GroupsService } from './services/GroupsService'
-import { GroupsTypesService } from './services/GroupsTypesService'
-import { HooksService } from './services/HooksService'
-import { IngestionWarningsService } from './services/IngestionWarningsService'
-import { InsightsService } from './services/InsightsService'
-import { IntegrationsService } from './services/IntegrationsService'
-import { InvitesService } from './services/InvitesService'
-import { IsGeneratingDemoDataService } from './services/IsGeneratingDemoDataService'
-import { MembersService } from './services/MembersService'
-import { OrganizationsService } from './services/OrganizationsService'
-import { PersonsService } from './services/PersonsService'
-import { PipelineDestinationsConfigsService } from './services/PipelineDestinationsConfigsService'
-import { PipelineDestinationsService } from './services/PipelineDestinationsService'
-import { PipelineTransformationsConfigsService } from './services/PipelineTransformationsConfigsService'
-import { PipelineTransformationsService } from './services/PipelineTransformationsService'
-import { PluginConfigsService } from './services/PluginConfigsService'
-import { PluginsService } from './services/PluginsService'
-import { ProjectsService } from './services/ProjectsService'
-import { PromptsService } from './services/PromptsService'
-import { PropertyDefinitionsService } from './services/PropertyDefinitionsService'
-import { QueryService } from './services/QueryService'
-import { ResetTokenService } from './services/ResetTokenService'
-import { ResourceAccessService } from './services/ResourceAccessService'
-import { RolesService } from './services/RolesService'
-import { ScheduledChangesService } from './services/ScheduledChangesService'
-import { SearchService } from './services/SearchService'
-import { SessionRecordingPlaylistsService } from './services/SessionRecordingPlaylistsService'
-import { SessionRecordingsService } from './services/SessionRecordingsService'
-import { SubscriptionsService } from './services/SubscriptionsService'
-import { SurveysService } from './services/SurveysService'
-import { TagsService } from './services/TagsService'
-import { TrendService } from './services/TrendService'
-import { UploadedMediaService } from './services/UploadedMediaService'
-import { WarehouseSavedQueriesService } from './services/WarehouseSavedQueriesService'
-import { WarehouseTablesService } from './services/WarehouseTablesService'
-import { WarehouseViewLinkService } from './services/WarehouseViewLinkService'
-import { WarehouseViewLinksService } from './services/WarehouseViewLinksService'
+import type { BaseHttpRequest } from "./core/BaseHttpRequest"
+import { FetchHttpRequest } from "./core/FetchHttpRequest"
+import type { OpenAPIConfig } from "./core/OpenAPI"
+import { ActionsService } from "./services/ActionsService"
+import { ActivityLogService } from "./services/ActivityLogService"
+import { AnnotationsService } from "./services/AnnotationsService"
+import { AppMetricsService } from "./services/AppMetricsService"
+import { BatchExportsService } from "./services/BatchExportsService"
+import { CohortsService } from "./services/CohortsService"
+import { DashboardsService } from "./services/DashboardsService"
+import { DashboardTemplatesService } from "./services/DashboardTemplatesService"
+import { DataManagementService } from "./services/DataManagementService"
+import { DomainsService } from "./services/DomainsService"
+import { EarlyAccessFeatureService } from "./services/EarlyAccessFeatureService"
+import { EventDefinitionsService } from "./services/EventDefinitionsService"
+import { EventsService } from "./services/EventsService"
+import { ExperimentsService } from "./services/ExperimentsService"
+import { ExplicitMembersService } from "./services/ExplicitMembersService"
+import { ExportsService } from "./services/ExportsService"
+import { ExternalDataSchemasService } from "./services/ExternalDataSchemasService"
+import { ExternalDataSourcesService } from "./services/ExternalDataSourcesService"
+import { FeatureFlagsService } from "./services/FeatureFlagsService"
+import { FunnelService } from "./services/FunnelService"
+import { GroupsService } from "./services/GroupsService"
+import { GroupsTypesService } from "./services/GroupsTypesService"
+import { HooksService } from "./services/HooksService"
+import { IngestionWarningsService } from "./services/IngestionWarningsService"
+import { InsightsService } from "./services/InsightsService"
+import { IntegrationsService } from "./services/IntegrationsService"
+import { InvitesService } from "./services/InvitesService"
+import { IsGeneratingDemoDataService } from "./services/IsGeneratingDemoDataService"
+import { MembersService } from "./services/MembersService"
+import { OrganizationsService } from "./services/OrganizationsService"
+import { PersonsService } from "./services/PersonsService"
+import { PipelineDestinationsConfigsService } from "./services/PipelineDestinationsConfigsService"
+import { PipelineDestinationsService } from "./services/PipelineDestinationsService"
+import { PipelineTransformationsConfigsService } from "./services/PipelineTransformationsConfigsService"
+import { PipelineTransformationsService } from "./services/PipelineTransformationsService"
+import { PluginConfigsService } from "./services/PluginConfigsService"
+import { PluginsService } from "./services/PluginsService"
+import { ProjectsService } from "./services/ProjectsService"
+import { PromptsService } from "./services/PromptsService"
+import { PropertyDefinitionsService } from "./services/PropertyDefinitionsService"
+import { QueryService } from "./services/QueryService"
+import { ResetTokenService } from "./services/ResetTokenService"
+import { ResourceAccessService } from "./services/ResourceAccessService"
+import { RolesService } from "./services/RolesService"
+import { ScheduledChangesService } from "./services/ScheduledChangesService"
+import { SearchService } from "./services/SearchService"
+import { SessionRecordingPlaylistsService } from "./services/SessionRecordingPlaylistsService"
+import { SessionRecordingsService } from "./services/SessionRecordingsService"
+import { SubscriptionsService } from "./services/SubscriptionsService"
+import { SurveysService } from "./services/SurveysService"
+import { TagsService } from "./services/TagsService"
+import { TrendService } from "./services/TrendService"
+import { UploadedMediaService } from "./services/UploadedMediaService"
+import { WarehouseSavedQueriesService } from "./services/WarehouseSavedQueriesService"
+import { WarehouseTablesService } from "./services/WarehouseTablesService"
+import { WarehouseViewLinkService } from "./services/WarehouseViewLinkService"
+import { WarehouseViewLinksService } from "./services/WarehouseViewLinksService"
+
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest
 export class client {
   public readonly actions: ActionsService
@@ -127,10 +128,10 @@ export class client {
     HttpRequest: HttpRequestConstructor = FetchHttpRequest,
   ) {
     this.request = new HttpRequest({
-      BASE: config?.BASE ?? '',
-      VERSION: config?.VERSION ?? 'null',
+      BASE: config?.BASE ?? "",
+      VERSION: config?.VERSION ?? "null",
       WITH_CREDENTIALS: config?.WITH_CREDENTIALS ?? false,
-      CREDENTIALS: config?.CREDENTIALS ?? 'include',
+      CREDENTIALS: config?.CREDENTIALS ?? "include",
       TOKEN: config?.TOKEN,
       USERNAME: config?.USERNAME,
       PASSWORD: config?.PASSWORD,

@@ -1,16 +1,16 @@
-import { Link } from '@/app/navigation'
-import { BlogPostGrid } from '@/components/blog-post-grid'
-import { CalCom } from '@/components/cal-com'
-import { PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
-import Testimonials from '@/components/testimonials'
-import { buttonVariants } from '@/components/ui/button'
-import { PageIntro } from '@/components/ui/page-intro'
-import { Skills } from '@/components/ui/skills'
-import { generatePageMeta } from '@/lib/seo'
-import { cn } from '@/lib/utils'
-import type { Metadata } from 'next'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import Image from 'next/image'
+import type { Metadata } from "next"
+import Image from "next/image"
+import { getTranslations, setRequestLocale } from "next-intl/server"
+import { Link } from "@/app/navigation"
+import { BlogPostGrid } from "@/components/blog-post-grid"
+import { CalCom } from "@/components/cal-com"
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/page-header"
+import Testimonials from "@/components/testimonials"
+import { buttonVariants } from "@/components/ui/button"
+import { PageIntro } from "@/components/ui/page-intro"
+import { Skills } from "@/components/ui/skills"
+import { generatePageMeta } from "@/lib/seo"
+import { cn } from "@/lib/utils"
 
 export async function generateMetadata({
   params,
@@ -21,7 +21,7 @@ export async function generateMetadata({
   return generatePageMeta({
     locale,
     url: `/${locale}`,
-    image: '/og.webp',
+    image: "/og.webp",
   })
 }
 
@@ -29,7 +29,7 @@ export default async function IndexPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params
   setRequestLocale(locale)
 
-  const t = await getTranslations('index')
+  const t = await getTranslations("index")
 
   // TODO: Sort by Views
   // let postsWithView = await Promise.all(posts.map(async (post) => {
@@ -60,37 +60,37 @@ export default async function IndexPage({ params }: { params: Promise<{ locale: 
 
           <Image
             className="rounded-full border border-primary-foreground"
-            src={'/logos/felix-vemmer.png'}
+            src={"/logos/felix-vemmer.png"}
             priority={true}
             width={200}
             height={200}
             alt="Felix Vemmer"
           />
 
-          <PageHeaderHeading className="text-center">{t('hero.title')}</PageHeaderHeading>
+          <PageHeaderHeading className="text-center">{t("hero.title")}</PageHeaderHeading>
           <PageHeaderDescription className="text-center">
-            {t('hero.description')}
+            {t("hero.description")}
           </PageHeaderDescription>
           <div className="flex w-full flex-col items-center justify-center gap-4 pt-4 pb-8 sm:w-fit sm:flex-row md:pb-10">
             <Link
               href="/consulting-services"
               className={cn(
                 buttonVariants({
-                  variant: 'default',
-                  size: 'lg',
-                  className: 'w-full',
+                  variant: "default",
+                  size: "lg",
+                  className: "w-full",
                 }),
               )}
             >
-              {t('hero.primaryCTA')}
+              {t("hero.primaryCTA")}
             </Link>
             <Link
-              href={'/blog'}
+              href={"/blog"}
               className={cn(
-                buttonVariants({ variant: 'outline', size: 'lg', className: 'w-full' }),
+                buttonVariants({ variant: "outline", size: "lg", className: "w-full" }),
               )}
             >
-              {t('hero.secondaryCTA')}
+              {t("hero.secondaryCTA")}
             </Link>
           </div>
         </PageHeader>
@@ -101,21 +101,21 @@ export default async function IndexPage({ params }: { params: Promise<{ locale: 
       </div>
 
       {/* Skills */}
-      <PageIntro centered title={t('skills.title')} eyebrow={t('skills.section')}>
-        {t('skills.description')}
+      <PageIntro centered title={t("skills.title")} eyebrow={t("skills.section")}>
+        {t("skills.description")}
       </PageIntro>
       <Skills />
       {/* Latest from blog */}
       <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16 lg:px-8">
-        <PageIntro centered title={t('blog.title')} eyebrow={t('blog.section')} />
+        <PageIntro centered title={t("blog.title")} eyebrow={t("blog.section")} />
         <BlogPostGrid locale={locale} limit={6} />
       </div>
       {/* <FeatureGrid /> */}
       <Testimonials>
-        <PageIntro centered title={t('testimonials.title')} eyebrow={t('testimonials.section')} />
+        <PageIntro centered title={t("testimonials.title")} eyebrow={t("testimonials.section")} />
       </Testimonials>
       <div>
-        <PageIntro centered title={t('bookAMeeeting.title')} eyebrow={t('bookAMeeeting.section')} />
+        <PageIntro centered title={t("bookAMeeeting.title")} eyebrow={t("bookAMeeeting.section")} />
         <CalCom />
       </div>
     </>

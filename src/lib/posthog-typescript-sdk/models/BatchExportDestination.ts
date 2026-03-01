@@ -9,7 +9,7 @@ export type BatchExportDestination = {
   /**
    * A choice of supported BatchExportDestination types.
    */
-  type: 'S3' | 'Snowflake' | 'Postgres' | 'Redshift' | 'BigQuery' | 'NoOp'
+  type: "S3" | "Snowflake" | "Postgres" | "Redshift" | "BigQuery" | "NoOp"
   /**
    * A JSON field to store all configuration parameters required to access a BatchExportDestination.
    */

@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Group } from '../models/Group'
-import type { PaginatedGroupList } from '../models/PaginatedGroupList'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Group } from "../models/Group"
+import type { PaginatedGroupList } from "../models/PaginatedGroupList"
 export class GroupsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -37,8 +37,8 @@ export class GroupsService {
     cursor?: string
   }): CancelablePromise<PaginatedGroupList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/groups/',
+      method: "GET",
+      url: "/api/projects/{project_id}/groups/",
       path: {
         project_id: projectId,
       },
@@ -72,8 +72,8 @@ export class GroupsService {
     projectId: string
   }): CancelablePromise<Group> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/groups/find/',
+      method: "GET",
+      url: "/api/projects/{project_id}/groups/find/",
       path: {
         project_id: projectId,
       },
@@ -96,8 +96,8 @@ export class GroupsService {
     projectId: string
   }): CancelablePromise<Group> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/groups/property_definitions/',
+      method: "GET",
+      url: "/api/projects/{project_id}/groups/property_definitions/",
       path: {
         project_id: projectId,
       },
@@ -126,8 +126,8 @@ export class GroupsService {
     projectId: string
   }): CancelablePromise<Group> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/groups/property_values/',
+      method: "GET",
+      url: "/api/projects/{project_id}/groups/property_values/",
       path: {
         project_id: projectId,
       },
@@ -160,8 +160,8 @@ export class GroupsService {
     projectId: string
   }): CancelablePromise<Group> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/groups/related/',
+      method: "GET",
+      url: "/api/projects/{project_id}/groups/related/",
       path: {
         project_id: projectId,
       },

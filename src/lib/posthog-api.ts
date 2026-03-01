@@ -1,13 +1,13 @@
-import { env } from '@/server'
-import { unstable_cache } from 'next/cache'
-import { client } from './posthog-typescript-sdk'
+import { unstable_cache } from "next/cache"
+import { env } from "@/server"
+import { client } from "./posthog-typescript-sdk"
 
 const token = env.POSTHOG_PERSONAL_API_KEY
 const projectId = env.POSTHOG_PROJECT_ID
 
 const posthogApi = new client({
   TOKEN: token,
-  BASE: 'https://eu.posthog.com',
+  BASE: "https://eu.posthog.com",
 })
 
 export const getPostHogInsightById = unstable_cache(
@@ -15,12 +15,12 @@ export const getPostHogInsightById = unstable_cache(
     const result = await posthogApi.insights.insightsRetrieve({
       projectId,
       id,
-      format: 'json',
+      format: "json",
       refresh: true,
     })
     return result
   },
-  ['getPostHogInsightById'],
+  ["getPostHogInsightById"],
   { revalidate: 3600 },
 ) // revalidate every 1 hours
 
@@ -31,12 +31,12 @@ export const getTotalPageViewsByPath = unstable_cache(
         projectId,
         refresh: true,
         id: 99083,
-        format: 'json',
+        format: "json",
       })
 
       // console.log({ insight })
 
-      let toalPageViews: number | undefined = undefined
+      let toalPageViews: number | undefined
 
       if (!insight?.result?.length) return toalPageViews
 
@@ -46,7 +46,7 @@ export const getTotalPageViewsByPath = unstable_cache(
       }>
 
       toalPageViews = result.find((item) =>
-        item.label.includes(path.replace('/en', '')),
+        item.label.includes(path.replace("/en", "")),
       )?.aggregated_value
 
       return toalPageViews
@@ -55,6 +55,6 @@ export const getTotalPageViewsByPath = unstable_cache(
       return 0
     }
   },
-  ['getTotalPageViewsByPath'],
+  ["getTotalPageViewsByPath"],
   { revalidate: 3600 },
 ) // revalidate every 1 hours

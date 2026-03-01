@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserBasic } from './UserBasic'
+import type { UserBasic } from "./UserBasic"
 /**
  * Serializer mixin that resolves appropriate response for tags depending on license.
  */
@@ -15,7 +15,7 @@ export type PatchedDashboard = {
   readonly created_by?: UserBasic
   readonly is_shared?: boolean
   deleted?: boolean
-  readonly creation_mode?: 'default' | 'template' | 'duplicate'
+  readonly creation_mode?: "default" | "template" | "duplicate"
   use_template?: string
   use_dashboard?: number | null
   delete_insights?: boolean

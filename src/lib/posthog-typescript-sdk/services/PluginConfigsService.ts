@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedPluginConfigList } from '../models/PaginatedPluginConfigList'
-import type { PaginatedPluginLogEntryList } from '../models/PaginatedPluginLogEntryList'
-import type { PatchedPluginConfig } from '../models/PatchedPluginConfig'
-import type { PluginConfig } from '../models/PluginConfig'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedPluginConfigList } from "../models/PaginatedPluginConfigList"
+import type { PaginatedPluginLogEntryList } from "../models/PaginatedPluginLogEntryList"
+import type { PatchedPluginConfig } from "../models/PatchedPluginConfig"
+import type { PluginConfig } from "../models/PluginConfig"
 export class PluginConfigsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -33,8 +33,8 @@ export class PluginConfigsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginConfigList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/plugin_configs/',
+      method: "GET",
+      url: "/api/projects/{project_id}/plugin_configs/",
       path: {
         project_id: projectId,
       },
@@ -59,13 +59,13 @@ export class PluginConfigsService {
     requestBody: PluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/plugin_configs/',
+      method: "POST",
+      url: "/api/projects/{project_id}/plugin_configs/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -93,8 +93,8 @@ export class PluginConfigsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginLogEntryList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/plugin_configs/{parent_lookup_plugin_config_id}/logs/',
+      method: "GET",
+      url: "/api/projects/{project_id}/plugin_configs/{parent_lookup_plugin_config_id}/logs/",
       path: {
         parent_lookup_plugin_config_id: parentLookupPluginConfigId,
         project_id: projectId,
@@ -123,8 +123,8 @@ export class PluginConfigsService {
     projectId: string
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/plugin_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -151,14 +151,14 @@ export class PluginConfigsService {
     requestBody: PluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/plugin_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -181,14 +181,14 @@ export class PluginConfigsService {
     requestBody?: PatchedPluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/plugin_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -209,8 +209,8 @@ export class PluginConfigsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/plugin_configs/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/plugin_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -235,8 +235,8 @@ export class PluginConfigsService {
     projectId: string
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/plugin_configs/{id}/frontend/',
+      method: "GET",
+      url: "/api/projects/{project_id}/plugin_configs/{id}/frontend/",
       path: {
         id: id,
         project_id: projectId,
@@ -263,14 +263,14 @@ export class PluginConfigsService {
     requestBody: PluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/plugin_configs/{id}/job/',
+      method: "POST",
+      url: "/api/projects/{project_id}/plugin_configs/{id}/job/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -288,13 +288,13 @@ export class PluginConfigsService {
     requestBody?: PatchedPluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/plugin_configs/rearrange/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/plugin_configs/rearrange/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

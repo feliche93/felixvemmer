@@ -1,5 +1,5 @@
-import Script from 'next/script'
-import type { FC } from 'react'
+import Script from "next/script"
+import type { FC } from "react"
 
 export interface IframeProps {
   src: string
@@ -11,11 +11,11 @@ export const Iframe: FC<IframeProps> = ({ src, className }) => {
     <div
       className={className}
       style={{
-        position: 'relative',
-        paddingBottom: '56.25%',
+        position: "relative",
+        paddingBottom: "56.25%",
         height: 0,
-        overflow: 'hidden',
-        maxWidth: '100%',
+        overflow: "hidden",
+        maxWidth: "100%",
       }}
     >
       <Script id="iframeContainer" strategy="afterInteractive">

@@ -1,17 +1,17 @@
-import { siteConfig } from '@/config/site'
-import type { Metadata } from 'next'
-import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
-import type { Twitter } from 'next/dist/lib/metadata/types/twitter-types'
-import type { StaticImageData } from 'next/image'
+import type { Metadata } from "next"
+import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types"
+import type { Twitter } from "next/dist/lib/metadata/types/twitter-types"
+import type { StaticImageData } from "next/image"
+import { siteConfig } from "@/config/site"
 
-export const title = 'Freelance Full-Stack Developer and Indiepreneur based in Berlin'
+export const title = "Freelance Full-Stack Developer and Indiepreneur based in Berlin"
 export const description = `Explore my insights on full-stack development and discover the freelance services I offer, directly from Berlin.`
 
 export const rootOpenGraph: OpenGraph = {
-  locale: 'en',
-  type: 'website',
+  locale: "en",
+  type: "website",
   url: siteConfig.url,
-  siteName: 'Felix Vemmer',
+  siteName: "Felix Vemmer",
   title,
   description,
 }
@@ -19,18 +19,18 @@ export const rootOpenGraph: OpenGraph = {
 export const rootTwitter: Twitter = {
   title,
   description,
-  card: 'summary_large_image',
-  site: '@felixvemmer',
+  card: "summary_large_image",
+  site: "@felixvemmer",
 }
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title,
   description,
-  applicationName: 'Felix Vemmer',
+  applicationName: "Felix Vemmer",
   openGraph: rootOpenGraph,
   twitter: rootTwitter,
-  robots: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
+  robots: "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
 }
 
 function getImage(image?: StaticImageData | string, alt?: string) {
@@ -38,7 +38,7 @@ function getImage(image?: StaticImageData | string, alt?: string) {
     return null
   }
 
-  if (typeof image === 'string') {
+  if (typeof image === "string") {
     return {
       url: image,
       alt,
@@ -54,7 +54,7 @@ function getImage(image?: StaticImageData | string, alt?: string) {
 }
 
 export function generatePageMeta({
-  locale = 'en',
+  locale = "en",
   title = rootOpenGraph.title as string,
   description = rootOpenGraph.description as string,
   url,
@@ -62,19 +62,19 @@ export function generatePageMeta({
   image_alt,
   publishedAt,
   updatedAt,
-  author = 'Felix Vemmer',
+  author = "Felix Vemmer",
   siteName = rootOpenGraph.siteName,
   feed,
   keywords = [
-    'Felix Vemmer',
-    'Freelance Software Engineer',
-    'Full-stack developer',
-    'Python',
-    'TypeScript',
-    'Next.js',
-    'React',
-    'Indiepreneur',
-    'Tech Stack',
+    "Felix Vemmer",
+    "Freelance Software Engineer",
+    "Full-stack developer",
+    "Python",
+    "TypeScript",
+    "Next.js",
+    "React",
+    "Indiepreneur",
+    "Tech Stack",
   ],
 }: {
   locale?: string
@@ -116,12 +116,12 @@ export function generatePageMeta({
   if (publishedAt && author) {
     metadata.openGraph = {
       ...metadata.openGraph,
-      type: 'article',
+      type: "article",
       publishedTime: publishedAt,
       modifiedTime: updatedAt ?? publishedAt,
       authors: [author],
       section: siteName,
-      tags: keywords.join(', '),
+      tags: keywords.join(", "),
     }
     metadata.creator = author
   }
@@ -132,28 +132,34 @@ export function generatePageMeta({
     width: 1200,
     height: 630,
     alt: title,
-    type: 'image/jpeg',
+    type: "image/jpeg",
   }
 
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  metadata.openGraph!.images = img ? [img] : [screenshot]
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  metadata.twitter!.images = img ? [img] : [screenshot]
+  metadata.openGraph = {
+    ...(metadata.openGraph ?? {}),
+    images: img ? [img] : [screenshot],
+  } as OpenGraph
+  metadata.twitter = {
+    ...(metadata.twitter ?? {}),
+    images: img ? [img] : [screenshot],
+  } as Twitter
 
   if (siteName) {
     metadata.applicationName = siteName
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    metadata.openGraph!.siteName = siteName
+    metadata.openGraph = {
+      ...(metadata.openGraph ?? {}),
+      siteName,
+    } as OpenGraph
   }
 
   if (feed) {
-    if (!metadata.alternates?.types) {
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      metadata.alternates!.types = {}
+    metadata.alternates = {
+      ...(metadata.alternates ?? {}),
+      types: {
+        ...(metadata.alternates?.types ?? {}),
+        "application/rss+xml": feed,
+      },
     }
-
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    metadata.alternates!.types['application/rss+xml'] = feed
   }
 
   return metadata

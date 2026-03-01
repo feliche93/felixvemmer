@@ -1,9 +1,9 @@
-import { env } from '@/server'
-import { Client, Pool, neon } from '@neondatabase/serverless'
-import { type SQL, asc, count, desc } from 'drizzle-orm'
-import { type NeonHttpDatabase, drizzle as drizzleHttp } from 'drizzle-orm/neon-http'
-import { drizzle as drizzleWebsocket } from 'drizzle-orm/neon-serverless'
-import type { PgColumn, PgSelect } from 'drizzle-orm/pg-core'
+import { Client, neon, Pool } from "@neondatabase/serverless"
+import { asc, count, desc, type SQL } from "drizzle-orm"
+import { drizzle as drizzleHttp, type NeonHttpDatabase } from "drizzle-orm/neon-http"
+import { drizzle as drizzleWebsocket } from "drizzle-orm/neon-serverless"
+import type { PgColumn, PgSelect } from "drizzle-orm/pg-core"
+import { env } from "@/server"
 
 const pool = new Pool({ connectionString: env.DATABASE_URL })
 
@@ -50,10 +50,12 @@ export function createWebSocketDbClient({
   }
 }
 
-export const getFirstOrThrow = <T extends any[]>(values: T): T[number] => {
-  if (values.length !== 1) throw new Error('Found non unique or inexistent value')
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  return values[0]!
+export const getFirstOrThrow = <T extends unknown[]>(values: T): T[number] => {
+  const first = values[0]
+  if (values.length !== 1 || first === undefined) {
+    throw new Error("Found non unique or inexistent value")
+  }
+  return first as T[number]
 }
 export async function withPagination<T extends PgSelect>(
   db: NeonHttpDatabase<Record<string, never>>,
@@ -64,7 +66,7 @@ export async function withPagination<T extends PgSelect>(
   const offset = (page - 1) * perPage
 
   // First, create a subquery for counting
-  const countSubQuery = qb.as('count_subquery')
+  const countSubQuery = qb.as("count_subquery")
 
   // Run count query and data query in parallel
   const [totalRowsResult, data] = await db.batch([
@@ -93,18 +95,18 @@ export async function withPagination<T extends PgSelect>(
 export function withOrderBy<T extends PgSelect>(
   qb: T,
   {
-    order = 'asc',
+    order = "asc",
     orderBy,
     sortMap,
     nullsLast = true,
   }: {
-    order?: 'asc' | 'desc'
+    order?: "asc" | "desc"
     orderBy?: string
-    sortMap: Record<string, PgColumn | SQL | SQL.Aliased> & Record<'default', PgColumn | SQL>
+    sortMap: Record<string, PgColumn | SQL | SQL.Aliased> & Record<"default", PgColumn | SQL>
     nullsLast?: boolean
   },
 ) {
-  const sortOrder = order === 'asc' ? asc : desc
+  const sortOrder = order === "asc" ? asc : desc
   const orderBySql = orderBy ? sortMap[orderBy] || sortMap.default : sortMap.default
 
   return qb.orderBy(sortOrder(orderBySql))
@@ -123,9 +125,9 @@ export function withTableFeatures<T extends PgSelect>(
   }: {
     page: number
     perPage: number
-    order?: 'asc' | 'desc' | null
+    order?: "asc" | "desc" | null
     orderBy?: string | null
-    sortMap: Record<string, PgColumn | SQL | SQL.Aliased> & Record<'default', PgColumn | SQL>
+    sortMap: Record<string, PgColumn | SQL | SQL.Aliased> & Record<"default", PgColumn | SQL>
     nullsLast?: boolean
   },
 ) {

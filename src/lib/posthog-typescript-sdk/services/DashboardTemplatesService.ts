@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { DashboardTemplate } from '../models/DashboardTemplate'
-import type { PaginatedDashboardTemplateList } from '../models/PaginatedDashboardTemplateList'
-import type { PatchedDashboardTemplate } from '../models/PatchedDashboardTemplate'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { DashboardTemplate } from "../models/DashboardTemplate"
+import type { PaginatedDashboardTemplateList } from "../models/PaginatedDashboardTemplateList"
+import type { PatchedDashboardTemplate } from "../models/PatchedDashboardTemplate"
 export class DashboardTemplatesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class DashboardTemplatesService {
     offset?: number
   }): CancelablePromise<PaginatedDashboardTemplateList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/dashboard_templates/',
+      method: "GET",
+      url: "/api/projects/{project_id}/dashboard_templates/",
       path: {
         project_id: projectId,
       },
@@ -58,13 +58,13 @@ export class DashboardTemplatesService {
     requestBody?: DashboardTemplate
   }): CancelablePromise<DashboardTemplate> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/dashboard_templates/',
+      method: "POST",
+      url: "/api/projects/{project_id}/dashboard_templates/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -82,8 +82,8 @@ export class DashboardTemplatesService {
     projectId: string
   }): CancelablePromise<DashboardTemplate> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/dashboard_templates/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/dashboard_templates/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -107,14 +107,14 @@ export class DashboardTemplatesService {
     requestBody?: DashboardTemplate
   }): CancelablePromise<DashboardTemplate> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/dashboard_templates/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/dashboard_templates/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -134,14 +134,14 @@ export class DashboardTemplatesService {
     requestBody?: PatchedDashboardTemplate
   }): CancelablePromise<DashboardTemplate> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/dashboard_templates/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/dashboard_templates/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -160,8 +160,8 @@ export class DashboardTemplatesService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/dashboard_templates/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/dashboard_templates/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -184,8 +184,8 @@ export class DashboardTemplatesService {
     projectId: string
   }): CancelablePromise<DashboardTemplate> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/dashboard_templates/json_schema/',
+      method: "GET",
+      url: "/api/projects/{project_id}/dashboard_templates/json_schema/",
       path: {
         project_id: projectId,
       },

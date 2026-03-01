@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 export class QueryService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -41,8 +41,8 @@ export class QueryService {
     query?: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/query/',
+      method: "POST",
+      url: "/api/projects/{project_id}/query/",
       path: {
         project_id: projectId,
       },
@@ -69,8 +69,8 @@ export class QueryService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/query/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/query/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -93,8 +93,8 @@ export class QueryService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/query/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/query/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -114,8 +114,8 @@ export class QueryService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/query/draft_sql/',
+      method: "GET",
+      url: "/api/projects/{project_id}/query/draft_sql/",
       path: {
         project_id: projectId,
       },

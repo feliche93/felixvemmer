@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { GenericInsights } from './GenericInsights'
+import type { GenericInsights } from "./GenericInsights"
 export type TrendResult = {
   /**
    * The requested counts.

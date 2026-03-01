@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EarlyAccessFeature } from './EarlyAccessFeature'
+import type { EarlyAccessFeature } from "./EarlyAccessFeature"
 export type PaginatedEarlyAccessFeatureList = {
   count?: number
   next?: string | null

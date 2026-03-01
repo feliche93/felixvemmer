@@ -8,8 +8,8 @@ export type PluginLogEntry = {
   plugin_id: number
   plugin_config_id: number
   timestamp: string
-  source: 'SYSTEM' | 'PLUGIN' | 'CONSOLE'
-  type: 'DEBUG' | 'LOG' | 'INFO' | 'WARN' | 'ERROR'
+  source: "SYSTEM" | "PLUGIN" | "CONSOLE"
+  type: "DEBUG" | "LOG" | "INFO" | "WARN" | "ERROR"
   message: string
   instance_id: string
 }

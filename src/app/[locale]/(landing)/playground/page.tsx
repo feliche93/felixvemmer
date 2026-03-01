@@ -1,6 +1,6 @@
-import ContentTeaser from '@/components/content-teaser'
-import { headers } from 'next/headers'
-import { userAgent } from 'next/server'
+import { headers } from "next/headers"
+import { userAgent } from "next/server"
+import ContentTeaser from "@/components/content-teaser"
 
 export default async function PlaygroundPage() {
   const headersList = await headers()

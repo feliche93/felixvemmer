@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { FeatureFlag } from './FeatureFlag'
+import type { FeatureFlag } from "./FeatureFlag"
 export type PaginatedFeatureFlagList = {
   count?: number
   next?: string | null

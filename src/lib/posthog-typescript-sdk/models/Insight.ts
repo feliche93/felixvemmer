@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { DashboardTileBasic } from './DashboardTileBasic'
-import type { UserBasic } from './UserBasic'
+import type { DashboardTileBasic } from "./DashboardTileBasic"
+import type { UserBasic } from "./UserBasic"
 /**
  * Simplified serializer to speed response times when loading large amounts of objects.
  */

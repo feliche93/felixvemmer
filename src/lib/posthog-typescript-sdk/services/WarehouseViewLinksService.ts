@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedViewLinkList } from '../models/PaginatedViewLinkList'
-import type { PatchedViewLink } from '../models/PatchedViewLink'
-import type { ViewLink } from '../models/ViewLink'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedViewLinkList } from "../models/PaginatedViewLinkList"
+import type { PatchedViewLink } from "../models/PatchedViewLink"
+import type { ViewLink } from "../models/ViewLink"
 export class WarehouseViewLinksService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -38,8 +38,8 @@ export class WarehouseViewLinksService {
     search?: string
   }): CancelablePromise<PaginatedViewLinkList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/warehouse_view_links/',
+      method: "GET",
+      url: "/api/projects/{project_id}/warehouse_view_links/",
       path: {
         project_id: projectId,
       },
@@ -66,13 +66,13 @@ export class WarehouseViewLinksService {
     requestBody: ViewLink
   }): CancelablePromise<ViewLink> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/warehouse_view_links/',
+      method: "POST",
+      url: "/api/projects/{project_id}/warehouse_view_links/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -94,8 +94,8 @@ export class WarehouseViewLinksService {
     projectId: string
   }): CancelablePromise<ViewLink> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/warehouse_view_links/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/warehouse_view_links/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -123,14 +123,14 @@ export class WarehouseViewLinksService {
     requestBody: ViewLink
   }): CancelablePromise<ViewLink> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/warehouse_view_links/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/warehouse_view_links/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -154,14 +154,14 @@ export class WarehouseViewLinksService {
     requestBody?: PatchedViewLink
   }): CancelablePromise<ViewLink> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/warehouse_view_links/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/warehouse_view_links/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -183,8 +183,8 @@ export class WarehouseViewLinksService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/warehouse_view_links/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/warehouse_view_links/{id}/",
       path: {
         id: id,
         project_id: projectId,

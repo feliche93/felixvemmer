@@ -4,7 +4,7 @@
 /* eslint-disable */
 export type PatchedPlugin = {
   readonly id?: number
-  plugin_type?: 'local' | 'custom' | 'repository' | 'source' | '' | null
+  plugin_type?: "local" | "custom" | "repository" | "source" | "" | null
   name?: string | null
   description?: string | null
   readonly url?: string | null

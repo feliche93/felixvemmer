@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class UserBenutzerService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -35,11 +35,11 @@ export class UserBenutzerService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/users',
+      method: "GET",
+      url: "/users",
       query: {
         page: page,
         page_size: pageSize,
@@ -64,8 +64,8 @@ export class UserBenutzerService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/users/{id}',
+      method: "GET",
+      url: "/users/{id}",
       path: {
         id: id,
       },

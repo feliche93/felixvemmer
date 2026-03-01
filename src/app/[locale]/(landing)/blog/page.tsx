@@ -1,10 +1,10 @@
-import { BlogPostGrid } from '@/components/blog-post-grid'
-import { generatePageMeta } from '@/lib/seo'
-import { BreadCrumbStructuredData } from '@/lib/structured'
-import { absoluteUrl } from '@/lib/utils'
-import type { Metadata } from 'next'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { locales } from '../../../../../i18n'
+import type { Metadata } from "next"
+import { getTranslations, setRequestLocale } from "next-intl/server"
+import { BlogPostGrid } from "@/components/blog-post-grid"
+import { generatePageMeta } from "@/lib/seo"
+import { BreadCrumbStructuredData } from "@/lib/structured"
+import { absoluteUrl } from "@/lib/utils"
+import { locales } from "../../../../../i18n"
 
 export async function generateMetadata({
   params,
@@ -16,14 +16,14 @@ export async function generateMetadata({
   const { locale } = await params
   return generatePageMeta({
     locale,
-    title: 'Blog',
+    title: "Blog",
     url: absoluteUrl(`/${locale}/blog`),
   })
 }
 
 export async function generateStaticParams() {
   const params = locales.map((locale) => ({
-    slug: 'blog',
+    slug: "blog",
     locale,
   }))
 
@@ -32,15 +32,15 @@ export async function generateStaticParams() {
 
 export default async function BlogPage({ params }: { params: { locale: string } }) {
   const { locale } = await params
-  setRequestLocale(locale || 'en')
-  const t = await getTranslations('blog')
+  setRequestLocale(locale || "en")
+  const t = await getTranslations("blog")
 
   return (
     <>
       <BreadCrumbStructuredData
         itemListElement={[
           {
-            name: 'Blog',
+            name: "Blog",
             href: absoluteUrl(`/${locale}/blog`),
           },
         ]}
@@ -50,9 +50,9 @@ export default async function BlogPage({ params }: { params: { locale: string } 
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-bold text-3xl text-primary tracking-tight sm:text-4xl">
-              {t('title')}
+              {t("title")}
             </h2>
-            <p className="mt-2 text-base-content text-lg leading-8">{t('subtitle')}</p>
+            <p className="mt-2 text-base-content text-lg leading-8">{t("subtitle")}</p>
           </div>
           <BlogPostGrid locale={locale} />
         </div>

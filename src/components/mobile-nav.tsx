@@ -1,23 +1,22 @@
-'use client'
+"use client"
 
-import Link, { type LinkProps } from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
-import * as React from 'react'
-
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { navigationConfig } from '@/config/navigation'
-import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
-import { MenuIcon } from 'lucide-react'
-import Image from 'next/image'
+import { MenuIcon } from "lucide-react"
+import Image from "next/image"
+import Link, { type LinkProps } from "next/link"
+import { useParams, useRouter } from "next/navigation"
+import * as React from "react"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { navigationConfig } from "@/config/navigation"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false)
   const params = useParams()
 
-  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
+  const locale = typeof params?.locale === "string" ? params?.locale : "en"
   // return <pre>{JSON.stringify(params, null, 2)}</pre>
 
   return (
@@ -34,7 +33,7 @@ export function MobileNav() {
       <SheetContent side="left" className="pr-0">
         <MobileLink href="/" className="flex items-center" onOpenChange={setOpen}>
           <Image
-            src={'/logos/felix-vemmer.png'}
+            src={"/logos/felix-vemmer.png"}
             width={40}
             height={40}
             alt="Felix Vemmer"

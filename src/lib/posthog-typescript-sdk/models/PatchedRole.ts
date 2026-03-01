@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserBasic } from './UserBasic'
+import type { UserBasic } from "./UserBasic"
 export type PatchedRole = {
   readonly id?: string
   name?: string

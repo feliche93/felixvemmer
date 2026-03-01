@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { pageParser, perPageParser } from '@/search-params/table'
-import { useQueryState } from 'nuqs'
+import { useQueryState } from "nuqs"
+import { pageParser, perPageParser } from "@/search-params/table"
 
 export function usePerPage({
   scroll = false,
@@ -14,7 +14,7 @@ export function usePerPage({
   clearOnDefault?: boolean
 } = {}) {
   return useQueryState(
-    'perPage',
+    "perPage",
     perPageParser({
       defaultPerPage,
       clearOnDefault,
@@ -33,7 +33,7 @@ export function usePage({
   clearOnDefault?: boolean
 } = {}) {
   return useQueryState(
-    'page',
+    "page",
     pageParser({
       defaultPage,
       clearOnDefault,

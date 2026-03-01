@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class BankingBankConnectionBankverbindungService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -35,11 +35,11 @@ export class BankingBankConnectionBankverbindungService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/banking/bank_connections',
+      method: "GET",
+      url: "/banking/bank_connections",
       query: {
         page: page,
         page_size: pageSize,
@@ -64,8 +64,8 @@ export class BankingBankConnectionBankverbindungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/banking/bank_connections/{id}',
+      method: "GET",
+      url: "/banking/bank_connections/{id}",
       path: {
         id: id,
       },

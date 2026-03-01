@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { FilterAction } from './FilterAction'
-import type { FilterEvent } from './FilterEvent'
-import type { FunnelExclusion } from './FunnelExclusion'
-import type { Property } from './Property'
+import type { FilterAction } from "./FilterAction"
+import type { FilterEvent } from "./FilterEvent"
+import type { FunnelExclusion } from "./FunnelExclusion"
+import type { Property } from "./Property"
 export type Funnel = {
   /**
    * Events to filter on. One of `events` or `actions` is required.
@@ -41,7 +41,7 @@ export type Funnel = {
   /**
    * Type of property to break down on.
    */
-  breakdown_type?: 'event' | 'person' | 'cohort' | 'group' | 'session' | 'hogql'
+  breakdown_type?: "event" | "person" | "cohort" | "group" | "session" | "hogql"
   /**
    * Funnel window size. Set in combination with funnel_window_interval, so defaults to 'days'.
    */
@@ -49,20 +49,20 @@ export type Funnel = {
   /**
    * The type of interval. Used in combination with `funnel_window_intervals`.
    */
-  funnel_window_interval_type?: 'DAY' | 'SECOND' | 'MINUTE' | 'HOUR' | 'WEEK' | 'MONTH'
+  funnel_window_interval_type?: "DAY" | "SECOND" | "MINUTE" | "HOUR" | "WEEK" | "MONTH"
   /**
    * The visualisation type.
    * - `steps` Track instances progress between steps of the funnel
    * - `trends` Track how this funnel's conversion rate is trending over time.
    * - `time_to_convert` Track how long it takes for instances to convert
    */
-  funnel_viz_type?: 'trends' | 'time_to_convert' | 'steps'
+  funnel_viz_type?: "trends" | "time_to_convert" | "steps"
   /**
    * - `ordered` - Step B must happen after Step A, but any number events can happen between A and B.
    * - `strict` - Step B must happen directly after Step A without any events in between.
    * - `unordered` - Steps can be completed in any sequence.
    */
-  funnel_order_type?: 'strict' | 'unordered' | 'ordered'
+  funnel_order_type?: "strict" | "unordered" | "ordered"
   /**
    * Exclude users/groups that completed the specified event between two specific steps. Note that these users/groups will be completely excluded from the entire funnel.
    */

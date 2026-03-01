@@ -1,21 +1,21 @@
-'use client'
-import { env } from '@/client'
+"use client"
 // @ts-expect-error
-import cookieCutter from 'cookie-cutter'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import cookieCutter from "cookie-cutter"
+import posthog from "posthog-js"
+import { PostHogProvider } from "posthog-js/react"
+import { env } from "@/client"
 
 const posthogKey = env.NEXT_PUBLIC_POSTHOG_KEY
-if (typeof window !== 'undefined') {
-  const flags = cookieCutter.get('bootstrapData')
+if (typeof window !== "undefined") {
+  const flags = cookieCutter.get("bootstrapData")
   let bootstrapData = {}
   if (flags) {
     bootstrapData = JSON.parse(flags)
   }
 
   posthog.init(posthogKey, {
-    api_host: '/ingest',
-    ui_host: 'https://eu.i.posthog.com',
+    api_host: "/ingest",
+    ui_host: "https://eu.i.posthog.com",
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
     bootstrap: bootstrapData,
   })

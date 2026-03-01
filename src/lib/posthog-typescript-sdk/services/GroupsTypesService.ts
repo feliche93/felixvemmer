@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { GroupType } from '../models/GroupType'
-import type { PatchedGroupType } from '../models/PatchedGroupType'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { GroupType } from "../models/GroupType"
+import type { PatchedGroupType } from "../models/PatchedGroupType"
 export class GroupsTypesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -21,8 +21,8 @@ export class GroupsTypesService {
     projectId: string
   }): CancelablePromise<Array<GroupType>> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/groups_types/',
+      method: "GET",
+      url: "/api/projects/{project_id}/groups_types/",
       path: {
         project_id: projectId,
       },
@@ -43,13 +43,13 @@ export class GroupsTypesService {
     requestBody?: PatchedGroupType
   }): CancelablePromise<GroupType> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/groups_types/update_metadata/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/groups_types/update_metadata/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

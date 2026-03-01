@@ -1,7 +1,5 @@
-import type { DataTableFilterOption, Option } from '@/types'
-import { CheckIcon } from '@radix-ui/react-icons'
-import type { Column } from '@tanstack/react-table'
-
+import { CheckIcon } from "@radix-ui/react-icons"
+import type { Column } from "@tanstack/react-table"
 import {
   Command,
   CommandEmpty,
@@ -10,8 +8,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command'
-import { cn } from '@/lib/utils'
+} from "@/components/ui/command"
+import { cn } from "@/lib/utils"
+import type { DataTableFilterOption, Option } from "@/types"
 
 interface DataTableAdvancedFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>
@@ -64,10 +63,10 @@ export function DataTableAdvancedFacetedFilter<TData, TValue>({
               >
                 <div
                   className={cn(
-                    'mr-2 flex size-4 items-center justify-center rounded-sm border border-primary',
+                    "mr-2 flex size-4 items-center justify-center rounded-sm border border-primary",
                     isSelected
-                      ? 'bg-primary text-primary-foreground'
-                      : 'opacity-50 [&_svg]:invisible',
+                      ? "bg-primary text-primary-foreground"
+                      : "opacity-50 [&_svg]:invisible",
                   )}
                 >
                   <CheckIcon className="size-4" aria-hidden="true" />

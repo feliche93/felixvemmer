@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { OrganizationMember } from '../models/OrganizationMember'
-import type { PaginatedOrganizationMemberList } from '../models/PaginatedOrganizationMemberList'
-import type { PatchedOrganizationMember } from '../models/PatchedOrganizationMember'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { OrganizationMember } from "../models/OrganizationMember"
+import type { PaginatedOrganizationMemberList } from "../models/PaginatedOrganizationMemberList"
+import type { PatchedOrganizationMember } from "../models/PatchedOrganizationMember"
 export class MembersService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -29,8 +29,8 @@ export class MembersService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationMemberList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -54,14 +54,14 @@ export class MembersService {
     requestBody?: OrganizationMember
   }): CancelablePromise<OrganizationMember> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         user__uuid: userUuid,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -78,14 +78,14 @@ export class MembersService {
     requestBody?: PatchedOrganizationMember
   }): CancelablePromise<OrganizationMember> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         user__uuid: userUuid,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -100,8 +100,8 @@ export class MembersService {
     userUuid: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         user__uuid: userUuid,

@@ -2,13 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MinimalFeatureFlag } from './MinimalFeatureFlag'
-import type { UserBasic } from './UserBasic'
+import type { MinimalFeatureFlag } from "./MinimalFeatureFlag"
+import type { UserBasic } from "./UserBasic"
 export type Survey = {
   readonly id: string
   name: string
   description?: string
-  type: 'popover' | 'widget' | 'button' | 'email' | 'full_screen' | 'api'
+  type: "popover" | "widget" | "button" | "email" | "full_screen" | "api"
   readonly linked_flag: MinimalFeatureFlag
   linked_flag_id?: number | null
   readonly targeting_flag: MinimalFeatureFlag

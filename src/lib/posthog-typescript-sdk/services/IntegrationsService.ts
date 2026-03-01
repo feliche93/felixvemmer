@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Integration } from '../models/Integration'
-import type { PaginatedIntegrationList } from '../models/PaginatedIntegrationList'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Integration } from "../models/Integration"
+import type { PaginatedIntegrationList } from "../models/PaginatedIntegrationList"
 export class IntegrationsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -31,8 +31,8 @@ export class IntegrationsService {
     offset?: number
   }): CancelablePromise<PaginatedIntegrationList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/integrations/',
+      method: "GET",
+      url: "/api/projects/{project_id}/integrations/",
       path: {
         project_id: projectId,
       },
@@ -57,13 +57,13 @@ export class IntegrationsService {
     requestBody: Integration
   }): CancelablePromise<Integration> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/integrations/',
+      method: "POST",
+      url: "/api/projects/{project_id}/integrations/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -84,8 +84,8 @@ export class IntegrationsService {
     projectId: string
   }): CancelablePromise<Integration> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/integrations/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/integrations/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -110,8 +110,8 @@ export class IntegrationsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/integrations/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/integrations/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -136,8 +136,8 @@ export class IntegrationsService {
     projectId: string
   }): CancelablePromise<Integration> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/integrations/{id}/channels/',
+      method: "GET",
+      url: "/api/projects/{project_id}/integrations/{id}/channels/",
       path: {
         id: id,
         project_id: projectId,

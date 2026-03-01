@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 export class SearchService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -19,8 +19,8 @@ export class SearchService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/search/',
+      method: "GET",
+      url: "/api/projects/{project_id}/search/",
       path: {
         project_id: projectId,
       },

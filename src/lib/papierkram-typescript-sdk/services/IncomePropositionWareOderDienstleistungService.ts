@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class IncomePropositionWareOderDienstleistungService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -35,11 +35,11 @@ export class IncomePropositionWareOderDienstleistungService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/propositions',
+      method: "GET",
+      url: "/income/propositions",
       query: {
         page: page,
         page_size: pageSize,
@@ -63,16 +63,16 @@ export class IncomePropositionWareOderDienstleistungService {
       description?: string | null
       article_no: string
       price?: string | null
-      proposition_type: 'service' | 'product' | 'ecommerce'
-      time_unit: 'hour' | 'day'
+      proposition_type: "service" | "product" | "ecommerce"
+      time_unit: "hour" | "day"
       vat_rate: string
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/propositions',
+      method: "POST",
+      url: "/income/propositions",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Proposition could not be created`,
       },
@@ -94,8 +94,8 @@ export class IncomePropositionWareOderDienstleistungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/propositions/{id}',
+      method: "GET",
+      url: "/income/propositions/{id}",
       path: {
         id: id,
       },
@@ -124,19 +124,19 @@ export class IncomePropositionWareOderDienstleistungService {
       description?: string | null
       article_no?: string
       price?: string | null
-      proposition_type?: 'service' | 'product' | 'ecommerce'
-      time_unit?: 'hour' | 'day'
+      proposition_type?: "service" | "product" | "ecommerce"
+      time_unit?: "hour" | "day"
       vat_rate?: string
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/income/propositions/{id}',
+      method: "PUT",
+      url: "/income/propositions/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified proposition was not found`,
       },
@@ -158,8 +158,8 @@ export class IncomePropositionWareOderDienstleistungService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/income/propositions/{id}',
+      method: "DELETE",
+      url: "/income/propositions/{id}",
       path: {
         id: id,
       },
@@ -184,8 +184,8 @@ export class IncomePropositionWareOderDienstleistungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/propositions/{id}/archive',
+      method: "POST",
+      url: "/income/propositions/{id}/archive",
       path: {
         id: id,
       },
@@ -207,8 +207,8 @@ export class IncomePropositionWareOderDienstleistungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/propositions/{id}/unarchive',
+      method: "POST",
+      url: "/income/propositions/{id}/unarchive",
       path: {
         id: id,
       },

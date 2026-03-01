@@ -2,13 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { FeatureFlag } from '../models/FeatureFlag'
-import type { FeatureFlagRoleAccess } from '../models/FeatureFlagRoleAccess'
-import type { PaginatedFeatureFlagList } from '../models/PaginatedFeatureFlagList'
-import type { PaginatedFeatureFlagRoleAccessList } from '../models/PaginatedFeatureFlagRoleAccessList'
-import type { PatchedFeatureFlag } from '../models/PatchedFeatureFlag'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { FeatureFlag } from "../models/FeatureFlag"
+import type { FeatureFlagRoleAccess } from "../models/FeatureFlagRoleAccess"
+import type { PaginatedFeatureFlagList } from "../models/PaginatedFeatureFlagList"
+import type { PaginatedFeatureFlagRoleAccessList } from "../models/PaginatedFeatureFlagRoleAccessList"
+import type { PatchedFeatureFlag } from "../models/PatchedFeatureFlag"
 export class FeatureFlagsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -24,8 +24,8 @@ export class FeatureFlagsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/feature_flags/{feature_flag_key}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/feature_flags/{feature_flag_key}/",
       path: {
         feature_flag_key: featureFlagKey,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -43,8 +43,8 @@ export class FeatureFlagsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/feature_flags/copy_flags/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/feature_flags/copy_flags/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -76,8 +76,8 @@ export class FeatureFlagsService {
     offset?: number
   }): CancelablePromise<PaginatedFeatureFlagList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/",
       path: {
         project_id: projectId,
       },
@@ -105,13 +105,13 @@ export class FeatureFlagsService {
     requestBody: FeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/feature_flags/',
+      method: "POST",
+      url: "/api/projects/{project_id}/feature_flags/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -139,8 +139,8 @@ export class FeatureFlagsService {
     offset?: number
   }): CancelablePromise<PaginatedFeatureFlagRoleAccessList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/",
       path: {
         parent_lookup_feature_flag_id: parentLookupFeatureFlagId,
         project_id: projectId,
@@ -168,14 +168,14 @@ export class FeatureFlagsService {
     requestBody: FeatureFlagRoleAccess
   }): CancelablePromise<FeatureFlagRoleAccess> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/',
+      method: "POST",
+      url: "/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/",
       path: {
         parent_lookup_feature_flag_id: parentLookupFeatureFlagId,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -198,8 +198,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlagRoleAccess> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/{id}/",
       path: {
         id: id,
         parent_lookup_feature_flag_id: parentLookupFeatureFlagId,
@@ -227,8 +227,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/{id}/",
       path: {
         id: id,
         parent_lookup_feature_flag_id: parentLookupFeatureFlagId,
@@ -257,8 +257,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -288,14 +288,14 @@ export class FeatureFlagsService {
     requestBody: FeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/feature_flags/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/feature_flags/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -321,14 +321,14 @@ export class FeatureFlagsService {
     requestBody?: PatchedFeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/feature_flags/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/feature_flags/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -350,8 +350,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/feature_flags/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/feature_flags/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -382,8 +382,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/{id}/activity/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/{id}/activity/",
       path: {
         id: id,
         project_id: projectId,
@@ -413,14 +413,14 @@ export class FeatureFlagsService {
     requestBody: FeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/feature_flags/{id}/create_static_cohort_for_flag/',
+      method: "POST",
+      url: "/api/projects/{project_id}/feature_flags/{id}/create_static_cohort_for_flag/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -446,14 +446,14 @@ export class FeatureFlagsService {
     requestBody: FeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/feature_flags/{id}/dashboard/',
+      method: "POST",
+      url: "/api/projects/{project_id}/feature_flags/{id}/dashboard/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -479,14 +479,14 @@ export class FeatureFlagsService {
     requestBody: FeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/feature_flags/{id}/enrich_usage_dashboard/',
+      method: "POST",
+      url: "/api/projects/{project_id}/feature_flags/{id}/enrich_usage_dashboard/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -505,8 +505,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/activity/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/activity/",
       path: {
         project_id: projectId,
       },
@@ -528,8 +528,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/evaluation_reasons/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/evaluation_reasons/",
       path: {
         project_id: projectId,
       },
@@ -551,8 +551,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/local_evaluation/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/local_evaluation/",
       path: {
         project_id: projectId,
       },
@@ -574,8 +574,8 @@ export class FeatureFlagsService {
     projectId: string
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/feature_flags/my_flags/',
+      method: "GET",
+      url: "/api/projects/{project_id}/feature_flags/my_flags/",
       path: {
         project_id: projectId,
       },
@@ -599,13 +599,13 @@ export class FeatureFlagsService {
     requestBody: FeatureFlag
   }): CancelablePromise<FeatureFlag> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/feature_flags/user_blast_radius/',
+      method: "POST",
+      url: "/api/projects/{project_id}/feature_flags/user_blast_radius/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

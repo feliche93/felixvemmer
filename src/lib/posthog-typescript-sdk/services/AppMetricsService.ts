@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 export class AppMetricsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -21,8 +21,8 @@ export class AppMetricsService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/app_metrics/{parent_lookup_plugin_config_id}/historical_exports/',
+      method: "GET",
+      url: "/api/projects/{project_id}/app_metrics/{parent_lookup_plugin_config_id}/historical_exports/",
       path: {
         parent_lookup_plugin_config_id: parentLookupPluginConfigId,
         project_id: projectId,
@@ -46,8 +46,8 @@ export class AppMetricsService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/app_metrics/{parent_lookup_plugin_config_id}/historical_exports/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/app_metrics/{parent_lookup_plugin_config_id}/historical_exports/{id}/",
       path: {
         id: id,
         parent_lookup_plugin_config_id: parentLookupPluginConfigId,
@@ -73,8 +73,8 @@ export class AppMetricsService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/app_metrics/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/app_metrics/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -99,8 +99,8 @@ export class AppMetricsService {
     projectId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/app_metrics/{id}/error_details/',
+      method: "GET",
+      url: "/api/projects/{project_id}/app_metrics/{id}/error_details/",
       path: {
         id: id,
         project_id: projectId,

@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import { CircleIcon, FileIcon, LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { useTheme } from 'next-themes'
-import { useParams, useRouter } from 'next/navigation'
-import * as React from 'react'
-
-import { Button } from '@/components/ui/button'
+import type { DialogProps } from "@radix-ui/react-dialog"
+import { CircleIcon, FileIcon, LaptopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import { useParams, useRouter } from "next/navigation"
+import { useTheme } from "next-themes"
+import * as React from "react"
+import { Button } from "@/components/ui/button"
 import {
   CommandDialog,
   CommandEmpty,
@@ -14,11 +14,10 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command'
-import { navigationConfig } from '@/config/navigation'
-import { cn } from '@/lib/utils'
-import type { DialogProps } from '@radix-ui/react-dialog'
-import type { NavItem } from '../types/nav'
+} from "@/components/ui/command"
+import { navigationConfig } from "@/config/navigation"
+import { cn } from "@/lib/utils"
+import type { NavItem } from "../types/nav"
 
 export function CommandMenu({ ...props }: DialogProps) {
   const router = useRouter()
@@ -26,18 +25,18 @@ export function CommandMenu({ ...props }: DialogProps) {
   const [open, setOpen] = React.useState(false)
   const { setTheme } = useTheme()
 
-  const locale = typeof params?.locale === 'string' ? params?.locale : 'en'
+  const locale = typeof params?.locale === "string" ? params?.locale : "en"
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         setOpen((open) => !open)
       }
     }
 
-    document.addEventListener('keydown', down)
-    return () => document.removeEventListener('keydown', down)
+    document.addEventListener("keydown", down)
+    return () => document.removeEventListener("keydown", down)
   }, [])
 
   const runCommand = React.useCallback((command: () => unknown) => {
@@ -50,7 +49,7 @@ export function CommandMenu({ ...props }: DialogProps) {
       <Button
         variant="outline"
         className={cn(
-          'relative w-full justify-start text-muted-foreground text-sm sm:pr-12 md:w-40 lg:w-64',
+          "relative w-full justify-start text-muted-foreground text-sm sm:pr-12 md:w-40 lg:w-64",
         )}
         onClick={() => setOpen(true)}
         {...props}
@@ -101,15 +100,15 @@ export function CommandMenu({ ...props }: DialogProps) {
           ))}
           <CommandSeparator />
           <CommandGroup heading="Theme">
-            <CommandItem onSelect={() => runCommand(() => setTheme('light'))}>
+            <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
               <SunIcon className="mr-2 h-4 w-4" />
               Light
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme('dark'))}>
+            <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
               <MoonIcon className="mr-2 h-4 w-4" />
               Dark
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme('system'))}>
+            <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
               <LaptopIcon className="mr-2 h-4 w-4" />
               System
             </CommandItem>

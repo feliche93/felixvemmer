@@ -1,12 +1,13 @@
 // Do Not use <Link/> from next-intl here, as locale is in url already
-import { formatDate } from '@/lib/utils'
-import { allAuthors, allPosts } from 'content-collections'
-import { compareDesc } from 'date-fns'
-import Image from 'next/image'
-import Link from 'next/link'
-import { type FC, Suspense } from 'react'
-import { PageViews } from './page-views'
-import { Badge } from './ui/badge'
+
+import { allAuthors, allPosts } from "content-collections"
+import { compareDesc } from "date-fns"
+import Image from "next/image"
+import Link from "next/link"
+import { type FC, Suspense } from "react"
+import { formatDate } from "@/lib/utils"
+import { PageViews } from "./page-views"
+import { Badge } from "./ui/badge"
 
 export interface BlogPostGridProps {
   locale: string
@@ -86,7 +87,7 @@ export const BlogPostGrid: FC<BlogPostGridProps> = ({ locale, limit }) => {
 
                     <div className="text-sm leading-6">
                       <p className="font-semibold text-base-conten/80">
-                        <Link href={'#'}>
+                        <Link href={"#"}>
                           <span className="absolute inset-0" />
                           {authors[0]?.title}
                         </Link>

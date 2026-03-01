@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Hook } from '../models/Hook'
-import type { PaginatedHookList } from '../models/PaginatedHookList'
-import type { PatchedHook } from '../models/PatchedHook'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Hook } from "../models/Hook"
+import type { PaginatedHookList } from "../models/PaginatedHookList"
+import type { PatchedHook } from "../models/PatchedHook"
 export class HooksService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -33,8 +33,8 @@ export class HooksService {
     offset?: number
   }): CancelablePromise<PaginatedHookList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/hooks/',
+      method: "GET",
+      url: "/api/projects/{project_id}/hooks/",
       path: {
         project_id: projectId,
       },
@@ -60,13 +60,13 @@ export class HooksService {
     requestBody: Hook
   }): CancelablePromise<Hook> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/hooks/',
+      method: "POST",
+      url: "/api/projects/{project_id}/hooks/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -88,8 +88,8 @@ export class HooksService {
     projectId: string
   }): CancelablePromise<Hook> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/hooks/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/hooks/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -117,14 +117,14 @@ export class HooksService {
     requestBody: Hook
   }): CancelablePromise<Hook> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/hooks/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/hooks/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -148,14 +148,14 @@ export class HooksService {
     requestBody?: PatchedHook
   }): CancelablePromise<Hook> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/hooks/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/hooks/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -177,8 +177,8 @@ export class HooksService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/hooks/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/hooks/{id}/",
       path: {
         id: id,
         project_id: projectId,

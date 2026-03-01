@@ -2,24 +2,24 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from './core/BaseHttpRequest'
-import { FetchHttpRequest } from './core/FetchHttpRequest'
-import type { OpenAPIConfig } from './core/OpenAPI'
+import type { BaseHttpRequest } from "./core/BaseHttpRequest"
+import { FetchHttpRequest } from "./core/FetchHttpRequest"
+import type { OpenAPIConfig } from "./core/OpenAPI"
 
-import { BankingBankConnectionBankverbindungService } from './services/BankingBankConnectionBankverbindungService'
-import { BankingTransactionKontoumsatzService } from './services/BankingTransactionKontoumsatzService'
-import { ContactCompanyKontaktpersonService } from './services/ContactCompanyKontaktpersonService'
-import { ContactCompanyUnternehmenService } from './services/ContactCompanyUnternehmenService'
-import { ExpenseVoucherAusgabeBelegService } from './services/ExpenseVoucherAusgabeBelegService'
-import { IncomeEstimateAngebotService } from './services/IncomeEstimateAngebotService'
-import { IncomeInvoiceRechnungService } from './services/IncomeInvoiceRechnungService'
-import { IncomePaymentTermZahlungsbedingungenService } from './services/IncomePaymentTermZahlungsbedingungenService'
-import { IncomePropositionWareOderDienstleistungService } from './services/IncomePropositionWareOderDienstleistungService'
-import { InfoService } from './services/InfoService'
-import { ProjectProjektService } from './services/ProjectProjektService'
-import { TrackerTaskAufgabeService } from './services/TrackerTaskAufgabeService'
-import { TrackerTimeEntryZeiteintragService } from './services/TrackerTimeEntryZeiteintragService'
-import { UserBenutzerService } from './services/UserBenutzerService'
+import { BankingBankConnectionBankverbindungService } from "./services/BankingBankConnectionBankverbindungService"
+import { BankingTransactionKontoumsatzService } from "./services/BankingTransactionKontoumsatzService"
+import { ContactCompanyKontaktpersonService } from "./services/ContactCompanyKontaktpersonService"
+import { ContactCompanyUnternehmenService } from "./services/ContactCompanyUnternehmenService"
+import { ExpenseVoucherAusgabeBelegService } from "./services/ExpenseVoucherAusgabeBelegService"
+import { IncomeEstimateAngebotService } from "./services/IncomeEstimateAngebotService"
+import { IncomeInvoiceRechnungService } from "./services/IncomeInvoiceRechnungService"
+import { IncomePaymentTermZahlungsbedingungenService } from "./services/IncomePaymentTermZahlungsbedingungenService"
+import { IncomePropositionWareOderDienstleistungService } from "./services/IncomePropositionWareOderDienstleistungService"
+import { InfoService } from "./services/InfoService"
+import { ProjectProjektService } from "./services/ProjectProjektService"
+import { TrackerTaskAufgabeService } from "./services/TrackerTaskAufgabeService"
+import { TrackerTimeEntryZeiteintragService } from "./services/TrackerTimeEntryZeiteintragService"
+import { UserBenutzerService } from "./services/UserBenutzerService"
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest
 
@@ -46,10 +46,10 @@ export class client {
     HttpRequest: HttpRequestConstructor = FetchHttpRequest,
   ) {
     this.request = new HttpRequest({
-      BASE: config?.BASE ?? 'https://felixvemmer.papierkram.de/api/v1',
-      VERSION: config?.VERSION ?? '1',
+      BASE: config?.BASE ?? "https://felixvemmer.papierkram.de/api/v1",
+      VERSION: config?.VERSION ?? "1",
       WITH_CREDENTIALS: config?.WITH_CREDENTIALS ?? false,
-      CREDENTIALS: config?.CREDENTIALS ?? 'include',
+      CREDENTIALS: config?.CREDENTIALS ?? "include",
       TOKEN: config?.TOKEN,
       USERNAME: config?.USERNAME,
       PASSWORD: config?.PASSWORD,

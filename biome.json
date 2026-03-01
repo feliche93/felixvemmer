@@ -151,6 +151,7 @@
         "rules": {
           "suspicious": {
             "noExplicitAny": "off",
+            "noThenProperty": "off",
             "noPrototypeBuiltins": "off",
             "useIterableCallbackReturn": "off"
           }

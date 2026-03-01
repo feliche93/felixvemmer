@@ -1,10 +1,8 @@
-'use client'
+"use client"
 
-import type { DataTableFilterOption } from '@/types'
-import { CaretSortIcon, ChevronDownIcon, PlusIcon, TextIcon } from '@radix-ui/react-icons'
-import * as React from 'react'
-
-import { Button } from '@/components/ui/button'
+import { CaretSortIcon, ChevronDownIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons"
+import * as React from "react"
+import { Button } from "@/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -13,8 +11,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+} from "@/components/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import type { DataTableFilterOption } from "@/types"
 
 interface DataTableFilterComboboxProps<TData> {
   options: DataTableFilterOption<TData>[]
@@ -31,7 +30,7 @@ export function DataTableFilterCombobox<TData>({
   onSelect,
   children,
 }: DataTableFilterComboboxProps<TData>) {
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = React.useState("")
   const [open, setOpen] = React.useState(false)
   const [selectedOption, setSelectedOption] = React.useState<DataTableFilterOption<TData>>(
     options[0] ?? ({} as DataTableFilterOption<TData>),
@@ -66,7 +65,7 @@ export function DataTableFilterCombobox<TData>({
                     className="capitalize"
                     value={String(option.value)}
                     onSelect={(currentValue) => {
-                      setValue(currentValue === value ? '' : currentValue)
+                      setValue(currentValue === value ? "" : currentValue)
                       setOpen(false)
                       setSelectedOption(option)
                       setSelectedOptions((prev) => {
@@ -93,8 +92,8 @@ export function DataTableFilterCombobox<TData>({
                     ...selectedOptions,
                     {
                       id: crypto.randomUUID(),
-                      label: selectedOption?.label ?? '',
-                      value: selectedOption?.value ?? '',
+                      label: selectedOption?.label ?? "",
+                      value: selectedOption?.value ?? "",
                       options: selectedOption?.options ?? [],
                       isMulti: true,
                     },

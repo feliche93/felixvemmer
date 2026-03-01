@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class InfoService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -16,8 +16,8 @@ export class InfoService {
    */
   public getInfo(): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/info',
+      method: "GET",
+      url: "/info",
     })
   }
 }

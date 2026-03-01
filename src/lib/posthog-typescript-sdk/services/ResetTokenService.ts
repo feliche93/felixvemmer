@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PatchedTeam } from '../models/PatchedTeam'
-import type { Team } from '../models/Team'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PatchedTeam } from "../models/PatchedTeam"
+import type { Team } from "../models/Team"
 export class ResetTokenService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -24,13 +24,13 @@ export class ResetTokenService {
     requestBody?: PatchedTeam
   }): CancelablePromise<Team> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{id}/reset_token/',
+      method: "PATCH",
+      url: "/api/projects/{id}/reset_token/",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import type { SerializableTOC } from '@fumadocs/content-collections/configuration'
-import * as Base from 'fumadocs-core/toc'
-import { useActiveAnchor } from 'fumadocs-core/toc'
-import React, { type FC } from 'react'
+import type { SerializableTOC } from "@fumadocs/content-collections/configuration"
+import * as Base from "fumadocs-core/toc"
+import { useActiveAnchor } from "fumadocs-core/toc"
+import React, { type FC } from "react"
 
 export interface TOCProps {
   toc: SerializableTOC
@@ -12,15 +12,15 @@ export interface TOCProps {
 
 const TOCItem: FC<{ item: SerializableTOC[0] }> = ({ item }) => {
   const activeAnchor = useActiveAnchor()
-  const isActive = item.url.replace('#', '') === activeAnchor
+  const isActive = item.url.replace("#", "") === activeAnchor
 
   return (
     <li>
       <Base.TOCItem
         href={item.url}
         className={`block py-1 text-sm ${
-          isActive ? 'font-medium text-primary' : 'text-muted-foreground'
-        } ${item.depth > 2 ? 'pl-4' : ''}`}
+          isActive ? "font-medium text-primary" : "text-muted-foreground"
+        } ${item.depth > 2 ? "pl-4" : ""}`}
         data-active={isActive}
       >
         {item.title}

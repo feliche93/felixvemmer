@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class TrackerTimeEntryZeiteintragService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -42,7 +42,7 @@ export class TrackerTimeEntryZeiteintragService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
     /**
      * Filter by project id
      */
@@ -62,7 +62,7 @@ export class TrackerTimeEntryZeiteintragService {
     /**
      * Filter by billing state
      */
-    billingState?: 'billed' | 'unbilled' | 'billable' | 'unbillable' | 'archived'
+    billingState?: "billed" | "unbilled" | "billable" | "unbillable" | "archived"
     /**
      * Filter by start time. Beginning of date range. As defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
      */
@@ -73,8 +73,8 @@ export class TrackerTimeEntryZeiteintragService {
     startTimeRangeEnd?: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/tracker/time_entries',
+      method: "GET",
+      url: "/tracker/time_entries",
       query: {
         page: page,
         page_size: pageSize,
@@ -119,10 +119,10 @@ export class TrackerTimeEntryZeiteintragService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/tracker/time_entries',
+      method: "POST",
+      url: "/tracker/time_entries",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Time entry not created when `,
       },
@@ -144,8 +144,8 @@ export class TrackerTimeEntryZeiteintragService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/tracker/time_entries/{id}',
+      method: "GET",
+      url: "/tracker/time_entries/{id}",
       path: {
         id: id,
       },
@@ -185,13 +185,13 @@ export class TrackerTimeEntryZeiteintragService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/tracker/time_entries/{id}',
+      method: "PUT",
+      url: "/tracker/time_entries/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified time entry was not found`,
         422: `The user was inactive`,
@@ -214,8 +214,8 @@ export class TrackerTimeEntryZeiteintragService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/tracker/time_entries/{id}',
+      method: "DELETE",
+      url: "/tracker/time_entries/{id}",
       path: {
         id: id,
       },
@@ -240,8 +240,8 @@ export class TrackerTimeEntryZeiteintragService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/tracker/time_entries/{id}/archive',
+      method: "POST",
+      url: "/tracker/time_entries/{id}/archive",
       path: {
         id: id,
       },
@@ -263,8 +263,8 @@ export class TrackerTimeEntryZeiteintragService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/tracker/time_entries/{id}/unarchive',
+      method: "POST",
+      url: "/tracker/time_entries/{id}/unarchive",
       path: {
         id: id,
       },

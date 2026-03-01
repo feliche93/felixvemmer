@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Experiment } from '../models/Experiment'
-import type { PaginatedExperimentList } from '../models/PaginatedExperimentList'
-import type { PatchedExperiment } from '../models/PatchedExperiment'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Experiment } from "../models/Experiment"
+import type { PaginatedExperimentList } from "../models/PaginatedExperimentList"
+import type { PatchedExperiment } from "../models/PatchedExperiment"
 export class ExperimentsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class ExperimentsService {
     offset?: number
   }): CancelablePromise<PaginatedExperimentList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/experiments/',
+      method: "GET",
+      url: "/api/projects/{project_id}/experiments/",
       path: {
         project_id: projectId,
       },
@@ -58,13 +58,13 @@ export class ExperimentsService {
     requestBody: Experiment
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/experiments/',
+      method: "POST",
+      url: "/api/projects/{project_id}/experiments/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -85,8 +85,8 @@ export class ExperimentsService {
     projectId: string
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/experiments/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/experiments/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -113,14 +113,14 @@ export class ExperimentsService {
     requestBody: Experiment
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/experiments/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/experiments/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -143,14 +143,14 @@ export class ExperimentsService {
     requestBody?: PatchedExperiment
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/experiments/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/experiments/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -171,8 +171,8 @@ export class ExperimentsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/experiments/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/experiments/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -197,8 +197,8 @@ export class ExperimentsService {
     projectId: string
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/experiments/{id}/results/',
+      method: "GET",
+      url: "/api/projects/{project_id}/experiments/{id}/results/",
       path: {
         id: id,
         project_id: projectId,
@@ -223,8 +223,8 @@ export class ExperimentsService {
     projectId: string
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/experiments/{id}/secondary_results/',
+      method: "GET",
+      url: "/api/projects/{project_id}/experiments/{id}/secondary_results/",
       path: {
         id: id,
         project_id: projectId,
@@ -244,8 +244,8 @@ export class ExperimentsService {
     projectId: string
   }): CancelablePromise<Experiment> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/experiments/requires_flag_implementation/',
+      method: "GET",
+      url: "/api/projects/{project_id}/experiments/requires_flag_implementation/",
       path: {
         project_id: projectId,
       },

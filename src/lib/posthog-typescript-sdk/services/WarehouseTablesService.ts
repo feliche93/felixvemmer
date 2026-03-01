@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedTableList } from '../models/PaginatedTableList'
-import type { PatchedTable } from '../models/PatchedTable'
-import type { Table } from '../models/Table'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedTableList } from "../models/PaginatedTableList"
+import type { PatchedTable } from "../models/PatchedTable"
+import type { Table } from "../models/Table"
 export class WarehouseTablesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -38,8 +38,8 @@ export class WarehouseTablesService {
     search?: string
   }): CancelablePromise<PaginatedTableList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/warehouse_tables/',
+      method: "GET",
+      url: "/api/projects/{project_id}/warehouse_tables/",
       path: {
         project_id: projectId,
       },
@@ -66,13 +66,13 @@ export class WarehouseTablesService {
     requestBody: Table
   }): CancelablePromise<Table> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/warehouse_tables/',
+      method: "POST",
+      url: "/api/projects/{project_id}/warehouse_tables/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -94,8 +94,8 @@ export class WarehouseTablesService {
     projectId: string
   }): CancelablePromise<Table> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/warehouse_tables/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/warehouse_tables/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -123,14 +123,14 @@ export class WarehouseTablesService {
     requestBody: Table
   }): CancelablePromise<Table> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/warehouse_tables/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/warehouse_tables/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -154,14 +154,14 @@ export class WarehouseTablesService {
     requestBody?: PatchedTable
   }): CancelablePromise<Table> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/warehouse_tables/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/warehouse_tables/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -183,8 +183,8 @@ export class WarehouseTablesService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/warehouse_tables/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/warehouse_tables/{id}/",
       path: {
         id: id,
         project_id: projectId,

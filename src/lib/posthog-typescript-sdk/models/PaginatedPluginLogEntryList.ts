@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PluginLogEntry } from './PluginLogEntry'
+import type { PluginLogEntry } from "./PluginLogEntry"
 export type PaginatedPluginLogEntryList = {
   count?: number
   next?: string | null

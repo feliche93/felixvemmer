@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils'
-import * as React from 'react'
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
 interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   Title?: typeof Title
@@ -7,20 +7,20 @@ interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Header = React.forwardRef<HTMLDivElement, HeaderProps>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('mx-auto max-w-xl text-center', className)} {...props} />
+  <div ref={ref} className={cn("mx-auto max-w-xl text-center", className)} {...props} />
 )) as React.ForwardRefExoticComponent<HeaderProps & React.RefAttributes<HTMLDivElement>> & {
   Title: typeof Title
   Section: typeof Section
 }
 
-Header.displayName = 'Header'
+Header.displayName = "Header"
 
 const Section = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
     <h2
       ref={ref}
       className={cn(
-        'font-semibold text-lg text-muted-foreground leading-8 tracking-tight',
+        "font-semibold text-lg text-muted-foreground leading-8 tracking-tight",
         className,
       )}
       {...props}
@@ -28,19 +28,19 @@ const Section = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHe
   ),
 )
 
-Section.displayName = 'Header.Section'
+Section.displayName = "Header.Section"
 
 const Title = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('mt-2 font-bold text-3xl tracking-tight sm:text-4xl', className)}
+      className={cn("mt-2 font-bold text-3xl tracking-tight sm:text-4xl", className)}
       {...props}
     />
   ),
 )
 
-Title.displayName = 'Header.Title'
+Title.displayName = "Header.Title"
 
 Header.Title = Title
 Header.Section = Section

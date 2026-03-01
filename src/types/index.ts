@@ -1,4 +1,4 @@
-import type { SQL } from 'drizzle-orm'
+import type { SQL } from "drizzle-orm"
 
 export interface SearchParams {
   [key: string]: string | string[] | undefined

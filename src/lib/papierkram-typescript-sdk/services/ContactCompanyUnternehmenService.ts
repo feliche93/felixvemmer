@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class ContactCompanyUnternehmenService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -35,11 +35,11 @@ export class ContactCompanyUnternehmenService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/contact/companies',
+      method: "GET",
+      url: "/contact/companies",
       query: {
         page: page,
         page_size: pageSize,
@@ -60,14 +60,14 @@ export class ContactCompanyUnternehmenService {
   }: {
     requestBody?: {
       name: string
-      contact_type: 'customer' | 'supplier' | null
+      contact_type: "customer" | "supplier" | null
       phone?: string | null
       fax?: string | null
       email?: string | null
       website?: string | null
       twitter?: string | null
       ust_idnr?: string | null
-      delivery_method?: 'pdf' | 'email' | null
+      delivery_method?: "pdf" | "email" | null
       postal_street?: string | null
       postal_zip?: string | null
       postal_city?: string | null
@@ -102,10 +102,10 @@ export class ContactCompanyUnternehmenService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/contact/companies',
+      method: "POST",
+      url: "/contact/companies",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Company could not be created`,
       },
@@ -127,8 +127,8 @@ export class ContactCompanyUnternehmenService {
     id: number
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/contact/companies/{id}',
+      method: "GET",
+      url: "/contact/companies/{id}",
       path: {
         id: id,
       },
@@ -154,14 +154,14 @@ export class ContactCompanyUnternehmenService {
     id: number
     requestBody?: {
       name?: string
-      contact_type?: 'customer' | 'supplier' | null
+      contact_type?: "customer" | "supplier" | null
       phone?: string | null
       fax?: string | null
       email?: string | null
       website?: string | null
       twitter?: string | null
       ust_idnr?: string | null
-      delivery_method?: 'pdf' | 'email' | null
+      delivery_method?: "pdf" | "email" | null
       postal_street?: string | null
       postal_zip?: string | null
       postal_city?: string | null
@@ -180,13 +180,13 @@ export class ContactCompanyUnternehmenService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/contact/companies/{id}',
+      method: "PUT",
+      url: "/contact/companies/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified company was not found`,
       },
@@ -208,8 +208,8 @@ export class ContactCompanyUnternehmenService {
     id: number
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/contact/companies/{id}',
+      method: "DELETE",
+      url: "/contact/companies/{id}",
       path: {
         id: id,
       },
@@ -234,8 +234,8 @@ export class ContactCompanyUnternehmenService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/contact/companies/{id}/archive',
+      method: "POST",
+      url: "/contact/companies/{id}/archive",
       path: {
         id: id,
       },
@@ -257,8 +257,8 @@ export class ContactCompanyUnternehmenService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/contact/companies/{id}/unarchive',
+      method: "POST",
+      url: "/contact/companies/{id}/unarchive",
       path: {
         id: id,
       },

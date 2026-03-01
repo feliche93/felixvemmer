@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PropertyItem } from './PropertyItem'
+import type { PropertyItem } from "./PropertyItem"
 export type Property = {
   /**
    *
@@ -46,6 +46,6 @@ export type Property = {
    * ```
    *
    */
-  type?: 'AND' | 'OR'
+  type?: "AND" | "OR"
   values: Array<PropertyItem>
 }

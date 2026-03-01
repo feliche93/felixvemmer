@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedSubscriptionList } from '../models/PaginatedSubscriptionList'
-import type { PatchedSubscription } from '../models/PatchedSubscription'
-import type { Subscription } from '../models/Subscription'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedSubscriptionList } from "../models/PaginatedSubscriptionList"
+import type { PatchedSubscription } from "../models/PatchedSubscription"
+import type { Subscription } from "../models/Subscription"
 export class SubscriptionsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class SubscriptionsService {
     offset?: number
   }): CancelablePromise<PaginatedSubscriptionList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/subscriptions/',
+      method: "GET",
+      url: "/api/projects/{project_id}/subscriptions/",
       path: {
         project_id: projectId,
       },
@@ -58,13 +58,13 @@ export class SubscriptionsService {
     requestBody: Subscription
   }): CancelablePromise<Subscription> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/subscriptions/',
+      method: "POST",
+      url: "/api/projects/{project_id}/subscriptions/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -85,8 +85,8 @@ export class SubscriptionsService {
     projectId: string
   }): CancelablePromise<Subscription> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/subscriptions/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/subscriptions/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -113,14 +113,14 @@ export class SubscriptionsService {
     requestBody: Subscription
   }): CancelablePromise<Subscription> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/subscriptions/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/subscriptions/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -143,14 +143,14 @@ export class SubscriptionsService {
     requestBody?: PatchedSubscription
   }): CancelablePromise<Subscription> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/subscriptions/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/subscriptions/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -172,8 +172,8 @@ export class SubscriptionsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/subscriptions/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/subscriptions/{id}/",
       path: {
         id: id,
         project_id: projectId,

@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { ExplicitTeamMember } from '../models/ExplicitTeamMember'
-import type { PatchedExplicitTeamMember } from '../models/PatchedExplicitTeamMember'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { ExplicitTeamMember } from "../models/ExplicitTeamMember"
+import type { PatchedExplicitTeamMember } from "../models/PatchedExplicitTeamMember"
 export class ExplicitMembersService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -21,8 +21,8 @@ export class ExplicitMembersService {
     projectId: string
   }): CancelablePromise<Array<ExplicitTeamMember>> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/explicit_members/',
+      method: "GET",
+      url: "/api/projects/{project_id}/explicit_members/",
       path: {
         project_id: projectId,
       },
@@ -43,13 +43,13 @@ export class ExplicitMembersService {
     requestBody: ExplicitTeamMember
   }): CancelablePromise<ExplicitTeamMember> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/explicit_members/',
+      method: "POST",
+      url: "/api/projects/{project_id}/explicit_members/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -67,8 +67,8 @@ export class ExplicitMembersService {
     projectId: string
   }): CancelablePromise<ExplicitTeamMember> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/",
       path: {
         parent_membership__user__uuid: parentMembershipUserUuid,
         project_id: projectId,
@@ -92,14 +92,14 @@ export class ExplicitMembersService {
     requestBody: ExplicitTeamMember
   }): CancelablePromise<ExplicitTeamMember> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/",
       path: {
         parent_membership__user__uuid: parentMembershipUserUuid,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -119,14 +119,14 @@ export class ExplicitMembersService {
     requestBody?: PatchedExplicitTeamMember
   }): CancelablePromise<ExplicitTeamMember> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/",
       path: {
         parent_membership__user__uuid: parentMembershipUserUuid,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -144,8 +144,8 @@ export class ExplicitMembersService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/explicit_members/{parent_membership__user__uuid}/",
       path: {
         parent_membership__user__uuid: parentMembershipUserUuid,
         project_id: projectId,

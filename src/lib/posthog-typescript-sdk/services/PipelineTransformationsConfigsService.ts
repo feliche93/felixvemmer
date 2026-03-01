@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedPluginConfigList } from '../models/PaginatedPluginConfigList'
-import type { PatchedPluginConfig } from '../models/PatchedPluginConfig'
-import type { PluginConfig } from '../models/PluginConfig'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedPluginConfigList } from "../models/PaginatedPluginConfigList"
+import type { PatchedPluginConfig } from "../models/PatchedPluginConfig"
+import type { PluginConfig } from "../models/PluginConfig"
 export class PipelineTransformationsConfigsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class PipelineTransformationsConfigsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginConfigList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/',
+      method: "GET",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/",
       path: {
         project_id: projectId,
       },
@@ -58,13 +58,13 @@ export class PipelineTransformationsConfigsService {
     requestBody: PluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/',
+      method: "POST",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -85,8 +85,8 @@ export class PipelineTransformationsConfigsService {
     projectId: string
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -113,14 +113,14 @@ export class PipelineTransformationsConfigsService {
     requestBody: PluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -143,14 +143,14 @@ export class PipelineTransformationsConfigsService {
     requestBody?: PatchedPluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -171,8 +171,8 @@ export class PipelineTransformationsConfigsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -197,8 +197,8 @@ export class PipelineTransformationsConfigsService {
     projectId: string
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/{id}/frontend/',
+      method: "GET",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/{id}/frontend/",
       path: {
         id: id,
         project_id: projectId,
@@ -225,14 +225,14 @@ export class PipelineTransformationsConfigsService {
     requestBody: PluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/{id}/job/',
+      method: "POST",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/{id}/job/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -250,13 +250,13 @@ export class PipelineTransformationsConfigsService {
     requestBody?: PatchedPluginConfig
   }): CancelablePromise<PluginConfig> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/pipeline_transformations_configs/rearrange/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/pipeline_transformations_configs/rearrange/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

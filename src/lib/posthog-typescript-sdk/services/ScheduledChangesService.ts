@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedScheduledChangeList } from '../models/PaginatedScheduledChangeList'
-import type { PatchedScheduledChange } from '../models/PatchedScheduledChange'
-import type { ScheduledChange } from '../models/ScheduledChange'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedScheduledChangeList } from "../models/PaginatedScheduledChangeList"
+import type { PatchedScheduledChange } from "../models/PatchedScheduledChange"
+import type { ScheduledChange } from "../models/ScheduledChange"
 export class ScheduledChangesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -33,8 +33,8 @@ export class ScheduledChangesService {
     offset?: number
   }): CancelablePromise<PaginatedScheduledChangeList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/scheduled_changes/',
+      method: "GET",
+      url: "/api/projects/{project_id}/scheduled_changes/",
       path: {
         project_id: projectId,
       },
@@ -60,13 +60,13 @@ export class ScheduledChangesService {
     requestBody: ScheduledChange
   }): CancelablePromise<ScheduledChange> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/scheduled_changes/',
+      method: "POST",
+      url: "/api/projects/{project_id}/scheduled_changes/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -88,8 +88,8 @@ export class ScheduledChangesService {
     projectId: string
   }): CancelablePromise<ScheduledChange> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/scheduled_changes/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/scheduled_changes/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -117,14 +117,14 @@ export class ScheduledChangesService {
     requestBody: ScheduledChange
   }): CancelablePromise<ScheduledChange> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/scheduled_changes/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/scheduled_changes/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -148,14 +148,14 @@ export class ScheduledChangesService {
     requestBody?: PatchedScheduledChange
   }): CancelablePromise<ScheduledChange> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/scheduled_changes/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/scheduled_changes/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -177,8 +177,8 @@ export class ScheduledChangesService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/scheduled_changes/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/scheduled_changes/{id}/",
       path: {
         id: id,
         project_id: projectId,

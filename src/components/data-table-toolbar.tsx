@@ -1,12 +1,11 @@
-'use client'
+"use client"
 
-import type { PropsWithChildren } from 'react'
+import { Cross2Icon } from "@radix-ui/react-icons"
+import type { Table } from "@tanstack/react-table"
+import type { PropsWithChildren } from "react"
+import { Button } from "@/components/ui/button"
 
-import { Button } from '@/components/ui/button'
-import { Cross2Icon } from '@radix-ui/react-icons'
-import type { Table } from '@tanstack/react-table'
-
-import { DataTableViewOptions } from './data-table-view-options'
+import { DataTableViewOptions } from "./data-table-view-options"
 
 interface DataTableToolbarProps<TData> extends PropsWithChildren {
   table: Table<TData>

@@ -7,5 +7,5 @@ export type SimpleExternalDataSourceSerializers = {
   readonly created_at: string
   readonly created_by: number | null
   readonly status: string
-  readonly source_type: 'Stripe'
+  readonly source_type: "Stripe"
 }

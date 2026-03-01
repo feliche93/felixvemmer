@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { ExternalDataSchema } from '../models/ExternalDataSchema'
-import type { PaginatedExternalDataSchemaList } from '../models/PaginatedExternalDataSchemaList'
-import type { PatchedExternalDataSchema } from '../models/PatchedExternalDataSchema'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { ExternalDataSchema } from "../models/ExternalDataSchema"
+import type { PaginatedExternalDataSchemaList } from "../models/PaginatedExternalDataSchemaList"
+import type { PatchedExternalDataSchema } from "../models/PatchedExternalDataSchema"
 export class ExternalDataSchemasService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -37,8 +37,8 @@ export class ExternalDataSchemasService {
     search?: string
   }): CancelablePromise<PaginatedExternalDataSchemaList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/external_data_schemas/',
+      method: "GET",
+      url: "/api/projects/{project_id}/external_data_schemas/",
       path: {
         project_id: projectId,
       },
@@ -64,13 +64,13 @@ export class ExternalDataSchemasService {
     requestBody: ExternalDataSchema
   }): CancelablePromise<ExternalDataSchema> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/external_data_schemas/',
+      method: "POST",
+      url: "/api/projects/{project_id}/external_data_schemas/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -91,8 +91,8 @@ export class ExternalDataSchemasService {
     projectId: string
   }): CancelablePromise<ExternalDataSchema> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/external_data_schemas/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/external_data_schemas/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -119,14 +119,14 @@ export class ExternalDataSchemasService {
     requestBody: ExternalDataSchema
   }): CancelablePromise<ExternalDataSchema> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/external_data_schemas/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/external_data_schemas/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -149,14 +149,14 @@ export class ExternalDataSchemasService {
     requestBody?: PatchedExternalDataSchema
   }): CancelablePromise<ExternalDataSchema> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/external_data_schemas/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/external_data_schemas/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -177,8 +177,8 @@ export class ExternalDataSchemasService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/external_data_schemas/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/external_data_schemas/{id}/",
       path: {
         id: id,
         project_id: projectId,

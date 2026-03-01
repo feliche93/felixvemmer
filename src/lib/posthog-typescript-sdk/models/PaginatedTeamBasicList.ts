@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { TeamBasic } from './TeamBasic'
+import type { TeamBasic } from "./TeamBasic"
 export type PaginatedTeamBasicList = {
   count?: number
   next?: string | null

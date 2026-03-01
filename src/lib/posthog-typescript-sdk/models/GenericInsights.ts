@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { FilterAction } from './FilterAction'
-import type { FilterEvent } from './FilterEvent'
-import type { Property } from './Property'
+import type { FilterAction } from "./FilterAction"
+import type { FilterEvent } from "./FilterEvent"
+import type { Property } from "./Property"
 export type GenericInsights = {
   /**
    * Events to filter on. One of `events` or `actions` is required.

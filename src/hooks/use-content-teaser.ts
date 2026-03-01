@@ -1,4 +1,4 @@
-import { atom, useAtom } from 'jotai'
+import { atom, useAtom } from "jotai"
 
 const showContentTeaser = atom(false)
 

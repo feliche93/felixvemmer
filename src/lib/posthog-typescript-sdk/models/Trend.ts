@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { FilterAction } from './FilterAction'
-import type { FilterEvent } from './FilterEvent'
-import type { Property } from './Property'
+import type { FilterAction } from "./FilterAction"
+import type { FilterEvent } from "./FilterEvent"
+import type { Property } from "./Property"
 export type Trend = {
   /**
    * Events to filter on. One of `events` or `actions` is required.
@@ -40,19 +40,19 @@ export type Trend = {
   /**
    * Type of property to break down on.
    */
-  breakdown_type?: 'event' | 'person' | 'cohort' | 'group' | 'session' | 'hogql'
+  breakdown_type?: "event" | "person" | "cohort" | "group" | "session" | "hogql"
   /**
    * How to display the data. Will change how the data is returned.
    */
   display?:
-    | 'ActionsLineGraph'
-    | 'ActionsLineGraphCumulative'
-    | 'ActionsTable'
-    | 'ActionsPie'
-    | 'ActionsBar'
-    | 'ActionsBarValue'
-    | 'WorldMap'
-    | 'BoldNumber'
+    | "ActionsLineGraph"
+    | "ActionsLineGraphCumulative"
+    | "ActionsTable"
+    | "ActionsPie"
+    | "ActionsBar"
+    | "ActionsBarValue"
+    | "WorldMap"
+    | "BoldNumber"
   /**
    * Combine the result of events or actions into a single number. For example `A + B` or `(A-B)/B`. The letters correspond to the order of the `events` or `actions` lists.
    */

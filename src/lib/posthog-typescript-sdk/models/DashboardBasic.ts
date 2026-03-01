@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserBasic } from './UserBasic'
+import type { UserBasic } from "./UserBasic"
 /**
  * Serializer mixin that resolves appropriate response for tags depending on license.
  */
@@ -15,7 +15,7 @@ export type DashboardBasic = {
   readonly created_by: UserBasic
   readonly is_shared: boolean
   readonly deleted: boolean
-  readonly creation_mode: 'default' | 'template' | 'duplicate'
+  readonly creation_mode: "default" | "template" | "duplicate"
   tags?: Array<any>
   readonly restriction_level: 21 | 37
   readonly effective_restriction_level: 21 | 37

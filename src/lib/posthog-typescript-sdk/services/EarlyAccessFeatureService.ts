@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { EarlyAccessFeature } from '../models/EarlyAccessFeature'
-import type { EarlyAccessFeatureSerializerCreateOnly } from '../models/EarlyAccessFeatureSerializerCreateOnly'
-import type { PaginatedEarlyAccessFeatureList } from '../models/PaginatedEarlyAccessFeatureList'
-import type { PatchedEarlyAccessFeature } from '../models/PatchedEarlyAccessFeature'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { EarlyAccessFeature } from "../models/EarlyAccessFeature"
+import type { EarlyAccessFeatureSerializerCreateOnly } from "../models/EarlyAccessFeatureSerializerCreateOnly"
+import type { PaginatedEarlyAccessFeatureList } from "../models/PaginatedEarlyAccessFeatureList"
+import type { PatchedEarlyAccessFeature } from "../models/PatchedEarlyAccessFeature"
 export class EarlyAccessFeatureService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -33,8 +33,8 @@ export class EarlyAccessFeatureService {
     offset?: number
   }): CancelablePromise<PaginatedEarlyAccessFeatureList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/early_access_feature/',
+      method: "GET",
+      url: "/api/projects/{project_id}/early_access_feature/",
       path: {
         project_id: projectId,
       },
@@ -59,13 +59,13 @@ export class EarlyAccessFeatureService {
     requestBody: EarlyAccessFeatureSerializerCreateOnly
   }): CancelablePromise<EarlyAccessFeatureSerializerCreateOnly> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/early_access_feature/',
+      method: "POST",
+      url: "/api/projects/{project_id}/early_access_feature/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -86,8 +86,8 @@ export class EarlyAccessFeatureService {
     projectId: string
   }): CancelablePromise<EarlyAccessFeature> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/early_access_feature/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/early_access_feature/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -114,14 +114,14 @@ export class EarlyAccessFeatureService {
     requestBody: EarlyAccessFeature
   }): CancelablePromise<EarlyAccessFeature> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/early_access_feature/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/early_access_feature/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -144,14 +144,14 @@ export class EarlyAccessFeatureService {
     requestBody?: PatchedEarlyAccessFeature
   }): CancelablePromise<EarlyAccessFeature> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/early_access_feature/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/early_access_feature/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -172,8 +172,8 @@ export class EarlyAccessFeatureService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/early_access_feature/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/early_access_feature/{id}/",
       path: {
         id: id,
         project_id: projectId,

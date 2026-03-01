@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { DashboardTemplate } from './DashboardTemplate'
+import type { DashboardTemplate } from "./DashboardTemplate"
 export type PaginatedDashboardTemplateList = {
   count?: number
   next?: string | null

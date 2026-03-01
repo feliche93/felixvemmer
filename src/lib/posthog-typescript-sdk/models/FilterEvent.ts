@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Property } from './Property'
+import type { Property } from "./Property"
 export type FilterEvent = {
   /**
    * Name of the event to filter on. For example `$pageview` or `user sign up`.
@@ -28,26 +28,26 @@ export type FilterEvent = {
    *
    */
   math?:
-    | 'total'
-    | 'dau'
-    | 'weekly_active'
-    | 'monthly_active'
-    | 'unique_group'
-    | 'unique_session'
-    | 'sum'
-    | 'min'
-    | 'max'
-    | 'avg'
-    | 'median'
-    | 'p90'
-    | 'p95'
-    | 'p99'
-    | 'min_count_per_actor'
-    | 'max_count_per_actor'
-    | 'avg_count_per_actor'
-    | 'median_count_per_actor'
-    | 'p90_count_per_actor'
-    | 'p95_count_per_actor'
-    | 'p99_count_per_actor'
-    | 'hogql'
+    | "total"
+    | "dau"
+    | "weekly_active"
+    | "monthly_active"
+    | "unique_group"
+    | "unique_session"
+    | "sum"
+    | "min"
+    | "max"
+    | "avg"
+    | "median"
+    | "p90"
+    | "p95"
+    | "p99"
+    | "min_count_per_actor"
+    | "max_count_per_actor"
+    | "avg_count_per_actor"
+    | "median_count_per_actor"
+    | "p90_count_per_actor"
+    | "p95_count_per_actor"
+    | "p99_count_per_actor"
+    | "hogql"
 }

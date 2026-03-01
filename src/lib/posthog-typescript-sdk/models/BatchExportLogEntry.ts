@@ -7,6 +7,6 @@ export type BatchExportLogEntry = {
   batch_export_id: string
   run_id: string
   timestamp: string
-  level: 'DEBUG' | 'LOG' | 'INFO' | 'WARNING' | 'ERROR'
+  level: "DEBUG" | "LOG" | "INFO" | "WARNING" | "ERROR"
   message: string
 }

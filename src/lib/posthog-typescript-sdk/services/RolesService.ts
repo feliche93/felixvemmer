@@ -2,13 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedRoleList } from '../models/PaginatedRoleList'
-import type { PaginatedRoleMembershipList } from '../models/PaginatedRoleMembershipList'
-import type { PatchedRole } from '../models/PatchedRole'
-import type { Role } from '../models/Role'
-import type { RoleMembership } from '../models/RoleMembership'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedRoleList } from "../models/PaginatedRoleList"
+import type { PaginatedRoleMembershipList } from "../models/PaginatedRoleMembershipList"
+import type { PatchedRole } from "../models/PatchedRole"
+import type { Role } from "../models/Role"
+import type { RoleMembership } from "../models/RoleMembership"
 export class RolesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -31,8 +31,8 @@ export class RolesService {
     offset?: number
   }): CancelablePromise<PaginatedRoleList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -54,13 +54,13 @@ export class RolesService {
     requestBody: Role
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -85,8 +85,8 @@ export class RolesService {
     offset?: number
   }): CancelablePromise<PaginatedRoleMembershipList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         parent_lookup_role_id: parentLookupRoleId,
@@ -111,14 +111,14 @@ export class RolesService {
     requestBody: RoleMembership
   }): CancelablePromise<RoleMembership> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         parent_lookup_role_id: parentLookupRoleId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -138,8 +138,8 @@ export class RolesService {
     parentLookupRoleId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -162,8 +162,8 @@ export class RolesService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -187,14 +187,14 @@ export class RolesService {
     requestBody: Role
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -214,14 +214,14 @@ export class RolesService {
     requestBody?: PatchedRole
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -239,8 +239,8 @@ export class RolesService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,

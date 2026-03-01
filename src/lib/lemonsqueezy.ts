@@ -1,6 +1,6 @@
-import { env } from '@/server'
-import { getStore, lemonSqueezySetup } from '@lemonsqueezy/lemonsqueezy.js'
-import { unstable_cache } from 'next/cache'
+import { getStore, lemonSqueezySetup } from "@lemonsqueezy/lemonsqueezy.js"
+import { unstable_cache } from "next/cache"
+import { env } from "@/server"
 
 const apiKey = env.LEMON_SQUEEZY_BACKLINKGPT_API_KEY
 
@@ -21,11 +21,11 @@ export const getTotalLemonSqueezyRevenue = unstable_cache(
     const res = await fetch(
       `https://api.frankfurter.app/latest?amount=${data.data.attributes.total_revenue}&from=USD&to=EUR`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        cache: 'no-store',
+        cache: "no-store",
       },
     )
 
@@ -40,6 +40,6 @@ export const getTotalLemonSqueezyRevenue = unstable_cache(
 
     return Number(converted.rates.EUR)
   },
-  ['lemonsqueezy'],
+  ["lemonsqueezy"],
   { revalidate: 3600 },
 )

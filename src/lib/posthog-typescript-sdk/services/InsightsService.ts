@@ -2,15 +2,15 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Funnel } from '../models/Funnel'
-import type { FunnelStepsResults } from '../models/FunnelStepsResults'
-import type { Insight } from '../models/Insight'
-import type { PaginatedInsightList } from '../models/PaginatedInsightList'
-import type { PatchedInsight } from '../models/PatchedInsight'
-import type { Trend } from '../models/Trend'
-import type { TrendResults } from '../models/TrendResults'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Funnel } from "../models/Funnel"
+import type { FunnelStepsResults } from "../models/FunnelStepsResults"
+import type { Insight } from "../models/Insight"
+import type { PaginatedInsightList } from "../models/PaginatedInsightList"
+import type { PatchedInsight } from "../models/PatchedInsight"
+import type { Trend } from "../models/Trend"
+import type { TrendResults } from "../models/TrendResults"
 export class InsightsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -30,7 +30,7 @@ export class InsightsService {
      */
     projectId: string
     createdBy?: number
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     /**
      * Number of results to return per page.
      */
@@ -42,8 +42,8 @@ export class InsightsService {
     shortId?: string
   }): CancelablePromise<PaginatedInsightList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/",
       path: {
         project_id: projectId,
       },
@@ -69,12 +69,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/",
       path: {
         project_id: projectId,
       },
@@ -82,7 +82,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -104,7 +104,7 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     /**
      *
      * When loading an insight for a dashboard pass a `from_dashboard` query parameter containing the dashboard ID
@@ -126,8 +126,8 @@ export class InsightsService {
     refresh?: boolean
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -157,12 +157,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/insights/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/insights/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -171,7 +171,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -192,12 +192,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: PatchedInsight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/insights/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/insights/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -206,7 +206,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -227,11 +227,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/insights/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/insights/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -261,11 +261,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/{id}/activity/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/{id}/activity/",
       path: {
         id: id,
         project_id: projectId,
@@ -293,12 +293,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/{id}/viewed/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/{id}/viewed/",
       path: {
         id: id,
         project_id: projectId,
@@ -307,7 +307,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -322,11 +322,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/activity/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/activity/",
       path: {
         project_id: projectId,
       },
@@ -348,12 +348,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/cancel/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/cancel/",
       path: {
         project_id: projectId,
       },
@@ -361,7 +361,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -376,11 +376,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/funnel/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/funnel/",
       path: {
         project_id: projectId,
       },
@@ -402,12 +402,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Funnel
   }): CancelablePromise<FunnelStepsResults> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/funnel/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/funnel/",
       path: {
         project_id: projectId,
       },
@@ -415,7 +415,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -430,11 +430,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/funnel/correlation/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/funnel/correlation/",
       path: {
         project_id: projectId,
       },
@@ -456,12 +456,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/funnel/correlation/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/funnel/correlation/",
       path: {
         project_id: projectId,
       },
@@ -469,7 +469,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -485,11 +485,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/my_last_viewed/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/my_last_viewed/",
       path: {
         project_id: projectId,
       },
@@ -510,11 +510,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/path/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/path/",
       path: {
         project_id: projectId,
       },
@@ -536,12 +536,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/path/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/path/",
       path: {
         project_id: projectId,
       },
@@ -549,7 +549,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -564,11 +564,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/retention/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/retention/",
       path: {
         project_id: projectId,
       },
@@ -590,12 +590,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Insight
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/timing/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/timing/",
       path: {
         project_id: projectId,
       },
@@ -603,7 +603,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -618,11 +618,11 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<Insight> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/insights/trend/',
+      method: "GET",
+      url: "/api/projects/{project_id}/insights/trend/",
       path: {
         project_id: projectId,
       },
@@ -644,12 +644,12 @@ export class InsightsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     requestBody?: Trend
   }): CancelablePromise<TrendResults> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/insights/trend/',
+      method: "POST",
+      url: "/api/projects/{project_id}/insights/trend/",
       path: {
         project_id: projectId,
       },
@@ -657,7 +657,7 @@ export class InsightsService {
         format: format,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

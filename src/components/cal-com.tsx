@@ -1,21 +1,21 @@
-'use client'
+"use client"
 
-import { useTheme } from 'next-themes'
-import Script from 'next/script'
-import { useEffect } from 'react'
+import Script from "next/script"
+import { useTheme } from "next-themes"
+import { useEffect } from "react"
 
 export function CalCom() {
   const { resolvedTheme } = useTheme()
 
   useEffect(() => {
-    // @ts-ignore
-    if (typeof window !== 'undefined' && window.Cal) {
-      // @ts-ignore
-      window.Cal.ns['30-minute-google-hangout-chat']('ui', {
-        styles: { branding: { brandColor: '#111827' } },
+    // @ts-expect-error
+    if (typeof window !== "undefined" && window.Cal) {
+      // @ts-expect-error
+      window.Cal.ns["30-minute-google-hangout-chat"]("ui", {
+        styles: { branding: { brandColor: "#111827" } },
         hideEventTypeDetails: false,
-        layout: 'month_view',
-        theme: resolvedTheme === 'dark' ? 'dark' : 'light',
+        layout: "month_view",
+        theme: resolvedTheme === "dark" ? "dark" : "light",
       })
     }
   }, [resolvedTheme])
@@ -25,7 +25,7 @@ export function CalCom() {
       <div
         id="my-cal-inline"
         className="my-8"
-        style={{ width: '100%', height: '100%', overflow: 'scroll' }}
+        style={{ width: "100%", height: "100%", overflow: "scroll" }}
       />
       <Script id="cal-com-script" strategy="afterInteractive">
         {`

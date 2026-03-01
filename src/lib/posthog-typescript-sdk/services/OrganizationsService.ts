@@ -2,27 +2,27 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { OrganizationDomain } from '../models/OrganizationDomain'
-import type { OrganizationInvite } from '../models/OrganizationInvite'
-import type { OrganizationMember } from '../models/OrganizationMember'
-import type { OrganizationResourceAccess } from '../models/OrganizationResourceAccess'
-import type { PaginatedOrganizationDomainList } from '../models/PaginatedOrganizationDomainList'
-import type { PaginatedOrganizationInviteList } from '../models/PaginatedOrganizationInviteList'
-import type { PaginatedOrganizationMemberList } from '../models/PaginatedOrganizationMemberList'
-import type { PaginatedOrganizationResourceAccessList } from '../models/PaginatedOrganizationResourceAccessList'
-import type { PaginatedPluginList } from '../models/PaginatedPluginList'
-import type { PaginatedRoleList } from '../models/PaginatedRoleList'
-import type { PaginatedRoleMembershipList } from '../models/PaginatedRoleMembershipList'
-import type { PatchedOrganizationDomain } from '../models/PatchedOrganizationDomain'
-import type { PatchedOrganizationMember } from '../models/PatchedOrganizationMember'
-import type { PatchedOrganizationResourceAccess } from '../models/PatchedOrganizationResourceAccess'
-import type { PatchedPlugin } from '../models/PatchedPlugin'
-import type { PatchedRole } from '../models/PatchedRole'
-import type { Plugin } from '../models/Plugin'
-import type { Role } from '../models/Role'
-import type { RoleMembership } from '../models/RoleMembership'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { OrganizationDomain } from "../models/OrganizationDomain"
+import type { OrganizationInvite } from "../models/OrganizationInvite"
+import type { OrganizationMember } from "../models/OrganizationMember"
+import type { OrganizationResourceAccess } from "../models/OrganizationResourceAccess"
+import type { PaginatedOrganizationDomainList } from "../models/PaginatedOrganizationDomainList"
+import type { PaginatedOrganizationInviteList } from "../models/PaginatedOrganizationInviteList"
+import type { PaginatedOrganizationMemberList } from "../models/PaginatedOrganizationMemberList"
+import type { PaginatedOrganizationResourceAccessList } from "../models/PaginatedOrganizationResourceAccessList"
+import type { PaginatedPluginList } from "../models/PaginatedPluginList"
+import type { PaginatedRoleList } from "../models/PaginatedRoleList"
+import type { PaginatedRoleMembershipList } from "../models/PaginatedRoleMembershipList"
+import type { PatchedOrganizationDomain } from "../models/PatchedOrganizationDomain"
+import type { PatchedOrganizationMember } from "../models/PatchedOrganizationMember"
+import type { PatchedOrganizationResourceAccess } from "../models/PatchedOrganizationResourceAccess"
+import type { PatchedPlugin } from "../models/PatchedPlugin"
+import type { PatchedRole } from "../models/PatchedRole"
+import type { Plugin } from "../models/Plugin"
+import type { Role } from "../models/Role"
+import type { RoleMembership } from "../models/RoleMembership"
 export class OrganizationsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -45,8 +45,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationDomainList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -68,13 +68,13 @@ export class OrganizationsService {
     requestBody: OrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -92,8 +92,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -117,14 +117,14 @@ export class OrganizationsService {
     requestBody: OrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -144,14 +144,14 @@ export class OrganizationsService {
     requestBody?: PatchedOrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -169,8 +169,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -194,14 +194,14 @@ export class OrganizationsService {
     requestBody: OrganizationDomain
   }): CancelablePromise<OrganizationDomain> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/domains/{id}/verify/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/domains/{id}/verify/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -217,8 +217,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/feature_flags/{feature_flag_key}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/feature_flags/{feature_flag_key}/",
       path: {
         feature_flag_key: featureFlagKey,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -236,8 +236,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/feature_flags/copy_flags/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/feature_flags/copy_flags/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -263,8 +263,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationInviteList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -286,13 +286,13 @@ export class OrganizationsService {
     requestBody: OrganizationInvite
   }): CancelablePromise<OrganizationInvite> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -310,8 +310,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -330,13 +330,13 @@ export class OrganizationsService {
     requestBody: OrganizationInvite
   }): CancelablePromise<OrganizationInvite> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/invites/bulk/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/invites/bulk/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -359,8 +359,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationMemberList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -384,14 +384,14 @@ export class OrganizationsService {
     requestBody?: OrganizationMember
   }): CancelablePromise<OrganizationMember> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         user__uuid: userUuid,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -408,14 +408,14 @@ export class OrganizationsService {
     requestBody?: PatchedOrganizationMember
   }): CancelablePromise<OrganizationMember> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         user__uuid: userUuid,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -430,8 +430,8 @@ export class OrganizationsService {
     userUuid: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         user__uuid: userUuid,
@@ -458,8 +458,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -481,13 +481,13 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -505,8 +505,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -530,14 +530,14 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -557,14 +557,14 @@ export class OrganizationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -582,8 +582,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -605,8 +605,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/check_for_updates/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/check_for_updates/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -628,8 +628,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/source/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -653,14 +653,14 @@ export class OrganizationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/update_source/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/update_source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -680,14 +680,14 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/upgrade/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/{id}/upgrade/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -700,8 +700,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/activity/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/activity/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -717,8 +717,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/repository/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/repository/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -734,8 +734,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/unused/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_destinations/unused/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -761,8 +761,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -784,13 +784,13 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -808,8 +808,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -833,14 +833,14 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -860,14 +860,14 @@ export class OrganizationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -885,8 +885,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -908,8 +908,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/check_for_updates/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/check_for_updates/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -931,8 +931,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/source/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -956,14 +956,14 @@ export class OrganizationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/update_source/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/update_source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -983,14 +983,14 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/upgrade/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/upgrade/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1003,8 +1003,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/activity/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/activity/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1020,8 +1020,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/repository/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/repository/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1037,8 +1037,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/unused/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/unused/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1064,8 +1064,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1087,13 +1087,13 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1111,8 +1111,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1136,14 +1136,14 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1163,14 +1163,14 @@ export class OrganizationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1188,8 +1188,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1211,8 +1211,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/check_for_updates/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/check_for_updates/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1234,8 +1234,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/source/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1259,14 +1259,14 @@ export class OrganizationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/update_source/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/update_source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1286,14 +1286,14 @@ export class OrganizationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/{id}/upgrade/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/upgrade/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1306,8 +1306,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/activity/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/activity/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1323,8 +1323,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/repository/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/repository/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1340,8 +1340,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/plugins/unused/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/plugins/unused/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1367,8 +1367,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedOrganizationResourceAccessList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1390,13 +1390,13 @@ export class OrganizationsService {
     requestBody: OrganizationResourceAccess
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1414,8 +1414,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1439,14 +1439,14 @@ export class OrganizationsService {
     requestBody: OrganizationResourceAccess
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1466,14 +1466,14 @@ export class OrganizationsService {
     requestBody?: PatchedOrganizationResourceAccess
   }): CancelablePromise<OrganizationResourceAccess> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1491,8 +1491,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1519,8 +1519,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedRoleList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -1542,13 +1542,13 @@ export class OrganizationsService {
     requestBody: Role
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1573,8 +1573,8 @@ export class OrganizationsService {
     offset?: number
   }): CancelablePromise<PaginatedRoleMembershipList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         parent_lookup_role_id: parentLookupRoleId,
@@ -1599,14 +1599,14 @@ export class OrganizationsService {
     requestBody: RoleMembership
   }): CancelablePromise<RoleMembership> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
         parent_lookup_role_id: parentLookupRoleId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1626,8 +1626,8 @@ export class OrganizationsService {
     parentLookupRoleId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1650,8 +1650,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -1675,14 +1675,14 @@ export class OrganizationsService {
     requestBody: Role
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1702,14 +1702,14 @@ export class OrganizationsService {
     requestBody?: PatchedRole
   }): CancelablePromise<Role> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -1727,8 +1727,8 @@ export class OrganizationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/roles/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/roles/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,

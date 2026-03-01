@@ -3,10 +3,10 @@ import {
   parseAsInteger,
   parseAsString,
   parseAsStringLiteral,
-} from 'nuqs/server'
+} from "nuqs/server"
 // Note: import from 'nuqs/server' to avoid the "use client" directive
 
-export const sortOrder = ['asc', 'desc'] as const
+export const sortOrder = ["asc", "desc"] as const
 
 export const pageParser = ({
   defaultPage = 1,

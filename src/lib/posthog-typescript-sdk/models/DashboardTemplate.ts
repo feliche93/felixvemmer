@@ -15,5 +15,5 @@ export type DashboardTemplate = {
   created_by?: number | null
   image_url?: string | null
   readonly team_id: number | null
-  scope?: 'team' | 'global' | 'feature_flag' | '' | null
+  scope?: "team" | "global" | "feature_flag" | "" | null
 }

@@ -12,36 +12,36 @@ export type PropertyItem = {
    */
   value: string
   operator?:
-    | 'exact'
-    | 'is_not'
-    | 'icontains'
-    | 'not_icontains'
-    | 'regex'
-    | 'not_regex'
-    | 'gt'
-    | 'lt'
-    | 'gte'
-    | 'lte'
-    | 'is_set'
-    | 'is_not_set'
-    | 'is_date_exact'
-    | 'is_date_after'
-    | 'is_date_before'
-    | 'is_relative_date_after'
-    | 'is_relative_date_before'
-    | ''
+    | "exact"
+    | "is_not"
+    | "icontains"
+    | "not_icontains"
+    | "regex"
+    | "not_regex"
+    | "gt"
+    | "lt"
+    | "gte"
+    | "lte"
+    | "is_set"
+    | "is_not_set"
+    | "is_date_exact"
+    | "is_date_after"
+    | "is_date_before"
+    | "is_relative_date_after"
+    | "is_relative_date_before"
+    | ""
     | null
   type?:
-    | 'event'
-    | 'person'
-    | 'cohort'
-    | 'element'
-    | 'static-cohort'
-    | 'precalculated-cohort'
-    | 'group'
-    | 'recording'
-    | 'behavioral'
-    | 'session'
-    | 'hogql'
-    | ''
+    | "event"
+    | "person"
+    | "cohort"
+    | "element"
+    | "static-cohort"
+    | "precalculated-cohort"
+    | "group"
+    | "recording"
+    | "behavioral"
+    | "session"
+    | "hogql"
+    | ""
 }

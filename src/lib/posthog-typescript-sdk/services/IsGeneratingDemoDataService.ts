@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Team } from '../models/Team'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Team } from "../models/Team"
 export class IsGeneratingDemoDataService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -21,8 +21,8 @@ export class IsGeneratingDemoDataService {
     id: number
   }): CancelablePromise<Team> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{id}/is_generating_demo_data/',
+      method: "GET",
+      url: "/api/projects/{id}/is_generating_demo_data/",
       path: {
         id: id,
       },

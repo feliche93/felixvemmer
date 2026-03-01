@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedTeamBasicList } from '../models/PaginatedTeamBasicList'
-import type { PatchedTeam } from '../models/PatchedTeam'
-import type { Team } from '../models/Team'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedTeamBasicList } from "../models/PaginatedTeamBasicList"
+import type { PatchedTeam } from "../models/PatchedTeam"
+import type { Team } from "../models/Team"
 export class ProjectsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -28,8 +28,8 @@ export class ProjectsService {
     offset?: number
   }): CancelablePromise<PaginatedTeamBasicList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/',
+      method: "GET",
+      url: "/api/projects/",
       query: {
         limit: limit,
         offset: offset,
@@ -43,10 +43,10 @@ export class ProjectsService {
    */
   public create({ requestBody }: { requestBody?: Team }): CancelablePromise<Team> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/',
+      method: "POST",
+      url: "/api/projects/",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -63,8 +63,8 @@ export class ProjectsService {
     id: number
   }): CancelablePromise<Team> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{id}/',
+      method: "GET",
+      url: "/api/projects/{id}/",
       path: {
         id: id,
       },
@@ -86,13 +86,13 @@ export class ProjectsService {
     requestBody?: Team
   }): CancelablePromise<Team> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{id}/',
+      method: "PUT",
+      url: "/api/projects/{id}/",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -111,13 +111,13 @@ export class ProjectsService {
     requestBody?: PatchedTeam
   }): CancelablePromise<Team> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{id}/",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -134,8 +134,8 @@ export class ProjectsService {
     id: number
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{id}/",
       path: {
         id: id,
       },

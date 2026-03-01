@@ -1,7 +1,7 @@
-import { type RankingInfo, compareItems, rankItem } from '@tanstack/match-sorter-utils'
-import { type FilterFn, type SortingFn, sortingFns } from '@tanstack/table-core'
+import { compareItems, type RankingInfo, rankItem } from "@tanstack/match-sorter-utils"
+import { type FilterFn, type SortingFn, sortingFns } from "@tanstack/table-core"
 
-declare module '@tanstack/table-core' {
+declare module "@tanstack/table-core" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>
   }
@@ -10,7 +10,7 @@ declare module '@tanstack/table-core' {
   }
 }
 
-const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+const fuzzyFilter: FilterFn<unknown> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value)
 
@@ -23,7 +23,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed
 }
 
-const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
+const fuzzySort: SortingFn<unknown> = (rowA, rowB, columnId) => {
   let dir = 0
 
   const rankA = rowA.columnFiltersMeta[columnId]?.itemRank
@@ -38,11 +38,12 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir
 }
 
-const isWithinRange: FilterFn<any> = (row, columnId, value) => {
-  const date = new Date(row.getValue(columnId))
-  let [start, end] = value
-  start = start ? new Date(start) : null
-  end = end ? new Date(end) : null
+const isWithinRange: FilterFn<unknown> = (row, columnId, value) => {
+  const rowValue = row.getValue(columnId)
+  const date = new Date((rowValue as string | number | Date | null | undefined) ?? "")
+  let [start, end] = Array.isArray(value) ? value : [null, null]
+  start = start ? new Date(start as string | number | Date) : null
+  end = end ? new Date(end as string | number | Date) : null
   //If one filter defined and date is null filter it
   if ((start || end) && !date) return false
   if (start && !end) {

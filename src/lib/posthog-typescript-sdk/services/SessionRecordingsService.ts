@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedSessionRecordingList } from '../models/PaginatedSessionRecordingList'
-import type { SessionRecording } from '../models/SessionRecording'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedSessionRecordingList } from "../models/PaginatedSessionRecordingList"
+import type { SessionRecording } from "../models/SessionRecording"
 export class SessionRecordingsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -31,8 +31,8 @@ export class SessionRecordingsService {
     offset?: number
   }): CancelablePromise<PaginatedSessionRecordingList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recordings/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recordings/",
       path: {
         project_id: projectId,
       },
@@ -60,8 +60,8 @@ export class SessionRecordingsService {
     projectId: string
   }): CancelablePromise<SessionRecording> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recordings/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recordings/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -86,8 +86,8 @@ export class SessionRecordingsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/session_recordings/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/session_recordings/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -114,14 +114,14 @@ export class SessionRecordingsService {
     requestBody?: SessionRecording
   }): CancelablePromise<SessionRecording> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/session_recordings/{id}/persist/',
+      method: "POST",
+      url: "/api/projects/{project_id}/session_recordings/{id}/persist/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -151,8 +151,8 @@ export class SessionRecordingsService {
     projectId: string
   }): CancelablePromise<SessionRecording> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recordings/{id}/snapshots/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recordings/{id}/snapshots/",
       path: {
         id: id,
         project_id: projectId,
@@ -177,8 +177,8 @@ export class SessionRecordingsService {
     projectId: string
   }): CancelablePromise<SessionRecording> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recordings/matching_events/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recordings/matching_events/",
       path: {
         project_id: projectId,
       },
@@ -197,8 +197,8 @@ export class SessionRecordingsService {
     projectId: string
   }): CancelablePromise<SessionRecording> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recordings/properties/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recordings/properties/",
       path: {
         project_id: projectId,
       },

@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class TrackerTaskAufgabeService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -37,7 +37,7 @@ export class TrackerTaskAufgabeService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
     /**
      * Filter by project id
      */
@@ -48,8 +48,8 @@ export class TrackerTaskAufgabeService {
     propositionId?: number
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/tracker/tasks',
+      method: "GET",
+      url: "/tracker/tasks",
       query: {
         page: page,
         page_size: pageSize,
@@ -88,10 +88,10 @@ export class TrackerTaskAufgabeService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/tracker/tasks',
+      method: "POST",
+      url: "/tracker/tasks",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Task could not be created`,
       },
@@ -113,8 +113,8 @@ export class TrackerTaskAufgabeService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/tracker/tasks/{id}',
+      method: "GET",
+      url: "/tracker/tasks/{id}",
       path: {
         id: id,
       },
@@ -156,13 +156,13 @@ export class TrackerTaskAufgabeService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/tracker/tasks/{id}',
+      method: "PUT",
+      url: "/tracker/tasks/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified task was not found`,
       },
@@ -184,8 +184,8 @@ export class TrackerTaskAufgabeService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/tracker/tasks/{id}',
+      method: "DELETE",
+      url: "/tracker/tasks/{id}",
       path: {
         id: id,
       },
@@ -210,8 +210,8 @@ export class TrackerTaskAufgabeService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/tracker/tasks/{id}/archive',
+      method: "POST",
+      url: "/tracker/tasks/{id}/archive",
       path: {
         id: id,
       },
@@ -233,8 +233,8 @@ export class TrackerTaskAufgabeService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/tracker/tasks/{id}/unarchive',
+      method: "POST",
+      url: "/tracker/tasks/{id}/unarchive",
       path: {
         id: id,
       },

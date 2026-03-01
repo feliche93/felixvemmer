@@ -1,51 +1,51 @@
-'use client'
+"use client"
 
-import { AudioWaveform, Command, GalleryVerticalEnd, Package } from 'lucide-react'
-import type * as React from 'react'
+import { AudioWaveform, Command, GalleryVerticalEnd, Package } from "lucide-react"
+import type * as React from "react"
 
-import { NavMain } from '@/components/nav-main'
+import { NavMain } from "@/components/nav-main"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from '@/components/ui/sidebar'
+} from "@/components/ui/sidebar"
 
 // This is sample data.
 const data = {
   user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
   },
   teams: [
     {
-      name: 'Acme Inc',
+      name: "Acme Inc",
       logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
+      plan: "Enterprise",
     },
     {
-      name: 'Acme Corp.',
+      name: "Acme Corp.",
       logo: AudioWaveform,
-      plan: 'Startup',
+      plan: "Startup",
     },
     {
-      name: 'Evil Corp.',
+      name: "Evil Corp.",
       logo: Command,
-      plan: 'Free',
+      plan: "Free",
     },
   ],
   navMain: [
     {
-      title: 'TBD',
-      url: '/',
+      title: "TBD",
+      url: "/",
       icon: Package,
       isActive: true,
       items: [
         {
-          title: 'TBD',
-          url: '/',
+          title: "TBD",
+          url: "/",
         },
         // {
         //   title: 'Starred',

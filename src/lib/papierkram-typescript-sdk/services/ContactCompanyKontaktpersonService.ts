@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class ContactCompanyKontaktpersonService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -40,11 +40,11 @@ export class ContactCompanyKontaktpersonService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/contact/companies/{company_id}/persons',
+      method: "GET",
+      url: "/contact/companies/{company_id}/persons",
       path: {
         company_id: companyId,
       },
@@ -89,13 +89,13 @@ export class ContactCompanyKontaktpersonService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/contact/companies/{company_id}/persons',
+      method: "POST",
+      url: "/contact/companies/{company_id}/persons",
       path: {
         company_id: companyId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Person could not be created`,
       },
@@ -122,8 +122,8 @@ export class ContactCompanyKontaktpersonService {
     id: number
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/contact/companies/{company_id}/persons/{id}',
+      method: "GET",
+      url: "/contact/companies/{company_id}/persons/{id}",
       path: {
         company_id: companyId,
         id: id,
@@ -171,14 +171,14 @@ export class ContactCompanyKontaktpersonService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/contact/companies/{company_id}/persons/{id}',
+      method: "PUT",
+      url: "/contact/companies/{company_id}/persons/{id}",
       path: {
         company_id: companyId,
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified person was not found`,
       },
@@ -205,8 +205,8 @@ export class ContactCompanyKontaktpersonService {
     id: number
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/contact/companies/{company_id}/persons/{id}',
+      method: "DELETE",
+      url: "/contact/companies/{company_id}/persons/{id}",
       path: {
         company_id: companyId,
         id: id,

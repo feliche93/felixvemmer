@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { Dashboard } from '../models/Dashboard'
-import type { PaginatedDashboardBasicList } from '../models/PaginatedDashboardBasicList'
-import type { PatchedDashboard } from '../models/PatchedDashboard'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { Dashboard } from "../models/Dashboard"
+import type { PaginatedDashboardBasicList } from "../models/PaginatedDashboardBasicList"
+import type { PatchedDashboard } from "../models/PatchedDashboard"
 export class DashboardsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -32,8 +32,8 @@ export class DashboardsService {
     offset?: number
   }): CancelablePromise<PaginatedDashboardBasicList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/dashboards/',
+      method: "GET",
+      url: "/api/projects/{project_id}/dashboards/",
       path: {
         project_id: projectId,
       },
@@ -58,13 +58,13 @@ export class DashboardsService {
     requestBody?: Dashboard
   }): CancelablePromise<Dashboard> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/dashboards/',
+      method: "POST",
+      url: "/api/projects/{project_id}/dashboards/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -85,8 +85,8 @@ export class DashboardsService {
     projectId: string
   }): CancelablePromise<Dashboard> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/dashboards/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/dashboards/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -113,14 +113,14 @@ export class DashboardsService {
     requestBody?: Dashboard
   }): CancelablePromise<Dashboard> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/dashboards/{id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/dashboards/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -143,14 +143,14 @@ export class DashboardsService {
     requestBody?: PatchedDashboard
   }): CancelablePromise<Dashboard> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/dashboards/{id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/dashboards/{id}/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -172,8 +172,8 @@ export class DashboardsService {
     projectId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/dashboards/{id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/dashboards/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -203,14 +203,14 @@ export class DashboardsService {
     requestBody?: PatchedDashboard
   }): CancelablePromise<Dashboard> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/dashboards/{id}/move_tile/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/dashboards/{id}/move_tile/",
       path: {
         id: id,
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -228,13 +228,13 @@ export class DashboardsService {
     requestBody?: Dashboard
   }): CancelablePromise<Dashboard> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/dashboards/create_from_template_json/',
+      method: "POST",
+      url: "/api/projects/{project_id}/dashboards/create_from_template_json/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
 }

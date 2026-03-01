@@ -1,8 +1,7 @@
 // core/structured.tsx
 
-import { siteConfig } from '@/config/site'
-import Script from 'next/script'
-import type React from 'react'
+import Script from "next/script"
+import type React from "react"
 import type {
   Article,
   BreadcrumbList,
@@ -11,7 +10,8 @@ import type {
   Person,
   WebSite,
   WithContext,
-} from 'schema-dts'
+} from "schema-dts"
+import { siteConfig } from "@/config/site"
 
 // Define a TypeScript type for the component's props
 interface NewsArticleProps {
@@ -42,29 +42,29 @@ export const NewsArticleStructuredData: React.FC<NewsArticleProps> = ({
 
   // Define the structured data
   const structuredData: WithContext<Article> = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    '@id': id,
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": id,
     headline: headline,
     datePublished: isoDatePublished,
     dateModified: isoDateModified,
     author: authorData,
     commentCount: commentCount,
     image: {
-      '@type': 'ImageObject',
+      "@type": "ImageObject",
       url: imageUrl,
-      width: '1200',
-      height: '630',
+      width: "1200",
+      height: "630",
     },
     articleSection: articleSection,
-    keywords: keywords.join(', '),
+    keywords: keywords.join(", "),
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${siteConfig.url}/${id}`,
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/${id}`,
     },
     publisher: authorData,
     thumbnailUrl: imageUrl,
-    inLanguage: 'en-US',
+    inLanguage: "en-US",
   }
 
   // Return the structured data inside a script tag
@@ -79,27 +79,27 @@ export const NewsArticleStructuredData: React.FC<NewsArticleProps> = ({
 }
 
 const organizationData: WithContext<Organization> = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'FV Ventures UG',
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "FV Ventures UG",
   url: siteConfig.url,
   logo: siteConfig.ogImage,
 }
 
 const authorData: WithContext<Person> = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Felix Vemmer',
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Felix Vemmer",
   url: siteConfig.url,
   image: siteConfig.logo,
   sameAs: [siteConfig.links.github, siteConfig.links.linkedin, siteConfig.links.twitter],
-  jobTitle: 'Full-Stack Developer & Indiepreneur',
+  jobTitle: "Full-Stack Developer & Indiepreneur",
   worksFor: organizationData,
 }
 
 const websiteData: WithContext<WebSite> = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
   name: siteConfig.name,
   url: siteConfig.url,
   publisher: authorData,
@@ -108,8 +108,8 @@ const websiteData: WithContext<WebSite> = {
 // Define the StructuredData component
 export const StructuredData: React.FC = () => {
   const graph: Graph = {
-    '@context': 'https://schema.org',
-    '@graph': [organizationData, websiteData, authorData],
+    "@context": "https://schema.org",
+    "@graph": [organizationData, websiteData, authorData],
   }
   return (
     <Script
@@ -126,10 +126,10 @@ export const BreadCrumbStructuredData = ({
   itemListElement: { name: string; href?: string }[]
 }) => {
   const structuredData: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: itemListElement.map((item, i) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: i + 1,
       name: item.name,
       item: item.href,

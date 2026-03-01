@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PluginConfig } from './PluginConfig'
+import type { PluginConfig } from "./PluginConfig"
 export type PaginatedPluginConfigList = {
   count?: number
   next?: string | null

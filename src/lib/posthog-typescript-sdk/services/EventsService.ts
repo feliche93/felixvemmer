@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { ClickhouseEvent } from '../models/ClickhouseEvent'
-import type { PaginatedClickhouseEventList } from '../models/PaginatedClickhouseEventList'
-import type { Property } from '../models/Property'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { ClickhouseEvent } from "../models/ClickhouseEvent"
+import type { PaginatedClickhouseEventList } from "../models/PaginatedClickhouseEventList"
+import type { Property } from "../models/Property"
 export class EventsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -47,7 +47,7 @@ export class EventsService {
      * Filter list by event. For example `user sign up` or `$pageview`.
      */
     event?: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
     /**
      * The maximum number of results to return
      */
@@ -74,8 +74,8 @@ export class EventsService {
     where?: Array<string>
   }): CancelablePromise<PaginatedClickhouseEventList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/events/',
+      method: "GET",
+      url: "/api/projects/{project_id}/events/",
       path: {
         project_id: projectId,
       },
@@ -108,11 +108,11 @@ export class EventsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<ClickhouseEvent> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/events/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/events/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -134,11 +134,11 @@ export class EventsService {
      * Project ID of the project you're trying to access. To find the ID of the project, make a call to /api/projects/.
      */
     projectId: string
-    format?: 'csv' | 'json'
+    format?: "csv" | "json"
   }): CancelablePromise<ClickhouseEvent> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/events/values/',
+      method: "GET",
+      url: "/api/projects/{project_id}/events/values/",
       path: {
         project_id: projectId,
       },

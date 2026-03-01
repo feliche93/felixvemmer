@@ -1,12 +1,12 @@
-import clsx from 'clsx'
+import clsx from "clsx"
 
-import { Border } from '@/components/ui/border'
-import { FadeIn, FadeInStagger } from '@/components/ui/fade-in'
+import { Border } from "@/components/ui/border"
+import { FadeIn, FadeInStagger } from "@/components/ui/fade-in"
 
 export function List({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <FadeInStagger>
-      <ul role="list" className={clsx('text-base text-muted-foreground', className)}>
+      <ul role="list" className={clsx("text-base text-muted-foreground", className)}>
         {children}
       </ul>
     </FadeInStagger>

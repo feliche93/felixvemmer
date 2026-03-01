@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import type { FC } from 'react'
-import LiteYouTubeEmbed from 'react-lite-youtube-embed'
-import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+import type { FC } from "react"
+import LiteYouTubeEmbed from "react-lite-youtube-embed"
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css"
 
 export interface YouTubeEmbedProps {
   id: string
@@ -10,7 +10,7 @@ export interface YouTubeEmbedProps {
   params?: string
   playlist?: boolean
   playlistCoverId?: string
-  poster?: 'hqdefault' | 'mqdefault' | 'sddefault' | 'maxresdefault'
+  poster?: "hqdefault" | "mqdefault" | "sddefault" | "maxresdefault"
   title: string
   noCookie?: boolean
 }
@@ -21,7 +21,7 @@ export const YouTubeEmbed: FC<YouTubeEmbedProps> = ({
   params,
   playlist = false,
   playlistCoverId,
-  poster = 'maxresdefault',
+  poster = "maxresdefault",
   noCookie = true,
 }) => {
   return (

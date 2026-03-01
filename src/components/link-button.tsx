@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
-import type { FC } from 'react'
-import { type ButtonProps, buttonVariants } from './ui/button'
+import Link from "next/link"
+import type { FC } from "react"
+import { cn } from "@/lib/utils"
+import { type ButtonProps, buttonVariants } from "./ui/button"
 
 export interface LinkButtonProps extends ButtonProps {
   href: string

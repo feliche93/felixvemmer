@@ -1,6 +1,6 @@
-import { Cross2Icon } from '@radix-ui/react-icons'
-import type { FC } from 'react'
-import { Button } from '../ui/button'
+import { Cross2Icon } from "@radix-ui/react-icons"
+import type { FC } from "react"
+import { Button } from "../ui/button"
 
 export interface DataTableResetFilterProps {
   isFiltered: boolean

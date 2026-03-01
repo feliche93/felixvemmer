@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ClickhouseEvent } from './ClickhouseEvent'
+import type { ClickhouseEvent } from "./ClickhouseEvent"
 export type PaginatedClickhouseEventList = {
   count?: number
   next?: string | null

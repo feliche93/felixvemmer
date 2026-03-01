@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
 
 export class IncomeInvoiceRechnungService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
@@ -39,7 +39,7 @@ export class IncomeInvoiceRechnungService {
     /**
      * Order direction (must be used with order_by)
      */
-    orderDirection?: Array<'asc' | 'desc'>
+    orderDirection?: Array<"asc" | "desc">
     /**
      * Filter by company id
      */
@@ -58,8 +58,8 @@ export class IncomeInvoiceRechnungService {
     documentDateRangeEnd?: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/invoices',
+      method: "GET",
+      url: "/income/invoices",
       query: {
         page: page,
         page_size: pageSize,
@@ -129,10 +129,10 @@ export class IncomeInvoiceRechnungService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/invoices',
+      method: "POST",
+      url: "/income/invoices",
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Invoice could not be created`,
       },
@@ -154,8 +154,8 @@ export class IncomeInvoiceRechnungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/invoices/{id}',
+      method: "GET",
+      url: "/income/invoices/{id}",
       path: {
         id: id,
       },
@@ -226,13 +226,13 @@ export class IncomeInvoiceRechnungService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/income/invoices/{id}',
+      method: "PUT",
+      url: "/income/invoices/{id}",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         404: `The specified invoice was not found`,
         422: `The specified invoice cannot be edited anymore`,
@@ -255,8 +255,8 @@ export class IncomeInvoiceRechnungService {
     id: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/income/invoices/{id}',
+      method: "DELETE",
+      url: "/income/invoices/{id}",
       path: {
         id: id,
       },
@@ -281,8 +281,8 @@ export class IncomeInvoiceRechnungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/invoices/{id}/archive',
+      method: "POST",
+      url: "/income/invoices/{id}/archive",
       path: {
         id: id,
       },
@@ -304,8 +304,8 @@ export class IncomeInvoiceRechnungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/invoices/{id}/unarchive',
+      method: "POST",
+      url: "/income/invoices/{id}/unarchive",
       path: {
         id: id,
       },
@@ -327,8 +327,8 @@ export class IncomeInvoiceRechnungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/invoices/{id}/cancel',
+      method: "POST",
+      url: "/income/invoices/{id}/cancel",
       path: {
         id: id,
       },
@@ -353,7 +353,7 @@ export class IncomeInvoiceRechnungService {
      */
     id: string
     requestBody?: {
-      send_via: 'email' | 'pdf' | null
+      send_via: "email" | "pdf" | null
       email?: {
         recipient: string
         subject: string
@@ -362,13 +362,13 @@ export class IncomeInvoiceRechnungService {
     }
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/income/invoices/{id}/deliver',
+      method: "POST",
+      url: "/income/invoices/{id}/deliver",
       path: {
         id: id,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
       errors: {
         422: `Invalid templates`,
       },
@@ -389,8 +389,8 @@ export class IncomeInvoiceRechnungService {
     id: string
   }): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/income/invoices/{id}/pdf',
+      method: "GET",
+      url: "/income/invoices/{id}/pdf",
       path: {
         id: id,
       },

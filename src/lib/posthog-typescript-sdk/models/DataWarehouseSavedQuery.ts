@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserBasic } from './UserBasic'
+import type { UserBasic } from "./UserBasic"
 export type DataWarehouseSavedQuery = {
   readonly id: string
   deleted?: boolean | null
@@ -16,17 +16,17 @@ export type DataWarehouseSavedQuery = {
   readonly columns: Array<{
     key: string
     type:
-      | 'integer'
-      | 'float'
-      | 'string'
-      | 'datetime'
-      | 'date'
-      | 'boolean'
-      | 'array'
-      | 'json'
-      | 'lazy_table'
-      | 'virtual_table'
-      | 'field_traverser'
+      | "integer"
+      | "float"
+      | "string"
+      | "datetime"
+      | "date"
+      | "boolean"
+      | "array"
+      | "json"
+      | "lazy_table"
+      | "virtual_table"
+      | "field_traverser"
     fields?: Array<string>
     table?: string
     chain?: Array<string>

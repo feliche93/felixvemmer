@@ -1,9 +1,7 @@
-'use client'
+"use client"
 
 import {
   type FilterFn,
-  type TableOptions,
-  type TableState,
   filterFns,
   getCoreRowModel,
   getFacetedRowModel,
@@ -11,28 +9,29 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  type TableOptions,
+  type TableState,
   useReactTable,
-} from '@tanstack/react-table'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import type * as React from 'react'
-import { z } from 'zod'
-
-import { fuzzyFilter } from '@/components/ui/filter-functions'
-import { usePage, usePerPage } from '@/hooks/use-table-pagination'
-import type { DataTableFilterField } from '@/types'
-import { parseAsString, parseAsStringLiteral, useQueryState } from 'nuqs'
+} from "@tanstack/react-table"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { parseAsString, parseAsStringLiteral, useQueryState } from "nuqs"
+import type * as React from "react"
+import { z } from "zod"
+import { fuzzyFilter } from "@/components/ui/filter-functions"
+import { usePage, usePerPage } from "@/hooks/use-table-pagination"
+import type { DataTableFilterField } from "@/types"
 
 interface UseDataTableProps<TData>
   extends Omit<
       TableOptions<TData>,
-      | 'pageCount'
-      | 'getCoreRowModel'
-      | 'manualFiltering'
-      | 'manualPagination'
-      | 'manualSorting'
-      | 'filterFns'
+      | "pageCount"
+      | "getCoreRowModel"
+      | "manualFiltering"
+      | "manualPagination"
+      | "manualSorting"
+      | "filterFns"
     >,
-    Required<Pick<TableOptions<TData>, 'pageCount'>> {
+    Required<Pick<TableOptions<TData>, "pageCount">> {
   /**
    * Defines filter fields for the table. Supports both dynamic faceted filters and search filters.
    * - Faceted filters are rendered when `options` are provided for a filter field.
@@ -76,7 +75,7 @@ interface UseDataTableProps<TData>
    * - "replace" - Replaces the current entry on the history stack.
    * @default "replace"
    */
-  method?: 'push' | 'replace'
+  method?: "push" | "replace"
 
   /**
    * Indicates whether the page should scroll to the top when the URL changes.
@@ -93,7 +92,7 @@ interface UseDataTableProps<TData>
   startTransition?: React.TransitionStartFunction
 
   // Extend to make the sorting id typesafe
-  initialState?: Omit<Partial<TableState>, 'sorting'> & {
+  initialState?: Omit<Partial<TableState>, "sorting"> & {
     sorting?: {
       id: Extract<keyof TData, string>
       desc: boolean
@@ -111,7 +110,7 @@ export function useDataTable<TData>({
   pageCount = -1,
   filterFields = [],
   enableAdvancedFilter = false,
-  method = 'replace',
+  method = "replace",
   scroll = false,
   startTransition,
   ...props
@@ -120,10 +119,10 @@ export function useDataTable<TData>({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const sortOrder = ['asc', 'desc'] as const
+  const sortOrder = ["asc", "desc"] as const
 
   const [sortDir, setSortDir] = useQueryState(
-    'sortDir',
+    "sortDir",
     parseAsStringLiteral(sortOrder).withOptions({
       shallow: false,
       clearOnDefault: true,
@@ -132,7 +131,7 @@ export function useDataTable<TData>({
   )
 
   const [sortCol, setSortCol] = useQueryState(
-    'sortCol',
+    "sortCol",
     parseAsString.withOptions({
       shallow: false,
       clearOnDefault: true,
@@ -160,7 +159,7 @@ export function useDataTable<TData>({
           ? [
               {
                 id: sortCol,
-                desc: sortDir === 'desc',
+                desc: sortDir === "desc",
               },
             ]
           : []),

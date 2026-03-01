@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { ExportedAsset } from '../models/ExportedAsset'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { ExportedAsset } from "../models/ExportedAsset"
 export class ExportsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -22,13 +22,13 @@ export class ExportsService {
     requestBody: ExportedAsset
   }): CancelablePromise<ExportedAsset> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/exports/',
+      method: "POST",
+      url: "/api/projects/{project_id}/exports/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -49,8 +49,8 @@ export class ExportsService {
     projectId: string
   }): CancelablePromise<ExportedAsset> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/exports/{id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/exports/{id}/",
       path: {
         id: id,
         project_id: projectId,
@@ -75,8 +75,8 @@ export class ExportsService {
     projectId: string
   }): CancelablePromise<ExportedAsset> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/exports/{id}/content/',
+      method: "GET",
+      url: "/api/projects/{project_id}/exports/{id}/content/",
       path: {
         id: id,
         project_id: projectId,

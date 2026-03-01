@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Annotation } from './Annotation'
+import type { Annotation } from "./Annotation"
 export type PaginatedAnnotationList = {
   count?: number
   next?: string | null

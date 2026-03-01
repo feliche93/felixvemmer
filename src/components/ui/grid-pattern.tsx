@@ -1,13 +1,13 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import { useEffect, useId, useRef, useState } from 'react'
+import { motion } from "framer-motion"
+import { useEffect, useId, useRef, useState } from "react"
 
 function Block({
   x,
   y,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof motion.path>, 'x' | 'y'> & {
+}: Omit<React.ComponentPropsWithoutRef<typeof motion.path>, "x" | "y"> & {
   x: number
   y: number
 }) {
@@ -24,12 +24,12 @@ export function GridPattern({
   yOffset = 0,
   interactive = false,
   ...props
-}: React.ComponentPropsWithoutRef<'svg'> & {
+}: React.ComponentPropsWithoutRef<"svg"> & {
   yOffset?: number
   interactive?: boolean
 }) {
   const id = useId()
-  const ref = useRef<React.ElementRef<'svg'>>(null)
+  const ref = useRef<React.ElementRef<"svg">>(null)
   const currentBlock = useRef<[x: number, y: number] | undefined>(undefined)
   const counter = useRef(0)
   const [hoveredBlocks, setHoveredBlocks] = useState<Array<[x: number, y: number, key: number]>>([])
@@ -80,10 +80,10 @@ export function GridPattern({
       })
     }
 
-    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener("mousemove", onMouseMove)
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener("mousemove", onMouseMove)
     }
   }, [yOffset, interactive])
 

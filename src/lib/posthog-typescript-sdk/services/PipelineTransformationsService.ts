@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedPluginList } from '../models/PaginatedPluginList'
-import type { PatchedPlugin } from '../models/PatchedPlugin'
-import type { Plugin } from '../models/Plugin'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedPluginList } from "../models/PaginatedPluginList"
+import type { PatchedPlugin } from "../models/PatchedPlugin"
+import type { Plugin } from "../models/Plugin"
 export class PipelineTransformationsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -29,8 +29,8 @@ export class PipelineTransformationsService {
     offset?: number
   }): CancelablePromise<PaginatedPluginList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -52,13 +52,13 @@ export class PipelineTransformationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -76,8 +76,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -101,14 +101,14 @@ export class PipelineTransformationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "PUT",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -128,14 +128,14 @@ export class PipelineTransformationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -153,8 +153,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/',
+      method: "DELETE",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -176,8 +176,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/check_for_updates/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/check_for_updates/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -199,8 +199,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/source/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
@@ -224,14 +224,14 @@ export class PipelineTransformationsService {
     requestBody?: PatchedPlugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/update_source/',
+      method: "PATCH",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/update_source/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -251,14 +251,14 @@ export class PipelineTransformationsService {
     requestBody?: Plugin
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/upgrade/',
+      method: "POST",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/{id}/upgrade/",
       path: {
         id: id,
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -271,8 +271,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/activity/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/activity/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -288,8 +288,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/repository/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/repository/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },
@@ -305,8 +305,8 @@ export class PipelineTransformationsService {
     parentLookupOrganizationId: string
   }): CancelablePromise<Plugin> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/unused/',
+      method: "GET",
+      url: "/api/organizations/{parent_lookup_organization_id}/pipeline_transformations/unused/",
       path: {
         parent_lookup_organization_id: parentLookupOrganizationId,
       },

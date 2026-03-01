@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MinimalFeatureFlag } from './MinimalFeatureFlag'
-import type { UserBasic } from './UserBasic'
+import type { MinimalFeatureFlag } from "./MinimalFeatureFlag"
+import type { UserBasic } from "./UserBasic"
 export type PatchedExperiment = {
   readonly id?: number
   name?: string

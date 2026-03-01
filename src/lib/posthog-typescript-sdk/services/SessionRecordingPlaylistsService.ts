@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BaseHttpRequest } from '../core/BaseHttpRequest'
-import type { CancelablePromise } from '../core/CancelablePromise'
-import type { PaginatedSessionRecordingPlaylistList } from '../models/PaginatedSessionRecordingPlaylistList'
-import type { PatchedSessionRecordingPlaylist } from '../models/PatchedSessionRecordingPlaylist'
-import type { SessionRecordingPlaylist } from '../models/SessionRecordingPlaylist'
+import type { BaseHttpRequest } from "../core/BaseHttpRequest"
+import type { CancelablePromise } from "../core/CancelablePromise"
+import type { PaginatedSessionRecordingPlaylistList } from "../models/PaginatedSessionRecordingPlaylistList"
+import type { PatchedSessionRecordingPlaylist } from "../models/PatchedSessionRecordingPlaylist"
+import type { SessionRecordingPlaylist } from "../models/SessionRecordingPlaylist"
 export class SessionRecordingPlaylistsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
@@ -36,8 +36,8 @@ export class SessionRecordingPlaylistsService {
     shortId?: string
   }): CancelablePromise<PaginatedSessionRecordingPlaylistList> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recording_playlists/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recording_playlists/",
       path: {
         project_id: projectId,
       },
@@ -64,13 +64,13 @@ export class SessionRecordingPlaylistsService {
     requestBody?: SessionRecordingPlaylist
   }): CancelablePromise<SessionRecordingPlaylist> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/session_recording_playlists/',
+      method: "POST",
+      url: "/api/projects/{project_id}/session_recording_playlists/",
       path: {
         project_id: projectId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -88,8 +88,8 @@ export class SessionRecordingPlaylistsService {
     shortId: string
   }): CancelablePromise<SessionRecordingPlaylist> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/",
       path: {
         project_id: projectId,
         short_id: shortId,
@@ -113,14 +113,14 @@ export class SessionRecordingPlaylistsService {
     requestBody?: SessionRecordingPlaylist
   }): CancelablePromise<SessionRecordingPlaylist> {
     return this.httpRequest.request({
-      method: 'PUT',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/',
+      method: "PUT",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/",
       path: {
         project_id: projectId,
         short_id: shortId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -140,14 +140,14 @@ export class SessionRecordingPlaylistsService {
     requestBody?: PatchedSessionRecordingPlaylist
   }): CancelablePromise<SessionRecordingPlaylist> {
     return this.httpRequest.request({
-      method: 'PATCH',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/',
+      method: "PATCH",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/",
       path: {
         project_id: projectId,
         short_id: shortId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -166,8 +166,8 @@ export class SessionRecordingPlaylistsService {
     shortId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/",
       path: {
         project_id: projectId,
         short_id: shortId,
@@ -192,8 +192,8 @@ export class SessionRecordingPlaylistsService {
     shortId: string
   }): CancelablePromise<SessionRecordingPlaylist> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/recordings/',
+      method: "GET",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/recordings/",
       path: {
         project_id: projectId,
         short_id: shortId,
@@ -219,15 +219,15 @@ export class SessionRecordingPlaylistsService {
     requestBody?: SessionRecordingPlaylist
   }): CancelablePromise<SessionRecordingPlaylist> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/recordings/{session_recording_id}/',
+      method: "POST",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/recordings/{session_recording_id}/",
       path: {
         project_id: projectId,
         session_recording_id: sessionRecordingId,
         short_id: shortId,
       },
       body: requestBody,
-      mediaType: 'application/json',
+      mediaType: "application/json",
     })
   }
   /**
@@ -247,8 +247,8 @@ export class SessionRecordingPlaylistsService {
     shortId: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
-      method: 'DELETE',
-      url: '/api/projects/{project_id}/session_recording_playlists/{short_id}/recordings/{session_recording_id}/',
+      method: "DELETE",
+      url: "/api/projects/{project_id}/session_recording_playlists/{short_id}/recordings/{session_recording_id}/",
       path: {
         project_id: projectId,
         session_recording_id: sessionRecordingId,

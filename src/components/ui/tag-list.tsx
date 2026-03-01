@@ -1,5 +1,5 @@
-import clsx from 'clsx'
-import { Badge } from './badge'
+import clsx from "clsx"
+import { Badge } from "./badge"
 
 export function TagList({
   children,
@@ -9,7 +9,7 @@ export function TagList({
   className?: string
 }) {
   return (
-    <ul role="list" className={clsx(className, 'flex flex-wrap gap-4')}>
+    <ul role="list" className={clsx(className, "flex flex-wrap gap-4")}>
       {children}
     </ul>
   )
@@ -22,5 +22,5 @@ export function TagListItem({
   children: React.ReactNode
   className?: string
 }) {
-  return <Badge size={'lg'}>{children}</Badge>
+  return <Badge size={"lg"}>{children}</Badge>
 }

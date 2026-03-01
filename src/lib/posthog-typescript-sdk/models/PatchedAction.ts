@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ActionStep } from './ActionStep'
-import type { UserBasic } from './UserBasic'
+import type { ActionStep } from "./ActionStep"
+import type { UserBasic } from "./UserBasic"
 /**
  * Serializer mixin that resolves appropriate response for tags depending on license.
  */

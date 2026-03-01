@@ -1,7 +1,7 @@
-import { type Table as TanstackTable, flexRender } from '@tanstack/react-table'
-import type * as React from 'react'
+import { flexRender, type Table as TanstackTable } from "@tanstack/react-table"
+import type * as React from "react"
 
-import { DataTablePagination } from '@/components/data-table/data-table-pagination'
+import { DataTablePagination } from "@/components/data-table/data-table-pagination"
 import {
   Table,
   TableBody,
@@ -9,10 +9,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { getCommonPinningStyles } from '@/lib/data-table'
-import { cn } from '@/lib/utils'
-import { DataTableViewOptions } from './data-table-view-options'
+} from "@/components/ui/table"
+import { getCommonPinningStyles } from "@/lib/data-table"
+import { cn } from "@/lib/utils"
+import { DataTableViewOptions } from "./data-table-view-options"
 
 interface DataTableProps<TData> extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -38,7 +38,7 @@ export function DataTable<TData>({
   ...props
 }: DataTableProps<TData>) {
   return (
-    <div className={cn('w-full space-y-2.5 overflow-auto p-1', className)} {...props}>
+    <div className={cn("w-full space-y-2.5 overflow-auto p-1", className)} {...props}>
       <div className="grid grid-cols-1 items-start justify-between gap-2 sm:flex">
         {children}
         <DataTableViewOptions table={table} />
@@ -69,7 +69,7 @@ export function DataTable<TData>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
