@@ -8,7 +8,9 @@ import { drizzle as drizzleHttp } from "drizzle-orm/neon-http"
 import { users } from "../drizzle/schema/auth/schema"
 import { newId } from "../src/lib/auth/ids"
 
-dotenv.config({ path: ".env.local" })
+if (!process.env.CLERK_SECRET_KEY || !process.env.DATABASE_URL) {
+  dotenv.config({ path: ".env.local" })
+}
 
 type ClerkEmailAddress = {
   id: string

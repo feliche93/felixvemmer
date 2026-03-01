@@ -1,50 +1,60 @@
-FROM node:20-alpine AS base
-
-# Install dependencies only when needed
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
+FROM oven/bun:1.3.10-alpine AS base
 WORKDIR /app
 
-# Copy package files
-COPY package.json pnpm-lock.yaml* .npmrc* ./
+RUN apk add --no-cache bash curl libc6-compat nodejs npm \
+  && npm install -g @infisical/cli
 
-# Install dependencies using pnpm
-RUN corepack enable pnpm && pnpm i --frozen-lockfile
+FROM base AS deps
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
-# Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
-# Copy dependencies from deps stage
-COPY --from=deps /app/node_modules ./node_modules
+ARG INFISICAL_MACHINE_CLIENT_ID
+ARG INFISICAL_MACHINE_CLIENT_SECRET
+ARG INFISICAL_PROJECT_ID
+ARG INFISICAL_SECRET_ENV
+ARG INFISICAL_API_URL
+ARG INFISICAL_DOMAIN
+ARG INFISICAL_SECRET_PATH=/
 
-# Copy source code
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the application
-RUN corepack enable pnpm && pnpm run build
+RUN chmod +x ./scripts/with-infisical.sh ./entrypoint.sh
 
-# Production image, copy all the files and run next
+RUN set -eu; \
+  if [ -n "${INFISICAL_DOMAIN:-}" ]; then INFISICAL_DOMAIN_FLAG="--domain=${INFISICAL_DOMAIN}"; \
+  elif [ -n "${INFISICAL_API_URL:-}" ]; then INFISICAL_DOMAIN_FLAG="--domain=${INFISICAL_API_URL}"; else INFISICAL_DOMAIN_FLAG=""; fi; \
+  export INFISICAL_TOKEN="$(infisical login ${INFISICAL_DOMAIN_FLAG} --method=universal-auth \
+    --client-id="${INFISICAL_MACHINE_CLIENT_ID}" \
+    --client-secret="${INFISICAL_MACHINE_CLIENT_SECRET}" \
+    --silent \
+    --plain)"; \
+  export INFISICAL_ENV="${INFISICAL_SECRET_ENV:-staging}"; \
+  export INFISICAL_PATH="${INFISICAL_SECRET_PATH:-/}"; \
+  export INFISICAL_PROJECT_ID="${INFISICAL_PROJECT_ID}"; \
+  INFISICAL_TOKEN="$INFISICAL_TOKEN" infisical run --projectId="${INFISICAL_PROJECT_ID}" --env="$INFISICAL_ENV" --path="$INFISICAL_PATH" -- sh -c 'INFISICAL_SKIP=1 bun run migrate && INFISICAL_SKIP=1 bun run build'
+
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 
-# Copy public assets
 COPY --from=builder /app/public ./public
-
-# Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
 
 USER nextjs
 
 EXPOSE 3000
 
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
-
-CMD ["node", "server.js"]
+CMD ["./entrypoint.sh"]
