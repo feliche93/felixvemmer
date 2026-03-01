@@ -163,3 +163,6 @@ pip-delete-this-directory.txt
 
 # Clerk migration audit artifacts (contain private user mappings)
 scripts/clerk-user-id-mapping*.json
+
+# Local tmux dev session logs
+tmux-*.log

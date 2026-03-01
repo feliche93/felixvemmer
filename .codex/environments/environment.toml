@@ -1,0 +1,48 @@
+version = 1
+name = "felixvemmer"
+
+[setup]
+script = '''
+bun install
+bun run setup-env
+'''
+
+[[actions]]
+name = "🟢 Start `dev` session"
+icon = "run"
+command = "bun run env:ports && bun run dev:session:start"
+
+[[actions]]
+name = "🔵 Show live `dev` logs"
+icon = "run"
+command = "bun run dev:session:logs-live"
+
+[[actions]]
+name = "🔴 Stop `dev` session"
+icon = "run"
+command = "bun run dev:session:stop"
+
+[[actions]]
+name = "☠️ Stop all `dev` sessions"
+icon = "run"
+command = "bun run dev:session:stop-all"
+
+[[actions]]
+name = "🔍 List all `dev` sessions"
+icon = "run"
+command = "bun run dev:session:list"
+
+[[actions]]
+name = "🐛 Run `checks`"
+icon = "run"
+command = "bun run checks"
+
+[[actions]]
+name = "🌐 Open Next.js"
+icon = "test"
+command = "bun run dev:open:next"
+
+[[actions]]
+name = "🌐 Open Drizzle Studio"
+icon = "test"
+command = "bun run dev:open:drizzle"

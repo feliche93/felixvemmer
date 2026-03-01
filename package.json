@@ -34,6 +34,17 @@
     "generate-papierkram-sdk": "bun run openapi-typescript-codegen --input https://felixvemmer.papierkram.de/api/v1/api-docs/api/v1/swagger.json --output ./src/lib/papierkram-typescript-sdk --name client --useOptions --client fetch --useUnionTypes",
     "migrate-clerk-users": "./scripts/with-infisical.sh bun run scripts/migrate-clerk-users-to-better-auth.ts",
     "clean": "rm -rf bun.lock pnpm-lock.yaml node_modules .next",
+    "env:ports": "bun --bun ./scripts/setup-env.ts ports",
+    "setup-env": "bun run env:ports",
+    "dev:session:start": "bun --bun ./scripts/dev-tmux.ts start",
+    "dev:session:logs": "bun --bun ./scripts/dev-tmux.ts logs",
+    "dev:session:logs-live": "bun --bun ./scripts/dev-tmux.ts logs-live",
+    "dev:session:stop": "bun --bun ./scripts/dev-tmux.ts stop",
+    "dev:session:stop-all": "bun --bun ./scripts/dev-tmux.ts stop-all",
+    "dev:session:attach": "bun --bun ./scripts/dev-tmux.ts attach",
+    "dev:session:list": "bun --bun ./scripts/dev-tmux.ts list",
+    "dev:open:next": "bun --bun ./scripts/open-local-dev-link.ts next",
+    "dev:open:drizzle": "bun --bun ./scripts/open-local-dev-link.ts drizzle_studio",
     "postinstall": "biome check package.json --write > /dev/null 2>&1 && next telemetry disable > /dev/null 2>&1"
   },
   "dependencies": {
