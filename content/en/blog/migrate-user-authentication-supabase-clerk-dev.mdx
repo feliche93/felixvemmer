@@ -1,29 +1,29 @@
 ---
-image: '/posts/migrate-user-authentication-supabase-clerk-dev/cover.png'
-title: 'Migrating User Authentication from Supabase to Clerk.dev: A Step-by-Step Guide'
-description: 'This step-by-step guide simplifies the process of migrating user authentication from Supabase to Clerk.dev. With just a few steps, you will learn to prepare your Clerk.dev environment, extract user data from Supabase, and programmatically create users in Clerk.dev'
-metaTitle: 'Migrating User Auth: Supabase to Clerk.dev Guide'
-metaDescription: 'Demystify migrating user auth from Supabase to Clerk.dev. Learn the process through this easy guide with few code tweaks'
-date: '2023-06-07'
+image: "/posts/migrate-user-authentication-supabase-clerk-dev/cover.png"
+title: "Migrating User Authentication from Supabase to Clerk.dev: A Step-by-Step Guide"
+description: "This step-by-step guide simplifies the process of migrating user authentication from Supabase to Clerk.dev. With just a few steps, you will learn to prepare your Clerk.dev environment, extract user data from Supabase, and programmatically create users in Clerk.dev"
+metaTitle: "Migrating User Auth: Supabase to Clerk.dev Guide"
+metaDescription: "Demystify migrating user auth from Supabase to Clerk.dev. Learn the process through this easy guide with few code tweaks"
+date: "2023-06-07"
 published: true
 categories:
-  - 'Tutorials'
-  - 'Python'
-  - 'Typescript'
+  - "Tutorials"
+  - "Python"
+  - "Typescript"
 authors:
-  - 'felix-vemmer'
+  - "felix-vemmer"
 featured: false
 keywords:
-  - 'User Authentication'
-  - 'Supabase'
-  - 'Clerk.dev'
-  - 'Migration'
-  - 'API keys'
-  - 'Python'
-  - 'PostgreSQL'
-  - 'SQL Query'
-  - 'Rate Limiting'
-  - 'Data Extraction'
+  - "User Authentication"
+  - "Supabase"
+  - "Clerk.dev"
+  - "Migration"
+  - "API keys"
+  - "Python"
+  - "PostgreSQL"
+  - "SQL Query"
+  - "Rate Limiting"
+  - "Data Extraction"
 ---
 
 Do you find the idea of migrating auth from Supabase to Clerk.dev intimidating? Let me assure you, it's less complex than it seems. In this guide, we'll simplify the process and walk you through every step of the migration. With just a handful of slight code tweaks, you'll be on the fast track to integrating Clerk.dev. So, let's dive right in and demystify this process together with a comprehensive, easy-to-follow guide.
@@ -47,7 +47,7 @@ Navigate to the `User & Authentication` settings and select `Email, Phone, Usern
   src="/posts/migrate-user-authentication-supabase-clerk-dev/CleanShot-2023-06-07-at-09.02.50@2x-1.png"
   width={1606}
   height={1808}
-  alt={'Clerk Email, Phone, Username Settings'}
+  alt={"Clerk Email, Phone, Username Settings"}
 />
 
 ## Step 2: Establishing Required Secrets as Environment Variables
@@ -57,11 +57,11 @@ In order to facilitate the creation of new users, we need to communicate with th
 <Image
   className="my-4 rounded-lg"
   src={
-    '/posts/migrate-user-authentication-supabase-clerk-dev/CleanShot-2023-06-07-at-09.05.47@2x-1.png'
+    "/posts/migrate-user-authentication-supabase-clerk-dev/CleanShot-2023-06-07-at-09.05.47@2x-1.png"
   }
   width={1600}
   height={1450}
-  alt={'Getting Clerk.dev API KEYs'}
+  alt={"Getting Clerk.dev API KEYs"}
 />
 
 Next, we'll store the `CLERK_SECRET_KEY` as a Python environment variable within the `.env` file, making it accessible from our script.
@@ -73,7 +73,7 @@ Lastly, we'll need to secure the database connection string from our existing Su
   src="/posts/migrate-user-authentication-supabase-clerk-dev/CleanShot-2023-06-07-at-09.18.16@2x.png"
   width={1600}
   height={1188}
-  alt={'Getting Supabase Connection URI'}
+  alt={"Getting Supabase Connection URI"}
 />
 
 Our final `.env` file should look like this:
@@ -109,7 +109,7 @@ load_dotenv(
 )
 ```
 
-<Callout variant={'destructive'} icon={<Icons.alertTriangle />}>
+<Callout variant={"destructive"} icon={<Icons.alertTriangle />}>
   Make sure to adjust the `.env.local` and path to your env file.
 </Callout>
 
@@ -185,7 +185,7 @@ The SQL query logic works in the following way:
 - Get all the `user_profiles` info from a separate table, e.g. `first_name` and `last_name` in a second CTE.
 - Piece all the info together and add any missing parts
 
-<Callout variant={'destructive'} icon={<Icons.alertTriangle />}>
+<Callout variant={"destructive"} icon={<Icons.alertTriangle />}>
   Make sure to adjust the sql query as needed. E.g. if you have **no username** or other auth types.
 </Callout>
 
@@ -220,7 +220,7 @@ LEFT JOIN user_profiles ON user_data.id = user_profiles.user_id
   src="/posts/migrate-user-authentication-supabase-clerk-dev/CleanShot-2023-06-07-at-09.33.22@2x.png"
   width={1526}
   height={1520}
-  alt={'Clerk Post User Body'}
+  alt={"Clerk Post User Body"}
 />
 
 One of the most awesome things is that we can straight away export the `encrypted_password` to Clerk.dev, since Supabase is using `bcrypt` as mentioned here:
@@ -230,7 +230,7 @@ One of the most awesome things is that we can straight away export the `encrypt
   src="/posts/migrate-user-authentication-supabase-clerk-dev/CleanShot-2023-06-07-at-09.38.14@2x.png"
   width={2108}
   height={952}
-  alt={'Supabase Bcrypt Usage'}
+  alt={"Supabase Bcrypt Usage"}
 />
 
 So all we need to do is just specify the following in SQL:
@@ -243,7 +243,7 @@ So all we need to do is just specify the following in SQL:
 
 Finally using the set up environment variable in Step 1, we connect to Backend API and iterate over the rows to create each user in Clerk.dev.
 
-<Callout className="my-4" variant={'destructive'} icon={<Icons.clock />}>
+<Callout className="my-4" variant={"destructive"} icon={<Icons.clock />}>
   As specified in the Rate limits section we can only make 20 requests per 10 seconds. That is why I
   included the wait time.
 </Callout>
@@ -280,7 +280,7 @@ for result in tqdm(results):
         print(f"User with email {result.get('email_address')[0]} created successfully")
 ```
 
-<Callout className="my-4" variant={'positive'} icon={<Icons.partyPopper />}>
+<Callout className="my-4" variant={"positive"} icon={<Icons.partyPopper />}>
   Congrats, you successfully migrated Auth from Supabase to Clerk.dev.
 </Callout>
 

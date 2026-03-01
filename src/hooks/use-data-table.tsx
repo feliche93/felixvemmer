@@ -22,7 +22,8 @@ import { usePage, usePerPage } from "@/hooks/use-table-pagination"
 import type { DataTableFilterField } from "@/types"
 
 interface UseDataTableProps<TData>
-  extends Omit<
+  extends
+    Omit<
       TableOptions<TData>,
       | "pageCount"
       | "getCoreRowModel"

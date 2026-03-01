@@ -1,49 +1,49 @@
 ---
-image: '/posts/drizzle-orm-directus-typescript-sdk/and.png'
-title: 'From Good to Great: Boosting Dev Experience with Drizzle ORM & Directus'
-description: 'Discover the synergy of Directus and Drizzle ORM. Elevate your TypeScript experience, streamline database operations, and supercharge your web development workflow in just a few steps.'
-metaTitle: 'Directus & Drizzle ORM: The TypeScript Game-Changer'
-metaDescription: 'Unleash the combined strength of Directus and Drizzle ORM. Boost your TypeScript workflow and revolutionize your development process.'
-date: '2023-09-17'
+image: "/posts/drizzle-orm-directus-typescript-sdk/and.png"
+title: "From Good to Great: Boosting Dev Experience with Drizzle ORM & Directus"
+description: "Discover the synergy of Directus and Drizzle ORM. Elevate your TypeScript experience, streamline database operations, and supercharge your web development workflow in just a few steps."
+metaTitle: "Directus & Drizzle ORM: The TypeScript Game-Changer"
+metaDescription: "Unleash the combined strength of Directus and Drizzle ORM. Boost your TypeScript workflow and revolutionize your development process."
+date: "2023-09-17"
 published: true
 categories:
-  - 'TypeScript'
-  - 'Directus'
-  - 'Drizzle ORM'
+  - "TypeScript"
+  - "Directus"
+  - "Drizzle ORM"
 authors:
-  - 'felix-vemmer'
+  - "felix-vemmer"
 keywords:
-  - 'Drizzle ORM'
-  - 'Directus'
-  - 'TypeScript'
-  - 'Database Operations'
-  - 'Web Development Workflow'
-  - 'JavaScript SDK'
-  - 'Type Safety'
-  - 'Schema Generation'
-  - 'Database Access'
-  - 'Query Syntax'
-  - 'SQL Dialects'
-  - 'Database Connection'
-  - 'Configuration File'
-  - 'Database Credentials'
-  - 'PostgreSQL'
-  - 'Environment Variables'
-  - 'Database Management'
-  - 'Database Schema'
-  - 'Database Migration'
-  - 'SQL Migrations'
-  - 'Database Introspection'
-  - 'Zod Models'
-  - 'Data Fetching'
-  - 'Data Insertion'
-  - 'Data Update'
-  - 'Data Deletion'
-  - 'SQL Transactions'
-  - 'Database Errors'
-  - 'Database Compatibility'
-  - 'Database Performance'
-  - 'Database Connectivity'
+  - "Drizzle ORM"
+  - "Directus"
+  - "TypeScript"
+  - "Database Operations"
+  - "Web Development Workflow"
+  - "JavaScript SDK"
+  - "Type Safety"
+  - "Schema Generation"
+  - "Database Access"
+  - "Query Syntax"
+  - "SQL Dialects"
+  - "Database Connection"
+  - "Configuration File"
+  - "Database Credentials"
+  - "PostgreSQL"
+  - "Environment Variables"
+  - "Database Management"
+  - "Database Schema"
+  - "Database Migration"
+  - "SQL Migrations"
+  - "Database Introspection"
+  - "Zod Models"
+  - "Data Fetching"
+  - "Data Insertion"
+  - "Data Update"
+  - "Data Deletion"
+  - "SQL Transactions"
+  - "Database Errors"
+  - "Database Compatibility"
+  - "Database Performance"
+  - "Database Connectivity"
 ---
 
 [Directus](https://directus.io/?ref=felixvemmer.com) is packed with features we all love, but there's been a missing piece: TypeScript support when querying data. That's where [Drizzle ORM](https://orm.drizzle.team/?ref=felixvemmer.com) comes in. In this article, we'll explore how using Drizzle ORM with Directus can make our development process even better and solve the TypeScript challenge.
@@ -63,9 +63,9 @@ However, when delving further into the SDK's documentation, we encounter:
 This means developers are tasked with implementing the schema themselves.
 
 ```typescript
-import { createDirectus } from '@directus/sdk'
-import { graphql } from '@directus/sdk/graphql'
-import { rest } from '@directus/sdk/rest'
+import { createDirectus } from "@directus/sdk"
+import { graphql } from "@directus/sdk/graphql"
+import { rest } from "@directus/sdk/rest"
 
 interface Article {
   id: number
@@ -78,10 +78,10 @@ interface Schema {
 }
 
 // Client with REST support
-const client = createDirectus<Schema>('http://directus.example.com').with(rest())
+const client = createDirectus<Schema>("http://directus.example.com").with(rest())
 
 // Client with GraphQL support
-const client = createDirectus<Schema>('http://directus.example.com').with(graphql())
+const client = createDirectus<Schema>("http://directus.example.com").with(graphql())
 ```
 
 ### The Challenge of Manual Schema Implementation
@@ -209,8 +209,8 @@ type getPageDataParams = {
 export const getPageData = cache(async (params: getPageDataParams) => {
   const { slug, lang } = params
 
-  const { data } = await directus.items('pages_translations').readByQuery({
-    fields: ['*', 'pages_id.content.collection', 'pages_id.content.item', 'pages_id.seo'],
+  const { data } = await directus.items("pages_translations").readByQuery({
+    fields: ["*", "pages_id.content.collection", "pages_id.content.item", "pages_id.seo"],
     filter: {
       _and: [
         {
@@ -296,26 +296,26 @@ Firstly, let's set up a configuration file for Drizzle ORM, which I've named `d
 📂 `path`: `packages/frontend/directus-drizzle.config.ts`
 
 ```typescript
-import dotenv from 'dotenv'
-import type { Config } from 'drizzle-kit'
+import dotenv from "dotenv"
+import type { Config } from "drizzle-kit"
 
 // Load environment variables from '.env.local'
-dotenv.config({ path: '.env.local' })
+dotenv.config({ path: ".env.local" })
 
 // Validate presence of the required DIRECTUS_DIRECT_URL environment variable
 if (!process.env.DIRECTUS_DIRECT_URL) {
-  throw new Error('DIRECTUS_DIRECT_URL is missing')
+  throw new Error("DIRECTUS_DIRECT_URL is missing")
 }
 
-console.log('DIRECTUS_DIRECT_URL', process.env.DIRECTUS_DIRECT_URL)
+console.log("DIRECTUS_DIRECT_URL", process.env.DIRECTUS_DIRECT_URL)
 
 // Export the configuration for Drizzle ORM
 export default {
-  out: './directus-drizzle',
+  out: "./directus-drizzle",
   dbCredentials: {
     connectionString: process.env.DIRECTUS_DIRECT_URL,
   },
-  driver: 'pg',
+  driver: "pg",
 } as Config
 ```
 
@@ -356,27 +356,27 @@ Within our `package.json` file, we have defined three scripts for schema manag
 While the introspection process is robust, you might encounter minor issues with the generated schema. We address these with the `fix-directus-schema.js` script:
 
 ```typescript
-const fs = require('fs')
-const path = require('path')
+const fs = require("fs")
+const path = require("path")
 
-const filePath = path.join(__dirname, 'directus-drizzle', 'schema.ts')
+const filePath = path.join(__dirname, "directus-drizzle", "schema.ts")
 
-fs.readFile(filePath, 'utf8', (err, data) => {
+fs.readFile(filePath, "utf8", (err, data) => {
   if (err) {
-    console.error('Error reading the file:', err)
+    console.error("Error reading the file:", err)
     return
   }
 
-  let newData = data.replace(/::character varying/g, '')
-  newData = newData.replace(/\.default\(NULL\)/g, '')
+  let newData = data.replace(/::character varying/g, "")
+  newData = newData.replace(/\.default\(NULL\)/g, "")
 
-  fs.writeFile(filePath, newData, 'utf8', (err) => {
+  fs.writeFile(filePath, newData, "utf8", (err) => {
     if (err) {
-      console.error('Error writing to the file:', err)
+      console.error("Error writing to the file:", err)
       return
     }
 
-    console.log('Replacements were successful!')
+    console.log("Replacements were successful!")
   })
 })
 ```
@@ -396,14 +396,14 @@ To do this, I created a file named `directus.ts` located in the frontend's `s
 📂 `path`: `packages/frontend/src/lib/directus.ts`
 
 ```tsx
-import * as schema from '@../directus-drizzle/schema'
-import { Pool } from '@neondatabase/serverless'
-import { drizzle } from 'drizzle-orm/neon-serverless'
+import * as schema from "@../directus-drizzle/schema"
+import { Pool } from "@neondatabase/serverless"
+import { drizzle } from "drizzle-orm/neon-serverless"
 
 // Validate the presence of the required DIRECTUS_DATABASE_URL environment variable
 const connectionString = process.env.DIRECTUS_DATABASE_URL
 if (!connectionString) {
-  throw new Error('DIRECTUS_DATABASE_URL environment variable is not set')
+  throw new Error("DIRECTUS_DATABASE_URL environment variable is not set")
 }
 
 // Initialize a new connection pool
@@ -626,9 +626,9 @@ export const BlockImage: FC<BlockImageProps> = async ({ item }) => {
 To streamline the process of fetching image metadata from Directus, we employ a helper function, `getDirectusImageUrl`. This function retrieves crucial data such as image URL, dimensions, and title.
 
 ```typescript
-import { directus } from '@lib/directus'
-import { directusFiles } from 'directus-drizzle/schema'
-import { eq } from 'drizzle-orm'
+import { directus } from "@lib/directus"
+import { directusFiles } from "directus-drizzle/schema"
+import { eq } from "drizzle-orm"
 
 export async function getDirectusImageUrl({ fileId }: { fileId: string }): Promise<{
   url: string
@@ -641,18 +641,18 @@ export async function getDirectusImageUrl({ fileId }: { fileId: string }): Promi
     .from(directusFiles)
     .where(eq(directusFiles.id, fileId))
 
-  if (!directusFilesData.length) throw new Error('No image found')
+  if (!directusFilesData.length) throw new Error("No image found")
 
   const image = directusFilesData[0]
 
   const { height, width, title, filenameDisk } = image
 
   if (!filenameDisk) {
-    throw new Error('Filename Disk cannot be null')
+    throw new Error("Filename Disk cannot be null")
   }
 
-  if (typeof height !== 'number' || typeof width !== 'number') {
-    throw new Error('Height and Width must be of type string')
+  if (typeof height !== "number" || typeof width !== "number") {
+    throw new Error("Height and Width must be of type string")
   }
 
   const s3Url = `https://directus-backlinkgpt.s3.eu-central-1.amazonaws.com/${filenameDisk}`

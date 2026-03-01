@@ -1,29 +1,29 @@
 ---
-image: '/posts/lemon-squeezy-nextjs-payment-integration-guide/Untitled-design--3-.png'
-title: 'Lemon Squeezy and Next.js 13: A Detailed Guide to Effortless Payment Integration'
-description: 'Discover how to integrate payments into a Next.js SaaS App using Lemon Squeezy. Our guide covers creating API keys, managing subscriptions, handling webhooks, and storing updates. Learn to build a robust subscription setup with this powerful tech stack.'
-metaTitle: 'Integrate Payments with Next.js 13 App Dir & Lemon Squeezy'
-metaDescription: 'Master the integration of Lemon Squeezy in a Next.js SaaS App. Learn key creation, product display, subscription handling, and more.'
-date: '2023-06-26'
+image: "/posts/lemon-squeezy-nextjs-payment-integration-guide/Untitled-design--3-.png"
+title: "Lemon Squeezy and Next.js 13: A Detailed Guide to Effortless Payment Integration"
+description: "Discover how to integrate payments into a Next.js SaaS App using Lemon Squeezy. Our guide covers creating API keys, managing subscriptions, handling webhooks, and storing updates. Learn to build a robust subscription setup with this powerful tech stack."
+metaTitle: "Integrate Payments with Next.js 13 App Dir & Lemon Squeezy"
+metaDescription: "Master the integration of Lemon Squeezy in a Next.js SaaS App. Learn key creation, product display, subscription handling, and more."
+date: "2023-06-26"
 categories:
-  - 'Guides'
-  - 'Tutorials'
-  - 'Typescript'
+  - "Guides"
+  - "Tutorials"
+  - "Typescript"
 published: true
 authors:
-  - 'felix-vemmer'
+  - "felix-vemmer"
 featured: true
 keywords:
-  - 'Lemon Squeezy'
-  - 'Next.js'
-  - 'Payment Integration'
-  - 'API keys'
-  - 'Subscriptions'
-  - 'Webhooks'
-  - 'Postgres database'
-  - 'Drizzle ORM'
-  - 'Product Data Synchronization'
-  - 'Server Actions'
+  - "Lemon Squeezy"
+  - "Next.js"
+  - "Payment Integration"
+  - "API keys"
+  - "Subscriptions"
+  - "Webhooks"
+  - "Postgres database"
+  - "Drizzle ORM"
+  - "Product Data Synchronization"
+  - "Server Actions"
 ---
 
 Dive into the power of Lemon Squeezy as we take a journey through setting up a fully functional SaaS App with subscriptions using [Next.js App Directory](https://nextjs.org/docs?ref=felixvemmer.com). In this hands-on tutorial, you'll learn how to create an API key, display products in a pricing table using [TailwindUI](https://tailwindui.com/?ref=felixvemmer.com), and manage subscriptions with [Lemon Squeezy](https://www.lemonsqueezy.com/?ref=felixvemmer.com).
@@ -34,7 +34,7 @@ By the end of this guide, you'll be equipped with the skills to create a robust 
 
 ## Setting up Lemon Squeezy 🍋
 
-<Callout className="my-4" variant={'destructive'} icon={<Icons.alertTriangle />}>
+<Callout className="my-4" variant={"destructive"} icon={<Icons.alertTriangle />}>
   As we walk through this process, ensure you've enabled the **test mode** - this allows us to
   experiment freely without the risk of errors.
 </Callout>
@@ -86,20 +86,20 @@ Pricing table fetching data from Lemon Squeezy for [BacklinkGPT.com](https://ww
 First, we need to fetch all the products with the `getProductVariants` function, which also has the `createHeaders` and `createRequestOptions` utility functions to build out the request:
 
 ```typescript
-'use server'
+"use server"
 
-import { SLemonSqueezyRequest, TLemonSqueezyRequest } from './zod-lemon-squeezy'
+import { SLemonSqueezyRequest, TLemonSqueezyRequest } from "./zod-lemon-squeezy"
 
-const lemonSqueezyBaseUrl = 'https://api.lemonsqueezy.com/v1'
+const lemonSqueezyBaseUrl = "https://api.lemonsqueezy.com/v1"
 const lemonSqueezyApiKey = process.env.LEMON_SQUEEZY_API_KEY
 
-if (!lemonSqueezyApiKey) throw new Error('No LEMON_SQUEEZY_API_KEY environment variable set')
+if (!lemonSqueezyApiKey) throw new Error("No LEMON_SQUEEZY_API_KEY environment variable set")
 
 function createHeaders() {
   const headers = new Headers()
-  headers.append('Accept', 'application/vnd.api+json')
-  headers.append('Content-Type', 'application/vnd.api+json')
-  headers.append('Authorization', `Bearer ${lemonSqueezyApiKey}`)
+  headers.append("Accept", "application/vnd.api+json")
+  headers.append("Content-Type", "application/vnd.api+json")
+  headers.append("Authorization", `Bearer ${lemonSqueezyApiKey}`)
   return headers
 }
 
@@ -107,15 +107,15 @@ function createRequestOptions(method: string, headers: Headers): RequestInit {
   return {
     method,
     headers,
-    redirect: 'follow',
-    cache: 'no-store',
+    redirect: "follow",
+    cache: "no-store",
   }
 }
 
 export async function getProductVariants(productId: string): Promise<TLemonSqueezyRequest> {
   const url = `${lemonSqueezyBaseUrl}/variants?filter[product_id]=${productId}`
   const headers = createHeaders()
-  const requestOptions = createRequestOptions('GET', headers)
+  const requestOptions = createRequestOptions("GET", headers)
 
   const response: Response = await fetch(url, requestOptions)
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
@@ -133,7 +133,7 @@ export async function getProductVariants(productId: string): Promise<TLemonSquee
 Furthermore, with the help of GPT4 I also quickly created a `zod` model `SLemonSqueezyRequest` and the corresponding type `TLemonSqueezyRequest` to help me parsing the API output and enhanced type safety and auto-completion functionality with the data:
 
 ```typescript
-import { z } from 'zod'
+import { z } from "zod"
 
 const SPagination = z.object({
   currentPage: z.number(),
@@ -351,7 +351,7 @@ Lemon Squeezy has some excellent documentation on webhooks, and I followed their
 
 In their [documentation](https://docs.lemonsqueezy.com/help/webhooks?ref=felixvemmer.com#event-types) they also do a great job in explaining the whole subscription's lifecycle and how and when which event will be fired.
 
-<Callout className="my-4" variant={'info'}>
+<Callout className="my-4" variant={"info"}>
   I did not implement the logic for subscription_payment_success since I figured I just tell
   customers to log into their Lemon Squeezy Account to view the invoices. I might add this though in
   the future and update the blog post.
@@ -377,8 +377,8 @@ I placed the `zod` models right next to the `route.ts` under this path:
 `/app/api/lemon-squeezy/models.ts`
 
 ```typescript
-import camelcaseKeys from 'camelcase-keys'
-import { z } from 'zod'
+import camelcaseKeys from "camelcase-keys"
+import { z } from "zod"
 
 const camelize = <T extends readonly unknown[] | Record<string, unknown>>(val: T) =>
   camelcaseKeys(val)
@@ -397,7 +397,7 @@ const Attributes = z
       })
       .transform(camelize),
     pause: z.null().optional(),
-    status: z.enum(['on_trial', 'active', 'paused', 'past_due', 'unpaid', 'cancelled', 'expired']),
+    status: z.enum(["on_trial", "active", "paused", "past_due", "unpaid", "cancelled", "expired"]),
     ends_at: z.coerce.date().optional(),
     order_id: z.number(),
     store_id: z.number(),
@@ -406,7 +406,7 @@ const Attributes = z
     test_mode: z.boolean(),
     user_name: z.string(),
     card_brand: z
-      .enum(['visa', 'mastercard', 'american_express', 'discover', 'jcb', 'diners_club'])
+      .enum(["visa", "mastercard", "american_express", "discover", "jcb", "diners_club"])
       .nullable(),
     created_at: z.coerce.date(),
     product_id: z.number(),
@@ -444,8 +444,8 @@ const Relationships = z
     product: Order,
     variant: Order,
     customer: Order,
-    'order-item': Order,
-    'subscription-invoices': Order,
+    "order-item": Order,
+    "subscription-invoices": Order,
   })
   .transform(camelize)
 
@@ -487,173 +487,173 @@ Shifting our focus, let's take a look at how I set up the tables using [`Drizzl
 
 ```typescript
 // declaring enum in database for subscription status
-export const subscriptionStatusEnum = pgEnum('subscription_status', [
-  'on_trial',
-  'active',
-  'paused',
-  'past_due',
-  'unpaid',
-  'cancelled',
-  'expired',
+export const subscriptionStatusEnum = pgEnum("subscription_status", [
+  "on_trial",
+  "active",
+  "paused",
+  "past_due",
+  "unpaid",
+  "cancelled",
+  "expired",
 ])
 
-export const pauseModeEnum = pgEnum('pause_mode', ['void', 'free'])
+export const pauseModeEnum = pgEnum("pause_mode", ["void", "free"])
 
 // declaring enum in database for card brand
-export const cardBrandEnum = pgEnum('card_brand', [
-  'visa',
-  'mastercard',
-  'american_express',
-  'discover',
-  'jcb',
-  'diners_club',
+export const cardBrandEnum = pgEnum("card_brand", [
+  "visa",
+  "mastercard",
+  "american_express",
+  "discover",
+  "jcb",
+  "diners_club",
 ])
 
-export const subscriptions = pgTable('subscriptions', {
-  id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(),
-  storeId: integer('store_id'),
-  customerId: integer('customer_id'),
-  orderId: integer('order_id'),
-  orderItemId: integer('order_item_id'),
-  productId: integer('product_id'),
-  variantId: integer('variant_id'),
-  productName: text('product_name'),
-  variantName: text('variant_name'),
-  userName: text('user_name'),
-  userEmail: text('user_email'),
-  status: subscriptionStatusEnum('status'),
-  statusFormatted: text('status_formatted'),
-  cardBrand: cardBrandEnum('card_brand'),
-  cardLastFour: varchar('card_last_four', { length: 4 }),
-  pause: jsonb('pause'),
-  cancelled: boolean('cancelled'),
-  trialEndsAt: timestamp('trial_ends_at'),
-  billingAnchor: integer('billing_anchor'),
-  urls: jsonb('urls'),
-  renewsAt: timestamp('renews_at'),
-  endsAt: timestamp('ends_at'),
-  createdAt: timestamp('created_at'),
-  updatedAt: timestamp('updated_at'),
-  testMode: boolean('test_mode'),
+export const subscriptions = pgTable("subscriptions", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(),
+  storeId: integer("store_id"),
+  customerId: integer("customer_id"),
+  orderId: integer("order_id"),
+  orderItemId: integer("order_item_id"),
+  productId: integer("product_id"),
+  variantId: integer("variant_id"),
+  productName: text("product_name"),
+  variantName: text("variant_name"),
+  userName: text("user_name"),
+  userEmail: text("user_email"),
+  status: subscriptionStatusEnum("status"),
+  statusFormatted: text("status_formatted"),
+  cardBrand: cardBrandEnum("card_brand"),
+  cardLastFour: varchar("card_last_four", { length: 4 }),
+  pause: jsonb("pause"),
+  cancelled: boolean("cancelled"),
+  trialEndsAt: timestamp("trial_ends_at"),
+  billingAnchor: integer("billing_anchor"),
+  urls: jsonb("urls"),
+  renewsAt: timestamp("renews_at"),
+  endsAt: timestamp("ends_at"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+  testMode: boolean("test_mode"),
 })
 
 // declaring enum in database for billing reason
-export const billingReasonEnum = pgEnum('billing_reason', ['initial', 'renewal', 'updated'])
+export const billingReasonEnum = pgEnum("billing_reason", ["initial", "renewal", "updated"])
 
 // declaring enum in database for invoice status
-export const invoiceStatusEnum = pgEnum('invoice_status', [
-  'paid',
-  'open',
-  'void',
-  'uncollectible',
-  'draft',
+export const invoiceStatusEnum = pgEnum("invoice_status", [
+  "paid",
+  "open",
+  "void",
+  "uncollectible",
+  "draft",
 ])
 
-export const subscriptionInvoices = pgTable('subscription_invoices', {
-  id: serial('id').primaryKey(),
-  storeId: integer('store_id'),
-  subscriptionId: integer('subscription_id'),
-  billingReason: billingReasonEnum('billing_reason'),
-  cardBrand: cardBrandEnum('card_brand'),
-  cardLastFour: varchar('card_last_four', { length: 4 }),
-  currency: varchar('currency', { length: 3 }),
-  currencyRate: numeric('currency_rate', { precision: 10, scale: 8 }),
-  subtotal: integer('subtotal'),
-  discountTotal: integer('discount_total'),
-  tax: integer('tax'),
-  total: integer('total'),
-  subtotalUsd: integer('subtotal_usd'),
-  discountTotalUsd: integer('discount_total_usd'),
-  taxUsd: integer('tax_usd'),
-  totalUsd: integer('total_usd'),
-  status: invoiceStatusEnum('status'),
-  statusFormatted: text('status_formatted'),
-  refunded: boolean('refunded'),
-  refundedAt: timestamp('refunded_at'),
-  urls: jsonb('urls'),
-  createdAt: timestamp('created_at'),
-  updatedAt: timestamp('updated_at'),
-  testMode: boolean('test_mode'),
+export const subscriptionInvoices = pgTable("subscription_invoices", {
+  id: serial("id").primaryKey(),
+  storeId: integer("store_id"),
+  subscriptionId: integer("subscription_id"),
+  billingReason: billingReasonEnum("billing_reason"),
+  cardBrand: cardBrandEnum("card_brand"),
+  cardLastFour: varchar("card_last_four", { length: 4 }),
+  currency: varchar("currency", { length: 3 }),
+  currencyRate: numeric("currency_rate", { precision: 10, scale: 8 }),
+  subtotal: integer("subtotal"),
+  discountTotal: integer("discount_total"),
+  tax: integer("tax"),
+  total: integer("total"),
+  subtotalUsd: integer("subtotal_usd"),
+  discountTotalUsd: integer("discount_total_usd"),
+  taxUsd: integer("tax_usd"),
+  totalUsd: integer("total_usd"),
+  status: invoiceStatusEnum("status"),
+  statusFormatted: text("status_formatted"),
+  refunded: boolean("refunded"),
+  refundedAt: timestamp("refunded_at"),
+  urls: jsonb("urls"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+  testMode: boolean("test_mode"),
 })
 
-export const storePlanEnum = pgEnum('store_plan', ['fresh', 'sweet', 'free'])
+export const storePlanEnum = pgEnum("store_plan", ["fresh", "sweet", "free"])
 
-export const stores = pgTable('stores', {
-  id: text('id').primaryKey().notNull(),
-  name: text('name').notNull(),
-  slug: text('slug').notNull(),
-  domain: text('domain').notNull(),
-  url: text('url').notNull(),
-  avatarUrl: text('avatar_url').notNull(),
-  plan: storePlanEnum('plan').notNull(),
-  country: text('country').notNull(),
-  countryNicename: text('country_nicename').notNull(),
-  currency: varchar('currency', { length: 3 }).notNull(),
-  totalSales: integer('total_sales').notNull(),
-  totalRevenue: integer('total_revenue').notNull(),
-  thirtyDaySales: integer('thirty_day_sales').notNull(),
-  thirtyDayRevenue: integer('thirty_day_revenue').notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'string' }).notNull(),
+export const stores = pgTable("stores", {
+  id: text("id").primaryKey().notNull(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull(),
+  domain: text("domain").notNull(),
+  url: text("url").notNull(),
+  avatarUrl: text("avatar_url").notNull(),
+  plan: storePlanEnum("plan").notNull(),
+  country: text("country").notNull(),
+  countryNicename: text("country_nicename").notNull(),
+  currency: varchar("currency", { length: 3 }).notNull(),
+  totalSales: integer("total_sales").notNull(),
+  totalRevenue: integer("total_revenue").notNull(),
+  thirtyDaySales: integer("thirty_day_sales").notNull(),
+  thirtyDayRevenue: integer("thirty_day_revenue").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" }).notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }).notNull(),
 })
 
-export const productStatusEnum = pgEnum('product_status', ['draft', 'published'])
+export const productStatusEnum = pgEnum("product_status", ["draft", "published"])
 
-export const products = pgTable('products', {
-  id: text('id').primaryKey().notNull(),
-  storeId: integer('store_id').notNull(),
-  name: text('name').notNull(),
-  slug: text('slug').notNull(),
-  description: text('description').notNull(),
-  status: productStatusEnum('status').notNull(),
-  statusFormatted: text('status_formatted').notNull(),
-  thumbUrl: text('thumb_url'),
-  largeThumbUrl: text('large_thumb_url'),
-  price: integer('price').notNull(),
-  payWhatYouWant: boolean('pay_what_you_want').notNull(),
-  fromPrice: integer('from_price'),
-  toPrice: integer('to_price'),
-  buyNowUrl: text('buy_now_url').notNull(),
-  priceFormatted: text('price_formatted').notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
-  testMode: boolean('test_mode').notNull(),
+export const products = pgTable("products", {
+  id: text("id").primaryKey().notNull(),
+  storeId: integer("store_id").notNull(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull(),
+  description: text("description").notNull(),
+  status: productStatusEnum("status").notNull(),
+  statusFormatted: text("status_formatted").notNull(),
+  thumbUrl: text("thumb_url"),
+  largeThumbUrl: text("large_thumb_url"),
+  price: integer("price").notNull(),
+  payWhatYouWant: boolean("pay_what_you_want").notNull(),
+  fromPrice: integer("from_price"),
+  toPrice: integer("to_price"),
+  buyNowUrl: text("buy_now_url").notNull(),
+  priceFormatted: text("price_formatted").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
+  testMode: boolean("test_mode").notNull(),
 })
 
-export const variantStatusEnum = pgEnum('variant_status', ['pending', 'draft', 'published'])
+export const variantStatusEnum = pgEnum("variant_status", ["pending", "draft", "published"])
 
-export const variantIntervalEnum = pgEnum('variant_interval', ['day', 'week', 'month', 'year'])
+export const variantIntervalEnum = pgEnum("variant_interval", ["day", "week", "month", "year"])
 
-export const licenseLengthUnitEnum = pgEnum('license_length_unit', ['days', 'months', 'years'])
+export const licenseLengthUnitEnum = pgEnum("license_length_unit", ["days", "months", "years"])
 
-export const productVariants = pgTable('product_variants', {
-  id: text('id').primaryKey().notNull(),
-  productId: integer('product_id').notNull(),
-  name: text('name').notNull(),
-  slug: text('slug').notNull(),
-  description: text('description').notNull(),
-  price: integer('price').notNull(),
-  isSubscription: boolean('is_subscription').notNull(),
-  interval: variantIntervalEnum('interval'),
-  intervalCount: integer('interval_count'),
-  hasFreeTrial: boolean('has_free_trial').notNull(),
-  trialInterval: variantIntervalEnum('trial_interval').notNull(),
-  trialIntervalCount: integer('trial_interval_count').notNull(),
-  payWhatYouWant: boolean('pay_what_you_want').notNull(),
-  minPrice: integer('min_price'),
-  suggestedPrice: integer('suggested_price'),
-  hasLicenseKeys: boolean('has_license_keys').notNull(),
-  licenseActivationLimit: integer('license_activation_limit'),
-  isLicenseLimitUnlimited: boolean('is_license_limit_unlimited').notNull(),
-  licenseLengthValue: integer('license_length_value'),
-  licenseLengthUnit: licenseLengthUnitEnum('license_length_unit').notNull(),
-  isLicenseLengthUnlimited: boolean('is_license_length_unlimited').notNull(),
-  sort: integer('sort').notNull(),
-  status: variantStatusEnum('status').notNull(),
-  statusFormatted: text('status_formatted').notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
+export const productVariants = pgTable("product_variants", {
+  id: text("id").primaryKey().notNull(),
+  productId: integer("product_id").notNull(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull(),
+  description: text("description").notNull(),
+  price: integer("price").notNull(),
+  isSubscription: boolean("is_subscription").notNull(),
+  interval: variantIntervalEnum("interval"),
+  intervalCount: integer("interval_count"),
+  hasFreeTrial: boolean("has_free_trial").notNull(),
+  trialInterval: variantIntervalEnum("trial_interval").notNull(),
+  trialIntervalCount: integer("trial_interval_count").notNull(),
+  payWhatYouWant: boolean("pay_what_you_want").notNull(),
+  minPrice: integer("min_price"),
+  suggestedPrice: integer("suggested_price"),
+  hasLicenseKeys: boolean("has_license_keys").notNull(),
+  licenseActivationLimit: integer("license_activation_limit"),
+  isLicenseLimitUnlimited: boolean("is_license_limit_unlimited").notNull(),
+  licenseLengthValue: integer("license_length_value"),
+  licenseLengthUnit: licenseLengthUnitEnum("license_length_unit").notNull(),
+  isLicenseLengthUnlimited: boolean("is_license_length_unlimited").notNull(),
+  sort: integer("sort").notNull(),
+  status: variantStatusEnum("status").notNull(),
+  statusFormatted: text("status_formatted").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
 })
 ```
 
@@ -678,23 +678,23 @@ The logic works like this.
 4. Check the exact event name to either insert or upsert data into our `subscriptions` table
 
 ```typescript
-import { db } from '@lib/db'
-import PostHogClient from '@lib/posthog'
-import { subscriptions } from '@schema'
-import camelcaseKeys from 'camelcase-keys'
-import crypto from 'crypto'
-import { eq } from 'drizzle-orm'
-import { NextResponse } from 'next/server'
-import { CamelCasedPropertiesDeep } from 'type-fest' // need CamelCasedPropertiesDeep because of https://github.com/sindresorhus/camelcase-keys/issues/77#issuecomment-1339844470
-import { ZodEffects, z } from 'zod'
-import { SLemonSqueezyWebhookRequest } from './models'
+import { db } from "@lib/db"
+import PostHogClient from "@lib/posthog"
+import { subscriptions } from "@schema"
+import camelcaseKeys from "camelcase-keys"
+import crypto from "crypto"
+import { eq } from "drizzle-orm"
+import { NextResponse } from "next/server"
+import { CamelCasedPropertiesDeep } from "type-fest" // need CamelCasedPropertiesDeep because of https://github.com/sindresorhus/camelcase-keys/issues/77#issuecomment-1339844470
+import { ZodEffects, z } from "zod"
+import { SLemonSqueezyWebhookRequest } from "./models"
 
 export const zodToCamelCase = <T extends z.ZodTypeAny>(
   zod: T,
-): ZodEffects<z.ZodTypeAny, CamelCasedPropertiesDeep<T['_output']>> =>
+): ZodEffects<z.ZodTypeAny, CamelCasedPropertiesDeep<T["_output"]>> =>
   zod.transform((val) => camelcaseKeys(val) as CamelCasedPropertiesDeep<T>)
 
-export const runtime = 'nodejs' // 'nodejs' is the default
+export const runtime = "nodejs" // 'nodejs' is the default
 
 export async function POST(request: Request) {
   const posthog = PostHogClient()
@@ -702,35 +702,35 @@ export async function POST(request: Request) {
   const secret = process.env.LEMON_SQUEEZY_SIGNING_SECRET
 
   if (!secret) {
-    throw new Error('LEMON_SQUEEZY_SIGNING_SECRET is not set')
+    throw new Error("LEMON_SQUEEZY_SIGNING_SECRET is not set")
   }
 
   // Get the raw body text
   const rawBody = await request.text()
 
   if (!rawBody) {
-    throw new Error('No body')
+    throw new Error("No body")
   }
 
-  const xSignature = request.headers.get('X-Signature')
+  const xSignature = request.headers.get("X-Signature")
 
-  const hmac = crypto.createHmac('sha256', secret)
+  const hmac = crypto.createHmac("sha256", secret)
 
   hmac.update(rawBody)
-  const digest = hmac.digest('hex')
+  const digest = hmac.digest("hex")
 
   if (
     !xSignature ||
-    !crypto.timingSafeEqual(Buffer.from(digest, 'hex'), Buffer.from(xSignature, 'hex'))
+    !crypto.timingSafeEqual(Buffer.from(digest, "hex"), Buffer.from(xSignature, "hex"))
   ) {
-    throw new Error('Invalid signature.')
+    throw new Error("Invalid signature.")
   }
 
   const body = JSON.parse(rawBody)
 
   const type = body.data.type
 
-  if (type === 'subscriptions') {
+  if (type === "subscriptions") {
     const parsedBody = SLemonSqueezyWebhookRequest.parse(body)
 
     posthog.identify({
@@ -743,7 +743,7 @@ export async function POST(request: Request) {
       },
     })
 
-    if (parsedBody.meta.eventName === 'subscription_created') {
+    if (parsedBody.meta.eventName === "subscription_created") {
       const insertedData = await db
         .insert(subscriptions)
         .values({
@@ -756,11 +756,11 @@ export async function POST(request: Request) {
       console.log(`Inserted subscription with id ${insertedData[0].id}`)
 
       return NextResponse.json({
-        status: 'ok',
+        status: "ok",
       })
     }
 
-    if (parsedBody.meta.eventName === 'subscription_updated') {
+    if (parsedBody.meta.eventName === "subscription_updated") {
       const updatedData = await db
         .update(subscriptions)
         .set({
@@ -774,7 +774,7 @@ export async function POST(request: Request) {
       console.log(`Updated subscription with id: ${updatedData[0].id}`)
 
       return NextResponse.json({
-        status: 'ok',
+        status: "ok",
       })
     }
   }
@@ -840,14 +840,14 @@ Also, you can fake events with each specific subscription. This can be really us
 As a last step, I wanted to display more detailed info with each subscription. So, I made three `Route Handerls` as [Cron Jobs](https://vercel.com/guides/how-to-setup-cron-jobs-on-vercel?ref=felixvemmer.com) to sync data between Lemon Squeezy and my database.
 
 ```typescript
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 
-import { db } from '@lib/db'
-import { products } from '@schema'
-import camelcaseKeys from 'camelcase-keys'
-import { z } from 'zod'
+import { db } from "@lib/db"
+import { products } from "@schema"
+import camelcaseKeys from "camelcase-keys"
+import { z } from "zod"
 
-export const runtime = 'edge' // 'nodejs' is the default
+export const runtime = "edge" // 'nodejs' is the default
 
 const camelize = <T extends readonly unknown[] | Record<string, unknown>>(val: T) =>
   camelcaseKeys(val, { deep: true })
@@ -862,7 +862,7 @@ const singleProductSchema = z
         name: z.string(),
         slug: z.string(),
         description: z.string(),
-        status: z.enum(['draft', 'published']),
+        status: z.enum(["draft", "published"]),
         status_formatted: z.string(),
         thumb_url: z.string().url().nullable(),
         large_thumb_url: z.string().url().nullable(),
@@ -942,16 +942,16 @@ const productSchema = z
   .transform(camelize)
 
 export async function GET(request: Request) {
-  const lemonSqueezyBaseUrl = 'https://api.lemonsqueezy.com/v1'
+  const lemonSqueezyBaseUrl = "https://api.lemonsqueezy.com/v1"
   const lemonSqueezyApiKey = process.env.LEMON_SQUEEZY_API_KEY
 
-  if (!lemonSqueezyApiKey) throw new Error('No LEMON_SQUEEZY_API_KEY environment variable set')
+  if (!lemonSqueezyApiKey) throw new Error("No LEMON_SQUEEZY_API_KEY environment variable set")
 
   function createHeaders() {
     const headers = new Headers()
-    headers.append('Accept', 'application/vnd.api+json')
-    headers.append('Content-Type', 'application/vnd.api+json')
-    headers.append('Authorization', `Bearer ${lemonSqueezyApiKey}`)
+    headers.append("Accept", "application/vnd.api+json")
+    headers.append("Content-Type", "application/vnd.api+json")
+    headers.append("Authorization", `Bearer ${lemonSqueezyApiKey}`)
     return headers
   }
 
@@ -959,14 +959,14 @@ export async function GET(request: Request) {
     return {
       method,
       headers,
-      redirect: 'follow',
-      cache: 'no-store',
+      redirect: "follow",
+      cache: "no-store",
     }
   }
 
   // try {
   const headers = createHeaders()
-  const requestOptions = createRequestOptions('GET', headers)
+  const requestOptions = createRequestOptions("GET", headers)
   const response = await fetch(`${lemonSqueezyBaseUrl}/products`, requestOptions)
   const data = await response.json()
 
@@ -997,13 +997,13 @@ export async function GET(request: Request) {
 [view raw](https://gist.github.com/feliche93/0f43f94e46435760ef6775005da96f32/raw/7429d16c4dedad8bbef74addb0140a12e0f1d6b5/sync-products-route.ts)[sync-products-route.ts](https://gist.github.com/feliche93/0f43f94e46435760ef6775005da96f32#file-sync-products-route-ts) hosted with ❤ by [GitHub](https://github.com/) |
 
 ```typescript
-import { db } from '@lib/db'
-import { stores } from '@schema'
-import camelcaseKeys from 'camelcase-keys'
-import { NextResponse } from 'next/server'
-import { z } from 'zod'
+import { db } from "@lib/db"
+import { stores } from "@schema"
+import camelcaseKeys from "camelcase-keys"
+import { NextResponse } from "next/server"
+import { z } from "zod"
 
-export const runtime = 'edge' // 'nodejs' is the default
+export const runtime = "edge" // 'nodejs' is the default
 
 const camelize = <T extends readonly unknown[] | Record<string, unknown>>(val: T) =>
   camelcaseKeys(val, { deep: true })
@@ -1047,7 +1047,7 @@ const relationshipsSchema = z
     discounts: z.object({
       links: relationshipLinksSchema,
     }),
-    'license-keys': z.object({
+    "license-keys": z.object({
       links: relationshipLinksSchema,
     }),
     webhooks: z.object({
@@ -1067,7 +1067,7 @@ const storeSchema = z
         domain: z.string(),
         url: z.string().url(),
         avatar_url: z.string().url(),
-        plan: z.union([z.literal('fresh'), z.literal('sweet'), z.literal('free')]),
+        plan: z.union([z.literal("fresh"), z.literal("sweet"), z.literal("free")]),
         country: z.string(),
         country_nicename: z.string(),
         currency: z.string(),
@@ -1106,16 +1106,16 @@ const storesSchema = z
   .transform(camelize)
 
 export async function GET(request: Request) {
-  const lemonSqueezyBaseUrl = 'https://api.lemonsqueezy.com/v1'
+  const lemonSqueezyBaseUrl = "https://api.lemonsqueezy.com/v1"
   const lemonSqueezyApiKey = process.env.LEMON_SQUEEZY_API_KEY
 
-  if (!lemonSqueezyApiKey) throw new Error('No LEMON_SQUEEZY_API_KEY environment variable set')
+  if (!lemonSqueezyApiKey) throw new Error("No LEMON_SQUEEZY_API_KEY environment variable set")
 
   function createHeaders() {
     const headers = new Headers()
-    headers.append('Accept', 'application/vnd.api+json')
-    headers.append('Content-Type', 'application/vnd.api+json')
-    headers.append('Authorization', `Bearer ${lemonSqueezyApiKey}`)
+    headers.append("Accept", "application/vnd.api+json")
+    headers.append("Content-Type", "application/vnd.api+json")
+    headers.append("Authorization", `Bearer ${lemonSqueezyApiKey}`)
     return headers
   }
 
@@ -1123,13 +1123,13 @@ export async function GET(request: Request) {
     return {
       method,
       headers,
-      redirect: 'follow',
-      cache: 'no-store',
+      redirect: "follow",
+      cache: "no-store",
     }
   }
 
   const headers = createHeaders()
-  const requestOptions = createRequestOptions('GET', headers)
+  const requestOptions = createRequestOptions("GET", headers)
   const response = await fetch(`${lemonSqueezyBaseUrl}/stores`, requestOptions)
   const data = await response.json()
 
@@ -1161,13 +1161,13 @@ export async function GET(request: Request) {
 [view raw](https://gist.github.com/feliche93/0f43f94e46435760ef6775005da96f32/raw/7429d16c4dedad8bbef74addb0140a12e0f1d6b5/sync-stores-route.ts)[sync-stores-route.ts](https://gist.github.com/feliche93/0f43f94e46435760ef6775005da96f32#file-sync-stores-route-ts) hosted with ❤ by [GitHub](https://github.com/)
 
 ```typescript
-import { db } from '@lib/db'
-import { productVariants } from '@schema'
-import camelcaseKeys from 'camelcase-keys'
-import { NextResponse } from 'next/server'
-import { z } from 'zod'
+import { db } from "@lib/db"
+import { productVariants } from "@schema"
+import camelcaseKeys from "camelcase-keys"
+import { NextResponse } from "next/server"
+import { z } from "zod"
 
-export const runtime = 'edge' // 'nodejs' is the default
+export const runtime = "edge" // 'nodejs' is the default
 
 const camelize = <T extends readonly unknown[] | Record<string, unknown>>(val: T) =>
   camelcaseKeys(val, { deep: true })
@@ -1184,10 +1184,10 @@ const singleVariantSchema = z
         description: z.string(),
         price: z.number().positive().int(),
         is_subscription: z.boolean(),
-        interval: z.union([z.enum(['day', 'week', 'month', 'year']), z.null()]),
+        interval: z.union([z.enum(["day", "week", "month", "year"]), z.null()]),
         interval_count: z.number().int().nullable(),
         has_free_trial: z.boolean(),
-        trial_interval: z.enum(['day', 'week', 'month', 'year']),
+        trial_interval: z.enum(["day", "week", "month", "year"]),
         trial_interval_count: z.number().int(),
         pay_what_you_want: z.boolean(),
         min_price: z.number().int(),
@@ -1196,10 +1196,10 @@ const singleVariantSchema = z
         license_activation_limit: z.number().int(),
         is_license_limit_unlimited: z.boolean(),
         license_length_value: z.number().int(),
-        license_length_unit: z.enum(['days', 'months', 'years']),
+        license_length_unit: z.enum(["days", "months", "years"]),
         is_license_length_unlimited: z.boolean(),
         sort: z.number().int(),
-        status: z.enum(['pending', 'draft', 'published']),
+        status: z.enum(["pending", "draft", "published"]),
         status_formatted: z.string(),
         created_at: z.coerce.date(),
         updated_at: z.coerce.date(),
@@ -1259,16 +1259,16 @@ const variantSchema = z
   .transform(camelize)
 
 export async function GET(request: Request) {
-  const lemonSqueezyBaseUrl = 'https://api.lemonsqueezy.com/v1'
+  const lemonSqueezyBaseUrl = "https://api.lemonsqueezy.com/v1"
   const lemonSqueezyApiKey = process.env.LEMON_SQUEEZY_API_KEY
 
-  if (!lemonSqueezyApiKey) throw new Error('No LEMON_SQUEEZY_API_KEY environment variable set')
+  if (!lemonSqueezyApiKey) throw new Error("No LEMON_SQUEEZY_API_KEY environment variable set")
 
   function createHeaders() {
     const headers = new Headers()
-    headers.append('Accept', 'application/vnd.api+json')
-    headers.append('Content-Type', 'application/vnd.api+json')
-    headers.append('Authorization', `Bearer ${lemonSqueezyApiKey}`)
+    headers.append("Accept", "application/vnd.api+json")
+    headers.append("Content-Type", "application/vnd.api+json")
+    headers.append("Authorization", `Bearer ${lemonSqueezyApiKey}`)
     return headers
   }
 
@@ -1276,14 +1276,14 @@ export async function GET(request: Request) {
     return {
       method,
       headers,
-      redirect: 'follow',
-      cache: 'no-store',
+      redirect: "follow",
+      cache: "no-store",
     }
   }
 
   // try {
   const headers = createHeaders()
-  const requestOptions = createRequestOptions('GET', headers)
+  const requestOptions = createRequestOptions("GET", headers)
   const response = await fetch(`${lemonSqueezyBaseUrl}/variants`, requestOptions)
   const data = await response.json()
 
@@ -1345,21 +1345,21 @@ For managing subscriptions, Lemon Squeezy doesn't currently offer a hosted versi
 To handle subscriptions, I'm using the new [`server actions`](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions?ref=felixvemmer.com) that Vercel recently rolled out.
 
 ```typescript
-'use server'
+"use server"
 
-import { revalidatePath } from 'next/cache'
-import { SLemonSqueezyRequest, TLemonSqueezyRequest } from './zod-lemon-squeezy'
+import { revalidatePath } from "next/cache"
+import { SLemonSqueezyRequest, TLemonSqueezyRequest } from "./zod-lemon-squeezy"
 
-const lemonSqueezyBaseUrl = 'https://api.lemonsqueezy.com/v1'
+const lemonSqueezyBaseUrl = "https://api.lemonsqueezy.com/v1"
 const lemonSqueezyApiKey = process.env.LEMON_SQUEEZY_API_KEY
 
-if (!lemonSqueezyApiKey) throw new Error('No LEMON_SQUEEZY_API_KEY environment variable set')
+if (!lemonSqueezyApiKey) throw new Error("No LEMON_SQUEEZY_API_KEY environment variable set")
 
 function createHeaders() {
   const headers = new Headers()
-  headers.append('Accept', 'application/vnd.api+json')
-  headers.append('Content-Type', 'application/vnd.api+json')
-  headers.append('Authorization', `Bearer ${lemonSqueezyApiKey}`)
+  headers.append("Accept", "application/vnd.api+json")
+  headers.append("Content-Type", "application/vnd.api+json")
+  headers.append("Authorization", `Bearer ${lemonSqueezyApiKey}`)
   return headers
 }
 
@@ -1367,8 +1367,8 @@ function createRequestOptions(method: string, headers: Headers): RequestInit {
   return {
     method,
     headers,
-    redirect: 'follow',
-    cache: 'no-store',
+    redirect: "follow",
+    cache: "no-store",
   }
 }
 
@@ -1379,7 +1379,7 @@ type DeleteSubscriptionParams = {
 export async function deleteSubscription(params: DeleteSubscriptionParams): Promise<void> {
   const url = `${lemonSqueezyBaseUrl}/subscriptions/${params.subscriptionId}`
   const headers = createHeaders()
-  const requestOptions = createRequestOptions('DELETE', headers)
+  const requestOptions = createRequestOptions("DELETE", headers)
 
   const response: Response = await fetch(url, requestOptions)
   if (!response.ok) {
@@ -1390,7 +1390,7 @@ export async function deleteSubscription(params: DeleteSubscriptionParams): Prom
   // Add delay
   await new Promise((resolve) => setTimeout(resolve, 2000))
 
-  revalidatePath('/account/billing')
+  revalidatePath("/account/billing")
 }
 
 type UpdateSubscriptionParams = {
@@ -1404,7 +1404,7 @@ export async function updateSubscription(params: UpdateSubscriptionParams): Prom
 
   const body = {
     data: {
-      type: 'subscriptions',
+      type: "subscriptions",
       id: params.subscriptionId.toString(),
       attributes: {
         cancelled: params.cancelled,
@@ -1412,7 +1412,7 @@ export async function updateSubscription(params: UpdateSubscriptionParams): Prom
     },
   }
 
-  const requestOptions = createRequestOptions('PATCH', headers)
+  const requestOptions = createRequestOptions("PATCH", headers)
   requestOptions.body = JSON.stringify(body)
 
   const response: Response = await fetch(url, requestOptions)
@@ -1425,13 +1425,13 @@ export async function updateSubscription(params: UpdateSubscriptionParams): Prom
   // Add delay
   await new Promise((resolve) => setTimeout(resolve, 2000))
 
-  revalidatePath('/account/billing')
+  revalidatePath("/account/billing")
 }
 
 export async function getProductVariants(productId: string): Promise<TLemonSqueezyRequest> {
   const url = `${lemonSqueezyBaseUrl}/variants?filter[product_id]=${productId}`
   const headers = createHeaders()
-  const requestOptions = createRequestOptions('GET', headers)
+  const requestOptions = createRequestOptions("GET", headers)
 
   const response: Response = await fetch(url, requestOptions)
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)

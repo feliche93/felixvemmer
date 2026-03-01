@@ -35,7 +35,7 @@ command = "bun run dev:session:list"
 [[actions]]
 name = "🐛 Run `checks`"
 icon = "run"
-command = "bun run checks"
+command = "bun run content-collections:build && bun run checks"
 
 [[actions]]
 name = "🌐 Open Next.js"

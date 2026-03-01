@@ -1,4 +1,4 @@
-import { getRequestConfig } from 'next-intl/server'
+import { getRequestConfig } from "next-intl/server"
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Get the locale from the request, defaulting to 'en' if not available
@@ -6,20 +6,20 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   // Ensure that the incoming locale is valid
   if (!locale || !locales.includes(locale as any)) {
-    locale = 'en'
+    locale = "en"
   }
 
   return {
     locale, // Return the locale as required by next-intl v3.22
     messages: (await import(`./messages/${locale}.json`)).default,
-    timeZone: 'Europe/Berlin',
+    timeZone: "Europe/Berlin",
     now: new Date(),
     formats: {
       dateTime: {
         short: {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric',
+          day: "numeric",
+          month: "short",
+          year: "numeric",
         },
       },
       number: {
@@ -29,12 +29,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
       },
       list: {
         enumeration: {
-          style: 'long',
-          type: 'conjunction',
+          style: "long",
+          type: "conjunction",
         },
       },
     },
   }
 })
 
-export const locales = ['en', 'de']
+export const locales = ["en", "de"]

@@ -1,46 +1,46 @@
 ---
-image: '/posts/drizzle-orm-boosting-developer-productivity/Untitled-design--4--1.png'
-title: 'Unveiling the Power of Drizzle ORM: Key Features that Skyrocketed My Productivity'
-description: 'Want to supercharge your dev productivity? Get a glimpse into how Drizzle ORM, with its well-structured docs and powerful features, could be a game-changer for your projects.'
-metaTitle: 'Boost Your Dev Productivity with Drizzle ORM'
-metaDescription: 'Explore Drizzle ORM: boosting dev productivity with easy SQL syntax, robust transactions, and top-notch documentation.'
-date: '2023-06-28'
+image: "/posts/drizzle-orm-boosting-developer-productivity/Untitled-design--4--1.png"
+title: "Unveiling the Power of Drizzle ORM: Key Features that Skyrocketed My Productivity"
+description: "Want to supercharge your dev productivity? Get a glimpse into how Drizzle ORM, with its well-structured docs and powerful features, could be a game-changer for your projects."
+metaTitle: "Boost Your Dev Productivity with Drizzle ORM"
+metaDescription: "Explore Drizzle ORM: boosting dev productivity with easy SQL syntax, robust transactions, and top-notch documentation."
+date: "2023-06-28"
 published: true
 categories:
-  - 'Reviews'
-  - 'Guides'
-  - 'Typescript'
+  - "Reviews"
+  - "Guides"
+  - "Typescript"
 authors:
-  - 'felix-vemmer'
+  - "felix-vemmer"
 featured: true
 keywords:
-  - 'Drizzle ORM'
-  - 'Developer Productivity'
-  - 'SQL Query Syntax'
-  - 'Complex SQL Queries'
-  - 'TypeScript'
-  - 'Joins'
-  - 'Transactions'
-  - 'Database Features'
-  - 'Documentation'
-  - 'Coding Workflow'
-  - 'Coding Tools'
-  - 'Database Management'
-  - 'SQL Databases'
-  - 'Drizzle Kit'
-  - 'CLI'
-  - 'SQL Migrations'
-  - 'Rapid Prototyping'
-  - 'Zod Models'
-  - 'Types'
-  - 'Data Insertion'
-  - 'Schema Changes'
-  - 'Drizzle-zod Plugin'
-  - 'Coding Challenges'
-  - 'Push Migrations'
-  - 'PSQL'
-  - 'Database Schema'
-  - 'Code Deployment'
+  - "Drizzle ORM"
+  - "Developer Productivity"
+  - "SQL Query Syntax"
+  - "Complex SQL Queries"
+  - "TypeScript"
+  - "Joins"
+  - "Transactions"
+  - "Database Features"
+  - "Documentation"
+  - "Coding Workflow"
+  - "Coding Tools"
+  - "Database Management"
+  - "SQL Databases"
+  - "Drizzle Kit"
+  - "CLI"
+  - "SQL Migrations"
+  - "Rapid Prototyping"
+  - "Zod Models"
+  - "Types"
+  - "Data Insertion"
+  - "Schema Changes"
+  - "Drizzle-zod Plugin"
+  - "Coding Challenges"
+  - "Push Migrations"
+  - "PSQL"
+  - "Database Schema"
+  - "Code Deployment"
 ---
 
 Inspired by a few of my favorite tech YouTubers, namely [Theo](https://www.youtube.com/@t3dotgg?ref=felixvemmer.com) and [Josh](https://www.youtube.com/@joshtriedcoding?ref=felixvemmer.com), I was intrigued to try out Drizzle ORM after hearing their rave reviews. Having since incorporated [Drizzle](https://orm.drizzle.team/?ref=felixvemmer.com) into several projects, I've discovered numerous features that have not only enhanced my productivity but have also made the development process more enjoyable. Want to know why Drizzle has made such a difference? Stay with me as I dive into its game-changing features.
@@ -118,7 +118,7 @@ export async function getTournaments({
   userId,
   timeframe = undefined,
   limit = undefined,
-  sort = 'asc',
+  sort = "asc",
   from = undefined,
   to = undefined,
   organizerId = undefined,
@@ -131,7 +131,7 @@ export async function getTournaments({
   userId: string
   timeframe?: string
   limit?: number
-  sort?: 'asc' | 'desc'
+  sort?: "asc" | "desc"
   from?: string
   to?: string
   organizerId?: string
@@ -167,21 +167,21 @@ export async function getTournaments({
 
   if (limit) query = query.limit(limit)
 
-  if (sort === 'desc') query = query.orderBy(desc(tournaments.startAt))
+  if (sort === "desc") query = query.orderBy(desc(tournaments.startAt))
 
-  if (sort === 'asc') query = query.orderBy(asc(tournaments.startAt))
+  if (sort === "asc") query = query.orderBy(asc(tournaments.startAt))
 
   let whereCondition
 
-  if (timeframe === 'my-tournaments') {
+  if (timeframe === "my-tournaments") {
     whereCondition = eq(userTournaments.userId, userId)
-  } else if (timeframe === 'upcoming') {
+  } else if (timeframe === "upcoming") {
     whereCondition = and(
       isNotNull(tournaments.startAt),
       gte(tournaments.startAt, now),
       isNull(userTournaments.userId),
     )
-  } else if (timeframe === 'past') {
+  } else if (timeframe === "past") {
     whereCondition = and(
       isNotNull(tournaments.startAt),
       lt(tournaments.startAt, now),
@@ -429,27 +429,27 @@ Here's an example that I used at BacklinkGPT:
 
 ```typescript
 export const onboardingSurveys = pgTable(
-  'onboarding_surveys',
+  "onboarding_surveys",
   {
-    id: uuid('id').defaultRandom().primaryKey().notNull(),
-    createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
-    userId: text('user_id').notNull(),
-    roleID: uuid('role_id')
+    id: uuid("id").defaultRandom().primaryKey().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+    userId: text("user_id").notNull(),
+    roleID: uuid("role_id")
       .references(() => onboardingRoles.id)
       .notNull(),
-    userRoleOther: text('user_role_other'),
-    problemID: uuid('problem_id')
+    userRoleOther: text("user_role_other"),
+    problemID: uuid("problem_id")
       .references(() => onboardingProblems.id)
       .notNull(),
-    problemToSolveOther: text('problem_to_solve_other'),
-    organizationID: uuid('organization_id')
+    problemToSolveOther: text("problem_to_solve_other"),
+    organizationID: uuid("organization_id")
       .references(() => onboardingOrganizations.id)
       .notNull(),
-    organizationOther: text('organization_other'),
+    organizationOther: text("organization_other"),
   },
   (table) => {
     return {
-      idKey: uniqueIndex('onboarding_surveys_id_key').on(table.id),
+      idKey: uniqueIndex("onboarding_surveys_id_key").on(table.id),
     }
   },
 )
@@ -547,17 +547,17 @@ If you wanna see first the migrations and then push them to the DB without havin
 execute all the statements, I came up with these scripts:
 
 ```typescript
-require('dotenv').config({ path: __dirname + '/../.env.local' })
+require("dotenv").config({ path: __dirname + "/../.env.local" })
 
-const { drizzle } = require('drizzle-orm/postgres-js')
-const { migrate } = require('drizzle-orm/postgres-js/migrator')
-const postgres = require('postgres')
+const { drizzle } = require("drizzle-orm/postgres-js")
+const { migrate } = require("drizzle-orm/postgres-js/migrator")
+const postgres = require("postgres")
 
 const connectionString = process.env.DIRECT_URL
 
 if (!connectionString) {
-  console.log({ path: __dirname + '/../.env.local' })
-  throw new Error('DIRECT_URL environment variable is not set')
+  console.log({ path: __dirname + "/../.env.local" })
+  throw new Error("DIRECT_URL environment variable is not set")
 }
 
 const sql = postgres(connectionString, { max: 1 })
@@ -565,7 +565,7 @@ const db = drizzle(sql)
 
 ;(async () => {
   try {
-    await migrate(db, { migrationsFolder: 'drizzle' })
+    await migrate(db, { migrationsFolder: "drizzle" })
   } finally {
     await sql.end()
   }

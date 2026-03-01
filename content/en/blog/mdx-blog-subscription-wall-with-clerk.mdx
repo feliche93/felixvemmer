@@ -1,27 +1,27 @@
 ---
-image: '/posts/mdx-blog-subscription-wall-with-clerk/cover-image.png'
-title: 'How to Build a Blog Subscription Wall with Clerk and ContentLayer for Your MDX Blog'
-description: 'In this article, we will build a subscription wall for your MDX blog using Clerk, an easy-to-use auth provider, and integrate it into our blog using MDX and ContentLayer.'
-metaTitle: 'Build a Subscription Wall with Clerk for Your MDX Blog'
-metaDescription: 'Learn to create a subscription wall for your MDX blog with Clerk, enhancing content access control efficiently.'
-date: '2024-04-09'
+image: "/posts/mdx-blog-subscription-wall-with-clerk/cover-image.png"
+title: "How to Build a Blog Subscription Wall with Clerk and ContentLayer for Your MDX Blog"
+description: "In this article, we will build a subscription wall for your MDX blog using Clerk, an easy-to-use auth provider, and integrate it into our blog using MDX and ContentLayer."
+metaTitle: "Build a Subscription Wall with Clerk for Your MDX Blog"
+metaDescription: "Learn to create a subscription wall for your MDX blog with Clerk, enhancing content access control efficiently."
+date: "2024-04-09"
 published: true
 categories:
-  - 'Resources'
+  - "Resources"
 authors:
-  - 'felix-vemmer'
+  - "felix-vemmer"
 featured: true
 keywords:
-  - 'Subscription Wall'
-  - 'Clerk Integration'
-  - 'MDX Blogging'
-  - 'Authentication Solutions'
-  - 'Content Access Control'
-  - 'User Subscription Management'
-  - 'Secure Content Delivery'
-  - 'Paywall Implementation'
-  - 'Member-Exclusive Content'
-  - 'Digital Subscription Models'
+  - "Subscription Wall"
+  - "Clerk Integration"
+  - "MDX Blogging"
+  - "Authentication Solutions"
+  - "Content Access Control"
+  - "User Subscription Management"
+  - "Secure Content Delivery"
+  - "Paywall Implementation"
+  - "Member-Exclusive Content"
+  - "Digital Subscription Models"
 ---
 
 I began this blog on [Ghost](https://ghost.org), a popular blogging platform. A standout feature of Ghost that I appreciated is the option to share some content publicly and keep other content private for subscribers.
@@ -40,7 +40,7 @@ After moving to my custom blog using Next.js and MDX through ContentLayer, I aim
 
 After announcing the launch in a tweet, here is the complete guide on creating a subscription wall for your MDX blog using [Clerk](https://clerk.com).
 
-<Tweet id={'1777368455785726080'} />
+<Tweet id={"1777368455785726080"} />
 
 ## Setting Up Clerk
 
@@ -71,15 +71,15 @@ As you can see from the component above, the component is a simple form wrapped 
 By using `react-hook-form`, we can create a type-safe subscription form with the following fields:
 
 ```typescript
-import { z } from 'zod'
+import { z } from "zod"
 
 const SSubscribe = z.object({
   email: z.string().email({
-    message: 'Please enter a valid email address',
+    message: "Please enter a valid email address",
   }),
   pendingVerification: z.boolean().optional(),
   code: z.string().optional(),
-  mode: z.literal('sign-up').or(z.literal('sign-in')).default('sign-up'),
+  mode: z.literal("sign-up").or(z.literal("sign-in")).default("sign-up"),
 })
 
 export type TSubscribe = z.infer<typeof SSubscribe>
@@ -96,10 +96,10 @@ We can then instantiate the form and build out the form fields inside the card.
 const form = useForm<TSubscribe>({
   resolver: zodResolver(SSubscribe),
   defaultValues: {
-    email: '',
+    email: "",
     pendingVerification: false,
-    code: '',
-    mode: 'sign-up',
+    code: "",
+    mode: "sign-up",
     newsletter: true,
   },
 })
@@ -245,18 +245,18 @@ async function onSubmit(values: TSubscribe) {
     return
   }
 
-  if (values.mode === 'sign-up') {
+  if (values.mode === "sign-up") {
     try {
       await signUp.create({
         emailAddress: values.email,
       })
 
-      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" })
 
-      form.setValue('pendingVerification', true)
-      toast.success('Please enter the verification code which was sent to your email.')
+      form.setValue("pendingVerification", true)
+      toast.success("Please enter the verification code which was sent to your email.")
     } catch (err: any) {
-      const message = err?.errors[0]?.message || 'There was an error subscribing.'
+      const message = err?.errors[0]?.message || "There was an error subscribing."
       toast.error(message)
       console.error(JSON.stringify(err, null, 2))
     }
@@ -267,7 +267,7 @@ async function onSubmit(values: TSubscribe) {
       const si = await signIn.create({ identifier: values.email })
 
       const firstFactor = si.supportedFirstFactors.find(
-        (ff) => ff.strategy === 'email_code' && ff.safeIdentifier === values.email,
+        (ff) => ff.strategy === "email_code" && ff.safeIdentifier === values.email,
       ) as EmailCodeFactor
 
       await si.prepareFirstFactor({
@@ -275,9 +275,9 @@ async function onSubmit(values: TSubscribe) {
         strategy: firstFactor.strategy,
       })
 
-      form.setValue('pendingVerification', true)
+      form.setValue("pendingVerification", true)
     } catch (err: any) {
-      const message = err?.errors[0]?.message || 'There was an error signing in.'
+      const message = err?.errors[0]?.message || "There was an error signing in."
       toast.error(message)
       console.error(JSON.stringify(err, null, 2))
     }
@@ -298,27 +298,27 @@ const onVerify = async (values: TSubscribe) => {
   }
 
   if (!values.code) {
-    toast.error('Please enter the verification code sent to your email.')
+    toast.error("Please enter the verification code sent to your email.")
     return
   }
 
-  if (form.watch('mode') === 'sign-up') {
+  if (form.watch("mode") === "sign-up") {
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
         code: values.code,
       })
-      if (completeSignUp.status !== 'complete') {
+      if (completeSignUp.status !== "complete") {
         /*  investigate the response, to see if there was an error
         or if the user needs to complete more steps.*/
         console.log(JSON.stringify(completeSignUp, null, 2))
       }
-      if (completeSignUp.status === 'complete') {
+      if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId })
 
         return
       }
     } catch (err: any) {
-      const message = err?.errors[0]?.message || 'There was an error verifying your email code.'
+      const message = err?.errors[0]?.message || "There was an error verifying your email code."
       toast.error(message)
       console.error(JSON.stringify(err, null, 2))
       return
@@ -327,8 +327,8 @@ const onVerify = async (values: TSubscribe) => {
     if (!signIn) return
 
     if (!values.code) {
-      form.setError('code', {
-        message: 'Please enter the verification code sent to your email.',
+      form.setError("code", {
+        message: "Please enter the verification code sent to your email.",
       })
       return
     }
@@ -336,25 +336,25 @@ const onVerify = async (values: TSubscribe) => {
     try {
       // Use the code provided by the user and attempt verification
       const completeSignIn = await signIn.attemptFirstFactor({
-        strategy: 'email_code',
+        strategy: "email_code",
         code: values.code,
       })
 
       // This mainly for debuggin while developing.
       // Once your Instance is setup this should not be required.
-      if (completeSignIn.status !== 'complete') {
+      if (completeSignIn.status !== "complete") {
         console.error(JSON.stringify(completeSignIn, null, 2))
         return
       }
 
       // If verification was completed, create a session for the user
-      if (completeSignIn.status === 'complete') {
+      if (completeSignIn.status === "complete") {
         await setActive({ session: completeSignIn.createdSessionId })
 
         return
       }
     } catch (err: any) {
-      const message = err?.errors[0]?.message || 'There was an error verifying your email code.'
+      const message = err?.errors[0]?.message || "There was an error verifying your email code."
       toast.error(message)
       console.error(JSON.stringify(err, null, 2))
       return
@@ -391,7 +391,7 @@ Since we want to show a teaser of the content to the user before they are authen
 `use-content-teaser.ts`
 
 ```typescript
-import { atom, useAtom } from 'jotai'
+import { atom, useAtom } from "jotai"
 
 const showContentTeaser = atom(false)
 

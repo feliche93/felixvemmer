@@ -1,24 +1,24 @@
 ---
-image: '/posts/instruct-llm-framework-reviewed/cover-image.webp'
-title: 'Instructor is All You Need: My Review of the Instructor LLM Library by Jason Liu'
-description: 'With numerous LLM libraries available, such as Langchain, CrewAI, Haystack, and Marvin AI, the question arises: what makes Instructor stand out as an llm library? Find out in this blog post.'
-metaTitle: 'Instructor is All You Need: My Review of the Instructor LLM Library by Jason Liu'
+image: "/posts/instruct-llm-framework-reviewed/cover-image.webp"
+title: "Instructor is All You Need: My Review of the Instructor LLM Library by Jason Liu"
+description: "With numerous LLM libraries available, such as Langchain, CrewAI, Haystack, and Marvin AI, the question arises: what makes Instructor stand out as an llm library? Find out in this blog post."
+metaTitle: "Instructor is All You Need: My Review of the Instructor LLM Library by Jason Liu"
 metaDescription: "Instructor is a new LLM library by Jason Liu that I've been using for a while now and I like it so much. It's a great tool for developers that want to get up and running with LLM in no time."
-date: '2024-04-10'
+date: "2024-04-10"
 published: true
 categories:
-  - 'Reviews'
-  - 'Typescript'
-  - 'Python'
-  - 'LLMs'
+  - "Reviews"
+  - "Typescript"
+  - "Python"
+  - "LLMs"
 authors:
-  - 'felix-vemmer'
+  - "felix-vemmer"
 featured: true
 keywords:
-  - 'Instructor'
-  - 'LLM'
-  - 'Python'
-  - 'Typescript'
+  - "Instructor"
+  - "LLM"
+  - "Python"
+  - "Typescript"
 ---
 
 Following the latest [AI Tinkeres Berlin Meetup](https://berlin.aitinkerers.org/p/ai-tinkerers-berlin-march-21), where I witnessed a speedrun of very cool AI demos, I couldn't help but dive back into the **chaotic world of LLM libraries**. It's a realm where developers like me are on a never-ending quest to find the best library to help them build the first 1 billion dollar company.
@@ -111,9 +111,9 @@ pnpm add @instructor-ai/instructor zod openai
 2. Import all dependencies and define the client
 
 ```typescript
-import Instructor from '@instructor-ai/instructor'
-import OpenAI from 'openai'
-import { z } from 'zod'
+import Instructor from "@instructor-ai/instructor"
+import OpenAI from "openai"
+import { z } from "zod"
 
 const oai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY ?? undefined,
@@ -122,7 +122,7 @@ const oai = new OpenAI({
 
 const client = Instructor({
   client: oai,
-  mode: 'FUNCTIONS',
+  mode: "FUNCTIONS",
 })
 ```
 
@@ -132,9 +132,9 @@ const client = Instructor({
 const SentimentSchema = z.object({
   // Description will be used in the prompt
   sentiment: z
-    .literal('positive')
-    .or(z.literal('negative').or(z.literal('neutral')))
-    .describe('The sentiment of the text'),
+    .literal("positive")
+    .or(z.literal("negative").or(z.literal("neutral")))
+    .describe("The sentiment of the text"),
 })
 ```
 
@@ -144,13 +144,13 @@ const SentimentSchema = z.object({
 async function main() {
   const sentiment = await client.chat.completions.create({
     messages: [
-      { role: 'system', content: 'What is the sentiment of the given text?' },
-      { role: 'user', content: 'The instructor llm library is awesome!' },
+      { role: "system", content: "What is the sentiment of the given text?" },
+      { role: "user", content: "The instructor llm library is awesome!" },
     ],
-    model: 'gpt-3.5-turbo',
+    model: "gpt-3.5-turbo",
     response_model: {
       schema: SentimentSchema,
-      name: 'Sentiment',
+      name: "Sentiment",
     },
   })
 
