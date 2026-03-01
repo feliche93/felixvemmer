@@ -160,3 +160,6 @@ pip-delete-this-directory.txt
 *.csv
 .env.prod
 .env.preview
+
+# Clerk migration audit artifacts (contain private user mappings)
+scripts/clerk-user-id-mapping*.json
