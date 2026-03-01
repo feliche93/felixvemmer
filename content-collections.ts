@@ -1,17 +1,19 @@
-import { defineCollection, defineConfig } from '@content-collections/core'
-import { transformMDX } from '@fumadocs/content-collections/configuration'
+import { defineCollection, defineConfig } from "@content-collections/core"
+import { transformMDX } from "@fumadocs/content-collections/configuration"
 import {
   rehypeCode,
   rehypeCodeDefaultOptions,
   remarkGfm,
   remarkHeading,
-} from 'fumadocs-core/mdx-plugins'
+} from "fumadocs-core/mdx-plugins"
+import { z } from "zod"
 
 const Post = defineCollection({
-  name: 'Post',
-  directory: 'content',
-  include: ['**/blog/**/*.mdx'],
-  schema: (z) => ({
+  name: "Post",
+  directory: "content",
+  include: ["**/blog/**/*.mdx"],
+  schema: z.object({
+    content: z.string(),
     title: z.string(),
     description: z.string().optional(),
     metaTitle: z.string().optional(),
@@ -24,8 +26,8 @@ const Post = defineCollection({
     authors: z.array(z.string()),
     categories: z.array(z.string()),
     postAccess: z
-      .enum(['public', 'membersOnly', 'paidMembersOnly', 'specificTiers'])
-      .default('public'),
+      .enum(["public", "membersOnly", "paidMembersOnly", "specificTiers"])
+      .default("public"),
   }),
   async transform(data, context) {
     const mdx = await transformMDX(data, context, {
@@ -33,9 +35,9 @@ const Post = defineCollection({
       remarkPlugins: [remarkGfm, remarkHeading],
     })
 
-    const slug = data._meta.fileName.replace(/\.mdx$/, '')
-    const slugAsParams = data._meta.path.split('/').slice(1).join('/')
-    const locale = data._meta.path.split('/')[0]
+    const slug = data._meta.fileName.replace(/\.mdx$/, "")
+    const slugAsParams = data._meta.path.split("/").slice(1).join("/")
+    const locale = data._meta.path.split("/")[0]
     const absoluteUrl = `/${data._meta.path}`
 
     return {
@@ -50,10 +52,11 @@ const Post = defineCollection({
 })
 
 const Author = defineCollection({
-  name: 'Author',
-  directory: 'content/authors',
-  include: '*.mdx',
-  schema: (z) => ({
+  name: "Author",
+  directory: "content/authors",
+  include: "*.mdx",
+  schema: z.object({
+    content: z.string(),
     title: z.string(),
     description: z.string().optional(),
     avatar: z.string(),
@@ -65,9 +68,9 @@ const Author = defineCollection({
       remarkPlugins: [remarkGfm, remarkHeading],
     })
 
-    const slug = data._meta.fileName.replace(/\.mdx$/, '')
-    const slugAsParams = data._meta.path.split('/').slice(1).join('/')
-    const locale = data._meta.path.split('/')[0]
+    const slug = data._meta.fileName.replace(/\.mdx$/, "")
+    const slugAsParams = data._meta.path.split("/").slice(1).join("/")
+    const locale = data._meta.path.split("/")[0]
     const absoluteUrl = `/${data._meta.path}`
 
     return {
@@ -82,10 +85,11 @@ const Author = defineCollection({
 })
 
 const Page = defineCollection({
-  name: 'Page',
-  directory: 'content',
-  include: ['**/pages/**/*.mdx'],
-  schema: (z) => ({
+  name: "Page",
+  directory: "content",
+  include: ["**/pages/**/*.mdx"],
+  schema: z.object({
+    content: z.string(),
     title: z.string(),
     description: z.string().optional(),
     metaTitle: z.string().optional(),
@@ -102,9 +106,9 @@ const Page = defineCollection({
       remarkPlugins: [remarkGfm, remarkHeading],
     })
 
-    const slug = data._meta.fileName.replace(/\.mdx$/, '')
-    const slugAsParams = data._meta.path.split('/').slice(1).join('/')
-    const locale = data._meta.path.split('/')[0]
+    const slug = data._meta.fileName.replace(/\.mdx$/, "")
+    const slugAsParams = data._meta.path.split("/").slice(1).join("/")
+    const locale = data._meta.path.split("/")[0]
     const absoluteUrl = `/${data._meta.path}`
 
     return {
@@ -119,5 +123,5 @@ const Page = defineCollection({
 })
 
 export default defineConfig({
-  collections: [Post, Author, Page],
+  content: [Post, Author, Page],
 })
