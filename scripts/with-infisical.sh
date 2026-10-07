@@ -45,6 +45,13 @@ if [[ -z "${INFISICAL_TOKEN:-}" && ! -t 0 && ! -t 2 && "${INFISICAL_ALLOW_GLOBAL
   exit 1
 fi
 
+# A person at a terminal (or an explicit override) let the CLI session through.
+# Wrapped commands that call this wrapper again (turbo, concurrently, tmux
+# panes) have no terminal of their own, so pass that permission down.
+if [[ -z "${INFISICAL_TOKEN:-}" ]]; then
+  export INFISICAL_ALLOW_GLOBAL_PROFILE=1
+fi
+
 CMD=(infisical run --env="${ENVIRONMENT}" --path="${SECRET_PATH}")
 if [[ -n "${PROJECT_ID}" ]]; then
   CMD+=(--projectId="${PROJECT_ID}")
