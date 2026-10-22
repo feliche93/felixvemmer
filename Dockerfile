@@ -1,7 +1,9 @@
-FROM oven/bun:1.3.10-alpine AS base
+FROM node:22.23.4-alpine AS base
+COPY --from=oven/bun:1.3.10-alpine /usr/local/bin/bun /usr/local/bin/bun
+RUN ln -s /usr/local/bin/bun /usr/local/bin/bunx
 WORKDIR /app
 
-RUN apk add --no-cache bash curl libc6-compat nodejs npm \
+RUN apk add --no-cache bash curl libc6-compat \
   && npm install -g @infisical/cli
 
 FROM base AS deps
