@@ -1,22 +1,18 @@
 import { relations } from "drizzle-orm"
-import { boolean, index, integer, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core"
+import { boolean, index, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
-export const users = pgTable(
-  "users",
-  {
-    id: text("id").primaryKey(),
-    name: text("name").notNull(),
-    email: text("email").notNull().unique(),
-    emailVerified: boolean("email_verified").default(false).notNull(),
-    image: text("image"),
-    clerkExternalId: text("clerk_external_id").unique(),
-    createdAt: timestamp("created_at").notNull(),
-    updatedAt: timestamp("updated_at")
-      .$onUpdate(() => new Date())
-      .notNull(),
-  },
-  (table) => [uniqueIndex("users_clerkExternalId_uidx").on(table.clerkExternalId)],
-)
+export const users = pgTable("users", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: boolean("email_verified").default(false).notNull(),
+  image: text("image"),
+  createdAt: timestamp("created_at").notNull(),
+  updatedAt: timestamp("updated_at")
+    .$onUpdate(() => new Date())
+    .notNull(),
+  clerkExternalId: text("clerk_external_id").unique(),
+})
 
 export const sessions = pgTable(
   "sessions",
