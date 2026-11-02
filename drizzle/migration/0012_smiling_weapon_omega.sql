@@ -1,1 +1,1 @@
-DROP INDEX "users_clerkExternalId_uidx";
+DROP INDEX IF EXISTS "users_clerkExternalId_uidx";
